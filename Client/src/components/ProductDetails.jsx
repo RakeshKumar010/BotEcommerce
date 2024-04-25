@@ -7,7 +7,7 @@ const ProductDetails = () => {
   const [data,setData]=useState('')
   async function getFun() {
     let result = await fetch(
-      `http://localhost:8000${location.pathname}`
+      `https://botecommerce.onrender.com${location.pathname}`
     );
     result = await result.json()
     if (result) {

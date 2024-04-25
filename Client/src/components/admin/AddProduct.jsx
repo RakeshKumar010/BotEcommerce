@@ -10,7 +10,7 @@ const AddProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let result = await fetch("http://localhost:8000/add-products", {
+    let result = await fetch("https://botecommerce.onrender.com/add-products", {
       method: "post",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ title, image, rating, price }),

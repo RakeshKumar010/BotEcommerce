@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const ProductCard = ({ value,setPageLoad }) => {
   const { _id, title, image, rating, price } = value;
   const deleteFun = async () => {
-   let result= await fetch(`http://localhost:8000/${_id}`, {
+   let result= await fetch(`https://botecommerce.onrender.com/${_id}`, {
       method: "delete",
       headers: { "content-type": "application/json" },
     });

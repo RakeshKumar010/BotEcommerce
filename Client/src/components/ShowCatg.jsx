@@ -7,7 +7,7 @@ const ShowCatg = () => {
 
   useEffect(() => {
     const getFun = async () => {
-      let result = await fetch("http://localhost:8000/product");
+      let result = await fetch("https://botecommerce.onrender.com/product");
       result = await result.json();
       setData(result);
       console.log(result);
