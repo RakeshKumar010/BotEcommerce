@@ -1,7 +1,28 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const AdminLogin = () => {
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState();
+  const [pass, setPass] = useState();
+
+  const handleSubmit = async (e) => {
+    
+    e.preventDefault();
+
+    let result = await fetch("http://localhost:8000/login", {
+      method: "post",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ email, pass }),
+    });
+    if (result) {
+      // navigate("/admin");
+      console.log(result.json());
+    }else{
+      console.log('error');
+    }
+  };
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -19,7 +40,12 @@ const AdminLogin = () => {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6" action="#" method="POST">
+        <form
+          className="space-y-6"
+          action="#"
+          method="POST"
+          onSubmit={handleSubmit}
+        >
           <div>
             <label
               htmlFor="email"
@@ -33,6 +59,9 @@ const AdminLogin = () => {
                 name="email"
                 type="email"
                 autoComplete="email"
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
                 required
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
               />
@@ -61,6 +90,9 @@ const AdminLogin = () => {
                 id="password"
                 name="password"
                 type="password"
+                onChange={(e) => {
+                  setPass(e.target.value);
+                }}
                 autoComplete="current-password"
                 required
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
@@ -69,13 +101,9 @@ const AdminLogin = () => {
           </div>
 
           <div>
-            <Link
-              to={"/admin"}
-              type="submit"
-              className="flex w-full justify-center rounded-md bg-gray-900 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
-            >
+            <button type="submit" className="flex w-full justify-center rounded-md bg-gray-900 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">
               Sign in
-            </Link>
+            </button>
           </div>
         </form>
       </div>

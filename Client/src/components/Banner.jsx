@@ -2,30 +2,101 @@ import React from "react";
 
 const Banner = () => {
   return (
-    <div className="relative">
-      {" "}
-      <img
-        className="brightness-50 filter lg:h-[500px] object-cover w-full"
-        src="https://tailwind-ecommerce-demo.vercel.app/header-bg.34bfbe1b.jpeg"
-        alt="Living room image"
-      />{" "}
-      <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col left-1/2 lg:ml-5 max-w-[1200px] mx-auto text-center text-white top-1/2 w-11/12">
-        {" "}
-        <h1 className="font-bold lg:text-left sm:text-5xl text-4xl">
-          {" "}
-          Best Collection {" "}
-        </h1>{" "}
-        <p className="lg:pt-5 lg:text-base lg:text-left lg:w-3/5 pt-3 text-xs">
-          {" "}
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequatur
-          aperiam natus, nulla, obcaecati nesciunt, itaque adipisci earum
-          ducimus pariatur eaque labore.{" "}
-        </p>{" "}
-        <button className="bg-amber-400 duration-100 hover:bg-yellow-300 lg:h-10 lg:mx-0 lg:px-10 lg:w-2/12 mt-5 mx-auto px-3 py-1 text-black w-1/2">
-          {" "}
-          Order Now{" "}
-        </button>{" "}
-      </div>{" "}
+    <div
+      id="indicators-carousel"
+      className="relative w-full"
+      data-carousel="static"
+    >
+      {/* <!-- Carousel wrapper --> */}
+      <div className="relative h-56 overflow-hidden rounded-lg md:h-screen">
+        {/* <!-- Item 1 --> */}
+        <div
+          className="hidden duration-700 ease-in-out"
+          data-carousel-item="active"
+        >
+          <img
+            src="https://bhaviniparis.com/cdn/shop/files/bhavini_paris_banner_1_1512x.jpg?v=1700808843"
+            className="absolute block w-full -translate-x-1/2   left-1/2"
+            alt="..."
+          />
+        </div>
+        {/* <!-- Item 2 --> */}
+        <div className="hidden duration-700 ease-in-out" data-carousel-item>
+          <img
+            src="https://bhaviniparis.com/cdn/shop/files/bhavini_paris_banner_1512x.jpg?v=1700808843"
+            className="absolute block w-full -translate-x-1/2   left-1/2"
+            alt="..."
+          />
+        </div>
+         
+      </div>
+      {/* <!-- Slider indicators --> */}
+      <div className="absolute z-30 flex -translate-x-1/2 space-x-3 rtl:space-x-reverse bottom-5 left-1/2">
+        <button
+          type="button"
+          className="w-3 h-3 rounded-full"
+          aria-current="true"
+          aria-label="Slide 1"
+          data-carousel-slide-to="0"
+        ></button>
+        <button
+          type="button"
+          className="w-3 h-3 rounded-full"
+          aria-current="false"
+          aria-label="Slide 2"
+          data-carousel-slide-to="1"
+        ></button>
+        
+      </div>
+      {/* <!-- Slider controls --> */}
+      <button
+        type="button"
+        className="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+        data-carousel-prev
+      >
+        <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+          <svg
+            className="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 6 10"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 1 1 5l4 4"
+            />
+          </svg>
+          <span className="sr-only">Previous</span>
+        </span>
+      </button>
+      <button
+        type="button"
+        className="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+        data-carousel-next
+      >
+        <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+          <svg
+            className="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 6 10"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m1 9 4-4-4-4"
+            />
+          </svg>
+          <span className="sr-only">Next</span>
+        </span>
+      </button>
     </div>
   );
 };
