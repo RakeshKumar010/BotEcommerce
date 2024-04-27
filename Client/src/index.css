@@ -5,13 +5,24 @@
 .header-top-animation {
   animation: slider 15s linear infinite;
 }
+/* .card-eye{
+animation: slideUp 2s linear  forwards;
+}
 
+.card-shop {
+    animation: slideUp 2s linear forwards;
+  }
+
+@keyframes slideUp {
+      to {
+          bottom: 60px;
+    }
+  } */
 @keyframes slider {
   from {
-      transform: translateX(85vw);
-    }
-    to {
-      transform: translateX(-15vw);
-
+    transform: translateX(85vw);
+  }
+  to {
+    transform: translateX(-15vw);
   }
 }

@@ -11,7 +11,7 @@ const AdminLogin = () => {
     
     e.preventDefault();
 
-    let result = await fetch("http://localhost:8000/login", {
+    let result = await fetch("https://botecommerce.onrender.com/login", {
       method: "post",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ email, pass }),

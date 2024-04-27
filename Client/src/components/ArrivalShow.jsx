@@ -14,14 +14,14 @@ const ArrivalShow = () => {
   }, []);
 
   return (
-    <div className="p-10">
+    <div className="md:p-10 p-0 ">
       <div className="text-center py-5">
         <p className="font-semibold text-2xl">NEW ARRIVALS</p>
         <p className="">
           Sustain your wardrobe with our best selling products.
         </p>
       </div>
-      <div className="flex justify-center flex-wrap gap-5">
+      <div className="flex md:justify-between justify-center  flex-wrap gap-4 sm:px-10 lg:px-10">
         {data &&
           [...data].reverse().map((value) => {
             return <Card value={value} />;

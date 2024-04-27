@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
+import { Link } from "react-router-dom";
 
 const BestSeller = () => {
   const [data, setData] = useState();
@@ -14,19 +15,19 @@ const BestSeller = () => {
   }, []);
 
   return (
-    <div className="p-10 mt-16">
+    <div className="md:p-10 p-0 mt-16">
       <div className="text-center py-5">
         <p className="font-semibold text-2xl">BEST SELLER</p>
         <p className="">Explore suit sets</p>
       </div>
-      <div className="flex justify-center flex-wrap gap-5">
+      <div className="flex md:justify-between justify-center  flex-wrap gap-4 sm:px-10 lg:px-10">
         {data &&
           [...data].reverse().map((value) => {
             return <Card value={value} />;
           })}
       </div>
       <div className="flex justify-center items-center my-10">
-        <p className="bg-uiColor p-2 text-white rounded-sm px-10 cursor-pointer">VIEW ALL PRODUCTS</p>
+        <Link to={'/best-seller'} className="bg-uiColor p-2 text-white rounded-sm px-10 cursor-pointer">VIEW ALL PRODUCTS</Link>
       </div>
     </div>
   );

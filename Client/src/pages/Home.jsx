@@ -6,6 +6,7 @@ import ArrivalShow from "../components/ArrivalShow";
 import BestSeller from "../components/BestSeller";
 import FeatureBottom from "../components/FeatureBottom";
 import Footer from "../components/global/Footer";
+import DreshList from "../components/DreshList";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <HeaderTop/>
       <NavBar />
       <Banner />
+      <DreshList/>
       <ArrivalShow />
       <BestSeller/>
       <FeatureBottom/>
