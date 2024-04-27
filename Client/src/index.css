@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.header-top-animation {
+  animation: slider 15s linear infinite;
+}
+
+@keyframes slider {
+  from {
+    transform: translateX(-1vw);
+  }
+  to {
+    transform: translateX(95vw);
+
+  }
+}
