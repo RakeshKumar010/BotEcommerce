@@ -26,3 +26,19 @@ animation: slideUp 2s linear  forwards;
     transform: translateX(-15vw);
   }
 }
+
+
+@media only screen and (max-width: 600px) {
+  
+.header-top-animation {
+  animation: slider 7s linear infinite;
+}
+  @keyframes slider {
+    from {
+      transform: translateX(52vw);
+    }
+    to {
+      transform: translateX(-45vw);
+    }
+  }
+}
