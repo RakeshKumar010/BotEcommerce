@@ -8,10 +8,10 @@
 
 @keyframes slider {
   from {
-    transform: translateX(-1vw);
-  }
-  to {
-    transform: translateX(95vw);
+      transform: translateX(85vw);
+    }
+    to {
+      transform: translateX(-15vw);
 
   }
 }
