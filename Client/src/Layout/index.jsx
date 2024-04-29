@@ -8,6 +8,7 @@ import DashBoard from "../components/admin/DashBoard";
 import Product from "../components/admin/Product";
 import AddProduct from "../components/admin/AddProduct";
 import NewArrival from "../pages/NewArrival";
+import OrderPage from "../pages/OrderPage";
 
 const Layout = () => {
   return (
@@ -15,6 +16,7 @@ const Layout = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path=":id" element={<ProductDetails />} />
+        <Route path=":id/buy-now" element={<OrderPage />} />
         <Route path="admin-login" element={<AdminLogin />} />
         <Route path="new-arrivals" element={<NewArrival title={'NEW ARRIVALS'} />} />
         <Route path="/suit-sets" element={<NewArrival  title={'SUIT SETS'}/>} />

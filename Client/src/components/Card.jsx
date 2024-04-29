@@ -31,14 +31,16 @@ const Card = ({ value, setDetailsPopup,setAddId }) => {
           }`}
         >
           <div
-            className={`w-10 text-white flex justify-center rounded-full transition-all  items-center relative  h-10 bg-uiColor bottom-16 `}
+          onClick={() => {
+            setAddId(_id)
+            console.log(_id);
+            setDetailsPopup(true);
+          }}
+            className={`w-10 cursor-pointer text-white flex justify-center rounded-full transition-all  items-center relative  h-10 bg-uiColor bottom-16 `}
           >
             <IoMdEye
-              onClick={() => {
-                setAddId(_id)
-                console.log(_id);
-                setDetailsPopup(true);
-              }}
+            className=""
+              
             />
           </div>
           <Link

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "./global/NavBar";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FaVanShuttle } from "react-icons/fa6";
 import { MdChangeCircle } from "react-icons/md";
 import Footer from "./global/Footer";
@@ -96,9 +96,11 @@ const ProductDetails = () => {
                   </p>
                 </div>
                 <div className="w-1/2 px-2">
+                  <Link to={'buy-now'} >
                   <p className="w-full bg-uiColor  text-center text-white   py-2 px-4 rounded-md font-bold hover:bg-uiColor/90 ">
                     Buy Now
                   </p>
+                  </Link>
                 </div>
               </div>
               <div className="flex gap-10">

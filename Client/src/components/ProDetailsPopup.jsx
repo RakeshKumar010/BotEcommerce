@@ -22,12 +22,12 @@ const ProDetailsPopup = ({ setDetailsPopup, addId }) => {
           onClick={() => {
             setDetailsPopup(false);
           }}
-          className=" text-3xl absolute right-0 top-0 text-black"
+          className=" text-3xl cursor-pointer absolute right-0 top-0 text-black"
         />
         <div className="md:flex-1 px-4">
           <div className="w-full h-full rounded-lg bg-gray-300   ">
             <img
-              className="w-full h-[40vh] bg-top object-cover rounded-md object-top"
+              className="w-full  h-[40vh] md:h-full object-cover rounded-md object-top"
               src={data.image}
               alt="Product Image"
             />
