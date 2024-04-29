@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
+import { Link } from "react-router-dom";
 
-const ArrivalShow = () => {
+const ArrivalShow = ({setDetailsPopup,setAddId}) => {
   const [data, setData] = useState();
 
   useEffect(() => {
@@ -15,8 +16,8 @@ const ArrivalShow = () => {
 
   return (
     <div className="md:p-10 p-0 ">
-      <div className="text-center py-5">
-        <p className="font-semibold text-2xl">NEW ARRIVALS</p>
+      <div className="text-center py-5 flex flex-col justify-center items-center ">
+        <Link to={'/new-arrivals'} className="font-semibold text-2xl px-5 border-2 p-3 rounded-full border-uiColor">NEW ARRIVALS</Link>
         <p className="">
           Sustain your wardrobe with our best selling products.
         </p>
@@ -24,7 +25,7 @@ const ArrivalShow = () => {
       <div className="flex md:justify-between justify-center  flex-wrap gap-4 sm:px-10 lg:px-10">
         {data &&
           [...data].reverse().map((value) => {
-            return <Card value={value} />;
+            return <Card value={value} setAddId={setAddId}  setDetailsPopup={setDetailsPopup}/>;
           })}
       </div>
     </div>

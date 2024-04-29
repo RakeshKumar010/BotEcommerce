@@ -3,16 +3,19 @@ import NavBar from "./global/NavBar";
 import { useLocation } from "react-router-dom";
 import { FaVanShuttle } from "react-icons/fa6";
 import { MdChangeCircle } from "react-icons/md";
+import Footer from "./global/Footer";
+import RelatedProduct from "./RelatedProduct";
 
 const ProductDetails = () => {
   const location = useLocation();
   const [data, setData] = useState("");
   async function getFun() {
-    let result = await fetch(`https://botecommerce.onrender.com${location.pathname}`);
+    let result = await fetch(
+      `https://botecommerce.onrender.com${location.pathname}`
+    );
     result = await result.json();
     if (result) {
       setData(result);
-      console.log(result);
     }
   }
   useEffect(() => {
@@ -127,7 +130,9 @@ const ProductDetails = () => {
             </div>
           </div>
         </div>
+        <RelatedProduct />
       </div>
+      <Footer />
     </>
   );
 };

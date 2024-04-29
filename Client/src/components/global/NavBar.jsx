@@ -26,10 +26,10 @@ const NavBar = () => {
             <div className="flex items-center justify-between text-2xl  border-b-[1px]">
               <input
                 type="text"
-                className="border-0 placeholder:text-2xl placeholder:text-uiColor px-0 w-full "
+                className="border-0 placeholder:text-2xl focus:ring-0 focus:border-0 placeholder:text-uiColor px-0 w-full "
                 placeholder="Search Products..."
               />
-              <IoSearchOutline />
+              <IoSearchOutline className="cursor-pointer" />
             </div>
           </div>
         </div>
@@ -40,12 +40,13 @@ const NavBar = () => {
           setNavRes(!navRes);
         }}
       />
-
-      <img
-        src="https://bhaviniparis.com/cdn/shop/files/bhavini_paris_logo_file-01_360x.jpg?v=1702467865"
-        alt="..."
-        className="h-8 lg:h-16"
-      />
+      <Link to={"/"}>
+        <img
+          src="https://bhaviniparis.com/cdn/shop/files/bhavini_paris_logo_file-01_360x.jpg?v=1702467865"
+          alt="..."
+          className="h-8 lg:h-16"
+        />
+      </Link>
       <ul
         className={`lg:flex lg:flex-row flex-col lg:static absolute left-0 top-0 bottom-0 bg-white gap-7 p-8  lg:h-auto z-50 lg:w-auto w-[80%] lg:items-center text-nowrap ${
           navRes ? "flex" : "hidden"

@@ -1,4 +1,4 @@
-import Banner from '../assets/image/banner.jpg'
+import Banner from "../assets/image/banner1.webp";
 
 const DreshList = () => {
   return (

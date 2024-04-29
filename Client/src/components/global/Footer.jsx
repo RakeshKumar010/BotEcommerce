@@ -1,5 +1,5 @@
-import { FaFacebookF, FaInstagram } from "react-icons/fa";
-
+import { FaFacebookF, FaYoutube, FaInstagram } from "react-icons/fa";
+import {Link} from 'react-router-dom'
 const Footer = () => {
   return (
     <div>
@@ -22,20 +22,42 @@ const Footer = () => {
         <div className="flex flex-col text-center md:text-start gap-7 lg:gap-10 mt-8 w-80">
           <h3 className="text-lg font-semibold">MAIN MENU</h3>
           <ul className="flex flex-col gap-3">
-            <li>Home</li>
-            <li>New Arrivals</li>
-            <li>Suit sets</li>
-            <li>Celebrity Stylists</li>
-            <li>Best Seller</li>
-            <li>Lehenga Sets</li>
+            <Link to={'/'}>
+              {" "}
+              <li>Home</li>
+            </Link>
+            <Link to={'/new-arrivals'}>
+              <li>New Arrivals</li>
+            </Link>
+            <Link to={'/suit-sets'}>
+              <li>Suit sets</li>
+            </Link>
+            <Link to={'/celebrity-stylists'}>
+              <li>Celebrity Stylists</li>
+            </Link>
+            <Link to={'/best-seller'}>
+              <li>Best Seller</li>
+            </Link>
+            <Link to={'/lehenga-sets'}>
+              <li>Lehenga Sets</li>
+            </Link>
           </ul>
         </div>
         <div className="flex flex-col text-center md:text-start gap-7 lg:gap-10 mt-8 w-80">
           <h3 className="text-lg font-semibold">FOOTER MENU</h3>
           <ul className="flex flex-col gap-3">
-            <li>About Us</li>
-            <li>RETURN & EXCHANGE POLICY</li>
-            <li>Cancellation Policy</li>
+            <Link to={'/'}>
+              {" "}
+              <li>About Us</li>
+            </Link>
+            <Link to={'/'}>
+              {" "}
+              <li>RETURN & EXCHANGE POLICY</li>
+            </Link>
+            <Link to={'/'}>
+              {" "}
+              <li>Cancellation Policy</li>
+            </Link>
           </ul>
         </div>
         <div className="flex flex-col text-center md:text-start gap-7 lg:gap-10 mt-8 w-80">
@@ -52,15 +74,16 @@ const Footer = () => {
               />
               <p className="border-b-2 border-white">SUBSCRIBE </p>
             </div>
-            <div className="flex gap-5 text-xl">
+            <div className="flex gap-5 text-xl mb-5">
               <FaFacebookF />
               <FaInstagram />
+              <FaYoutube />
             </div>
           </div>
         </div>
       </div>
       <div className="bg-black text-white py-4 px-16">
-<p>© 2024 botmediadigital.com | Developed by  BotMedia Digital</p>
+        <p>© 2024 botmediadigital.com | Developed by BotMedia Digital</p>
       </div>
     </div>
   );

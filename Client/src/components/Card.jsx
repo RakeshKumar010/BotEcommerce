@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import { IoMdEye } from "react-icons/io";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 
-const Card = ({ value }) => {
+const Card = ({ value, setDetailsPopup,setAddId }) => {
   const { _id, title, image, rating, price } = value;
   const [addStyle, setAddStyle] = useState(false);
   return (
-    <div className=" md:w-80 w-40 bg-white border hover:border-gray-900 rounded-lg shadow  " >
-      <Link to={"/" + _id} className="relative">
+    <div className=" md:w-80 w-40 bg-white border hover:border-gray-900 rounded-lg shadow  ">
+      <p className="relative">
+      <Link to={"/" + _id} >
         <img
           className=" rounded-t-lg w-full"
           src={image}
@@ -20,6 +21,7 @@ const Card = ({ value }) => {
             setAddStyle(false);
           }}
         />
+        </Link>
         <div
           onMouseEnter={() => {
             setAddStyle(true);
@@ -31,15 +33,22 @@ const Card = ({ value }) => {
           <div
             className={`w-10 text-white flex justify-center rounded-full transition-all  items-center relative  h-10 bg-uiColor bottom-16 `}
           >
-            <IoMdEye />
+            <IoMdEye
+              onClick={() => {
+                setAddId(_id)
+                console.log(_id);
+                setDetailsPopup(true);
+              }}
+            />
           </div>
-          <div
+          <Link
+            to={"/" + _id}
             className={`w-10 text-white flex justify-center rounded-full transition-all items-center h-10 relative  bg-uiColor bottom-16`}
           >
             <HiOutlineShoppingBag />
-          </div>
+          </Link>
         </div>
-      </Link>
+      </p>
       <div className="px-5 pb-5 text-center">
         <Link to={"/" + _id}>
           <h5 className="text-lg  tracking-tight text-[#ac384b] ">{title}</h5>

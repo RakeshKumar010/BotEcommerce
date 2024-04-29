@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import { Link } from "react-router-dom";
 
-const BestSeller = () => {
+const BestSeller = ({setDetailsPopup,setAddId}) => {
   const [data, setData] = useState();
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const BestSeller = () => {
       <div className="flex md:justify-between justify-center  flex-wrap gap-4 sm:px-10 lg:px-10">
         {data &&
           [...data].reverse().map((value) => {
-            return <Card value={value} />;
+            return <Card setDetailsPopup={setDetailsPopup} setAddId={setAddId}  value={value} />;
           })}
       </div>
       <div className="flex justify-center items-center my-10">

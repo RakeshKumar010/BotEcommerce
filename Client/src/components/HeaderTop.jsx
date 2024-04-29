@@ -7,7 +7,7 @@ const HeaderTop = () => {
   useEffect(() => {
     setTimeout(() => {
       setPopUp(true);
-    }, 3000);
+    }, 1000);
   }, []);
   return (
     <>

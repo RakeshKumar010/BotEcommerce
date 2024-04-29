@@ -5,11 +5,11 @@ import Footer from "../components/global/Footer";
 import NavBar from "../components/global/NavBar";
 import { VscSettings } from "react-icons/vsc";
 import { GoArrowRight } from "react-icons/go";
+import FilterSide from "../components/FilterSide";
 
-
-
-const NewArrival = ({title}) => {
+const NewArrival = ({ title }) => {
   const [data, setData] = useState();
+  const [filterOpen, setFilterOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("created-descending");
 
   const handleSelectChange = (event) => {
@@ -33,7 +33,9 @@ const NewArrival = ({title}) => {
           {title}
         </h2>
         <div className="flex justify-between px-5 sm:px-10 lg:px-20">
-          <div className="flex bg-uiColor text-white items-center py-2 px-1 md:px-16 my-5 gap-2">
+          <div onClick={()=>{
+            setFilterOpen(true)
+          }} className="flex bg-uiColor cursor-pointer text-white items-center py-2 px-1 md:px-16 my-5 gap-2">
             <VscSettings />
             <p>Filter</p>
           </div>
@@ -68,16 +70,14 @@ const NewArrival = ({title}) => {
       </div>
       {/* pagination  */}
 
-        <div className="flex items-center justify-center py-10 gap-3 ">
-          <p className="bg-uiColor flex justify-center items-center w-10 h-10 text-white">
-            1
-          </p>
-          <p className=" flex justify-center items-center w-10 h-10 ">
-            2
-          </p>
-          <GoArrowRight className="text-lg" />
-        </div>
- 
+      <div className="flex items-center justify-center py-10 gap-3 ">
+        <p className="bg-uiColor flex justify-center items-center w-10 h-10 text-white">
+          1
+        </p>
+        <p className=" flex justify-center items-center w-10 h-10 ">2</p>
+        <GoArrowRight className="text-lg" />
+      </div>
+     {filterOpen? <FilterSide setFilterOpen={setFilterOpen} />:null}
       <Footer />
     </div>
   );

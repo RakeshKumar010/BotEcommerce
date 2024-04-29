@@ -1,10 +1,12 @@
-import Banner1 from "../assets/image/banner1.webp";
-import Banner2 from "../assets/image/banner2.webp";
+
+import Banner1 from "../assets/image/offerBanner1.webp";
+import Banner2 from "../assets/image/offerBanner2.webp";
+import Banner0 from '../assets/image/offerBanner.jpg'
 import { Carousel } from "flowbite-react";
 const Banner = () => {
-  const data = [Banner1, Banner2];
+  const data = [Banner0,Banner1, Banner2];
   return (
-    <div className="relative  h-[25vh] md:h-[90vh]">
+    <div className="relative  h-[40vh] ">
       <Carousel  >
         {data &&
           data.map((value) => {
