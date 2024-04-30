@@ -9,19 +9,20 @@ const AdminLogin = ({setIsAdmin}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    let result = await fetch("https://botecommerce.onrender.com/login", {
+  
+    let response = await fetch("https://botecommerce.onrender.com/login", {
       method: "post",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ email, pass }),
     });
   
-    if (result.ok) { 
-      setIsAdmin(true)
+    let result = await response.text();
+  
+    if (result === 'OK') { 
+      setIsAdmin(true);
       navigate("/admin");
-
     } else {
-      alert('Invalid Information')
+      alert('Invalid Information');
     }
   };
   return (
