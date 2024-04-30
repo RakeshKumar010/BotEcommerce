@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const AdminLogin = () => {
+const AdminLogin = ({setIsAdmin}) => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState();
@@ -17,10 +17,11 @@ const AdminLogin = () => {
     });
   
     if (result.ok) { 
+      setIsAdmin(true)
       navigate("/admin");
 
     } else {
-      console.log('error');
+      alert('Invalid Information')
     }
   };
   return (

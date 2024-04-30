@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "../pages/Home";
 import AdminLogin from "../pages/AdminLogin";
@@ -10,21 +10,23 @@ import AddProduct from "../components/admin/AddProduct";
 import NewArrival from "../pages/NewArrival";
 import OrderPage from "../pages/OrderPage";
 import SignUp from "../components/admin/SignUp";
+import RedirectPage from "../components/RedirectPage";
 
 const Layout = () => {
+  const [isAdmin,setIsAdmin]=useState(false)
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path=":id" element={<ProductDetails />} />
         <Route path=":id/buy-now" element={<OrderPage />} />
-        <Route path="admin-login" element={<AdminLogin />} />
+        <Route path="admin-login" element={<AdminLogin setIsAdmin={setIsAdmin}/>} />
         <Route path="new-arrivals" element={<NewArrival title={'NEW ARRIVALS'} />} />
         <Route path="/suit-sets" element={<NewArrival  title={'SUIT SETS'}/>} />
         <Route path="/celebrity-stylists" element={<NewArrival  title={'CELEBRITY STYLISTS'}/>} />
         <Route path="/best-seller" element={<NewArrival  title={'BEST SELLER'}/>} />
         <Route path="/lehenga-sets" element={<NewArrival  title={'LEHENGA SETS'}/>} />
-        <Route path="/admin" element={<Admin />}>
+        <Route path="/admin" element={isAdmin ? <Admin /> : <RedirectPage/>}>
           <Route index element={<DashBoard />} />
           <Route path="product" element={<Product />} />
           <Route path="add-products" element={<AddProduct />} />
