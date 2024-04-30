@@ -8,9 +8,8 @@ const AddProduct = () => {
   const [rating, setRating] = useState("");
   const [price, setPrice] = useState("");
   const [vendor, setVendor] = useState("");
-  const [color, setcolor] = useState("");
-  const [dimensions, setDimensions] = useState("");
-  const [packContains, setPackContains] = useState("");
+  const [type, setType] = useState("");
+  const [availability, setAvailability] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,9 +22,8 @@ const AddProduct = () => {
         rating,
         price,
         vendor,
-        color,
-        dimensions,
-        packContains,
+        type,
+        availability,
       }),
     });
     if (result) {
@@ -43,7 +41,6 @@ const AddProduct = () => {
         <div>
           <p className="block text-gray-700 text-sm font-bold mb-2">Title</p>
           <input
-         
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -55,7 +52,6 @@ const AddProduct = () => {
             Image URL
           </p>
           <input
-     
             type="text"
             value={image}
             onChange={(e) => setImage(e.target.value)}
@@ -66,7 +62,6 @@ const AddProduct = () => {
         <div>
           <p className="block text-gray-700 text-sm font-bold mb-2">Rating</p>
           <input
-          
             type="number"
             min="0"
             max="5"
@@ -79,7 +74,6 @@ const AddProduct = () => {
         <div>
           <p className="block text-gray-700 text-sm font-bold mb-2">Price</p>
           <input
-          
             type="number"
             min="0"
             value={price}
@@ -97,33 +91,22 @@ const AddProduct = () => {
           />
         </div>
         <div>
-          <p className="block text-gray-700 text-sm font-bold mb-2">Color</p>
+          <p className="block text-gray-700 text-sm font-bold mb-2">Type</p>
           <input
             type="text"
-            value={color}
-            onChange={(e) => setcolor(e.target.value)}
+            value={type}
+            onChange={(e) => setType(e.target.value)}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
         <div>
           <p className="block text-gray-700 text-sm font-bold mb-2">
-            Dimensions
+            Availability
           </p>
           <input
             type="text"
-            value={dimensions}
-            onChange={(e) => setDimensions(e.target.value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          />
-        </div>
-        <div>
-          <p className="block text-gray-700 text-sm font-bold mb-2">
-            Pack Contains
-          </p>
-          <input
-            type="text"
-            value={packContains}
-            onChange={(e) => setPackContains(e.target.value)}
+            value={availability}
+            onChange={(e) => setAvailability(e.target.value)}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
