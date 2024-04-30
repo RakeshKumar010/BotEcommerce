@@ -24,7 +24,7 @@ app.delete("/:id", async (req, res) => {
   let result = await productModel.deleteOne({ _id: req.params.id });
   res.send(result);
 });
-app.post("/", async (req, res) => {
+app.post("/sign-up", async (req, res) => {
   let result = await userSchema.findOne(req.body);
   if (result) {
     res.send(result);

@@ -9,6 +9,7 @@ import Product from "../components/admin/Product";
 import AddProduct from "../components/admin/AddProduct";
 import NewArrival from "../pages/NewArrival";
 import OrderPage from "../pages/OrderPage";
+import SignUp from "../components/admin/SignUp";
 
 const Layout = () => {
   return (
@@ -27,6 +28,7 @@ const Layout = () => {
           <Route index element={<DashBoard />} />
           <Route path="product" element={<Product />} />
           <Route path="add-products" element={<AddProduct />} />
+          <Route path="sign-up" element={<SignUp />} />
         </Route>
       </Routes>
     </BrowserRouter>
