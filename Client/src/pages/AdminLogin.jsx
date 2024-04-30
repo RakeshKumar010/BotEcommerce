@@ -8,7 +8,6 @@ const AdminLogin = () => {
   const [pass, setPass] = useState();
 
   const handleSubmit = async (e) => {
-    
     e.preventDefault();
 
     let result = await fetch("https://botecommerce.onrender.com/login", {
@@ -16,10 +15,11 @@ const AdminLogin = () => {
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ email, pass }),
     });
-    if (result) {
-      // navigate("/admin");
-      console.log(result.json());
-    }else{
+  
+    if (result.ok) { 
+      navigate("/admin");
+
+    } else {
       console.log('error');
     }
   };

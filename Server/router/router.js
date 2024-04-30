@@ -26,12 +26,14 @@ app.delete("/:id", async (req, res) => {
 });
 app.post("/sign-up", async (req, res) => {
   let result = await new userSchema(req.body);
-  if (result) {
-    console.log(result);
-    res.send(result);
-  } else {
-    res.send({ error: "not avai" });
-  }
+  result = await result.save();
+  res.send(result);
+  console.log(result);
+});
+app.post("/login", async (req, res) => {
+  let result = await userSchema.findOne(req.body)
+  res.send(result)
+  console.log(result);
 });
 
 module.exports = app;
