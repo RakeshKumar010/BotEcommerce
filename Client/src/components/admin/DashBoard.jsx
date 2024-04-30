@@ -2,7 +2,7 @@ import React from "react";
 
 const DashBoard = () => {
   return (
-    <div className="absolute right-0 border-dotted border-black border-2 min-h-screen w-[82%]">
+    <div className="absolute right-0 border-dotted border-black border-2 min-h-screen w-full md:w-[82%]">
       <div className="grid  grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4  ">
         <div className="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
           <div className="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">

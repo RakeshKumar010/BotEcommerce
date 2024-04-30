@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import Home from "../pages/Home";
 import AdminLogin from "../pages/AdminLogin";
 import Admin from "../pages/Admin";
@@ -13,7 +13,18 @@ import SignUp from "../components/admin/SignUp";
 import RedirectPage from "../components/RedirectPage";
 
 const Layout = () => {
-  const [isAdmin,setIsAdmin]=useState(false)
+
+  const [isAdmin,setIsAdmin]=useState(false)   
+  // Check local storage for admin details on component mount
+  useEffect(() => {
+  const email = localStorage.getItem('email');
+  const pass = localStorage.getItem('pass');
+
+  if (email) {
+    setIsAdmin(true);
+    // console.log(email,pass);
+  }
+}, []);
   return (
     <BrowserRouter>
       <Routes>
@@ -26,7 +37,7 @@ const Layout = () => {
         <Route path="/celebrity-stylists" element={<NewArrival  title={'CELEBRITY STYLISTS'}/>} />
         <Route path="/best-seller" element={<NewArrival  title={'BEST SELLER'}/>} />
         <Route path="/lehenga-sets" element={<NewArrival  title={'LEHENGA SETS'}/>} />
-        <Route path="/admin" element={isAdmin ? <Admin /> : <RedirectPage/>}>
+        <Route path="/admin" element={isAdmin ? <Admin/> : <RedirectPage/>}>
           <Route index element={<DashBoard />} />
           <Route path="product" element={<Product />} />
           <Route path="add-products" element={<AddProduct />} />

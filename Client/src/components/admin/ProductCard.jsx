@@ -15,19 +15,19 @@ const ProductCard = ({ value,setPageLoad }) => {
 
   return (
     <div className="w-full  max-w-sm bg-white border hover:border-gray-900 rounded-lg shadow  ">
-      <Link to="/product-details">
+      <div>
         <img
           className="p-8 rounded-t-lg w-full"
           src={image}
           alt="product image"
         />
-      </Link>
+      </div>
       <div className="px-5 pb-5">
-        <Link to="/product-details">
+        <div>
           <h5 className="text-xl font-semibold tracking-tight text-gray-900 ">
             {title}
           </h5>
-        </Link>
+        </div>
         <div className="flex items-center mt-2.5 mb-5">
           <div className="flex items-center space-x-1 rtl:space-x-reverse">
             <svg

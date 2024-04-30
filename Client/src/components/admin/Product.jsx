@@ -15,7 +15,7 @@ const Product = () => {
     getFun();
   }, [pageLoad]);
   return (
-    <div className="absolute right-0 border-dotted border-black border-2 min-h-screen w-[82%]">
+    <div className="absolute right-0 border-dotted border-black border-2 min-h-screen w-full md:w-[82%]">
       <div className="text-center py-5">
         <p className="font-bold text-3xl">All Products</p>
       </div>

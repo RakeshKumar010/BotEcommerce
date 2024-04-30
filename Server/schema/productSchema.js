@@ -4,6 +4,10 @@ const productModel =mongoose.Schema({
     image:String,
     rating:String,
     price:String,
+    vendor:String,
+    color:String,
+    dimensions:String,
+    packContains:String,
 })
 
 module.exports = mongoose.model('products',productModel)
