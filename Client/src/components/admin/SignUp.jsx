@@ -10,7 +10,7 @@ const SignUp = () => {
   
     const handleSubmit = async (e) => {
       e.preventDefault();
-      let result = await fetch("http://localhost:3000/sign-up", {
+      let result = await fetch("https://botecommerce.onrender.com/sign-up", {
         method: "post",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ name, email, pass }),
