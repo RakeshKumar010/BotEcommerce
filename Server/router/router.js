@@ -25,8 +25,9 @@ app.delete("/:id", async (req, res) => {
   res.send(result);
 });
 app.post("/sign-up", async (req, res) => {
-  let result = await  new userSchema(req.body);
+  let result = await new userSchema(req.body);
   if (result) {
+    console.log(result);
     res.send(result);
   } else {
     res.send({ error: "not avai" });

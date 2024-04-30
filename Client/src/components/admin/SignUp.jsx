@@ -10,12 +10,14 @@ const SignUp = () => {
   
     const handleSubmit = async (e) => {
       e.preventDefault();
-      let result = await fetch("https://botecommerce.onrender.com/sign-up", {
+      let result = await fetch("http://localhost:3000/sign-up", {
         method: "post",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ name, email, pass }),
       });
+    
       if (result) {
+        console.log(result);
         navigate("/admin/product");
       }
     };
@@ -69,7 +71,7 @@ const SignUp = () => {
             </label>
             <input
               id="pass"
-              type="text"
+              type="password"
               min="0"
               value={pass}
               onChange={(e) => setPass(e.target.value)}
