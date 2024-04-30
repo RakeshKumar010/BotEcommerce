@@ -9,8 +9,8 @@ const OrderPage = () => {
     <>
       <HeaderTop />
       <NavBar />
-      <div className="flex w-[80vw] mx-auto gap-5 p-5">
-        <div className="w-1/2">
+      <div className="flex md:flex-row flex-col-reverse  md:w-[80vw] w-[95vw] mx-auto gap-5 p-5">
+        <div className="md:w-1/2 w-full flex flex-col gap-4 ">
           <div className="flex justify-between">
             <p className="text-lg font-bold">Contact</p>
             <Link to={"#"} className="underline">
@@ -22,7 +22,7 @@ const OrderPage = () => {
             placeholder="Email or mobile phone number"
             className="w-full"
           />
-          <div className="flex items-center">
+          <div className="flex items-center gap-1">
             <input type="checkbox" />
             <p>Email me with news and offers</p>
           </div>
@@ -32,9 +32,9 @@ const OrderPage = () => {
               <option value="in">India</option>
               <option value="usa">Usa</option>
             </select>
-            <div className="flex justify-between">
-              <input type="text" placeholder="First name" />
-              <input type="text" placeholder="Last name" />
+            <div className="flex justify-between flex-wrap gap-4">
+              <input type="text" placeholder="First name" className="w-full" />
+              <input type="text" placeholder="Last name"  className="w-full"/>
             </div>
             <input type="text" className="w-full" placeholder="Address" />
             <input
@@ -68,8 +68,8 @@ const OrderPage = () => {
             </p>
           </div>
         </div>
-        <div className="w-1/2 p-5 ">
-          <div className="flex">
+        <div className="md:w-1/2 w-full p-5 flex flex-col gap-5">
+          <div className="flex gap-3 items-start">
             <img
               src="https://cdn.shopify.com/s/files/1/0839/4647/1697/files/DSC_1321copy_64x64.jpg?v=1711732690"
               alt=".."
@@ -85,7 +85,7 @@ const OrderPage = () => {
             <input type="text" placeholder="Discount Code" className="w-full"/>
             <p className="border border-gray-500 p-2 bg-gray-300">Apply</p>
           </div>
-          <div>
+          <div className="flex flex-col gap-2">
             <div className="flex justify-between">
               <p>Subtotal</p>
               <p className="text-[13px] font-blod">₹5,899.00</p>

@@ -17,7 +17,7 @@ const ArrivalShow = ({setDetailsPopup,setAddId}) => {
   return (
     <div className="md:p-10 p-0 ">
       <div className="text-center py-5 flex flex-col justify-center items-center ">
-        <Link to={'/new-arrivals'} className="font-semibold text-2xl px-5 border-2 p-3 rounded-full border-uiColor">NEW ARRIVALS</Link>
+        <Link to={'/new-arrivals'} className="font-semibold text-lg md:text-2xl">NEW ARRIVALS</Link>
         <p className="">
           Sustain your wardrobe with our best selling products.
         </p>
@@ -27,6 +27,9 @@ const ArrivalShow = ({setDetailsPopup,setAddId}) => {
           [...data].reverse().map((value) => {
             return <Card value={value} setAddId={setAddId}  setDetailsPopup={setDetailsPopup}/>;
           })}
+      </div>
+      <div className="flex justify-center items-center my-10">
+        <Link to={'/new-arrivals'} className="bg-uiColor p-2 text-white rounded-sm px-10 cursor-pointer">VIEW ALL PRODUCTS</Link>
       </div>
     </div>
   );

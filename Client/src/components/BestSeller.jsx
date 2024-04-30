@@ -17,7 +17,7 @@ const BestSeller = ({setDetailsPopup,setAddId}) => {
   return (
     <div className="md:p-10 p-0 mt-16">
       <div className="text-center py-5">
-        <p className="font-semibold text-2xl">BEST SELLER</p>
+        <p className="font-semibold text-lg md:text-2xl">BEST SELLER</p>
         <p className="">Explore suit sets</p>
       </div>
       <div className="flex md:justify-between justify-center  flex-wrap gap-4 sm:px-10 lg:px-10">
