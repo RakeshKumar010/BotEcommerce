@@ -4,9 +4,12 @@ const productModel =mongoose.Schema({
     image:String,
     rating:String,
     price:String,
-    vendor:String,
-    type:String,
+    offer:String,
+    fabric:String,
+    dispatchTime:String,
+    pieces:String,
     availability:String,
+    point:String,
  
 })
 
