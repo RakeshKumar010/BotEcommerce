@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-
+import {  useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2'
 const AdminLogin = ({ setIsAdmin }) => {
   const navigate = useNavigate();
-
   const [email, setEmail] = useState();
   const [pass, setPass] = useState();
 
@@ -26,14 +25,20 @@ const AdminLogin = ({ setIsAdmin }) => {
 
       navigate("/admin");
     } else {
-      alert("Invalid Information");
+      Swal.fire({
+        icon: "error",
+        title: "Incorrect Password",
+        text: `You have only 3 attems `,
+      });
+      
+     
     }
   };
   return (
     <div className="flex min-h-full h-screen flex-col justify-center px-6 py-12 lg:px-8 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 transition-all duration-500 ease-in-out">
       <div className="animate-bounce">
         <h2 className="mt-10 text-center text-3xl font-bold leading-9 tracking-tight text-white transform hover:scale-110 transition-transform duration-300 ease-in-out">
-          Sign in to your account
+          Sign in to your account 
         </h2>
       </div>
 

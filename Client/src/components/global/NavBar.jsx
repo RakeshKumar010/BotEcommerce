@@ -26,7 +26,7 @@ const NavBar = () => {
             <div className="flex items-center justify-between text-2xl  border-b-[1px]">
               <input
                 type="text"
-                className="border-0 placeholder:text-2xl focus:ring-0 focus:border-0 placeholder:text-uiColor px-0 w-full "
+                className=" placeholder:text-2xl border-0 focus:ring-0 focus:border-0 placeholder:text-uiColor px-0 w-full "
                 placeholder="Search Products..."
               />
               <IoSearchOutline className="cursor-pointer" />

@@ -7,7 +7,7 @@ const Card = ({ value, setDetailsPopup,setAddId }) => {
   const { _id, title, image, rating, price } = value;
   const [addStyle, setAddStyle] = useState(false);
   return (
-    <div className=" md:w-80 w-40 bg-white border hover:border-gray-900 rounded-lg shadow  ">
+    <div className="hover:scale-105 transition-all duration-200 md:w-80 w-40 bg-white border hover:border-gray-900 rounded-lg shadow  ">
       <p className="relative">
       <Link to={"/" + _id} >
         <img

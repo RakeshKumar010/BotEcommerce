@@ -9,8 +9,8 @@ const productModel =mongoose.Schema({
     dispatchTime:String,
     pieces:String,
     availability:String,
-    point:String,
-    selectedSizes: [String]
+    selectedSizes: [String],
+    points:[String],
  
 })
 

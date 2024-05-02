@@ -12,8 +12,19 @@ const AddProduct = () => {
   const [dispatchTime, setDispatchTime] = useState("");
   const [pieces, setPieces] = useState("");
   const [availability, setAvailability] = useState("");
-  const [point, setPoint] = useState("");
   const [selectedSizes, setSelectedSizes] = useState([]);
+  const [points, setPoints] = useState([""]);
+
+  const handleInputChange = (e, index) => {
+    const newPoints = [...points];
+    newPoints[index] = e.target.value;
+    setPoints(newPoints);
+
+  };
+
+  const handleAddClick = () => {
+    setPoints([...points, ""]);
+  };
 
   const handleSizeChange = (event) => {
     const { value } = event.target;
@@ -22,11 +33,8 @@ const AddProduct = () => {
         ? prevSizes.filter((size) => size !== value)
         : [...prevSizes, value]
     );
+    
   };
-
-  useEffect(() => {
-    console.log(selectedSizes);
-  }, [selectedSizes]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,12 +51,13 @@ const AddProduct = () => {
         dispatchTime,
         pieces,
         availability,
-        point,
         selectedSizes,
+        points,
       }),
     });
     if (result) {
       navigate("/admin/product");
+   
     }
   };
 
@@ -174,7 +183,7 @@ const AddProduct = () => {
         <div>
           <p className="block text-gray-700 text-sm font-bold mb-2">Size</p>
 
-          <div className="p-4 flex gap-6">
+          <div className="py-4 flex gap-6">
             {sizes.map((size, index) => (
               <div key={index} className="mb-2">
                 <label className="inline-flex items-center">
@@ -190,16 +199,28 @@ const AddProduct = () => {
             ))}
           </div>
         </div>
-
         <div>
-          <p className="block text-gray-700 text-sm font-bold mb-2">Point</p>
-
-          <textarea
-            rows={8}
-            value={point}
-            onChange={(e) => setPoint(e.target.value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          ></textarea>
+          {points.map((point, index) => (
+            <div key={index}>
+              <p className="block text-gray-700 text-sm font-bold mb-2">
+                Point {index}
+              </p>
+              <input
+                type="text"
+                value={point}
+                onChange={(e) => handleInputChange(e, index)}
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              ></input>
+            </div>
+          ))}
+          <div className="flex justify-end my-1">
+            <p
+              className="text-end bg-black text-white py-2 px-5 rounded-md cursor-pointer"
+              onClick={handleAddClick}
+            >
+              Add More Points
+            </p>
+          </div>
         </div>
 
         <button
