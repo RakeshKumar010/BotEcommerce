@@ -10,6 +10,7 @@ const productModel =mongoose.Schema({
     pieces:String,
     availability:String,
     point:String,
+    selectedSizes: [String]
  
 })
 

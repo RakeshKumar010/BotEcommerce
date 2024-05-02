@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+const sizes = ["XS", "S", "M", "L", "XL", "XXL", "3XL", "4XL"];
 const AddProduct = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
@@ -13,6 +13,20 @@ const AddProduct = () => {
   const [pieces, setPieces] = useState("");
   const [availability, setAvailability] = useState("");
   const [point, setPoint] = useState("");
+  const [selectedSizes, setSelectedSizes] = useState([]);
+
+  const handleSizeChange = (event) => {
+    const { value } = event.target;
+    setSelectedSizes((prevSizes) =>
+      prevSizes.includes(value)
+        ? prevSizes.filter((size) => size !== value)
+        : [...prevSizes, value]
+    );
+  };
+
+  useEffect(() => {
+    console.log(selectedSizes);
+  }, [selectedSizes]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,6 +44,7 @@ const AddProduct = () => {
         pieces,
         availability,
         point,
+        selectedSizes,
       }),
     });
     if (result) {
@@ -130,37 +145,51 @@ const AddProduct = () => {
         </div>
 
         <div>
-  <p className="block text-gray-700 text-sm font-bold mb-2">
-    Availability
-  </p>
-  <div className="mt-2">
-    <label>
-      <input
-        type="radio"
-        value="Available"
-        checked={availability === "Available"}
-        onChange={(e) => setAvailability(e.target.value)}
-        className="mr-2 leading-tight"
-      />
-      <span className="text-sm">
-        Available
-      </span>
-    </label>
-    <label className="ml-6">
-      <input
-        type="radio"
-        value="Unavailable"
-        checked={availability === "Unavailable"}
-        onChange={(e) => setAvailability(e.target.value)}
-        className="mr-2 leading-tight"
-      />
-      <span className="text-sm">
-        Unavailable
-      </span>
-    </label>
-  </div>
-</div>
+          <p className="block text-gray-700 text-sm font-bold mb-2">
+            Availability
+          </p>
+          <div className="mt-2">
+            <label>
+              <input
+                type="radio"
+                value="Available"
+                checked={availability === "Available"}
+                onChange={(e) => setAvailability(e.target.value)}
+                className="mr-2 leading-tight"
+              />
+              <span className="text-sm">Available</span>
+            </label>
+            <label className="ml-6">
+              <input
+                type="radio"
+                value="Unavailable"
+                checked={availability === "Unavailable"}
+                onChange={(e) => setAvailability(e.target.value)}
+                className="mr-2 leading-tight"
+              />
+              <span className="text-sm">Unavailable</span>
+            </label>
+          </div>
+        </div>
+        <div>
+          <p className="block text-gray-700 text-sm font-bold mb-2">Size</p>
 
+          <div className="p-4 flex gap-6">
+            {sizes.map((size, index) => (
+              <div key={index} className="mb-2">
+                <label className="inline-flex items-center">
+                  <input
+                    type="checkbox"
+                    className="form-checkbox rounded-full h-4 w-4 text-blue-600"
+                    value={size}
+                    onChange={handleSizeChange}
+                  />
+                  <span className="ml-1 text-gray-700">{size}</span>
+                </label>
+              </div>
+            ))}
+          </div>
+        </div>
 
         <div>
           <p className="block text-gray-700 text-sm font-bold mb-2">Point</p>
