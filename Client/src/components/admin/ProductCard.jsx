@@ -6,6 +6,7 @@ const ProductCard = ({ value, setPageLoad }) => {
   const {
     _id,
     title,
+    section,
     image,
     rating,
     price,
@@ -16,7 +17,6 @@ const ProductCard = ({ value, setPageLoad }) => {
     availability,
     points,
     selectedSizes,
- 
   } = value;
 
   const deleteFun = async () => {
@@ -28,19 +28,32 @@ const ProductCard = ({ value, setPageLoad }) => {
   };
 
   return (
-    <tr className="text-center">
-      <td className="flex border border-gray-500 justify-center"><img className="rounded-t-lg w-10 h-10 object-cover md:w-20 md:h-20" src={image} alt="product image" /></td>
-      <td className="border border-gray-500">{title}</td>
-      <td className="border border-gray-500">{rating}</td>
-      <td className="border border-gray-500">{fabric}</td>
-      <td className="border border-gray-500">{dispatchTime}</td>
-      <td className="border border-gray-500">{pieces}</td>
-      <td className="border border-gray-500">{availability}</td>
-      <td className="border border-gray-500">{selectedSizes.join(", ")}</td>
-      <td className="border border-gray-500">₹{price}</td>
-      <td className="border border-gray-500">{points}</td>
-      <td className="border border-gray-500">{offer}</td>
-      <td className="border border-gray-500">
+    <tr className="text-center ">
+      <td className="p-2 border w-48 flex justify-between flex-wrap gap-2 border-gray-500 ">
+        {image.map((value) => {
+          return (
+            <img
+              className=" w-10 h-10 rounded-sm object-cover md:w-20 md:h-20"
+              src={`https://botecommerce.onrender.com/${value}`}
+              alt="product image"
+            />
+          );
+        })}
+      </td>
+      <td className="border border-gray-500 px-2 ">{title}</td>
+      <td className="border border-gray-500 px-2 w-20">{rating}</td>
+      <td className="border border-gray-500 px-2 ">{fabric}</td>
+      <td className="border border-gray-500 px-2 w-20">{pieces}</td>
+      <td className="border border-gray-500 px-2 ">{dispatchTime}</td>
+      <td className="border border-gray-500 px-2 ">{availability}</td>
+      <td className="border border-gray-500 px-2 ">
+        {selectedSizes.join(", ")}
+      </td>
+      <td className="border border-gray-500 px-2 ">₹{price}</td>
+      <td className="border border-gray-500 px-2 ">{points}</td>
+      <td className="border border-gray-500 px-2 ">{section}</td>
+      <td className="border border-gray-500 px-2 ">{offer}</td>
+      <td className="border border-gray-500 px-2 ">
         <div className="text-3xl flex cursor-pointer md:text-4xl">
           <CgRemove onClick={deleteFun} />
           <BiEdit className="ml-2" />

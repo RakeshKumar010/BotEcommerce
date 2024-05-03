@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 const sizes = ["XS", "S", "M", "L", "XL", "XXL", "3XL", "4XL"];
+const categories = [
+  "New-Arrivals",
+  "Suit-Sets",
+  "Celebrity-Stylists",
+  "Best-Seller",
+  "Lehenga-Sets",
+];
+
 const AddProduct = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
-  const [image, setImage] = useState("");
+  const [section, setSection] = useState("");
+  const [image, setImage] = useState([]);
   const [rating, setRating] = useState("");
   const [price, setPrice] = useState("");
   const [offer, setOffer] = useState("");
@@ -19,7 +28,6 @@ const AddProduct = () => {
     const newPoints = [...points];
     newPoints[index] = e.target.value;
     setPoints(newPoints);
-
   };
 
   const handleAddClick = () => {
@@ -33,31 +41,45 @@ const AddProduct = () => {
         ? prevSizes.filter((size) => size !== value)
         : [...prevSizes, value]
     );
-    
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let result = await fetch("https://botecommerce.onrender.com/add-products", {
-      method: "post",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        title,
-        image,
-        rating,
-        price,
-        offer,
-        fabric,
-        dispatchTime,
-        pieces,
-        availability,
-        selectedSizes,
-        points,
-      }),
+  
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("rating", rating);
+    formData.append("price", price);
+    formData.append("offer", offer);
+    formData.append("fabric", fabric);
+    formData.append("dispatchTime", dispatchTime);
+    formData.append("pieces", pieces);
+    formData.append("availability", availability);
+    formData.append("section", section);
+  
+    // Append each image file to formData
+    for (let i = 0; i < image.length; i++) {
+      formData.append("image", image[i]);
+    }
+    for (let i = 0; i < points.length; i++) {
+      formData.append("points", points[i]);
+    }
+    for (let i = 0; i < selectedSizes.length; i++) {
+      formData.append("selectedSizes", selectedSizes[i]);
+    }
+    // Append other fields...
+  
+    let response = await fetch("https://botecommerce.onrender.com/add-products", {
+      method: "POST",
+      body: formData,
     });
-    if (result) {
+  
+    if (response.ok) { // if HTTP-status is 200-299
+      // get the response body
+      let result = await response.json();
       navigate("/admin/product");
-   
+    } else {
+      alert("HTTP-Error: " + response.status);
     }
   };
 
@@ -77,14 +99,15 @@ const AddProduct = () => {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
+
         <div>
           <p className="block text-gray-700 text-sm font-bold mb-2">
             Image URL
           </p>
           <input
-            type="text"
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
+            type="file"
+            multiple
+            onChange={(e) => setImage(e.target.files)}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
@@ -180,10 +203,33 @@ const AddProduct = () => {
             </label>
           </div>
         </div>
+
+        <div className="py-6">
+          <p className="block text-gray-700 text-sm font-bold mb-2">Section</p>
+          <div className="flex justify-between flex-wrap">
+            {categories.map((category) => (
+              <div key={category} className="mb-3">
+                <label className="inline-flex items-center">
+                  <input
+                    type="radio"
+                    className="form-radio rounded-full text-blue-600"
+                    name="category"
+                    value={category}
+                    checked={section === category}
+                    onChange={(e) => {
+                      setSection(e.target.value);
+                    }}
+                  />
+                  <span className="ml-2 text-gray-700 ">{category}</span>
+                </label>
+              </div>
+            ))}
+          </div>
+        </div>
         <div>
           <p className="block text-gray-700 text-sm font-bold mb-2">Size</p>
 
-          <div className="py-4 flex gap-6">
+          <div className="py-4 flex gap-6 flex-wrap">
             {sizes.map((size, index) => (
               <div key={index} className="mb-2">
                 <label className="inline-flex items-center">

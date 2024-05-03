@@ -31,34 +31,26 @@ const ProductDetails = () => {
             <div className="flex flex-col gap-5  px-4 ">
               <div className="md:flex-1">
                 <div className="w-full h-full rounded-lg bg-gray-300  mb-4">
-                  <img
-                    className="w-full h-full object-cover rounded-md object-top"
-                    src={data.image}
-                    alt="Product Image"
-                  />
+                {data.image && (
+                    <img
+                      className="w-full h-full object-cover rounded-md object-top"
+                      src={`https://botecommerce.onrender.com/${data.image[0]}`}
+                      alt="Product Image"
+                    />
+                  )}
                 </div>
               </div>
               <div className="flex justify-between flex-wrap">
-                <img
-                  className=" rounded-md w-36"
-                  src={data.image}
-                  alt="Product Image"
-                />{" "}
-                <img
-                  className=" rounded-md w-36"
-                  src={data.image}
-                  alt="Product Image"
-                />{" "}
-                <img
-                  className=" rounded-md w-36"
-                  src={data.image}
-                  alt="Product Image"
-                />
-                <img
-                  className=" rounded-md w-36"
-                  src={data.image}
-                  alt="Product Image"
-                />
+               
+                {data.image && data.image.map((value)=>{
+                  return(   <img
+                    className=" rounded-md w-36"
+            
+                    src={`https://botecommerce.onrender.com/${value}`}
+
+                    alt="Product Image"
+                  />)
+                })}
               </div>
             </div>
             <div className="md:flex-1 px-4">
@@ -161,11 +153,12 @@ const ProductDetails = () => {
           <p className="text-center underline text-lg text-black font-normal my-10 underline-offset-4">
             DESCRIPTION
           </p>
-<div className="my-5">
-  {data.points && data.points.map((value)=>{
-    return(<p>&#10687;{value}</p>)
-  }) }
-</div>
+          <div className="my-5">
+            {data.points &&
+              data.points.map((value) => {
+                return <p>&#10687;{value}</p>;
+              })}
+          </div>
           <div className="w-full">
             <table className="table-auto w-full border border-gray-500">
               <tbody>

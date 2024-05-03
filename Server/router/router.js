@@ -1,19 +1,32 @@
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
 const express = require("express");
 const app = express.Router();
 const productModel = require("../schema/productSchema");
 const userSchema = require("../schema/userSchema");
+
+
+app.post("/add-products", upload.array('image'), async (req, res) => {
+  try {
+    let productData = req.body;
+    productData.image = req.files.map(file => file.path); // Add image paths to product data
+    
+    let result = new productModel(productData);
+    result = await result.save();
+    res.send(result);
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occurred while saving the product.");
+  }
+});
 
 app.get("/product", async (req, res) => {
   let result = await productModel.find();
   res.send(result);
 });
 
-app.post("/add-products", async (req, res) => {
-  let result = new productModel(req.body);
-  result = await result.save();
-  res.send(result);
-  console.log(result);
-});
+
 
 app.get("/:id", async (req, res) => {
   let result = await productModel.findOne({ _id: req.params.id });
@@ -42,5 +55,7 @@ app.post("/login", async (req, res) => {
     console.log("Login failed for:", req.body.email);
   }
 });
+
+
 
 module.exports = app;
