@@ -8,7 +8,15 @@ import RelatedProduct from "./RelatedProduct";
 
 const ProductDetails = () => {
   const location = useLocation();
+  const [imageUrl,setImageUrl]=useState(null)
   const [data, setData] = useState("");
+  let offer = data.offer; // "20% off"
+  let discount = parseInt(offer); // 20
+  let price = data.price;
+  let priceNumber = parseInt(price); // 5299.00
+
+  let currentPrice = priceNumber - priceNumber * (discount / 100);
+  // currentPrice=currentPrice-discount
 
   async function getFun() {
     let result = await fetch(
@@ -20,8 +28,9 @@ const ProductDetails = () => {
     }
   }
   useEffect(() => {
+    window.scrollTo(0, 0);
     getFun();
-  }, []);
+  }, [location.pathname]);
   return (
     <>
       <NavBar />
@@ -31,75 +40,94 @@ const ProductDetails = () => {
             <div className="flex flex-col gap-5  px-4 ">
               <div className="md:flex-1">
                 <div className="w-full h-full rounded-lg bg-gray-300  mb-4">
-                {data.image && (
+                  {data.image && (
                     <img
                       className="w-full h-full object-cover rounded-md object-top"
-                      src={`https://botecommerce.onrender.com/${data.image[0]}`}
+                      src={`https://botecommerce.onrender.com/${imageUrl==null?data.image[3]:imageUrl}`}
                       alt="Product Image"
                     />
                   )}
                 </div>
               </div>
-              <div className="flex justify-between flex-wrap">
-               
-                {data.image && data.image.map((value)=>{
-                  return(   <img
-                    className=" rounded-md w-36"
-            
-                    src={`https://botecommerce.onrender.com/${value}`}
-
-                    alt="Product Image"
-                  />)
-                })}
+              <div className="flex justify-between gap-y-2 flex-wrap">
+                {data.image &&
+                  [...data.image].reverse().map((value) => {
+                    return (
+                      <img
+                      onClick={()=>{
+                        setImageUrl(value)
+                      }}
+                        className=" rounded-md w-40 md:w-36"
+                        src={`https://botecommerce.onrender.com/${value}`}
+                        alt="Product Image"
+                      />
+                    );
+                  })}
               </div>
             </div>
-            <div className="md:flex-1 px-4">
-              <h2 className="text-2xl font-bold text-gray-800  mb-2">
+
+            <div className="flex flex-col gap-6 my-5 md:my-0 px-4">
+              <h2 className="text-2xl font-bold text-gray-800  ">
                 {data.title}
               </h2>
-
-              <div className="flex my-10">
-                <div className="mr-4">
-                  <span className="font-bold text-gray-700 ">Price:</span>
-                  <span className="text-gray-600 "> ₹{data.price}</span>
-                </div>
-                <div>
-                  <span className="font-bold text-gray-700 ">
-                    Availability:
-                  </span>
-                  <span className="text-gray-600 ">
-                    {" "}
-                    {data.availability == "available"
-                      ? "In Stock"
-                      : "Out of Stock"}
-                  </span>
-                </div>
+              <div className="flex items-center  gap-2">
+                <span className="bg-[#388e3c] text-white text-[12px] font-bold p-1 px-2 rounded-md">
+                  {data.rating} ★
+                </span>
+                <span>82,352 Ratings & 5,670 Reviews</span>
               </div>
-              <div className="my-10">
-                <div className="mb-4">
-                  <span className="font-bold text-gray-700 ">Select Size:</span>
-                  <div className="flex items-center mt-2 md:flex-nowrap flex-wrap">
-                    {data.selectedSizes &&
-                      data.selectedSizes.map((value) => {
-                        return (
-                          <button className="bg-gray-300  text-gray-700  py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 ">
-                            {value}
-                          </button>
-                        );
-                      })}
+
+              <div>
+                <span className="text-[#388e3c] font-semibold">
+                  Extra ₹{priceNumber * (discount / 100)} off
+                </span>
+                <div className=" flex gap-3 items-center">
+                  <span className=" text-xl font-bold">₹{currentPrice}</span>
+
+                  <div className="flex items-center gap-2">
+                    <span className="text-gray-600 line-through">
+                      ₹{data.price}
+                    </span>
+                    <span className="text-[#388e3c] font-semibold">
+                      {data.offer}% off
+                    </span>
                   </div>
                 </div>
-                <div>
-                  <p className="font-bold">Customize your order:</p>
-                  <textarea
-                    className="w-full focus:ring-0 focus:outline-none bg-gray-200"
-                    rows="5"
-                    placeholder="Add special instructions or customization..."
-                  ></textarea>
+              </div>
+
+              <div>
+                <span className="font-bold ">Availability:</span>
+                <span className="">
+                  {" "}
+                  {data.availability == "Available"
+                    ? "In Stock"
+                    : "Out of Stock"}
+                </span>
+              </div>
+              <div>
+                <span className="font-bold text-gray-700 ">Select Size:</span>
+                <div className="flex items-center mt-2 md:flex-nowrap gap-y-2 flex-wrap">
+                  {data.selectedSizes &&
+                    data.selectedSizes.map((value) => {
+                      return (
+                        <button className="bg-gray-300  text-gray-700  py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 ">
+                          {value}
+                        </button>
+                      );
+                    })}
                 </div>
               </div>
 
-              <div className="flex -mx-2 my-10">
+              <div>
+                <p className="font-bold">Customize your order:</p>
+                <textarea
+                  className="w-full focus:ring-0 focus:outline-none bg-gray-200"
+                  rows="5"
+                  placeholder="Add special instructions or customization..."
+                ></textarea>
+              </div>
+
+              <div className="flex -mx-2">
                 <input
                   type="number"
                   defaultValue={1}
@@ -128,7 +156,7 @@ const ProductDetails = () => {
                   <p>Free Delivery within India</p>
                 </div>
               </div>
-              <table className="border-collapse border border-gray-300 my-10">
+              <table className="border-collapse border border-gray-300">
                 <tbody>
                   <tr className="border border-gray-300">
                     <td className="p-2 border border-gray-300">VENDOR:</td>
@@ -184,7 +212,7 @@ const ProductDetails = () => {
                 </tr>
                 <tr className="border-b border-gray-500">
                   <td className="p-2">Size</td>
-                  <td className="p-2 border-l border-gray-500 flex gap-3">
+                  <td className="p-2 border-l border-gray-500 flex flex-wrap gap-3">
                     {data.selectedSizes &&
                       data.selectedSizes.map((value) => {
                         return <span>{value}</span>;

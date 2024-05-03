@@ -17,6 +17,7 @@ const NewArrival = ({ title }) => {
     // You can perform additional actions based on the selected option here.
   };
   useEffect(() => {
+    
     const getFun = async () => {
       let result = await fetch("https://botecommerce.onrender.com/product");
       result = await result.json();

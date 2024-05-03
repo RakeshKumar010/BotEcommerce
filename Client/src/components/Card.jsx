@@ -14,7 +14,7 @@ const Card = ({ value, setDetailsPopup,setAddId }) => {
       {image && (
   <img
     className="rounded-t-lg w-full"
-    src={`https://botecommerce.onrender.com/${image[0]}`}
+    src={`https://botecommerce.onrender.com/${image[3]}`}
     alt="product image"
     onMouseEnter={() => {
       setAddStyle(true);

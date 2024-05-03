@@ -17,9 +17,14 @@ const Product = () => {
 
   return (
     <div className="absolute right-0 border-dotted border-black border-2 min-h-screen w-full md:w-[82%] px-2">
+      
       <div className="text-center py-5">
         <p className="font-bold text-3xl">All Products</p>
+        <div className="flex justify-end">
+        <p className="bg-[#3f83f8] text-white p-5 py-3 rounded-md mx-2 hover:shadow-lg">Export to Excel</p>
       </div>
+      </div>
+     
       <table className="table-auto w-full ">
         <thead>
           <tr>
@@ -31,7 +36,7 @@ const Product = () => {
             <th>Dispatch Time</th>
             <th>Availability</th>
             <th>Selected Sizes</th>
-           
+
             <th>Price</th>
             <th>Points</th>
             <th>Section</th>
@@ -46,6 +51,7 @@ const Product = () => {
             })}
         </tbody>
       </table>
+      
     </div>
   );
 };
