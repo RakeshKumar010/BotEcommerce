@@ -42,3 +42,8 @@ animation: slideUp 2s linear  forwards;
     }
   }
 }
+
+
+.carousel-main div{
+  border-radius: 0;
+}

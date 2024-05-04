@@ -11,6 +11,7 @@ import NewArrival from "../pages/NewArrival";
 import OrderPage from "../pages/OrderPage";
 import SignUp from "../components/admin/SignUp";
 import RedirectPage from "../components/RedirectPage";
+import AddCoupon from "../components/admin/AddCoupon";
 
 const Layout = () => {
 
@@ -40,6 +41,7 @@ const Layout = () => {
         <Route path="/admin" element={isAdmin ? <Admin/> : <RedirectPage/>}>
           <Route index element={<DashBoard />} />
           <Route path="product" element={<Product />} />
+          <Route path="add-coupon" element={<AddCoupon />} />
           <Route path="add-products" element={<AddProduct />} />
           <Route path="sign-up" element={<SignUp />} />
         </Route>

@@ -8,7 +8,7 @@ import RelatedProduct from "./RelatedProduct";
 
 const ProductDetails = () => {
   const location = useLocation();
-  const [imageUrl,setImageUrl]=useState(null)
+  const [imageUrl, setImageUrl] = useState(null);
   const [data, setData] = useState("");
   let offer = data.offer; // "20% off"
   let discount = parseInt(offer); // 20
@@ -35,29 +35,30 @@ const ProductDetails = () => {
     <>
       <NavBar />
       <div className="bg-gray-100  py-8">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row -mx-4">
-            <div className="flex flex-col gap-5  px-4 ">
-              <div className="md:flex-1">
-                <div className="w-full h-full rounded-lg bg-gray-300  mb-4">
-                  {data.image && (
-                    <img
-                      className="w-full h-full object-cover rounded-md object-top"
-                      src={`https://botecommerce.onrender.com/${imageUrl==null?data.image[3]:imageUrl}`}
-                      alt="Product Image"
-                    />
-                  )}
-                </div>
+        <div className="sm:w-[90vw] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row">
+            <div className="flex flex-col md:flex-row  gap-2  px-4 ">
+              <div className="w-full h-full rounded-lg bg-gray-300  mb-4">
+                {data.image && (
+                  <img
+                    className="w-full h-full object-cover rounded-md object-top"
+                    src={`https://botecommerce.onrender.com/${
+                      imageUrl == null ? data.image[3] : imageUrl
+                    }`}
+                    alt="Product Image"
+                  />
+                )}
               </div>
-              <div className="flex justify-between gap-y-2 flex-wrap">
+
+              <div className="flex flex-row md:flex-col justify-center items-center gap-2 ">
                 {data.image &&
                   [...data.image].reverse().map((value) => {
                     return (
                       <img
-                      onClick={()=>{
-                        setImageUrl(value)
-                      }}
-                        className=" rounded-md w-40 md:w-36"
+                        onClick={() => {
+                          setImageUrl(value);
+                        }}
+                        className=" rounded-md w-16 md:w-36"
                         src={`https://botecommerce.onrender.com/${value}`}
                         alt="Product Image"
                       />

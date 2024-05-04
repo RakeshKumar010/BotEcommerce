@@ -10,20 +10,24 @@ import DreshList from "../components/DreshList";
 import ProDetailsPopup from "../components/ProDetailsPopup";
 
 const Home = () => {
-  const[detailsPopup,setDetailsPopup]=useState(false)
-  const[addId,setAddId]=useState(false)
+  const [detailsPopup, setDetailsPopup] = useState(false);
+  const [addId, setAddId] = useState(false);
 
   return (
     <>
-      {detailsPopup?<ProDetailsPopup addId={addId} setDetailsPopup={setDetailsPopup}/>:null}
-      <HeaderTop/>
-      <NavBar />
-      <Banner />
-      <DreshList/>
-      <ArrivalShow setAddId={setAddId} setDetailsPopup={setDetailsPopup}/>
-      <BestSeller setAddId={setAddId} setDetailsPopup={setDetailsPopup}/>
-      <FeatureBottom/>
-      <Footer/>
+      <>
+        {detailsPopup ? (
+          <ProDetailsPopup addId={addId} setDetailsPopup={setDetailsPopup} />
+        ) : null}
+        <HeaderTop />
+        <NavBar />
+        <Banner />
+      </>
+      <DreshList />
+      <ArrivalShow setAddId={setAddId} setDetailsPopup={setDetailsPopup} />
+      <BestSeller setAddId={setAddId} setDetailsPopup={setDetailsPopup} />
+      <FeatureBottom />
+      <Footer />
     </>
   );
 };

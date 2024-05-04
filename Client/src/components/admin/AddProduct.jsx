@@ -102,7 +102,7 @@ const AddProduct = () => {
 
         <div>
           <p className="block text-gray-700 text-sm font-bold mb-2">
-            Image URL
+            Image
           </p>
           <input
             type="file"

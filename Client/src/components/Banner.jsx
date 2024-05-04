@@ -6,8 +6,8 @@ import { Carousel } from "flowbite-react";
 const Banner = () => {
   const data = [Banner0,Banner1, Banner2];
   return (
-    <div className="relative h-[12vh]  md:h-[40vh] ">
-      <Carousel  >
+    <div className="relative h-[12vh]  md:h-[40vh] carousel-main">
+      <Carousel >
         {data &&
           data.map((value) => {
             return (

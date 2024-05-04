@@ -62,7 +62,7 @@ const NewArrival = ({ title }) => {
             </select>
           </div>
         </div>
-        <div className="flex md:justify-between justify-center  flex-wrap gap-4 sm:px-10 lg:px-20">
+        <div className="flex md:justify-between justify-center  flex-wrap gap-4 gap-y-7 sm:px-10 lg:px-20">
           {data &&
             [...data].reverse().map((value) => {
               return <Card value={value} />;
