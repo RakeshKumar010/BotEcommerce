@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Banner from "../components/Banner";
 import NavBar from "../components/global/NavBar";
 import HeaderTop from "../components/HeaderTop";
@@ -15,15 +15,15 @@ const Home = () => {
 
   return (
     <>
-      <>
-        {detailsPopup ? (
-          <ProDetailsPopup addId={addId} setDetailsPopup={setDetailsPopup} />
-        ) : null}
-        <HeaderTop />
-        <NavBar />
-        <Banner />
-      </>
+      {detailsPopup ? (
+        <ProDetailsPopup addId={addId} setDetailsPopup={setDetailsPopup} />
+      ) : null}
+      <HeaderTop />
+      <NavBar />
+
+      <Banner />
       <DreshList />
+
       <ArrivalShow setAddId={setAddId} setDetailsPopup={setDetailsPopup} />
       <BestSeller setAddId={setAddId} setDetailsPopup={setDetailsPopup} />
       <FeatureBottom />

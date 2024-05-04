@@ -4,6 +4,7 @@ const express = require("express");
 const app = express.Router();
 const productModel = require("../schema/productSchema");
 const userSchema = require("../schema/userSchema");
+const couponSchema = require("../schema/couponSchema")
 
 
 app.post("/add-products", upload.array('image'), async (req, res) => {
@@ -26,10 +27,18 @@ app.get("/product", async (req, res) => {
   res.send(result);
 });
 
+app.get("/coupon", async (req, res) => {
+  let result = await couponSchema.find();
+  res.send(result);
 
+});
 
 app.get("/:id", async (req, res) => {
   let result = await productModel.findOne({ _id: req.params.id });
+  res.send(result);
+});
+app.delete("/coupon/:id", async (req, res) => {
+  let result = await couponSchema.deleteOne({ _id: req.params.id });
   res.send(result);
 });
 
@@ -41,8 +50,15 @@ app.post("/sign-up", async (req, res) => {
   let result = await new userSchema(req.body);
   result = await result.save();
   res.send(result);
-  console.log(result);
+
 });
+app.post("/add-coupon", async (req, res) => {
+  let result = await new couponSchema(req.body);
+  result = await result.save();
+  res.send(result);
+
+});
+
 app.post("/login", async (req, res) => {
   let result = await userSchema.findOne({
     email: req.body.email,

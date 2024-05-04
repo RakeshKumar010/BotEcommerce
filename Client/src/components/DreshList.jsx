@@ -2,7 +2,7 @@ import Banner from "../assets/image/banner1.webp";
 
 const DreshList = () => {
   return (
-    <div>
+    <div className="bg-white pb-3">
       <img
         src={Banner}
         alt="..."

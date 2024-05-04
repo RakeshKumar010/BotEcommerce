@@ -40,6 +40,7 @@ const ProductCard = ({ value, setPageLoad }) => {
           );
         })}
       </td>
+      <td className="border border-gray-500 px-2 ">{points}</td>
       <td className="border border-gray-500 px-2 ">{title}</td>
       <td className="border border-gray-500 px-2 w-20">{rating}</td>
       <td className="border border-gray-500 px-2 ">{fabric}</td>
@@ -50,7 +51,6 @@ const ProductCard = ({ value, setPageLoad }) => {
         {selectedSizes.join(", ")}
       </td>
       <td className="border border-gray-500 px-2 ">₹{price}</td>
-      <td className="border border-gray-500 px-2 ">{points}</td>
       <td className="border border-gray-500 px-2 ">{section}</td>
       <td className="border border-gray-500 px-2 ">{offer}</td>
       <td className="border border-gray-500 px-2 ">

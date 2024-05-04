@@ -20,13 +20,13 @@ const BestSeller = ({setDetailsPopup,setAddId}) => {
         <p className="font-semibold text-lg md:text-2xl">BEST SELLER</p>
         <p className="">Explore suit sets</p>
       </div>
-      <div className="flex md:justify-between justify-center  flex-wrap gap-4 sm:px-10 lg:px-10">
+      <div className="flex md:justify-between justify-center  flex-wrap gap-4 gap-y-7 sm:px-10 lg:px-10">
         {data &&
           [...data].reverse().map((value) => {
             return <Card setDetailsPopup={setDetailsPopup} setAddId={setAddId}  value={value} />;
           })}
       </div>
-      <div className="flex justify-center items-center my-10">
+      <div className="flex justify-center items-center my-10 ">
         <Link to={'/best-seller'} className="bg-uiColor p-2 text-white rounded-sm px-10 cursor-pointer">VIEW ALL PRODUCTS</Link>
       </div>
     </div>

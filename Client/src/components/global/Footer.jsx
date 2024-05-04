@@ -1,7 +1,9 @@
 import { FaFacebookF, FaYoutube, FaInstagram } from "react-icons/fa";
 import {Link} from 'react-router-dom'
+import ScrollUpDown from "./ScrollUpDown";
 const Footer = () => {
   return (
+    <>
     <div>
       <div className="flex justify-center md:justify-between flex-wrap bg-uiColor text-white md:p-5 lg:p-16 ">
         <div className="flex flex-col text-center md:text-start gap-7 lg:gap-10 mt-8 w-80">
@@ -86,6 +88,8 @@ const Footer = () => {
         <p>© 2024 botmediadigital.com | Developed by BotMedia Digital</p>
       </div>
     </div>
+    <ScrollUpDown/>
+    </>
   );
 };
 
