@@ -9,7 +9,7 @@ const Coupon = () => {
 
   useEffect(() => {
     const getFun = async () => {
-      let result = await fetch("http://localhost:3000/coupon");
+      let result = await fetch("https://botecommerce.onrender.com/coupon");
       result = await result.json();
       setData(result);
       setPageLoad(result);
@@ -74,7 +74,7 @@ const Coupon = () => {
                   <CgRemove
                     onClick={async () => {
                       let result = await fetch(
-                        `http://localhost:3000/coupon/${_id}`,
+                        `https://botecommerce.onrender.com/coupon/${_id}`,
                         {
                           method: "delete",
                           headers: { "content-type": "application/json" },

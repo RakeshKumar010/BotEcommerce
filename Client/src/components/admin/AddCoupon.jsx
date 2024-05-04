@@ -10,7 +10,7 @@ const AddCoupon = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let response = await fetch("http://localhost:3000/add-coupon", {
+    let response = await fetch("https://botecommerce.onrender.com/add-coupon", {
       method: "post",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ title, discount,code,expiryDate }),
