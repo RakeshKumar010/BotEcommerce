@@ -12,18 +12,27 @@ import ProDetailsPopup from "../components/ProDetailsPopup";
 const Home = () => {
   const [detailsPopup, setDetailsPopup] = useState(false);
   const [addId, setAddId] = useState(false);
-
+  let screenWidth = window.innerWidth;
   return (
     <>
       {detailsPopup ? (
         <ProDetailsPopup addId={addId} setDetailsPopup={setDetailsPopup} />
       ) : null}
-      <HeaderTop />
-      <NavBar />
+      {screenWidth > 1021 ? (
+        <>
+         
+          <HeaderTop />
+          <NavBar />
+          <Banner />
+        </>
+      ) : null}
 
-      <Banner />
+      <div className="lg:static sticky top-0 z-10 block  lg:hidden bg-white pb-2 shadow-xl ">
+        <HeaderTop />
+        <NavBar />
+        <Banner />
+      </div>
       <DreshList />
-
       <ArrivalShow setAddId={setAddId} setDetailsPopup={setDetailsPopup} />
       <BestSeller setAddId={setAddId} setDetailsPopup={setDetailsPopup} />
       <FeatureBottom />
