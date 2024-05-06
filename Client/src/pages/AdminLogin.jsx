@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { jwtDecode } from "jwt-decode";
 const AdminLogin = ({ setIsAdmin }) => {
+  let screenWidth = window.innerWidth;
   const navigate = useNavigate();
   const [email, setEmail] = useState();
   const [pass, setPass] = useState();
@@ -91,8 +92,9 @@ const AdminLogin = ({ setIsAdmin }) => {
             >
               Sign in
             </button>
+       
             <GoogleLogin
-              width={400}
+              width={screenWidth>500?400:265}
               onSuccess={(credentialResponse) => {
                 const decoded = jwtDecode(credentialResponse?.credential);
                 const email = decoded.email;
@@ -105,7 +107,8 @@ const AdminLogin = ({ setIsAdmin }) => {
                 console.log("Login Failed");
               }}
             />
-          </div>
+            </div>
+ 
         </form>
       </div>
     </div>
