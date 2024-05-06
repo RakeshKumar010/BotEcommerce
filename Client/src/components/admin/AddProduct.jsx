@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2'
 const sizes = ["XS", "S", "M", "L", "XL", "XXL", "3XL", "4XL"];
 const categories = [
   "New-Arrivals",
@@ -10,7 +10,6 @@ const categories = [
 ];
 
 const AddProduct = () => {
-  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [section, setSection] = useState("");
   const [image, setImage] = useState([]);
@@ -69,8 +68,12 @@ const AddProduct = () => {
   
     if (response.ok) { // if HTTP-status is 200-299
       // get the response body
-      let result = await response.json();
-      navigate("/admin/product");
+    
+      Swal.fire({
+        title: "Success",
+        text: "Product added successfully!",
+        icon: "success"
+      });
     } else {
       alert("HTTP-Error: " + response.status);
     }

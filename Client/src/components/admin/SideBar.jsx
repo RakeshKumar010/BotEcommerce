@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { IoTrailSignOutline } from "react-icons/io5";
-import { MdAddChart, MdLogout, MdOutlineAddPhotoAlternate, MdOutlineDashboardCustomize, MdProductionQuantityLimits } from "react-icons/md";
+import {
+  MdAddChart,
+  MdLogout,
+  MdOutlineAddPhotoAlternate,
+  MdOutlineDashboardCustomize,
+  MdProductionQuantityLimits,
+} from "react-icons/md";
 import { LuRecycle } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import { RiCoupon2Line } from "react-icons/ri";
@@ -8,28 +14,42 @@ import { RiCoupon2Line } from "react-icons/ri";
 const SideBar = () => {
   const [navOpen, setNavOpen] = useState(true);
   const links = [
-    { to: "/admin", text: "Dashboard", icon: <MdOutlineDashboardCustomize className="text-xl" /> },
-    { to: "product", text: "Products", icon: <MdProductionQuantityLimits className="text-xl" /> },
+    {
+      to: "/admin",
+      text: "Dashboard",
+      icon: <MdOutlineDashboardCustomize className="text-xl" />,
+    },
+    {
+      to: "product",
+      text: "Products",
+      icon: <MdProductionQuantityLimits className="text-xl" />,
+    },
     {
       to: "add-products",
       text: "Add Products",
       icon: <MdAddChart className="text-xl" />,
     },
-    { to: "add-coupon", text: "Add Coupon", icon: <MdOutlineAddPhotoAlternate className="text-xl" /> },
-    { to: "coupon", text: "Coupon", icon: <RiCoupon2Line className="text-xl" /> },
-    { to: "recycle-bin", text: "Recycle Bin", icon: <LuRecycle className="text-xl" /> },
-    { to: "sign-up", text: "Sign Up", icon: <IoTrailSignOutline className="text-xl" /> },
     {
-      to: "/",
-      text: "Logout",
-      icon: <MdLogout className="text-xl" />,
-      onClick: () => {
-        // Clear all data from local storage
-        localStorage.clear();
-        // Set isAdmin to false
-        setIsAdmin(false);
-      },
+      to: "add-coupon",
+      text: "Add Coupon",
+      icon: <MdOutlineAddPhotoAlternate className="text-xl" />,
     },
+    {
+      to: "coupon",
+      text: "Coupon",
+      icon: <RiCoupon2Line className="text-xl" />,
+    },
+    {
+      to: "recycle-bin",
+      text: "Recycle Bin",
+      icon: <LuRecycle className="text-xl" />,
+    },
+    {
+      to: "sign-up",
+      text: "Sign Up",
+      icon: <IoTrailSignOutline className="text-xl" />,
+    },
+    
   ];
   return (
     <>
@@ -62,12 +82,20 @@ const SideBar = () => {
         } lg:translate-x-0`}
       >
         <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 ">
+      
           <ul className="space-y-2 font-medium">
+          <Link to={"/"}>
+        <img
+          src="https://bhaviniparis.com/cdn/shop/files/bhavini_paris_logo_file-01_360x.jpg?v=1702467865"
+          alt="..."
+          className="h-10  lg:h-12"
+        />
+      </Link>
             {links.map((link, index) => (
               <li key={index}>
                 <Link
                   to={link.to}
-                  className="flex items-center p-2 text-gray-900 rounded-lg  hover:bg-gray-100  group"
+                  className="flex items-center p-2 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group"
                   onClick={link.onClick}
                 >
                   {link.icon}
@@ -77,6 +105,19 @@ const SideBar = () => {
                 </Link>
               </li>
             ))}
+            <li >
+              <Link
+                to={"/"}
+                className="flex hover:bg-[#9d4253] hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group"
+                onClick={() => {
+                  localStorage.clear();
+                  setIsAdmin(false);
+                }}
+              >
+                <MdLogout className="text-xl" />
+                <span className="flex-1 ms-3 whitespace-nowrap">Logout</span>
+              </Link>
+            </li>
           </ul>
         </div>
       </aside>

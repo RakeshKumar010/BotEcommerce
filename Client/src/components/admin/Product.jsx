@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
-import EditProduct from "./EditProduct";
 
 const Product = () => {
   const [data, setData] = useState();
@@ -19,11 +18,11 @@ const Product = () => {
 
   return (
     <>
-    <div className="absolute right-0 border-dotted border-black border-2 min-h-screen w-full lg:w-[82%] px-2">
+    <div className="absolute right-0 border-dotted border-black border-0 md:border-2 min-h-screen w-full lg:w-[82%] px-2">
       <div className="text-center py-5">
         <p className="font-bold text-3xl">All Products</p>
         <div className="flex justify-end">
-          <p className="bg-[#3f83f8] text-white p-5 py-3 rounded-md mx-2 hover:shadow-lg">
+          <p className="bg-teal-400 text-white p-5 py-3 rounded-md mx-2 hover:scale-105 transition-all duration-200 hover:shadow-lg">
             Export to Excel
           </p>
         </div>

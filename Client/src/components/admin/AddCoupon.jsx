@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
+import Swal from 'sweetalert2'
 const AddCoupon = () => {
-  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [discount, setDiscount] = useState("");
   const [code, setCode] = useState("");
@@ -17,10 +15,13 @@ const AddCoupon = () => {
     });
 
     if (response.ok) {
-      // if HTTP-status is 200-299
-      // get the response body
-      let result = await response.json();
-      navigate("/admin/product");
+     
+     
+      Swal.fire({
+        title: "Success",
+        text: "Coupon added successfully!",
+        icon: "success"
+      });
     } else {
       alert("HTTP-Error: " + response.status);
     }

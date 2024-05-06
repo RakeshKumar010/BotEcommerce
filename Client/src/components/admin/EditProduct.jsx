@@ -32,10 +32,7 @@ const EditProduct = () => {
     newPoints[index] = e.target.value;
     setPoints(newPoints);
   };
-
-  const handleAddClick = () => {
-    setPoints([...points, ""]);
-  };
+ 
 
   const handleSizeChange = (event) => {
     const { value } = event.target;
@@ -222,27 +219,22 @@ const EditProduct = () => {
           </div>
         </div>
         <div>
-          {points.map((point, index) => (
+          {data ?data.points.map((value, index) => (
             <div key={index}>
               <p className="block text-gray-700 text-sm font-bold mb-2">
                 Point {index}
               </p>
               <input
                 type="text"
-                value={point}
+            
+                // value={data ? data.point[0] : ''}
+                value={value}
                 onChange={(e) => handleInputChange(e, index)}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               ></input>
             </div>
-          ))}
-          <div className="flex justify-end my-1">
-            <p
-              className="text-end bg-black text-white py-2 px-5 rounded-md cursor-pointer"
-              onClick={handleAddClick}
-            >
-              Add More Points
-            </p>
-          </div>
+          )):null}
+          
         </div>
 
         <button

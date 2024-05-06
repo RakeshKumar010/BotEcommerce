@@ -56,9 +56,9 @@ const ProductCard = ({ value, setPageLoad }) => {
       <td className="border border-gray-500 px-2 ">{offer}</td>
       <td className="border border-gray-500 px-2 ">
         <div className="text-3xl flex cursor-pointer md:text-4xl">
-          <CgRemove onClick={deleteFun} />
+          <CgRemove onClick={deleteFun} className="text-[#9d4253] hover:scale-110 transition-all duration-200"/>
           <Link to={_id}>
-          <BiEdit className="ml-2" />
+          <BiEdit className="ml-2 hover:scale-110 transition-all duration-200 text-teal-400" />
           </Link>
         </div>
       </td>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import Swal from 'sweetalert2'
 const SignUp = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
@@ -16,8 +16,12 @@ const SignUp = () => {
       body: JSON.stringify({ name, email, pass }),
     });
 
-    if (result) {
-      navigate("/admin/product");
+    if (result.ok) {
+      Swal.fire({
+        title: "Success",
+        text: "Created successfully!",
+        icon: "success"
+      });
     } else {
       console.log("error");
     }

@@ -17,9 +17,45 @@ const Coupon = () => {
     getFun();
   }, [pageLoad]);
   return (
-    <div className="bg-gray-50 border-2 border-dotted border-black h-screen w-full lg:w-[83%] absolute right-0 ">
+    <div className="bg-gray-50 border-0 md:border-2 border-dotted border-black h-screen w-full lg:w-[83%] absolute right-0 ">
       <p className="text-3xl font-bold text-center my-10">All Coupon</p>
-      <div className="flex w-full     flex-wrap text-center justify-center ">
+      <table className="w-[90%] mx-auto text-center shadow-lg ">
+        <tr className="border-2 bg-teal-400 text-white">
+          <th>Title</th>
+          <th>Discount</th>
+          <th>Code</th>
+          <th>Expiry Date</th>
+          <th>Action</th>
+        </tr>
+  
+          {data &&
+            [...data].reverse().map(({_id,title,discount,code,expiryDate}) => {
+              return <tr className="border-2">
+              <td>{title}</td>
+              <td>{discount}</td>
+              <td>{code}</td>
+              <td>{expiryDate}</td>
+              <td className="flex justify-center">
+              <BiEdit className="text-2xl" />
+                  <CgRemove
+                    onClick={async () => {
+                      let result = await fetch(
+                        `https://botecommerce.onrender.com/coupon/${_id}`,
+                        {
+                          method: "delete",
+                          headers: { "content-type": "application/json" },
+                        }
+                      );
+                      setPageLoad(result);
+                    }}
+                    className="text-2xl"
+                  />
+              </td>
+              </tr>
+            })}
+   
+      </table>
+      {/* <div className="flex w-full     flex-wrap text-center justify-center ">
         <div className="border border-r-0 border-black ">
           <p className="font-bold bg-gray-200 p-3">Title</p>
           {data &&
@@ -88,7 +124,7 @@ const Coupon = () => {
               );
             })}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
