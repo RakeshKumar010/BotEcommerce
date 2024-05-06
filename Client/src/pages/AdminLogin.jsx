@@ -96,7 +96,9 @@ const AdminLogin = ({ setIsAdmin }) => {
               onSuccess={(credentialResponse) => {
                 const decoded = jwtDecode(credentialResponse?.credential);
                 localStorage.setItem("email", decoded.email);
-                 
+                if (decoded.email) {
+                  navigate("/admin");
+                }
               }}
               onError={() => {
                 console.log("Login Failed");
