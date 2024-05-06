@@ -1,6 +1,8 @@
+import { GoogleLogin } from "@react-oauth/google";
 import React, { useState } from "react";
-import {  useNavigate } from "react-router-dom";
-import Swal from 'sweetalert2'
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { jwtDecode } from "jwt-decode";
 const AdminLogin = ({ setIsAdmin }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState();
@@ -30,15 +32,13 @@ const AdminLogin = ({ setIsAdmin }) => {
         title: "Incorrect Password",
         text: `You have only 3 attems `,
       });
-      
-     
     }
   };
   return (
     <div className="flex min-h-full h-screen flex-col justify-center px-6 py-12 lg:px-8 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 transition-all duration-500 ease-in-out">
       <div className="animate-bounce">
         <h2 className="mt-10 text-center text-3xl font-bold leading-9 tracking-tight text-white transform hover:scale-110 transition-transform duration-300 ease-in-out">
-          Sign in to your account 
+          Sign in to your account
         </h2>
       </div>
 
@@ -84,13 +84,24 @@ const AdminLogin = ({ setIsAdmin }) => {
             </div>
           </div>
 
-          <div>
+          <div className="flex flex-col gap-3 justify-center ">
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-gray-900 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600 transform hover:scale-110 transition-transform duration-300 ease-in-out"
+              className="flex w-full  justify-center rounded-md bg-gray-900 px-3 py-2 text-lg font-semibold leading-6 text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600 transform hover:scale-110 transition-transform duration-300 ease-in-out"
             >
               Sign in
             </button>
+            <GoogleLogin
+              width={400}
+              onSuccess={(credentialResponse) => {
+                const decoded = jwtDecode(credentialResponse?.credential);
+                localStorage.setItem("email", decoded.email);
+                 
+              }}
+              onError={() => {
+                console.log("Login Failed");
+              }}
+            />
           </div>
         </form>
       </div>
