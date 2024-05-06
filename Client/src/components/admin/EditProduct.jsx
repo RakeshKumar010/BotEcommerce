@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 const sizes = ["XS", "S", "M", "L", "XL", "XXL", "3XL", "4XL"];
 const categories = [
   "New-Arrivals",
@@ -9,8 +9,11 @@ const categories = [
   "Lehenga-Sets",
 ];
 
-const AddProduct = () => {
+const EditProduct = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [data, setData] = useState();
+
   const [title, setTitle] = useState("");
   const [section, setSection] = useState("");
   const [image, setImage] = useState([]);
@@ -34,72 +37,50 @@ const AddProduct = () => {
     setPoints([...points, ""]);
   };
 
-  
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-  
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("rating", rating);
-    formData.append("price", price);
-    formData.append("offer", offer);
-    formData.append("fabric", fabric);
-    formData.append("dispatchTime", dispatchTime);
-    formData.append("pieces", pieces);
-    formData.append("availability", availability);
-    formData.append("section", section);
-  
-    // Append each image file to formData
-    for (let i = 0; i < image.length; i++) {
-      formData.append("image", image[i]);
-    }
-    for (let i = 0; i < points.length; i++) {
-      formData.append("points", points[i]);
-    }
-    for (let i = 0; i < selectedSizes.length; i++) {
-      formData.append("selectedSizes", selectedSizes[i]);
-    }
-    // Append other fields...
-  
-    let response = await fetch("https://botecommerce.onrender.com/add-products", {
-      method: "POST",
-      body: formData,
-    });
-  
-    if (response.ok) { // if HTTP-status is 200-299
-      // get the response body
-      let result = await response.json();
-      navigate("/admin/product");
-    } else {
-      alert("HTTP-Error: " + response.status);
-    }
+  const handleSizeChange = (event) => {
+    const { value } = event.target;
+    setSelectedSizes((prevSizes) =>
+      prevSizes.includes(value)
+        ? prevSizes.filter((size) => size !== value)
+        : [...prevSizes, value]
+    );
   };
 
+   
+
+  useEffect(() => {
+    const getFun = async () => {
+      let result = await fetch("https://botecommerce.onrender.com/"+location.pathname.split("/").pop());
+      result = await result.json();
+      setData(result);
+      console.log(result);
+    };
+    getFun();
+  }, []);
   return (
-    <div className="absolute flex justify-center items-center bg-gray-100 right-0 border-dotted border-black border-2 min-h-screen w-full lg:w-[82%]">
+    <div className="absolute flex justify-center items-center bg-gray-100 right-0 border-dotted border-black border-2 min-h-screen w-full md:w-[82%]">
       <form
-        onSubmit={handleSubmit}
+        
         className="space-y-4 w-[90vw] md:w-[50vw] bg-white shadow-md rounded px-8  pt-6 pb-8 mb-4"
       >
-        <h1 className="text-center text-2xl font-bold">Add Product</h1>
+        <h1 className="text-center text-2xl font-bold">Edit Product</h1>
         <div>
-          <p className="block text-gray-700 text-sm font-bold mb-2">Title</p>
+          <p className="block text-gray-700 text-sm font-bold mb-2">Title </p>
           <input
             type="text"
-            value={title}
+            value={data ? data.title : ''}
             onChange={(e) => setTitle(e.target.value)}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
 
         <div>
-          <p className="block text-gray-700 text-sm font-bold mb-2">
-            Image
-          </p>
+          <p className="block text-gray-700 text-sm font-bold mb-2">Image</p>
           <input
             type="file"
             multiple
+            
+            
             onChange={(e) => setImage(e.target.files)}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
@@ -111,7 +92,8 @@ const AddProduct = () => {
             </p>
             <input
               type="text"
-              value={pieces}
+          
+              value={data ? data.pieces : ''}
               onChange={(e) => setPieces(e.target.value)}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
@@ -120,7 +102,7 @@ const AddProduct = () => {
             <p className="block text-gray-700 text-sm font-bold mb-2">Rating</p>
             <input
               type="text"
-              value={rating}
+              value={data ? data.rating : ''}
               onChange={(e) => setRating(e.target.value)}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
@@ -129,7 +111,7 @@ const AddProduct = () => {
             <p className="block text-gray-700 text-sm font-bold mb-2">Price</p>
             <input
               type="text"
-              value={price}
+              value={data ? data.price : ''}
               onChange={(e) => setPrice(e.target.value)}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
@@ -143,7 +125,7 @@ const AddProduct = () => {
             </p>
             <input
               type="text"
-              value={dispatchTime}
+              value={data ? data.dispatchTime : ''}
               onChange={(e) => setDispatchTime(e.target.value)}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
@@ -153,7 +135,7 @@ const AddProduct = () => {
             <p className="block text-gray-700 text-sm font-bold mb-2">Offer</p>
             <input
               type="text"
-              value={offer}
+              value={data ? data.offer : ''}
               onChange={(e) => setOffer(e.target.value)}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
@@ -162,7 +144,8 @@ const AddProduct = () => {
             <p className="block text-gray-700 text-sm font-bold mb-2">Fabric</p>
             <input
               type="text"
-              value={fabric}
+    
+              value={data ? data.fabric : ''}
               onChange={(e) => setFabric(e.target.value)}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
@@ -230,14 +213,7 @@ const AddProduct = () => {
                     type="checkbox"
                     className="form-checkbox rounded-full h-4 w-4 text-blue-600"
                     value={size}
-                    onChange={(event) => {
-                      const { value } = event.target;
-                      setSelectedSizes((prevSizes) =>
-                        prevSizes.includes(value)
-                          ? prevSizes.filter((size) => size !== value)
-                          : [...prevSizes, value]
-                      );
-                    }}
+                    onChange={handleSizeChange}
                   />
                   <span className="ml-1 text-gray-700">{size}</span>
                 </label>
@@ -280,4 +256,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default EditProduct;

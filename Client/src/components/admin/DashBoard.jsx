@@ -21,7 +21,7 @@ const cardData = [
 
 const DashBoard = () => {
   return (
-    <div className="absolute right-0 border-dotted border-black border-2 min-h-screen w-full md:w-[82%]">
+    <div className="absolute right-0 border-dotted border-black border-2 min-h-screen w-full lg:w-[82%]">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4">
         {cardData.map((card, index) => (
           <DashBoardCard key={index} name={card.name} value={card.value} icon={card.icon} />

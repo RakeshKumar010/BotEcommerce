@@ -1,6 +1,7 @@
 import React from "react";
 import { BiEdit } from "react-icons/bi";
 import { CgRemove } from "react-icons/cg";
+import { Link } from "react-router-dom";
 
 const ProductCard = ({ value, setPageLoad }) => {
   const {
@@ -56,7 +57,9 @@ const ProductCard = ({ value, setPageLoad }) => {
       <td className="border border-gray-500 px-2 ">
         <div className="text-3xl flex cursor-pointer md:text-4xl">
           <CgRemove onClick={deleteFun} />
+          <Link to={_id}>
           <BiEdit className="ml-2" />
+          </Link>
         </div>
       </td>
     </tr>

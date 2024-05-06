@@ -3,27 +3,26 @@ import { Link } from "react-router-dom";
 import { IoMdEye } from "react-icons/io";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 
-const Card = ({ value, setDetailsPopup,setAddId }) => {
+const Card = ({ value, setDetailsPopup, setAddId }) => {
   const { _id, title, image, rating, price } = value;
   const [addStyle, setAddStyle] = useState(false);
   return (
-    <div className="hover:scale-105 transition-all duration-200 md:w-80 w-40 bg-white border hover:border-gray-900 rounded-lg shadow  ">
-       
+    <div className="hover:scale-105 transition-all duration-200 sm:w-72  lg:w-80 w-40 bg-white border hover:border-gray-900 rounded-lg shadow  ">
       <p className="relative">
-      <Link to={"/" + _id} >
-      {image && (
-  <img
-    className="rounded-t-lg w-full"
-    src={`https://botecommerce.onrender.com/${image[3]}`}
-    alt="product image"
-    onMouseEnter={() => {
-      setAddStyle(true);
-    }}
-    onMouseLeave={() => {
-      setAddStyle(false);
-    }}
-  />
-)}
+        <Link to={"/" + _id}>
+          {image && (
+            <img
+              className="rounded-t-lg  w-full"
+              src={`https://botecommerce.onrender.com/${image[3]}`}
+              alt="product image"
+              onMouseEnter={() => {
+                setAddStyle(true);
+              }}
+              onMouseLeave={() => {
+                setAddStyle(false);
+              }}
+            />
+          )}
         </Link>
         <div
           onMouseEnter={() => {
@@ -34,17 +33,14 @@ const Card = ({ value, setDetailsPopup,setAddId }) => {
           }`}
         >
           <div
-          onClick={() => {
-            setAddId(_id)
-            console.log(_id);
-            setDetailsPopup(true);
-          }}
+            onClick={() => {
+              setAddId(_id);
+              console.log(_id);
+              setDetailsPopup(true);
+            }}
             className={`w-10 cursor-pointer text-white flex justify-center rounded-full transition-all  items-center relative  h-10 bg-uiColor bottom-16 `}
           >
-            <IoMdEye
-            className=""
-              
-            />
+            <IoMdEye className="" />
           </div>
           <Link
             to={"/" + _id}

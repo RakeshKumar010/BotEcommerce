@@ -13,6 +13,7 @@ import SignUp from "../components/admin/SignUp";
 import RedirectPage from "../components/RedirectPage";
 import AddCoupon from "../components/admin/AddCoupon";
 import Coupon from "../components/admin/Coupon.jsx";
+import EditProduct from "../components/admin/EditProduct.jsx";
 
 const Layout = () => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -57,6 +58,7 @@ const Layout = () => {
         <Route path="/admin" element={isAdmin ? <Admin /> : <RedirectPage />}>
           <Route index element={<DashBoard />} />
           <Route path="product" element={<Product />} />
+          <Route path="product/:id" element={<EditProduct />} />
           <Route path="coupon" element={<Coupon />} />
           <Route path="add-coupon" element={<AddCoupon />} />
           <Route path="add-products" element={<AddProduct />} />

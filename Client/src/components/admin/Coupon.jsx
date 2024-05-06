@@ -17,7 +17,7 @@ const Coupon = () => {
     getFun();
   }, [pageLoad]);
   return (
-    <div className="bg-gray-50 border-2 border-dotted border-black h-screen w-full md:w-[83%] absolute right-0 ">
+    <div className="bg-gray-50 border-2 border-dotted border-black h-screen w-full lg:w-[83%] absolute right-0 ">
       <p className="text-3xl font-bold text-center my-10">All Coupon</p>
       <div className="flex w-full     flex-wrap text-center justify-center ">
         <div className="border border-r-0 border-black ">

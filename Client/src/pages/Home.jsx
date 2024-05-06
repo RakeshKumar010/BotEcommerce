@@ -18,16 +18,16 @@ const Home = () => {
       {detailsPopup ? (
         <ProDetailsPopup addId={addId} setDetailsPopup={setDetailsPopup} />
       ) : null}
-      {screenWidth > 1021 ? (
+      {screenWidth > 600 ? (
         <>
-         
           <HeaderTop />
           <NavBar />
           <Banner />
         </>
       ) : null}
 
-      <div className="lg:static sticky top-0 z-10 block  lg:hidden bg-white pb-2 shadow-xl ">
+      <div className=" sticky top-0 z-10 block  sm:hidden md:bg-gray-200 bg-white pb-2 shadow-xl ">
+ 
         <HeaderTop />
         <NavBar />
         <Banner />

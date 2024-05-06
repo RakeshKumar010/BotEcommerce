@@ -10,7 +10,9 @@ const NavBar = () => {
   const [showCart, setShowCart] = useState(false);
   const [searchData, setSearchData] = useState(false);
   return (
-    <div className="flex sticky top-0 z-10 right-0 left-0 items-center justify-between  lg:py-2 p-5 lg:px-16 bg-white">
+    <div className="flex sticky top-0 z-10 right-0 left-0 items-center justify-between  md:py-2 p-5 sm:px-8 lg:px-16
+     bg-white">
+
       {searchData ? (
         <div className="absolute z-[51] top-0 bottom-0 right-0 left-0 bg-black/30">
           <div className="bg-white/20 p-16">
@@ -35,7 +37,7 @@ const NavBar = () => {
         </div>
       ) : null}
       <IoReorderThreeOutline
-        className="cursor-pointer text-3xl lg:hidden block"
+        className="cursor-pointer text-3xl md:hidden block"
         onClick={() => {
           setNavRes(!navRes);
         }}
@@ -44,18 +46,18 @@ const NavBar = () => {
         <img
           src="https://bhaviniparis.com/cdn/shop/files/bhavini_paris_logo_file-01_360x.jpg?v=1702467865"
           alt="..."
-          className="h-8 lg:h-16"
+          className="h-8  lg:h-16"
         />
       </Link>
       <div
-        className={`lg:sticky absolute  lg:left-auto left-0 top-0 bottom-0 right-0 z-50 bg-black/20 ${
-          navRes ? "flex" : "hidden lg:block"
+        className={`md:sticky absolute  md:left-auto left-0 top-0 bottom-0 right-0 z-50 bg-black/20 ${
+          navRes ? "flex" : "hidden md:block"
         } }`}
       >
         <ul
-          className={`flex lg:flex-row flex-col lg:static h-screen bg-white  gap-7 p-8  lg:h-auto  lg:w-auto w-[80%] lg:items-center text-nowrap `}
+          className={`flex md:flex-row flex-col md:static h-screen bg-white sm:gap-4 gap-7 md:gap-5 lg:gap-7 p-8  md:h-auto  md:w-auto w-[80%] md:items-center text-nowrap `}
         >
-          <div className="lg:hidden flex justify-between items-center  py-2 px-1 w-full bg-gray-100">
+          <div className="md:hidden flex justify-between items-center  py-2 px-1 w-full bg-gray-100">
             <input
               type="text"
               placeholder="Search Products.."
@@ -70,7 +72,7 @@ const NavBar = () => {
             }}
             className=""
           >
-            <li>HOME</li>
+            <li className="text-base sm:text-[12px] lg:text-base">HOME</li>
           </Link>
           <Link
             to={"/new-arrivals"}
@@ -79,7 +81,7 @@ const NavBar = () => {
             }}
             className=""
           >
-            <li>NEW ARRIVALS</li>
+            <li className="text-base sm:text-[12px] lg:text-base">NEW ARRIVALS</li>
           </Link>
           <Link
             to={"/suit-sets"}
@@ -88,7 +90,7 @@ const NavBar = () => {
             }}
             className=""
           >
-            <li>SUIT SETS</li>
+            <li className="text-base sm:text-[12px] lg:text-base">SUIT SETS</li>
           </Link>
           <Link
             to={"/celebrity-stylists"}
@@ -97,7 +99,7 @@ const NavBar = () => {
             }}
             className=""
           >
-            <li>CELEBRITY STYLISTS</li>
+            <li className="text-base sm:text-[12px] lg:text-base">CELEBRITY STYLISTS</li>
           </Link>
           <Link
             to={"/best-seller"}
@@ -106,7 +108,7 @@ const NavBar = () => {
             }}
             className=""
           >
-            <li>BEST SELLER</li>
+            <li className="text-base sm:text-[12px] lg:text-base">BEST SELLER</li>
           </Link>
           <Link
             to={"/lehenga-sets"}
@@ -115,7 +117,7 @@ const NavBar = () => {
             }}
             className=""
           >
-            <li>LEHENGA SETS</li>
+            <li className="text-base sm:text-[12px] lg:text-base">LEHENGA SETS</li>
           </Link>
           <Link
             to={"/"}
@@ -124,7 +126,7 @@ const NavBar = () => {
             }}
             className="text-gray-400 md:hidden block "
           >
-            <li>Sign In</li>
+            <li className="text-base sm:text-[12px] lg:text-base">Sign In</li>
           </Link>
           <Link
             to={"/"}
@@ -133,19 +135,19 @@ const NavBar = () => {
             }}
             className="text-gray-400 md:hidden block "
           >
-            <li>Register</li>
+            <li className="text-base sm:text-[12px] lg:text-base">Register</li>
           </Link>
         </ul>
         <div   onClick={() => {
               setNavRes(!navRes);
-            }} className="  w-[20%] h-screen lg:hidden block"></div>
+            }} className="  w-[20%] h-screen md:hidden block"></div>
       </div>
       <div className="flex gap-6 relative select-none">
         <IoSearchOutline
           onClick={() => {
             setSearchData(true);
           }}
-          className="text-2xl hidden lg:block cursor-pointer"
+          className="text-2xl hidden md:block cursor-pointer"
         />
         <IoBagHandleOutline
           className="text-2xl cursor-pointer"

@@ -38,7 +38,7 @@ const SideBar = () => {
           setNavOpen(!navOpen);
         }}
         type="button"
-        className="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200   "
+        className="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200   "
       >
         <span className="sr-only">Open sidebar</span>
         <svg
@@ -59,7 +59,7 @@ const SideBar = () => {
       <aside
         className={`fixed  left-0 z-40 w-64 h-screen transition-transform mt-1 ${
           navOpen ? "-translate-x-full" : "translate-x-0 "
-        } sm:translate-x-0`}
+        } lg:translate-x-0`}
       >
         <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 ">
           <ul className="space-y-2 font-medium">

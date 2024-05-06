@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
+import EditProduct from "./EditProduct";
 
 const Product = () => {
   const [data, setData] = useState();
+ 
   const [pageLoad, setPageLoad] = useState();
 
   useEffect(() => {
@@ -16,7 +18,8 @@ const Product = () => {
   }, [pageLoad]);
 
   return (
-    <div className="absolute right-0 border-dotted border-black border-2 min-h-screen w-full md:w-[82%] px-2">
+    <>
+    <div className="absolute right-0 border-dotted border-black border-2 min-h-screen w-full lg:w-[82%] px-2">
       <div className="text-center py-5">
         <p className="font-bold text-3xl">All Products</p>
         <div className="flex justify-end">
@@ -46,10 +49,13 @@ const Product = () => {
 
         {data &&
           [...data].reverse().map((value) => {
+ 
             return <ProductCard setPageLoad={setPageLoad} value={value} />;
           })}
       </table>
     </div>
+    {/* <EditProduct/> */}
+    </>
   );
 };
 
