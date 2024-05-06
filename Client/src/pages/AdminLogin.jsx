@@ -95,10 +95,11 @@ const AdminLogin = ({ setIsAdmin }) => {
               width={400}
               onSuccess={(credentialResponse) => {
                 const decoded = jwtDecode(credentialResponse?.credential);
-                localStorage.setItem("email", decoded.email);
-                if (decoded.email) {
+                const email = decoded.email;
+                localStorage.setItem("email", email);
+                setIsAdmin(true);
                   navigate("/admin");
-                }
+             
               }}
               onError={() => {
                 console.log("Login Failed");
