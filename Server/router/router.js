@@ -45,6 +45,10 @@ app.put("/admins/:id", async (req, res) => {
   );
   res.send(result);
 });
+app.get("/admins/:id", async (req, res) => {
+  let result = await userSchema.findOne({ _id: req.params.id });
+  res.send(result);
+});
 
 app.get("/:id", async (req, res) => {
   let result = await productModel.findOne({ _id: req.params.id });
@@ -71,7 +75,7 @@ app.delete("/:id", async (req, res) => {
   let result = await productModel.deleteOne({ _id: req.params.id });
   res.send(result);
 });
-app.post("/sign-up", async (req, res) => {
+app.post("/admins", async (req, res) => {
   let result = await new userSchema(req.body);
   result = await result.save();
   res.send(result);

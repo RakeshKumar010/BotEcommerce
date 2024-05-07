@@ -23,7 +23,7 @@ const SideBar = () => {
     },
     {
       to: "account",
-      text: "Admins",
+      text: "Account",
       icon: <FaUserAstronaut className="text-xl" />,
     },
     {

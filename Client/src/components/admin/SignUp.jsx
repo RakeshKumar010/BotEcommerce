@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 const SignUp = () => {
-  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [addProduct, setAddProduct] = useState("");
   const [editProduct, setEditProduct] = useState("");
@@ -15,7 +13,7 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let result = await fetch("https://botecommerce.onrender.com/sign-up", {
+    let result = await fetch("https://botecommerce.onrender.com/admins", {
       method: "post",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ name, email, pass,addProduct,editProduct,deleteProduct,addCoupon,editCoupon,deleteCoupon }),

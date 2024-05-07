@@ -19,7 +19,7 @@ const Admins = () => {
   return (
     <div className="bg-gray-50 border-0 md:border-2 border-dotted border-black h-screen w-full lg:w-[83%] absolute right-0 ">
       <p className="text-3xl font-bold text-center my-10 text-[#9b3d4e]">
-        All Coupon
+        All Account
       </p>
       <table className="w-[90%] mx-auto text-center shadow-lg ">
         <tr className="border-2 bg-teal-400 text-white ">

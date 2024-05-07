@@ -16,6 +16,7 @@ import Coupon from "../components/admin/Coupon.jsx";
 import EditProduct from "../components/admin/EditProduct.jsx";
 import EditCoupon from "../components/admin/EditCoupon.jsx";
 import Admins from "../components/admin/Admins.jsx";
+import EditAccounts from "../components/admin/EditAccounts.jsx";
 
 const Layout = () => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -66,6 +67,7 @@ const Layout = () => {
           <Route path="add-coupon" element={<AddCoupon />} />
           <Route path="add-products" element={<AddProduct />} />
           <Route path="account" element={<Admins />} />
+          <Route path="account/:id" element={<EditAccounts />} />
           <Route path="sign-up" element={<SignUp />} />
         </Route>
       </Routes>
