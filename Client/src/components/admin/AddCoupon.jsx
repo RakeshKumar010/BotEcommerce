@@ -32,7 +32,7 @@ const AddCoupon = () => {
         onSubmit={handleSubmit}
         className="space-y-4 w-[90vw] md:w-[50vw] bg-white shadow-md rounded px-8  pt-6 pb-8 mb-4"
       >
-        <h1 className="text-center text-2xl font-bold text-[#9b3d4e]">Add Coupon</h1>
+        <h1 className="text-center text-2xl font-bold text-teal-400">Add Coupon</h1>
         <div>
           <p className="block text-gray-700 text-sm font-bold mb-2">Title</p>
           <input

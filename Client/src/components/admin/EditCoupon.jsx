@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
 const EditCoupon = () => {
   const location = useLocation();
   const navigater = useNavigate();
@@ -21,7 +23,14 @@ const EditCoupon = () => {
     );
 
     if (response.ok) {
-      navigater('/admin/coupon')
+      Swal.fire({
+        title: "Success",
+        text: "Edited successfully!",
+        icon: "success",
+      });
+      setTimeout(() => {
+        navigater("/admin/coupon");
+      }, 1000);
     } else {
       alert("HTTP-Error: " + response.status);
     }
@@ -34,8 +43,6 @@ const EditCoupon = () => {
           location.pathname.split("/").pop()
       );
       result = await result.json();
-
-      console.log(result);
       setTitle(result.title);
       setDiscount(result.discount);
       setCode(result.code);
@@ -49,7 +56,9 @@ const EditCoupon = () => {
         onSubmit={handleSubmit}
         className="space-y-4 w-[90vw] md:w-[50vw] bg-white shadow-md rounded px-8  pt-6 pb-8 mb-4"
       >
-        <h1 className="text-center text-2xl font-bold text-[#9b3d4e]">Edit Coupon</h1>
+        <h1 className="text-center text-2xl font-bold text-teal-400">
+          Edit Coupon
+        </h1>
         <div>
           <p className="block text-gray-700 text-sm font-bold mb-2">Title</p>
           <input

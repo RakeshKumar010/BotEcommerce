@@ -19,7 +19,7 @@ const Coupon = () => {
   }, [pageLoad]);
   return (
     <div className="bg-gray-50 border-0 md:border-2 border-dotted border-black h-screen w-full lg:w-[83%] absolute right-0 ">
-      <p className="text-3xl font-bold text-center my-10 text-[#9b3d4e]" >All Coupon</p>
+      <p className="text-3xl font-bold text-center my-10 text-teal-400" >All Coupon</p>
       <table className="w-[90%] mx-auto text-center shadow-lg ">
         <tr className="border-2 bg-teal-400 text-white ">
           <th className="p-2">Title</th>

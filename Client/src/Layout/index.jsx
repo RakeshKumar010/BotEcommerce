@@ -17,6 +17,7 @@ import EditProduct from "../components/admin/EditProduct.jsx";
 import EditCoupon from "../components/admin/EditCoupon.jsx";
 import Admins from "../components/admin/Admins.jsx";
 import EditAccounts from "../components/admin/EditAccounts.jsx";
+import RecycleData from "../components/admin/RecycleData.jsx";
 
 const Layout = () => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -61,6 +62,7 @@ const Layout = () => {
         <Route path="/admin" element={isAdmin ? <Admin /> : <RedirectPage />}>
           <Route index element={<DashBoard />} />
           <Route path="product" element={<Product />} />
+          <Route path="recycle-bin" element={<RecycleData />} />
           <Route path="product/:id" element={<EditProduct />} />
           <Route path="coupon" element={<Coupon />} />
           <Route path="coupon/:id" element={<EditCoupon />} />

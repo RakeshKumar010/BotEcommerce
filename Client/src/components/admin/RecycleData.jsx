@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 
-const Product = () => {
+
+const RecycleData = () => {
   const [data, setData] = useState();
  
   const [pageLoad, setPageLoad] = useState();
 
   useEffect(() => {
     const getFun = async () => {
-      let result = await fetch("https://botecommerce.onrender.com/product");
+      let result = await fetch("https://botecommerce.onrender.com/product/recycle-bin");
       result = await result.json();
       setData(result);
       setPageLoad(result);
@@ -58,4 +59,5 @@ const Product = () => {
   );
 };
 
-export default Product;
+
+export default RecycleData

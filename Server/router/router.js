@@ -25,6 +25,10 @@ app.get("/product", async (req, res) => {
   let result = await productModel.find();
   res.send(result);
 });
+app.get("/product/recycle-bin", async (req, res) => {
+  let result = await productModel.find({ dId: "2" });
+  res.send(result);
+});
 
 app.get("/coupon", async (req, res) => {
   let result = await couponSchema.find();

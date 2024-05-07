@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 const EditAccounts = () => {
     const location =useLocation()
+    const navigate =useNavigate()
     const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [pass, setPass] = useState("");
     const [addProduct, setAddProduct] = useState("");
     const [editProduct, setEditProduct] = useState("");
     const [deleteProduct, setDeleteProduct] = useState("");
     const [addCoupon, setAddCoupon] = useState("");
     const [editCoupon, setEditCoupon] = useState("");
     const [deleteCoupon, setDeleteCoupon] = useState("");
-    const [email, setEmail] = useState("");
-    const [pass, setPass] = useState("");
+
   
     const handleSubmit = async (e) => {
       e.preventDefault();
-      let result = await fetch("https://botecommerce.onrender.com/admins", {
+      let result = await fetch("https://botecommerce.onrender.com/admins/"+location.pathname.split("/").pop(), {
         method: "put",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ name, email, pass,addProduct,editProduct,deleteProduct,addCoupon,editCoupon,deleteCoupon }),
@@ -24,9 +26,12 @@ const EditAccounts = () => {
       if (result.ok) {
         Swal.fire({
           title: "Success",
-          text: "Created successfully!",
+          text: "Edited successfully!",
           icon: "success",
         });
+        setTimeout(() => {
+            navigate('/admin/account')
+        }, 1000);
       } else {
         console.log("error");
       }
@@ -35,16 +40,15 @@ const EditAccounts = () => {
         const getFun = async () => {
           let result = await fetch("https://botecommerce.onrender.com/admins/"+location.pathname.split("/").pop());
           result = await result.json();
-          console.log(result);
           setName(result.name)
-          setName(result.email)
-          setName(result.pass)
-          setName(result.addProduct)
-          setName(result.editProduct)
-          setName(result.deleteProduct)
-          setName(result.addCoupon)
-          setName(result.editCoupon)
-          setName(result.deleteCoupon)
+          setEmail(result.email)
+          setPass(result.pass)
+          setAddProduct(result.addProduct)
+          setEditProduct(result.editProduct)
+          setDeleteProduct(result.deleteProduct)
+          setAddCoupon(result.addCoupon)
+          setEditCoupon(result.editCoupon)
+          setDeleteCoupon(result.deleteCoupon)
         };
         getFun();
       }, []);
@@ -62,7 +66,7 @@ const EditAccounts = () => {
               htmlFor="name"
               className="block text-gray-700 text-sm font-bold mb-2"
             >
-              Name
+              Name 
             </label>
             <input
               id="name"

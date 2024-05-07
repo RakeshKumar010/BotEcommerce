@@ -18,7 +18,7 @@ const Admins = () => {
   }, [pageLoad]);
   return (
     <div className="bg-gray-50 border-0 md:border-2 border-dotted border-black h-screen w-full lg:w-[83%] absolute right-0 ">
-      <p className="text-3xl font-bold text-center my-10 text-[#9b3d4e]">
+      <p className="text-3xl font-bold text-center my-10  text-teal-400">
         All Account
       </p>
       <table className="w-[90%] mx-auto text-center shadow-lg ">
