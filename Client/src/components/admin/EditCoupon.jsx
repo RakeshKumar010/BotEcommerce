@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 const EditCoupon = () => {
-    const location = useLocation();
-    const [data, setData] = useState();
+  const location = useLocation();
+  const navigater = useNavigate();
   const [title, setTitle] = useState("");
   const [discount, setDiscount] = useState("");
   const [code, setCode] = useState("");
@@ -10,27 +10,31 @@ const EditCoupon = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let response = await fetch("https://botecommerce.onrender.com/add-coupon", {
-      method: "post",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ title, discount, code, expiryDate }),
-    });
+    let response = await fetch(
+      "https://botecommerce.onrender.com/coupon/" +
+        location.pathname.split("/").pop(),
+      {
+        method: "put",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ title, discount, code, expiryDate }),
+      }
+    );
 
     if (response.ok) {
-      Swal.fire({
-        title: "Success",
-        text: "Coupon added successfully!",
-        icon: "success",
-      });
+      navigater('/admin/coupon')
     } else {
       alert("HTTP-Error: " + response.status);
     }
   };
+
   useEffect(() => {
     const getFun = async () => {
-      let result = await fetch("https://botecommerce.onrender.com/coupon/"+location.pathname.split("/").pop());
+      let result = await fetch(
+        "https://botecommerce.onrender.com/coupon/" +
+          location.pathname.split("/").pop()
+      );
       result = await result.json();
-      setData(result);
+
       console.log(result);
       setTitle(result.title);
       setDiscount(result.discount);
@@ -45,7 +49,7 @@ const EditCoupon = () => {
         onSubmit={handleSubmit}
         className="space-y-4 w-[90vw] md:w-[50vw] bg-white shadow-md rounded px-8  pt-6 pb-8 mb-4"
       >
-        <h1 className="text-center text-2xl font-bold">Edit Coupon</h1>
+        <h1 className="text-center text-2xl font-bold text-[#9b3d4e]">Edit Coupon</h1>
         <div>
           <p className="block text-gray-700 text-sm font-bold mb-2">Title</p>
           <input

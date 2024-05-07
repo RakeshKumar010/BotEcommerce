@@ -30,22 +30,20 @@ const ProductCard = ({ value, setPageLoad }) => {
 
   return (
     <tr className="text-center ">
-      <td className="p-2 border w-48 flex justify-between flex-wrap gap-2 border-gray-500 ">
-        {image.map((value) => {
-          return (
-            <img
-              className=" w-10 h-10 rounded-sm object-cover md:w-20 md:h-20"
-              src={`https://botecommerce.onrender.com/${value}`}
-              alt="product image"
-            />
-          );
-        })}
+      <td className="p-2 border     border-gray-500 ">
+        {image.length > 0 && (
+          <img
+            className="   rounded-sm object-cover   "
+            src={`https://botecommerce.onrender.com/${image[image.length - 1]}`}
+            alt="product image"
+          />
+        )}
       </td>
       <td className="border border-gray-500 px-2 ">{points}</td>
       <td className="border border-gray-500 px-2 ">{title}</td>
-      <td className="border border-gray-500 px-2 w-20">{rating}</td>
+      <td className="border border-gray-500 px-2 ">{rating}</td>
       <td className="border border-gray-500 px-2 ">{fabric}</td>
-      <td className="border border-gray-500 px-2 w-20">{pieces}</td>
+      <td className="border border-gray-500 px-2 ">{pieces}</td>
       <td className="border border-gray-500 px-2 ">{dispatchTime}</td>
       <td className="border border-gray-500 px-2 ">{availability}</td>
       <td className="border border-gray-500 px-2 ">
@@ -56,9 +54,12 @@ const ProductCard = ({ value, setPageLoad }) => {
       <td className="border border-gray-500 px-2 ">{offer}</td>
       <td className="border border-gray-500 px-2 ">
         <div className="text-3xl flex cursor-pointer md:text-4xl">
-          <CgRemove onClick={deleteFun} className="text-[#9d4253] hover:scale-110 transition-all duration-200"/>
+          <CgRemove
+            onClick={deleteFun}
+            className="text-[#9d4253] hover:scale-110 transition-all duration-200"
+          />
           <Link to={_id}>
-          <BiEdit className="ml-2 hover:scale-110 transition-all duration-200 text-teal-400" />
+            <BiEdit className="ml-2 hover:scale-110 transition-all duration-200 text-teal-400" />
           </Link>
         </div>
       </td>

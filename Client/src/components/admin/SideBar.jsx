@@ -49,7 +49,6 @@ const SideBar = () => {
       text: "Sign Up",
       icon: <IoTrailSignOutline className="text-xl" />,
     },
-    
   ];
   return (
     <>
@@ -77,20 +76,19 @@ const SideBar = () => {
       </button>
 
       <aside
-        className={`fixed  left-0 z-40 w-64 h-screen transition-transform mt-1 ${
+        className={`fixed  left-0 z-40 w-60 h-screen transition-transform mt-1 ${
           navOpen ? "-translate-x-full" : "translate-x-0 "
         } lg:translate-x-0`}
       >
         <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 ">
-      
           <ul className="space-y-2 font-medium">
-          <Link to={"/"}>
-        <img
-          src="https://bhaviniparis.com/cdn/shop/files/bhavini_paris_logo_file-01_360x.jpg?v=1702467865"
-          alt="..."
-          className="h-10  lg:h-12"
-        />
-      </Link>
+            <Link to={"/admin"}>
+              <img
+                src="https://bhaviniparis.com/cdn/shop/files/bhavini_paris_logo_file-01_360x.jpg?v=1702467865"
+                alt="..."
+                className="h-10  lg:h-12"
+              />
+            </Link>
             {links.map((link, index) => (
               <li key={index}>
                 <Link
@@ -105,7 +103,7 @@ const SideBar = () => {
                 </Link>
               </li>
             ))}
-            <li >
+            <li>
               <Link
                 to={"/"}
                 className="flex hover:bg-[#9d4253] hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group"

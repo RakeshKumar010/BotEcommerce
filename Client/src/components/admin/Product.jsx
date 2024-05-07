@@ -20,7 +20,7 @@ const Product = () => {
     <>
     <div className="absolute right-0 border-dotted border-black border-0 md:border-2 min-h-screen w-full lg:w-[82%] px-2">
       <div className="text-center py-5">
-        <p className="font-bold text-3xl">All Products</p>
+        <p className="font-bold text-3xl text-[#9b3d4e]">All Products</p>
         <div className="flex justify-end">
           <p className="bg-teal-400 text-white p-5 py-3 rounded-md mx-2 hover:scale-105 transition-all duration-200 hover:shadow-lg">
             Export to Excel
@@ -28,7 +28,7 @@ const Product = () => {
         </div>
       </div>
 
-      <table className="table-auto w-full ">
+      <table className="table-auto  ">
         <tr>
           <th>Image</th>
           <th>Points</th>
