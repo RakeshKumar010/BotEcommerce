@@ -33,6 +33,7 @@ const EditProduct = () => {
     setPoints(newPoints);
   };
  
+   
 
   const handleSizeChange = (event) => {
     const { value } = event.target;
@@ -50,6 +51,20 @@ const EditProduct = () => {
       let result = await fetch("https://botecommerce.onrender.com/"+location.pathname.split("/").pop());
       result = await result.json();
       setData(result);
+      setAvailability(result.availability)
+      setTitle(result.title)
+      setSection(result.section)
+      setImage(result.image)
+      setRating(result.rating)
+      setPrice(result.price)
+      setOffer(result.offer)
+      setOffer(result.offer)
+      setFabric(result.fabric)
+      setDispatchTime(result.dispatchTime)
+      setPieces(result.pieces)
+      setAvailability(result.availability)
+      setSelectedSizes(result.selectedSizes)
+      setPoints(result.points)
       console.log(result);
     };
     getFun();
@@ -65,7 +80,7 @@ const EditProduct = () => {
           <p className="block text-gray-700 text-sm font-bold mb-2">Title </p>
           <input
             type="text"
-            value={data ? data.title : ''}
+            value={title}
             onChange={(e) => setTitle(e.target.value)}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
@@ -76,8 +91,6 @@ const EditProduct = () => {
           <input
             type="file"
             multiple
-            
-            
             onChange={(e) => setImage(e.target.files)}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
@@ -90,7 +103,7 @@ const EditProduct = () => {
             <input
               type="text"
           
-              value={data ? data.pieces : ''}
+              value={pieces}
               onChange={(e) => setPieces(e.target.value)}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
@@ -99,7 +112,7 @@ const EditProduct = () => {
             <p className="block text-gray-700 text-sm font-bold mb-2">Rating</p>
             <input
               type="text"
-              value={data ? data.rating : ''}
+              value={rating}
               onChange={(e) => setRating(e.target.value)}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
@@ -108,7 +121,7 @@ const EditProduct = () => {
             <p className="block text-gray-700 text-sm font-bold mb-2">Price</p>
             <input
               type="text"
-              value={data ? data.price : ''}
+              value={price}
               onChange={(e) => setPrice(e.target.value)}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
@@ -122,7 +135,7 @@ const EditProduct = () => {
             </p>
             <input
               type="text"
-              value={data ? data.dispatchTime : ''}
+              value={dispatchTime}
               onChange={(e) => setDispatchTime(e.target.value)}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
@@ -132,7 +145,7 @@ const EditProduct = () => {
             <p className="block text-gray-700 text-sm font-bold mb-2">Offer</p>
             <input
               type="text"
-              value={data ? data.offer : ''}
+              value={offer}
               onChange={(e) => setOffer(e.target.value)}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
@@ -142,7 +155,7 @@ const EditProduct = () => {
             <input
               type="text"
     
-              value={data ? data.fabric : ''}
+              value={fabric}
               onChange={(e) => setFabric(e.target.value)}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
@@ -210,7 +223,14 @@ const EditProduct = () => {
                     type="checkbox"
                     className="form-checkbox rounded-full h-4 w-4 text-blue-600"
                     value={size}
-                    onChange={handleSizeChange}
+                    onChange={(event) => {
+                      const { value } = event.target;
+                      setSelectedSizes((prevSizes) =>
+                        prevSizes.includes(value)
+                          ? prevSizes.filter((size) => size !== value)
+                          : [...prevSizes, value]
+                      );
+                    }}
                   />
                   <span className="ml-1 text-gray-700">{size}</span>
                 </label>
@@ -219,7 +239,7 @@ const EditProduct = () => {
           </div>
         </div>
         <div>
-          {data ?data.points.map((value, index) => (
+          {points.map((value, index) => (
             <div key={index}>
               <p className="block text-gray-700 text-sm font-bold mb-2">
                 Point {index}
@@ -233,8 +253,17 @@ const EditProduct = () => {
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               ></input>
             </div>
-          )):null}
-          
+          ))}
+          <div className="flex justify-end my-1">
+            <p
+              className="text-end bg-black text-white py-2 px-5 rounded-md cursor-pointer"
+              onClick={() => {
+                setPoints([...points, ""]);
+              }}
+            >
+              Add More Points
+            </p>
+          </div>
         </div>
 
         <button

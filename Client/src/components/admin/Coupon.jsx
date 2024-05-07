@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BiEdit } from "react-icons/bi";
 import { CgRemove } from "react-icons/cg";
+import { Link } from "react-router-dom";
 
 const Coupon = () => {
   const [data, setData] = useState();
@@ -20,24 +21,26 @@ const Coupon = () => {
     <div className="bg-gray-50 border-0 md:border-2 border-dotted border-black h-screen w-full lg:w-[83%] absolute right-0 ">
       <p className="text-3xl font-bold text-center my-10">All Coupon</p>
       <table className="w-[90%] mx-auto text-center shadow-lg ">
-        <tr className="border-2 bg-teal-400 text-white">
-          <th>Title</th>
-          <th>Discount</th>
-          <th>Code</th>
-          <th>Expiry Date</th>
-          <th>Action</th>
+        <tr className="border-2 bg-teal-400 text-white ">
+          <th className="p-2">Title</th>
+          <th className="p-2">Discount</th>
+          <th className="p-2">Code</th>
+          <th className="p-2">Expiry Date</th>
+          <th className="p-2">Action</th>
         </tr>
   
           {data &&
             [...data].reverse().map(({_id,title,discount,code,expiryDate}) => {
               return <tr className="border-2">
-              <td>{title}</td>
-              <td>{discount}</td>
-              <td>{code}</td>
-              <td>{expiryDate}</td>
-              <td className="flex justify-center">
-              <BiEdit className="text-2xl" />
-                  <CgRemove
+              <td className=" p-2">{title}</td>
+              <td className=" p-2">{discount}</td>
+              <td className=" p-2">{code}</td>
+              <td className=" p-2">{expiryDate}</td>
+              <td className="flex gap-2 justify-center p-2">
+              <Link to={_id}>
+              <BiEdit className="text-2xl text-teal-400 hover:scale-110" />
+              </Link>
+                  <CgRemove 
                     onClick={async () => {
                       let result = await fetch(
                         `https://botecommerce.onrender.com/coupon/${_id}`,
@@ -48,7 +51,7 @@ const Coupon = () => {
                       );
                       setPageLoad(result);
                     }}
-                    className="text-2xl"
+                    className="text-2xl text-[#9b3d4e] hover:scale-110"
                   />
               </td>
               </tr>
