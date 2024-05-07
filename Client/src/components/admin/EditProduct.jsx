@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import Swal from "sweetalert2";
 const sizes = ["XS", "S", "M", "L", "XL", "XXL", "3XL", "4XL"];
 const categories = [
   "New-Arrivals",
@@ -59,14 +60,28 @@ const EditProduct = () => {
     // Append other fields...
 
     let response = await fetch(
-      "https://botecommerce.onrender.com/add-products/" +
+      "https://botecommerce.onrender.com/product/" +
         location.pathname.split("/").pop(),
       {
-        method: "put",
-        body: formData,
+        method: "PUT",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          title,
+          rating,
+          price,
+          offer,
+          fabric,
+          dispatchTime,
+          pieces,
+          availability,
+          section,
+          image,
+          points,
+          selectedSizes,
+        }),
       }
     );
-
+    console.log(response);
     if (response.ok) {
       // if HTTP-status is 200-299
       // get the response body
