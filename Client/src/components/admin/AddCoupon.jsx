@@ -74,7 +74,7 @@ const AddCoupon = () => {
 
         <button
           type="submit"
-          className="bg-gray-900 w-full hover:shadow-xl text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          className="bg-teal-400 w-full hover:shadow-xl text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
           Submit
         </button>

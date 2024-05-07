@@ -264,7 +264,7 @@ const AddProduct = () => {
           ))}
           <div className="flex justify-end my-1">
             <p
-              className="text-end bg-black text-white py-2 px-5 rounded-md cursor-pointer"
+              className="text-end bg-teal-400 text-white py-2 px-5 rounded-md cursor-pointer"
               onClick={handleAddClick}
             >
               Add More Points
@@ -274,7 +274,7 @@ const AddProduct = () => {
 
         <button
           type="submit"
-          className="bg-gray-900 w-full hover:shadow-xl text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          className="bg-teal-400 w-full hover:shadow-xl text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
           Add Product
         </button>

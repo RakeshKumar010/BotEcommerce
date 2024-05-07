@@ -49,7 +49,7 @@ const Product = () => {
         {data &&
           [...data].reverse().map((value) => {
  
-            return <ProductCard setPageLoad={setPageLoad} value={value} />;
+            return <ProductCard recycle={false} setPageLoad={setPageLoad} value={value} />;
           })}
       </table>
     </div>

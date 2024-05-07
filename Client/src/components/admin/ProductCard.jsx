@@ -3,7 +3,7 @@ import { BiEdit } from "react-icons/bi";
 import { CgRemove } from "react-icons/cg";
 import { Link } from "react-router-dom";
 
-const ProductCard = ({ value, setPageLoad }) => {
+const ProductCard = ({ value, setPageLoad,recycle }) => {
   const {
     _id,
     title,
@@ -21,6 +21,13 @@ const ProductCard = ({ value, setPageLoad }) => {
   } = value;
 
   const deleteFun = async () => {
+    let result = await fetch(`https://botecommerce.onrender.com/${_id}`, {
+      method: "put",
+      headers: { "content-type": "application/json" },
+    });
+    setPageLoad(result);
+  };
+  const recycleBinFun = async () => {
     let result = await fetch(`https://botecommerce.onrender.com/${_id}`, {
       method: "delete",
       headers: { "content-type": "application/json" },
@@ -55,7 +62,7 @@ const ProductCard = ({ value, setPageLoad }) => {
       <td className="border border-gray-500 px-2 ">
         <div className="text-3xl flex cursor-pointer md:text-4xl">
           <CgRemove
-            onClick={deleteFun}
+            onClick={recycle?deleteFun:recycleBinFun}
             className="text-[#9d4253] hover:scale-110 transition-all duration-200"
           />
           <Link to={_id}>

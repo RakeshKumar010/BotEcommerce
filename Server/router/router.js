@@ -5,6 +5,7 @@ const app = express.Router();
 const productModel = require("../schema/productSchema");
 const userSchema = require("../schema/userSchema");
 const couponSchema = require("../schema/couponSchema");
+const productSchema = require("../schema/productSchema");
 
 app.post("/add-products", upload.array("image"), async (req, res) => {
   try {
@@ -25,8 +26,10 @@ app.get("/product", async (req, res) => {
   let result = await productModel.find();
   res.send(result);
 });
+
+
 app.get("/product/recycle-bin", async (req, res) => {
-  let result = await productModel.find({ dId: "2" });
+  let result = await productModel.findOne({ dId: "2" });
   res.send(result);
 });
 
@@ -44,6 +47,13 @@ app.delete("/admins/:id", async (req, res) => {
 });
 app.put("/admins/:id", async (req, res) => {
   let result = await userSchema.updateOne(
+    { _id: req.params.id },
+    { $set: req.body }
+  );
+  res.send(result);
+});
+app.put("/product/:id", async (req, res) => {
+  let result = await productSchema.updateOne(
     { _id: req.params.id },
     { $set: req.body }
   );
