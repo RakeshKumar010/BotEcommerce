@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 const sizes = ["XS", "S", "M", "L", "XL", "XXL", "3XL", "4XL"];
 const categories = [
   "New-Arrivals",
@@ -10,7 +10,7 @@ const categories = [
 ];
 
 const EditProduct = () => {
-  const navigate = useNavigate();
+ 
   const location = useLocation();
   const [data, setData] = useState();
 

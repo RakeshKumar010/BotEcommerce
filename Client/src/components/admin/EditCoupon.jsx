@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 const EditCoupon = () => {
+    const location = useLocation();
     const [data, setData] = useState();
   const [title, setTitle] = useState("");
   const [discount, setDiscount] = useState("");
