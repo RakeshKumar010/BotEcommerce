@@ -28,7 +28,7 @@ const EditCoupon = () => {
   };
   useEffect(() => {
     const getFun = async () => {
-      let result = await fetch("https://botecommerce.onrender.com/coupon"+location.pathname.split("/").pop());
+      let result = await fetch("https://botecommerce.onrender.com/coupon/"+location.pathname.split("/").pop());
       result = await result.json();
       setData(result);
       console.log(result);

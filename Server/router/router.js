@@ -37,7 +37,7 @@ app.get("/:id", async (req, res) => {
   let result = await productModel.findOne({ _id: req.params.id });
   res.send(result);
 });
-app.get("coupon/:id", async (req, res) => {
+app.get("/coupon/:id", async (req, res) => {
   let result = await couponSchema.findOne({ _id: req.params.id });
   res.send(result);
 });
