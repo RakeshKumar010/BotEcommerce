@@ -7,6 +7,8 @@ import {
   MdOutlineDashboardCustomize,
   MdProductionQuantityLimits,
 } from "react-icons/md";
+import { FaUserAstronaut } from "react-icons/fa";
+
 import { LuRecycle } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import { RiCoupon2Line } from "react-icons/ri";
@@ -20,9 +22,19 @@ const SideBar = () => {
       icon: <MdOutlineDashboardCustomize className="text-xl" />,
     },
     {
+      to: "account",
+      text: "Admins",
+      icon: <FaUserAstronaut className="text-xl" />,
+    },
+    {
       to: "product",
       text: "Products",
       icon: <MdProductionQuantityLimits className="text-xl" />,
+    },
+    {
+      to: "coupon",
+      text: "Coupon",
+      icon: <RiCoupon2Line className="text-xl" />,
     },
     {
       to: "add-products",
@@ -34,11 +46,7 @@ const SideBar = () => {
       text: "Add Coupon",
       icon: <MdOutlineAddPhotoAlternate className="text-xl" />,
     },
-    {
-      to: "coupon",
-      text: "Coupon",
-      icon: <RiCoupon2Line className="text-xl" />,
-    },
+   
     {
       to: "recycle-bin",
       text: "Recycle Bin",

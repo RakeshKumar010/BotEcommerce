@@ -58,76 +58,7 @@ const Coupon = () => {
             })}
    
       </table>
-      {/* <div className="flex w-full     flex-wrap text-center justify-center ">
-        <div className="border border-r-0 border-black ">
-          <p className="font-bold bg-gray-200 p-3">Title</p>
-          {data &&
-            [...data].reverse().map(({ title }) => {
-              return (
-                <div className="flex flex-col gap-5 p-3">
-                  <p>{title}</p>
-                </div>
-              );
-            })}
-        </div>
-        <div className="border sm:border-r-0 border-black ">
-          <p className="font-bold bg-gray-200 p-3">Discount</p>
-          {data &&
-            [...data].reverse().map(({ discount }) => {
-              return (
-                <div className="flex flex-col gap-5 p-3">
-                  <p>{discount}%</p>
-                </div>
-              );
-            })}
-        </div>
-        <div className="border border-r-0 border-black ">
-          <p className="font-bold bg-gray-200 p-3">Code</p>
-          {data &&
-            [...data].reverse().map(({ code }) => {
-              return (
-                <div className="flex flex-col gap-5 p-3">
-                  <p>{code}</p>
-                </div>
-              );
-            })}
-        </div>
-        <div className="border border-r-0 border-black ">
-          <p className="font-bold bg-gray-200 p-3">Expiry Date</p>
-          {data &&
-            [...data].reverse().map(({ expiryDate }) => {
-              return (
-                <div className="flex flex-col gap-5 p-3">
-                  <p>{expiryDate}</p>
-                </div>
-              );
-            })}
-        </div>
-        <div className="border  border-black ">
-          <p className="font-bold bg-gray-200 p-3">Action</p>
-          {data &&
-            [...data].reverse().map(({ _id }) => {
-              return (
-                <div className="flex items-center py-4  gap-5 p-3  ">
-                  <BiEdit className="text-lg" />
-                  <CgRemove
-                    onClick={async () => {
-                      let result = await fetch(
-                        `https://botecommerce.onrender.com/coupon/${_id}`,
-                        {
-                          method: "delete",
-                          headers: { "content-type": "application/json" },
-                        }
-                      );
-                      setPageLoad(result);
-                    }}
-                    className="text-lg"
-                  />
-                </div>
-              );
-            })}
-        </div>
-      </div> */}
+      
     </div>
   );
 };

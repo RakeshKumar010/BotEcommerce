@@ -30,6 +30,21 @@ app.get("/coupon", async (req, res) => {
   let result = await couponSchema.find();
   res.send(result);
 });
+app.get("/admins", async (req, res) => {
+  let result = await userSchema.find();
+  res.send(result);
+});
+app.delete("/admins/:id", async (req, res) => {
+  let result = await userSchema.deleteOne({ _id: req.params.id });
+  res.send(result);
+});
+app.put("/admins/:id", async (req, res) => {
+  let result = await userSchema.updateOne(
+    { _id: req.params.id },
+    { $set: req.body }
+  );
+  res.send(result);
+});
 
 app.get("/:id", async (req, res) => {
   let result = await productModel.findOne({ _id: req.params.id });
