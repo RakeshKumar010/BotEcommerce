@@ -62,7 +62,8 @@ const Admins = () => {
                     <td className=" p-2">{addCoupon}</td>
                     <td className=" p-2">{editCoupon}</td>
                     <td className=" p-2">{deleteCoupon}</td>
-                    <td className="flex gap-2 justify-center p-2">
+                    <td className=" p-2">
+                      <div className="flex justify-center items-center">
                       <Link to={_id}>
                         <BiEdit className="text-2xl text-teal-400 hover:scale-110" />
                       </Link>
@@ -79,6 +80,7 @@ const Admins = () => {
                         }}
                         className="text-2xl text-[#9b3d4e] hover:scale-110"
                       />
+                      </div>
                     </td>
                   </tr>
                 );
