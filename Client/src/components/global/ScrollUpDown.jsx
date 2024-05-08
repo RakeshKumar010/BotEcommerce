@@ -1,57 +1,31 @@
-import React, { useState, useEffect } from "react";
-import { FaArrowCircleUp, FaArrowCircleDown } from "react-icons/fa";
+import React, { useEffect, useState } from "react";
+import ScrollTop from "../ScrollTop";
+import ScrollDown from "../ScrollDown";
 
 const ScrollUpDown = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [scrollY, setScrollY] = useState(window.scrollY);
+  const [scrollDirection, setScrollDirection] = useState(null);
 
-  // Show button when page is scrolled up to given distance
-  const toggleVisibility = () => {
-    if (window.pageYOffset > 300) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
+  const handleScroll = (e) => {
+    const currentScrollY = window.scrollY;
+    if (scrollY > currentScrollY) {
+      setScrollDirection("up");
+    } else if (scrollY < currentScrollY) {
+      setScrollDirection("down");
     }
-  };
-
-  // Set the top cordinate to 0
-  // make scrolling smooth
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
-  // Scroll to bottom
-  const scrollToBottom = () => {
-    window.scrollTo({
-      top: document.body.scrollHeight,
-      behavior: "smooth",
-    });
+    setScrollY(currentScrollY);
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", toggleVisibility);
-  }, []);
-
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [scrollY]); // Add scrollY to the dependency array
   return (
-    <div className="scroll-to-top">
-      {isVisible && (
-        <div>
-          <div
-            onClick={scrollToTop}
-            className="fixed bottom-14 right-2 cursor-pointer text-4xl text-gray-400/50"
-          >
-            <FaArrowCircleUp />
-          </div>
-          <div
-            onClick={scrollToBottom}
-            className="fixed bottom-2 right-2 cursor-pointer text-4xl text-gray-400/50"
-          >
-            <FaArrowCircleDown />
-          </div>
-        </div>
-      )}
+    <div className="fixed z-50 right-0 bottom-0 text-2xl text-black">
+      {scrollDirection == "up" ? <ScrollTop /> : <ScrollDown/>}
+       
     </div>
   );
 };

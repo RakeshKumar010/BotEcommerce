@@ -66,11 +66,7 @@ app.get("/admins/:id", async (req, res) => {
   let result = await userSchema.findOne({ _id: req.params.id });
   res.send(result);
 });
-
-app.get("/admins/:email", async (req, res) => {
-  let result = await userSchema.findOne({ email: req.params.email });
-  res.send(result);
-});
+ 
 
 app.get("/:id", async (req, res) => {
   let result = await productModel.findOne({ _id: req.params.id });

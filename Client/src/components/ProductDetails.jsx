@@ -36,7 +36,7 @@ const ProductDetails = () => {
       <NavBar />
       <div className="bg-gray-100  py-8">
         <div className="sm:w-[90vw] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row">
+          <div className="flex flex-col  lg:flex-row">
             <div className="flex flex-col md:flex-row  gap-2  px-4 ">
               <div className="w-full h-full rounded-lg bg-gray-300  mb-4">
                 {data.image && (
