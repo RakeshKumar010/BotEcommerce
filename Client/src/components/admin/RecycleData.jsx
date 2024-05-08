@@ -33,6 +33,7 @@ const RecycleData = () => {
 
         <table className="table-auto  ">
           <tr className=" bg-teal-400 text-white">
+            <th>S.No.</th>
             <th>Image</th>
             <th>Points</th>
             <th>Title</th>
@@ -50,12 +51,13 @@ const RecycleData = () => {
           </tr>
 
           {data &&
-            [...data].reverse().map((value) => {
+            [...data].reverse().map((value,index) => {
               return (
                 <ProductCard
                   recycle={true}
                   setPageLoad={setPageLoad}
                   value={value}
+                  index={index+1}
                 />
               );
             })}

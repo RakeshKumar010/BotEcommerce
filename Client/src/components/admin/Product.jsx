@@ -30,6 +30,7 @@ const Product = () => {
 
       <table className="table-auto  ">
         <tr className=" bg-teal-400 text-white">
+          <th>S.No.</th>
           <th>Image</th>
           <th>Points</th>
           <th>Title</th>
@@ -47,9 +48,9 @@ const Product = () => {
         </tr>
 
         {data &&
-          [...data].reverse().map((value) => {
+          [...data].reverse().map((value,index) => {
  
-            return <ProductCard recycle={false} setPageLoad={setPageLoad} value={value} />;
+            return <ProductCard index={index+1} recycle={false} setPageLoad={setPageLoad} value={value} />;
           })}
       </table>
     </div>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BiEdit } from "react-icons/bi";
 import { CgRemove } from "react-icons/cg";
+import { MdStars } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 const Admins = () => {
@@ -21,8 +22,9 @@ const Admins = () => {
       <p className="text-3xl font-bold text-center my-10  text-teal-400">
         All Account
       </p>
-      <table className="w-[90%] mx-auto text-center shadow-lg ">
-        <tr className="border-2 bg-teal-400 text-white ">
+      <table className="w-[90%]  mx-auto text-center shadow-lg ">
+        <tr className=" border border-black bg-teal-400 text-white ">
+          <th className="p-2">S.No.</th>
           <th className="p-2">Name</th>
           <th className="p-2">Email</th>
           <th className="p-2">Passwod</th>
@@ -50,19 +52,21 @@ const Admins = () => {
                 addCoupon,
                 editCoupon,
                 deleteCoupon,
-              }) => {
+                sAdmin
+              },index) => {
                 return (
-                  <tr className="border-2">
-                    <td className=" p-2">{name}</td>
-                    <td className=" p-2">{email}</td>
-                    <td className=" p-2">{pass}</td>
-                    <td className=" p-2">{addProduct}</td>
-                    <td className=" p-2">{editProduct}</td>
-                    <td className=" p-2">{deleteProduct}</td>
-                    <td className=" p-2">{addCoupon}</td>
-                    <td className=" p-2">{editCoupon}</td>
-                    <td className=" p-2">{deleteCoupon}</td>
-                    <td className=" p-2">
+                  <tr className="border border-black" key={index}>
+                    <td className="p-2 border-r border-black">{index+1}</td>
+                    <td className="p-2 border-r border-black flex items-center gap-2 text-nowrap ">{name}{sAdmin=='1'?<MdStars className="text-xl text-yellow-300"/>:null}</td>
+                    <td className="p-2 border-r border-black">{email}</td>
+                    <td className="p-2 border-r border-black">{pass}</td>
+                    <td className="p-2 border-r border-black">{addProduct}</td>
+                    <td className="p-2 border-r border-black">{editProduct}</td>
+                    <td className="p-2 border-r border-black">{deleteProduct}</td>
+                    <td className="p-2 border-r border-black">{addCoupon}</td>
+                    <td className="p-2 border-r border-black">{editCoupon}</td>
+                    <td className="p-2 border-r border-black">{deleteCoupon}</td>
+                    <td className="p-2 border-r border-black">
                       <div className="flex justify-center items-center">
                       <Link to={_id}>
                         <BiEdit className="text-2xl text-teal-400 hover:scale-110" />

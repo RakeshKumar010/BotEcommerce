@@ -8,7 +8,8 @@ const userMobel = mongoose.Schema({
   deleteProduct:String,
   addCoupon:String,
   editCoupon:String,
-  deleteCoupon:String
+  deleteCoupon:String,
+  sAdmin:{type: String, default: '0' }
 });
 
 module.exports = mongoose.model('users',userMobel);

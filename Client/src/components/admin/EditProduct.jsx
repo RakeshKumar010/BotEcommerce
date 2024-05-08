@@ -140,11 +140,11 @@ const EditProduct = () => {
           />
         </div>
 
-        <div>
+        {/* <div>
           <p className="block text-gray-700 gap-5 text-sm font-bold mb-2">
             Image
           </p>
-          {/* {image?image[0]:''} */}
+        
           <div className="flex w-[70vw] md:w-[40vw] flex-wrap justify-between">
             {image &&
               [...image].reverse().map((value) => {
@@ -165,7 +165,7 @@ const EditProduct = () => {
             onChange={(e) => setImage(e.target.files)}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
-        </div>
+        </div> */}
         <div className="flex items-center justify-between">
           <div>
             <p className="block text-gray-700 text-sm font-bold mb-2">

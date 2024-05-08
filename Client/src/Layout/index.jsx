@@ -62,6 +62,7 @@ const Layout = () => {
         <Route path="/admin" element={isAdmin ? <Admin /> : <RedirectPage />}>
           <Route index element={<DashBoard />} />
           <Route path="product" element={<Product />} />
+          <Route path="recycle-bin/:id" element={<EditProduct />} />
           <Route path="recycle-bin" element={<RecycleData />} />
           <Route path="product/:id" element={<EditProduct />} />
           <Route path="coupon" element={<Coupon />} />

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { BiEdit } from "react-icons/bi";
 import { CgRemove } from "react-icons/cg";
-import {  MdRestorePage } from "react-icons/md";
+import { MdRestorePage } from "react-icons/md";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
-const ProductCard = ({ value, setPageLoad, recycle }) => {
-  const recycleId=''
+const ProductCard = ({ value, index, setPageLoad, recycle }) => {
+  const recycleId = "";
   const {
     _id,
     title,
@@ -35,10 +36,19 @@ const ProductCard = ({ value, setPageLoad, recycle }) => {
       {
         method: "put",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ recycleId:"1" }),
+        body: JSON.stringify({ recycleId: "1" }),
       }
     );
-    setPageLoad(result);
+    if (result.ok) {
+      setPageLoad(result);
+      Swal.fire({
+        title: "Success",
+        text: "Product Deleted successfully!",
+        icon: "success",
+      });
+    } else {
+      alert("HTTP-Error: " + response.status);
+    }
   };
   const restoreFun = async () => {
     let result = await fetch(
@@ -46,14 +56,26 @@ const ProductCard = ({ value, setPageLoad, recycle }) => {
       {
         method: "put",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ recycleId:"0" }),
+        body: JSON.stringify({ recycleId: "0" }),
       }
     );
-    setPageLoad(result);
+    if (result.ok) {
+      setPageLoad(result);
+      Swal.fire({
+        title: "Success",
+        text: "Product Restore successfully!",
+        icon: "success",
+      });
+    } else {
+      alert("HTTP-Error: " + response.status);
+    }
+
   };
 
   return (
-    <tr className="text-center ">
+    <tr className="text-center " key={index}>
+      <td className="border border-gray-500 px-2 ">{index}</td>
+
       <td className="p-2 border     border-gray-500 ">
         {image.length > 0 && (
           <img
@@ -78,18 +100,19 @@ const ProductCard = ({ value, setPageLoad, recycle }) => {
       <td className="border border-gray-500 px-2 ">{offer}</td>
       <td className="border border-gray-500 px-2 ">
         <div className="text-3xl flex gap-2 cursor-pointer md:text-4xl">
- 
           <CgRemove
             onClick={recycle ? deleteFun : recycleBinFun}
             className="text-[#9d4253] hover:scale-110 transition-all duration-200"
           />
-             {recycle ? (
-            <MdRestorePage onClick={restoreFun} className="text-green-400 hover:scale-110 transition-all duration-200" />
+          {recycle ? (
+            <MdRestorePage
+              onClick={restoreFun}
+              className="text-green-400 hover:scale-110 transition-all duration-200"
+            />
           ) : null}
           <Link to={_id}>
             <BiEdit className="hover:scale-110 transition-all duration-200 text-teal-400" />
           </Link>
-          
         </div>
       </td>
     </tr>
