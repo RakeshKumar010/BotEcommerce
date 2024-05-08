@@ -12,7 +12,7 @@ const productModel = mongoose.Schema({
   availability: String,
   selectedSizes: [String],
   points: [String],
-  recycleId: String,
+  recycleId: { type: String, default: '0' },
 });
 
 module.exports = mongoose.model("products", productModel);

@@ -51,7 +51,7 @@ app.get("/product", async (req, res) => {
   res.send(result);
 });
 app.get("/product/recycle-bin", async (req, res) => {
-  let result = await productModel.findOne({ recycleId: "1" });
+  let result = await productModel.find({ recycleId: "1" });
   res.send(result);
 });
 app.get("/coupon", async (req, res) => {
