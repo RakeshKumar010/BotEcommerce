@@ -28,7 +28,11 @@ const Footer = () => {
                     className="h-10 mb-5"
                   />
                 ) : (
-                  "https://bhaviniparis.com/cdn/shop/files/bhavini_paris_logo_file-01_360x.jpg?v=1702467865"
+                  <img
+                    src="https://bhaviniparis.com/cdn/shop/files/bhavini_paris_logo_file-01_360x.jpg?v=1702467865"
+                    alt="..."
+                    className="h-10 mb-5"
+                  />
                 )}
               </Link>
               <p className="text-lg">
