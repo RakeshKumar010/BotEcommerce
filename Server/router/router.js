@@ -111,6 +111,13 @@ app.put("/recycle/:id", async (req, res) => {
   );
   res.send(result);
 });
+app.put("/restore/:id", async (req, res) => {
+  let result = await productSchema.updateOne(
+    { _id: req.params.id },
+    { $set: req.body }
+  );
+  res.send(result);
+});
 
 app.put("/coupon/:id", async (req, res) => {
   let result = await couponSchema.updateOne(
