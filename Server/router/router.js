@@ -7,6 +7,7 @@ const userSchema = require("../schema/userSchema");
 const couponSchema = require("../schema/couponSchema");
 const productSchema = require("../schema/productSchema");
 
+// post
 app.post("/add-products", upload.array("image"), async (req, res) => {
   try {
     let productData = req.body;
@@ -21,18 +22,38 @@ app.post("/add-products", upload.array("image"), async (req, res) => {
     res.status(500).send("An error occurred while saving the product.");
   }
 });
+app.post("/admins", async (req, res) => {
+  let result = await new userSchema(req.body);
+  result = await result.save();
+  res.send(result);
+});
+app.post("/add-coupon", async (req, res) => {
+  let result = await new couponSchema(req.body);
+  result = await result.save();
+  res.send(result);
+});
+app.post("/login", async (req, res) => {
+  let result = await userSchema.findOne({
+    email: req.body.email,
+    pass: req.body.pass,
+  });
+  if (result) {
+    res.status(200).send("OK");
+  } else {
+    res.status(401).send("Invalid Information");
+    console.log("Login failed for:", req.body.email);
+  }
+});
 
+//get
 app.get("/product", async (req, res) => {
   let result = await productModel.find();
   res.send(result);
 });
-
-
 app.get("/product/recycle-bin", async (req, res) => {
-  let result = await productModel.findOne({ dId: "2" });
+  let result = await productModel.findOne({ recycleId: "1" });
   res.send(result);
 });
-
 app.get("/coupon", async (req, res) => {
   let result = await couponSchema.find();
   res.send(result);
@@ -41,10 +62,34 @@ app.get("/admins", async (req, res) => {
   let result = await userSchema.find();
   res.send(result);
 });
+app.get("/admins/:id", async (req, res) => {
+  let result = await userSchema.findOne({ _id: req.params.id });
+  res.send(result);
+});
+app.get("/:id", async (req, res) => {
+  let result = await productModel.findOne({ _id: req.params.id });
+  res.send(result);
+});
+app.get("/coupon/:id", async (req, res) => {
+  let result = await couponSchema.findOne({ _id: req.params.id });
+  res.send(result);
+});
+
+// delete
 app.delete("/admins/:id", async (req, res) => {
   let result = await userSchema.deleteOne({ _id: req.params.id });
   res.send(result);
 });
+app.delete("/coupon/:id", async (req, res) => {
+  let result = await couponSchema.deleteOne({ _id: req.params.id });
+  res.send(result);
+});
+app.delete("/:id", async (req, res) => {
+  let result = await productModel.deleteOne({ _id: req.params.id });
+  res.send(result);
+});
+
+// put
 app.put("/admins/:id", async (req, res) => {
   let result = await userSchema.updateOne(
     { _id: req.params.id },
@@ -59,21 +104,11 @@ app.put("/product/:id", async (req, res) => {
   );
   res.send(result);
 });
-app.get("/admins/:id", async (req, res) => {
-  let result = await userSchema.findOne({ _id: req.params.id });
-  res.send(result);
-});
-
-app.get("/:id", async (req, res) => {
-  let result = await productModel.findOne({ _id: req.params.id });
-  res.send(result);
-});
-app.get("/coupon/:id", async (req, res) => {
-  let result = await couponSchema.findOne({ _id: req.params.id });
-  res.send(result);
-});
-app.delete("/coupon/:id", async (req, res) => {
-  let result = await couponSchema.deleteOne({ _id: req.params.id });
+app.put("/product", async (req, res) => {
+  let result = await productSchema.updateOne(
+    { _id: req.body._id },
+    { $set: req.body }
+  );
   res.send(result);
 });
 
@@ -83,34 +118,6 @@ app.put("/coupon/:id", async (req, res) => {
     { $set: req.body }
   );
   res.send(result);
-});
-
-app.delete("/:id", async (req, res) => {
-  let result = await productModel.deleteOne({ _id: req.params.id });
-  res.send(result);
-});
-app.post("/admins", async (req, res) => {
-  let result = await new userSchema(req.body);
-  result = await result.save();
-  res.send(result);
-});
-app.post("/add-coupon", async (req, res) => {
-  let result = await new couponSchema(req.body);
-  result = await result.save();
-  res.send(result);
-});
-
-app.post("/login", async (req, res) => {
-  let result = await userSchema.findOne({
-    email: req.body.email,
-    pass: req.body.pass,
-  });
-  if (result) {
-    res.status(200).send("OK");
-  } else {
-    res.status(401).send("Invalid Information");
-    console.log("Login failed for:", req.body.email);
-  }
 });
 
 module.exports = app;

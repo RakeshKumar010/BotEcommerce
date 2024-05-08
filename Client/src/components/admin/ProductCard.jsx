@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { BiEdit } from "react-icons/bi";
 import { CgRemove } from "react-icons/cg";
 import { Link } from "react-router-dom";
 
 const ProductCard = ({ value, setPageLoad,recycle }) => {
+  const [recycleId,setRecycleId]=useState('1')
   const {
     _id,
     title,
@@ -22,17 +23,19 @@ const ProductCard = ({ value, setPageLoad,recycle }) => {
 
   const deleteFun = async () => {
     let result = await fetch(`https://botecommerce.onrender.com/${_id}`, {
-      method: "put",
+      method: "delete",
       headers: { "content-type": "application/json" },
     });
     setPageLoad(result);
   };
   const recycleBinFun = async () => {
-    let result = await fetch(`https://botecommerce.onrender.com/${_id}`, {
-      method: "delete",
+    let result = await fetch(`https://botecommerce.onrender.com/product`, {
+      method: "put",
       headers: { "content-type": "application/json" },
+      body: JSON.stringify({ _id,recycleId }),
     });
     setPageLoad(result);
+   
   };
 
   return (
