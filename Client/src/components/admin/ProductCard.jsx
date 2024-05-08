@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BiEdit } from "react-icons/bi";
 import { CgRemove } from "react-icons/cg";
 import { MdRestorePage } from "react-icons/md";
@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const ProductCard = ({ value, index, setPageLoad, recycle }) => {
+  const [access, setAccess] = useState("");
+
   const recycleId = "";
   const {
     _id,
@@ -69,8 +71,20 @@ const ProductCard = ({ value, index, setPageLoad, recycle }) => {
     } else {
       alert("HTTP-Error: " + response.status);
     }
-
   };
+  useEffect(() => {
+    const getFun = async () => {
+      let result = await fetch("https://botecommerce.onrender.com/admins");
+      result = await result.json();
+      result.map((value) => {
+        if (value.email == localStorage.getItem("email")) {
+          setAccess(value);
+          console.log(value);
+        }
+      });
+    };
+    getFun();
+  }, []);
 
   return (
     <tr className="text-center " key={index}>
@@ -100,19 +114,23 @@ const ProductCard = ({ value, index, setPageLoad, recycle }) => {
       <td className="border border-gray-500 px-2 ">{offer}</td>
       <td className="border border-gray-500 px-2 ">
         <div className="text-3xl flex gap-2 cursor-pointer md:text-4xl">
-          <CgRemove
-            onClick={recycle ? deleteFun : recycleBinFun}
-            className="text-[#9d4253] hover:scale-110 transition-all duration-200"
-          />
+          {access.deleteProduct == "yes" ? (
+            <CgRemove
+              onClick={recycle ? deleteFun : recycleBinFun}
+              className="text-[#9d4253] hover:scale-110 transition-all duration-200"
+            />
+          ) : null}
           {recycle ? (
             <MdRestorePage
               onClick={restoreFun}
               className="text-green-400 hover:scale-110 transition-all duration-200"
             />
           ) : null}
-          <Link to={_id}>
-            <BiEdit className="hover:scale-110 transition-all duration-200 text-teal-400" />
-          </Link>
+          {access.editProduct == "yes" ? (
+            <Link to={_id}>
+              <BiEdit className="hover:scale-110 transition-all duration-200 text-teal-400" />
+            </Link>
+          ) : null}
         </div>
       </td>
     </tr>

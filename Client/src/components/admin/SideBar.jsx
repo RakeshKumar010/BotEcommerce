@@ -15,18 +15,26 @@ import { RiCoupon2Line } from "react-icons/ri";
 
 const SideBar = () => {
   const [navOpen, setNavOpen] = useState(true);
-  const [email, setEmail] = useState("");
-
+  const [sAdminId, setSAdminId] = useState();
+  const [access, setAccess] = useState("");
 
   useEffect(() => {
-    setEmail(localStorage.getItem('email'))
-    
     const getFun = async () => {
-      let result = await fetch("https://botecommerce.onrender.com/admins/"+email);
+      let result = await fetch("https://botecommerce.onrender.com/admins");
       result = await result.json();
-      setData(result);
-      setPageLoad(result);
-      console.log(result);
+      result.map((value) => {
+        if (value.email == localStorage.getItem("email")) {
+          setSAdminId(value.sAdmin);
+        }
+      });
+      let result2 = await fetch("https://botecommerce.onrender.com/admins");
+      result2 = await result2.json();
+      result2.map((value) => {
+        if (value.email == localStorage.getItem("email")) {
+          setAccess(value);
+          console.log(value);
+        }
+      });
     };
     getFun();
   }, []);
@@ -37,11 +45,16 @@ const SideBar = () => {
       text: "Dashboard",
       icon: <MdOutlineDashboardCustomize className="text-xl" />,
     },
-    {
-      to: "account",
-      text: "Account",
-      icon: <FaRegUser className="text-xl" />,
-    },
+
+    ...(sAdminId == "1"
+      ? [
+          {
+            to: "account",
+            text: "Account",
+            icon: <FaRegUser className="text-xl" />,
+          },
+        ]
+      : []),
     {
       to: "product",
       text: "Products",
@@ -52,26 +65,43 @@ const SideBar = () => {
       text: "Coupon",
       icon: <RiCoupon2Line className="text-xl" />,
     },
-    {
-      to: "sign-up",
-      text: "Add Account",
-      icon: <IoTrailSignOutline className="text-xl" />,
-    },
-    {
-      to: "add-products",
-      text: "Add Products",
-      icon: <MdAddChart className="text-xl" />,
-    },
-    {
-      to: "add-coupon",
-      text: "Add Coupon",
-      icon: <MdOutlineAddPhotoAlternate className="text-xl" />,
-    },
-    {
-      to: "recycle-bin",
-      text: "Recycle Bin",
-      icon: <LuRecycle className="text-xl" />,
-    },
+    ...(sAdminId == "1"
+      ? [
+          {
+            to: "sign-up",
+            text: "Add Account",
+            icon: <IoTrailSignOutline className="text-xl" />,
+          },
+        ]
+      : []),
+    ...(access.addProduct == "yes"
+      ? [
+          {
+            to: "add-products",
+            text: "Add Products",
+            icon: <MdAddChart className="text-xl" />,
+          },
+        ]
+      : []),
+    ...(access.addCoupon == "yes"
+      ? [
+          {
+            to: "add-coupon",
+            text: "Add Coupon",
+            icon: <MdOutlineAddPhotoAlternate className="text-xl" />,
+          },
+        ]
+      : []),
+
+    ...(sAdminId == "1"
+      ? [
+          {
+            to: "recycle-bin",
+            text: "Recycle Bin",
+            icon: <LuRecycle className="text-xl" />,
+          },
+        ]
+      : []),
   ];
   return (
     <>

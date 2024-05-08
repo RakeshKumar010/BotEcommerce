@@ -37,10 +37,7 @@ const Admins = () => {
           <th className="p-2">Action</th>
         </tr>
 
-        {data &&
-          [...data]
-            .reverse()
-            .map(
+        {data && data.map(
               ({
                 _id,
                 name,

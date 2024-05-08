@@ -23,7 +23,7 @@ const AdminLogin = ({ setIsAdmin }) => {
       // Store login details in local storage
       localStorage.setItem("email", email);
       localStorage.setItem("pass", pass);
-      // navigate("/admin");
+      navigate("/admin");
     } else {
       Swal.fire({
         icon: "error",
