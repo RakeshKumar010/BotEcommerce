@@ -104,9 +104,9 @@ app.put("/product/:id", async (req, res) => {
   );
   res.send(result);
 });
-app.put("/product", async (req, res) => {
+app.put("/recycle/:id", async (req, res) => {
   let result = await productSchema.updateOne(
-    { _id: req.body._id },
+    { _id: req.params.id },
     { $set: req.body }
   );
   res.send(result);

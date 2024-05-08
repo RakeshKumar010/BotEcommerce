@@ -29,13 +29,13 @@ const ProductCard = ({ value, setPageLoad,recycle }) => {
     setPageLoad(result);
   };
   const recycleBinFun = async () => {
-    let result = await fetch(`https://botecommerce.onrender.com/product`, {
+    let result = await fetch(`https://botecommerce.onrender.com/recycle/${_id}`, {
       method: "put",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ _id,recycleId }),
+      body: JSON.stringify({ recycleId }),
     });
     setPageLoad(result);
-   
+  
   };
 
   return (
