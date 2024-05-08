@@ -17,16 +17,13 @@ const AdminLogin = ({ setIsAdmin }) => {
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ email, pass }),
     });
-
-    let result = await response.text();
-
-    if (result === "OK") {
+ 
+    if (response.ok) {
       setIsAdmin(true);
       // Store login details in local storage
       localStorage.setItem("email", email);
       localStorage.setItem("pass", pass);
-
-      navigate("/admin");
+      // navigate("/admin");
     } else {
       Swal.fire({
         icon: "error",

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoTrailSignOutline } from "react-icons/io5";
 import {
   MdAddChart,
@@ -15,6 +15,22 @@ import { RiCoupon2Line } from "react-icons/ri";
 
 const SideBar = () => {
   const [navOpen, setNavOpen] = useState(true);
+  const [email, setEmail] = useState("");
+
+
+  useEffect(() => {
+    setEmail(localStorage.getItem('email'))
+    
+    const getFun = async () => {
+      let result = await fetch("https://botecommerce.onrender.com/admins/"+email);
+      result = await result.json();
+      setData(result);
+      setPageLoad(result);
+      console.log(result);
+    };
+    getFun();
+  }, []);
+
   const links = [
     {
       to: "/admin",
@@ -51,14 +67,11 @@ const SideBar = () => {
       text: "Add Coupon",
       icon: <MdOutlineAddPhotoAlternate className="text-xl" />,
     },
-  
-   
     {
       to: "recycle-bin",
       text: "Recycle Bin",
       icon: <LuRecycle className="text-xl" />,
     },
-  
   ];
   return (
     <>
