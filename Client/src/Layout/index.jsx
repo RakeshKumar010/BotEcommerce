@@ -18,6 +18,7 @@ import EditCoupon from "../components/admin/EditCoupon.jsx";
 import Admins from "../components/admin/Admins.jsx";
 import EditAccounts from "../components/admin/EditAccounts.jsx";
 import RecycleData from "../components/admin/RecycleData.jsx";
+import AddLogo from "../components/admin/AddLogo.jsx";
 
 const Layout = () => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -69,6 +70,7 @@ const Layout = () => {
           <Route path="coupon/:id" element={<EditCoupon />} />
           <Route path="add-coupon" element={<AddCoupon />} />
           <Route path="add-products" element={<AddProduct />} />
+          <Route path="add-logo" element={<AddLogo />} />
           <Route path="account" element={<Admins />} />
           <Route path="account/:id" element={<EditAccounts />} />
           <Route path="sign-up" element={<SignUp />} />

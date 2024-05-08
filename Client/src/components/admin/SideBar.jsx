@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { IoTrailSignOutline } from "react-icons/io5";
+import {  IoMdAddCircleOutline } from "react-icons/io";
 import {
   MdAddChart,
   MdLogout,
@@ -17,6 +18,7 @@ const SideBar = () => {
   const [navOpen, setNavOpen] = useState(true);
   const [sAdminId, setSAdminId] = useState();
   const [access, setAccess] = useState("");
+  const [logos,setLogos]=useState(false)
 
   useEffect(() => {
     const getFun = async () => {
@@ -32,9 +34,14 @@ const SideBar = () => {
       result2.map((value) => {
         if (value.email == localStorage.getItem("email")) {
           setAccess(value);
-          console.log(value);
+       
         }
       });
+
+      let result3=await fetch("https://botecommerce.onrender.com/add-logo")
+      result3 =await result3.json()
+      setLogos(result3[result3.length - 1].logo)
+  
     };
     getFun();
   }, []);
@@ -102,6 +109,15 @@ const SideBar = () => {
           },
         ]
       : []),
+    ...(sAdminId == "1"
+      ? [
+          {
+            to: "add-logo",
+            text: "Add Logo",
+            icon: <IoMdAddCircleOutline className="text-xl" />,
+          },
+        ]
+      : []),
   ];
   return (
     <>
@@ -136,11 +152,11 @@ const SideBar = () => {
         <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 ">
           <ul className="space-y-2 font-medium">
             <Link to={"/admin"}>
-              <img
-                src="https://bhaviniparis.com/cdn/shop/files/bhavini_paris_logo_file-01_360x.jpg?v=1702467865"
+              {logos?<img
+                src={`https://botecommerce.onrender.com/${logos}`}
                 alt="..."
                 className="h-10  lg:h-12"
-              />
+              />:''}
             </Link>
             {links.map((link, index) => (
               <li key={index}>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoReorderThreeOutline, IoSearchOutline } from "react-icons/io5";
 import { IoBagHandleOutline } from "react-icons/io5";
 import { IoCloseOutline } from "react-icons/io5";
@@ -9,6 +9,17 @@ const NavBar = () => {
   const [navRes, setNavRes] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const [searchData, setSearchData] = useState(false);
+  const [logos,setLogos]=useState(false)
+
+  useEffect(() => {
+    const getFun = async () => {
+      let result=await fetch("https://botecommerce.onrender.com/add-logo")
+      result =await result.json()
+      setLogos(result[result.length - 1].logo)
+  
+    };
+    getFun();
+  }, []);
   return (
     <div className="flex sticky top-0 z-10 right-0 left-0 items-center justify-between  md:py-2 p-5 sm:px-8 lg:px-16
      bg-white">
@@ -43,11 +54,11 @@ const NavBar = () => {
         }}
       />
       <Link to={"/"}>
-        <img
-          src="https://bhaviniparis.com/cdn/shop/files/bhavini_paris_logo_file-01_360x.jpg?v=1702467865"
+        {logos?<img
+          src={`https://botecommerce.onrender.com/${logos}`}
           alt="..."
           className="h-8  lg:h-16"
-        />
+        />:'https://bhaviniparis.com/cdn/shop/files/bhavini_paris_logo_file-01_360x.jpg?v=1702467865'}
       </Link>
       <div
         className={`md:sticky absolute  md:left-auto left-0 top-0 bottom-0 right-0 z-50 bg-black/20 ${
