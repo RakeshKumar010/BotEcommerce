@@ -47,7 +47,7 @@ app.post("/login", async (req, res) => {
 
 //get
 app.get("/product", async (req, res) => {
-  let result = await productModel.find();
+  let result = await productModel.find({ recycleId: "0" });
   res.send(result);
 });
 app.get("/product/recycle-bin", async (req, res) => {
