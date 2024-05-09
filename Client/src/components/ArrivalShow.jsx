@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import { Link } from "react-router-dom";
+import { MdAddShoppingCart } from "react-icons/md";
 
 const ArrivalShow = ({setDetailsPopup,setAddId}) => {
   const [data, setData] = useState();
@@ -21,6 +22,12 @@ const ArrivalShow = ({setDetailsPopup,setAddId}) => {
         <p className="">
           Sustain your wardrobe with our best selling products.
         </p>
+        <div className="flex items-center my-5 justify-center ">
+          <div className="flex items-center bg-[#ac384b] text-white p-2 md:w-[40vw] w-[60vw]  justify-center rounded-full hover:scale-105 hover:shadow-sm hover:shadow-gray-600 transition-all duration-200">
+            <MdAddShoppingCart />
+            <p>Store</p>
+          </div>
+        </div>
       </div>
       <div className="flex md:justify-between justify-center  flex-wrap gap-4 gap-y-7 sm:px-10 lg:px-10">
         {data &&
@@ -28,9 +35,7 @@ const ArrivalShow = ({setDetailsPopup,setAddId}) => {
             return <Card value={value} setAddId={setAddId}  setDetailsPopup={setDetailsPopup}/>;
           })}
       </div>
-      <div className="flex justify-center items-center my-10">
-        <Link to={'/new-arrivals'} className="bg-uiColor p-2 text-white rounded-sm px-10 cursor-pointer">VIEW ALL PRODUCTS</Link>
-      </div>
+    
     </div>
   );
 };

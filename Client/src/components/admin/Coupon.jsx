@@ -35,6 +35,7 @@ const Coupon = () => {
       </p>
       <table className="w-[90%] mx-auto text-center shadow-lg ">
         <tr className="border-2 bg-teal-400 text-white ">
+          <th className="p-2">S.No.</th>
           <th className="p-2">Title</th>
           <th className="p-2">Discount</th>
           <th className="p-2">Code</th>
@@ -45,9 +46,10 @@ const Coupon = () => {
         {data &&
           [...data]
             .reverse()
-            .map(({ _id, title, discount, code, expiryDate }) => {
+            .map(({ _id, title, discount, code, expiryDate },index) => {
               return (
                 <tr className="border-2">
+                  <td className=" p-2">{index+1}</td>
                   <td className=" p-2">{title}</td>
                   <td className=" p-2">{discount}</td>
                   <td className=" p-2">{code}</td>

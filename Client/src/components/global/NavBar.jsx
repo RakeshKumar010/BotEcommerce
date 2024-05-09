@@ -4,29 +4,38 @@ import { IoBagHandleOutline } from "react-icons/io5";
 import { IoCloseOutline } from "react-icons/io5";
 
 import { Link } from "react-router-dom";
-
+const navItems = [
+  { to: "/", text: "HOME" },
+  { to: "/new-arrivals", text: "NEW ARRIVALS" },
+  { to: "/suit-sets", text: "SUIT SETS" },
+  { to: "/celebrity-stylists", text: "CELEBRITY STYLISTS" },
+  { to: "/best-seller", text: "BEST SELLER" },
+  { to: "/lehenga-sets", text: "LEHENGA SETS" },
+  { to: "/", text: "Sign In", className: "text-gray-400 md:hidden block" },
+  { to: "/", text: "Register", className: "text-gray-400 md:hidden block" },
+];
 const NavBar = () => {
   const [navRes, setNavRes] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const [searchData, setSearchData] = useState(false);
-  const [logos,setLogos]=useState(false)
+  const [logos, setLogos] = useState(false);
 
   useEffect(() => {
     const getFun = async () => {
-      let result=await fetch("https://botecommerce.onrender.com/add-logo")
-      result =await result.json()
-      setLogos(result[result.length - 1].logo)
-  
+      let result = await fetch("https://botecommerce.onrender.com/add-logo");
+      result = await result.json();
+      setLogos(result[result.length - 1].logo);
     };
     getFun();
   }, []);
   return (
-    <div className="flex sticky top-0 z-10 right-0 left-0 items-center justify-between  md:py-2 p-5 sm:px-8 lg:px-16
-     bg-white">
-
+    <div
+      className="flex sticky top-0 z-10 right-0 left-0 items-center justify-between  md:py-2 p-5 sm:px-8 lg:px-16
+     bg-white"
+    >
       {searchData ? (
-        <div className="absolute z-[51] top-0 bottom-0 right-0 left-0 bg-black/30">
-          <div className="bg-white/20 p-16">
+        <div className="absolute z-[51] top-0 bottom-0 right-0 left-0 bg-white">
+          <div className="bg-white p-16">
             <div className=" flex justify-between text-gray-700 font-thin cursor-pointer">
               <p>WHAT ARE YOU LOOKING FOR?</p>
               <IoCloseOutline
@@ -54,15 +63,19 @@ const NavBar = () => {
         }}
       />
       <Link to={"/"}>
-        {logos?<img
-          src={`https://botecommerce.onrender.com/${logos}`}
-          alt="..."
-          className="h-8  lg:h-16"
-        />:<img
-        src='https://bhaviniparis.com/cdn/shop/files/bhavini_paris_logo_file-01_360x.jpg?v=1702467865'
-        alt="..."
-        className="h-8  lg:h-16"
-      />}
+        {logos ? (
+          <img
+            src={`https://botecommerce.onrender.com/${logos}`}
+            alt="..."
+            className="h-8  lg:h-16"
+          />
+        ) : (
+          <img
+            src="https://bhaviniparis.com/cdn/shop/files/bhavini_paris_logo_file-01_360x.jpg?v=1702467865"
+            alt="..."
+            className="h-8  lg:h-16"
+          />
+        )}
       </Link>
       <div
         className={`md:sticky absolute  md:left-auto left-0 top-0 bottom-0 right-0 z-50 bg-black/20 ${
@@ -70,7 +83,7 @@ const NavBar = () => {
         } }`}
       >
         <ul
-          className={`flex md:flex-row flex-col md:static h-screen bg-white sm:gap-4 gap-7 md:gap-5 lg:gap-7 p-8  md:h-auto  md:w-auto w-[80%] md:items-center text-nowrap `}
+          className={`flex md:flex-row flex-col md:static h-screen bg-white sm:gap-4 gap-7 md:gap-5 lg:gap-4 p-8  md:h-auto  md:w-auto w-[80%] md:items-center text-nowrap `}
         >
           <div className="md:hidden flex justify-between items-center  py-2 px-1 w-full bg-gray-100">
             <input
@@ -80,82 +93,29 @@ const NavBar = () => {
             />
             <IoSearchOutline className="text-xl" />
           </div>
-          <Link
-            to={"/"}
-            onClick={() => {
-              setNavRes(!navRes);
-            }}
-            className=""
-          >
-            <li className="text-base sm:text-[12px] lg:text-base">HOME</li>
-          </Link>
-          <Link
-            to={"/new-arrivals"}
-            onClick={() => {
-              setNavRes(!navRes);
-            }}
-            className=""
-          >
-            <li className="text-base sm:text-[12px] lg:text-base">NEW ARRIVALS</li>
-          </Link>
-          <Link
-            to={"/suit-sets"}
-            onClick={() => {
-              setNavRes(!navRes);
-            }}
-            className=""
-          >
-            <li className="text-base sm:text-[12px] lg:text-base">SUIT SETS</li>
-          </Link>
-          <Link
-            to={"/celebrity-stylists"}
-            onClick={() => {
-              setNavRes(!navRes);
-            }}
-            className=""
-          >
-            <li className="text-base sm:text-[12px] lg:text-base">CELEBRITY STYLISTS</li>
-          </Link>
-          <Link
-            to={"/best-seller"}
-            onClick={() => {
-              setNavRes(!navRes);
-            }}
-            className=""
-          >
-            <li className="text-base sm:text-[12px] lg:text-base">BEST SELLER</li>
-          </Link>
-          <Link
-            to={"/lehenga-sets"}
-            onClick={() => {
-              setNavRes(!navRes);
-            }}
-            className=""
-          >
-            <li className="text-base sm:text-[12px] lg:text-base">LEHENGA SETS</li>
-          </Link>
-          <Link
-            to={"/"}
-            onClick={() => {
-              setNavRes(!navRes);
-            }}
-            className="text-gray-400 md:hidden block "
-          >
-            <li className="text-base sm:text-[12px] lg:text-base">Sign In</li>
-          </Link>
-          <Link
-            to={"/"}
-            onClick={() => {
-              setNavRes(!navRes);
-            }}
-            className="text-gray-400 md:hidden block "
-          >
-            <li className="text-base sm:text-[12px] lg:text-base">Register</li>
-          </Link>
+          {navItems.map((item) => (
+            <Link
+              to={item.to}
+              onClick={() => {
+                setNavRes(!navRes);
+              }}
+              className={item.className || ""}
+            >
+              <li className="text-base hover:bg-[#ac384b] shadow-sm shadow-gray-600 px-3
+               hover:text-white p-2 rounded-full hover:shadow-md hover:scale-105 transition-all duration-200 hover:shadow-gray-600
+               sm:text-[12px] lg:text-base">
+                {item.text}
+              </li>
+            </Link>
+          ))}
         </ul>
-        <div   onClick={() => {
-              setNavRes(!navRes);
-            }} className="  w-[20%] h-screen md:hidden block"></div>
+
+        <div
+          onClick={() => {
+            setNavRes(!navRes);
+          }}
+          className="  w-[20%] h-screen md:hidden block"
+        ></div>
       </div>
       <div className="flex gap-6 relative select-none">
         <IoSearchOutline

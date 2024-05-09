@@ -52,9 +52,10 @@ const ProductDetails = () => {
 
               <div className="flex flex-row md:flex-col justify-center items-center gap-2 ">
                 {data.image &&
-                  [...data.image].reverse().map((value) => {
+                  [...data.image].reverse().map((value,index) => {
                     return (
                       <img
+                      key={index}
                         onClick={() => {
                           setImageUrl(value);
                         }}
@@ -109,9 +110,9 @@ const ProductDetails = () => {
                 <span className="font-bold text-gray-700 ">Select Size:</span>
                 <div className="flex items-center mt-2 md:flex-nowrap gap-y-2 flex-wrap">
                   {data.selectedSizes &&
-                    data.selectedSizes.map((value) => {
+                    data.selectedSizes.map((value,index) => {
                       return (
-                        <button className="bg-gray-300  text-gray-700  py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 ">
+                        <button key={index} className="bg-gray-300  text-gray-700  py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 ">
                           {value}
                         </button>
                       );
@@ -184,8 +185,8 @@ const ProductDetails = () => {
           </p>
           <div className="my-5">
             {data.points &&
-              data.points.map((value) => {
-                return <p>&#10687;{value}</p>;
+              data.points.map((value,index) => {
+                return <p key={index}>&#10687;{value}</p>;
               })}
           </div>
           <div className="w-full">
