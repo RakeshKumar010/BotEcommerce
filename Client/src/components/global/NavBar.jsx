@@ -33,7 +33,7 @@ const NavBar = () => {
   return (
     <div
       className="flex sticky top-0 z-10 right-0 left-0 items-center justify-between  md:py-2 p-5 sm:px-8 lg:px-16
-     bg-white"
+     bg-white/80 backdrop-blur-md sm:shadow-xl"
     >
       {searchData ? (
         <div className="absolute z-[51] top-0 bottom-0 right-0 left-0 bg-white">
@@ -80,12 +80,12 @@ const NavBar = () => {
         )}
       </Link>
       <div
-        className={`md:sticky absolute  md:left-auto left-0 top-0 bottom-0 right-0 z-50 bg-black/20 ${
+        className={`md:sticky absolute  md:left-auto left-0 top-0 bottom-0 right-0 z-50   ${
           navRes ? "flex" : "hidden md:block"
         } }`}
       >
         <ul
-          className={`flex md:flex-row flex-col md:static h-screen bg-white sm:gap-4 gap-7 md:gap-5 lg:gap-4 p-8  md:h-auto  md:w-auto w-[80%] md:items-center text-nowrap `}
+          className={`flex md:flex-row flex-col md:static h-screen   sm:gap-4 gap-7 md:gap-5 lg:gap-4 p-8  md:h-auto  md:w-auto w-[80%] md:items-center text-nowrap `}
         >
           <div className="md:hidden flex justify-between items-center  py-2 px-1 w-full bg-gray-100">
             <input
@@ -103,7 +103,7 @@ const NavBar = () => {
               }}
               className={item.className || ""}
             >
-              <li className="text-base hover:bg-[#ac384b] shadow-sm shadow-gray-600 px-3
+              <li className="text-base hover:bg-[#ac384b] shadow-sm  px-3
                hover:text-white p-2 rounded-full hover:shadow-md hover:scale-105 transition-all duration-200 hover:shadow-gray-600
                sm:text-[12px] lg:text-base">
                 {item.text}

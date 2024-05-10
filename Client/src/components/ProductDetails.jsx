@@ -173,7 +173,7 @@ const ProductDetails = () => {
                         sizes,
                         number,
                         massage,
-                        imageUrl:data.image[3]
+                        imageUrl: data.image[3],
                       };
                       sessionStorage.setItem("myObject", JSON.stringify(obj));
                     }}
@@ -218,45 +218,59 @@ const ProductDetails = () => {
             </div>
           </div>
         </div>
-        <div className="md:w-[70%] text-uiColor  mx-auto  font-bold my-10 px-2">
-          <p className="text-center underline text-lg text-black font-normal my-10 underline-offset-4">
+        <div className="md:w-[90%]  text-uiColor mx-auto font-bold my-10 p-5 shadow-lg rounded-lg">
+          <h2 className="text-center text-2xl text-black bg-gray-200 font-bold my-10 underline-offset-4">
             DESCRIPTION
-          </p>
+          </h2>
           <div className="my-5">
             {data.points &&
               data.points.map((value, index) => {
-                return <p key={index}>&#10687;{value}</p>;
+                return (
+                  <p key={index} className="text-lg leading-relaxed">
+                    ⦿ {value}
+                  </p>
+                );
               })}
           </div>
           <div className="w-full">
-            <table className="table-auto w-full border border-gray-500">
+            <table className="table-auto w-full border border-gray-500 text-lg">
+              <thead className="bg-gray-200">
+                <tr>
+                  <th className="p-2 font-bold">Attribute</th>
+                  <th className="p-2 font-bold">Value</th>
+                </tr>
+              </thead>
               <tbody>
                 <tr className="border-b border-gray-500">
-                  <td className="p-2">Dispatch Time</td>
+                  <td className="p-2 font-bold">Dispatch Time</td>
                   <td className="p-2 border-l border-gray-500">
                     {data.dispatchTime}
                   </td>
                 </tr>
 
                 <tr className="border-b border-gray-500">
-                  <td className="p-2">Fabric Composition</td>
+                  <td className="p-2 font-bold">Fabric Composition</td>
                   <td className="p-2 border-l border-gray-500">
                     {data.fabric}
                   </td>
                 </tr>
 
                 <tr className="border-b border-gray-500">
-                  <td className="p-2">No. of pieces in a set</td>
+                  <td className="p-2 font-bold">No. of pieces in a set</td>
                   <td className="p-2 border-l border-gray-500">
                     {data.pieces}
                   </td>
                 </tr>
                 <tr className="border-b border-gray-500">
-                  <td className="p-2">Size</td>
+                  <td className="p-2 font-bold">Size</td>
                   <td className="p-2 border-l border-gray-500 flex flex-wrap gap-3">
                     {data.selectedSizes &&
                       data.selectedSizes.map((value) => {
-                        return <span>{value}</span>;
+                        return (
+                          <span className="bg-gray-200 p-1 rounded">
+                            {value}
+                          </span>
+                        );
                       })}
                   </td>
                 </tr>
@@ -264,6 +278,7 @@ const ProductDetails = () => {
             </table>
           </div>
         </div>
+
         <RelatedProduct />
       </div>
       <Footer />
