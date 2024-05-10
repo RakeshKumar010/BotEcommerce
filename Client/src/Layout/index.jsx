@@ -19,6 +19,7 @@ import Admins from "../components/admin/Admins.jsx";
 import EditAccounts from "../components/admin/EditAccounts.jsx";
 import RecycleData from "../components/admin/RecycleData.jsx";
 import AddLogo from "../components/admin/AddLogo.jsx";
+import AddToCart from "../pages/AddToCart.jsx";
 
 const Layout = () => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -37,6 +38,7 @@ const Layout = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/add-to-cart" element={<AddToCart />} />
         <Route path=":id" element={<ProductDetails />} />
         <Route path=":id/buy-now" element={<OrderPage />} />
         <Route

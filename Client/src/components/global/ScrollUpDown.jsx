@@ -23,7 +23,7 @@ const ScrollUpDown = () => {
     };
   }, [scrollY]); // Add scrollY to the dependency array
   return (
-    <div className="fixed z-50 right-0 bottom-0 text-2xl text-black">
+    <div className="fixed  z-50 right-0 bottom-0 text-2xl text-black">
       {scrollDirection == "up" ? <ScrollTop /> : <ScrollDown/>}
        
     </div>

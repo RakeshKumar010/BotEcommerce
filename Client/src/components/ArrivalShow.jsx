@@ -31,8 +31,8 @@ const ArrivalShow = ({setDetailsPopup,setAddId}) => {
       </div>
       <div className="flex md:justify-between justify-center  flex-wrap gap-4 gap-y-7 sm:px-10 lg:px-10">
         {data &&
-          [...data].reverse().map((value) => {
-            return <Card value={value} setAddId={setAddId}  setDetailsPopup={setDetailsPopup}/>;
+          [...data].reverse().map((value,index) => {
+            return <Card value={value} key={index} setAddId={setAddId}  setDetailsPopup={setDetailsPopup}/>;
           })}
       </div>
     

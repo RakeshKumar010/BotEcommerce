@@ -159,7 +159,36 @@ const ProductDetails = () => {
                   className="w-20 border-0 border-b-[1px] focus:ring-0    bg-gray-100 px-0"
                 />
                 <div className="w-1/2 px-2">
-                  <p className="w-full bg-uiColor text-center text-nowrap text-white py-2 px-4 rounded-md font-bold hover:bg-uiColor/90 ">
+                  <p
+                    onClick={() => {
+                      navigater("/add-to-cart");
+                      const obj = {
+                        title: data.title,
+                        currentPrice,
+                        sizes,
+                        number,
+                        imageUrl: data.image[3],
+                      };
+
+                      // Check if any items already exist in local storage
+                      let existingItems = localStorage.getItem("myCart");
+
+                      // Parse the existing items back into an array
+                      existingItems = existingItems
+                        ? JSON.parse(existingItems)
+                        : [];
+
+                      // Push the new item into the array
+                      existingItems.push(obj);
+
+                      // Store the updated array back into local storage
+                      localStorage.setItem(
+                        "myCart",
+                        JSON.stringify(existingItems)
+                      );
+                    }}
+                    className="w-full cursor-pointer hover:scale-105 hover:shadow-md hover:bg-gray-600 transition-all duration-200 bg-uiColor text-center text-nowrap text-white py-2 px-4 rounded-md font-bold hover:bg-uiColor/90 "
+                  >
                     Add to Cart
                   </p>
                 </div>
@@ -177,7 +206,7 @@ const ProductDetails = () => {
                       };
                       sessionStorage.setItem("myObject", JSON.stringify(obj));
                     }}
-                    className="w-full bg-uiColor text-nowrap  text-center text-white   py-2 px-4 rounded-md font-bold hover:bg-uiColor/90 "
+                    className="w-full cursor-pointer hover:scale-105 hover:shadow-md hover:bg-gray-600 transition-all duration-200 bg-uiColor text-nowrap  text-center text-white   py-2 px-4 rounded-md font-bold hover:bg-uiColor/90 "
                   >
                     Buy Now
                   </p>

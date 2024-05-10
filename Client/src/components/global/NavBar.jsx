@@ -32,7 +32,7 @@ const NavBar = () => {
   }, []);
   return (
     <div
-      className="flex sticky top-0 z-10 right-0 left-0 items-center justify-between  md:py-2 p-5 sm:px-8 lg:px-16
+      className="flex sticky top-0 z-10 right-0 left-0 items-center justify-between  md:py-1 p-5 sm:px-8 lg:px-16
      bg-white/80 backdrop-blur-md sm:shadow-xl"
     >
       {searchData ? (
@@ -85,7 +85,7 @@ const NavBar = () => {
         } }`}
       >
         <ul
-          className={`flex md:flex-row flex-col md:static h-screen   sm:gap-4 gap-7 md:gap-5 lg:gap-4 p-8  md:h-auto  md:w-auto w-[80%] md:items-center text-nowrap `}
+          className={`flex md:flex-row flex-col md:static h-screen   sm:gap-4 gap-7 md:gap-5 lg:gap-4 p-4  md:h-auto  md:w-auto w-[80%] md:items-center text-nowrap `}
         >
           <div className="md:hidden flex justify-between items-center  py-2 px-1 w-full bg-gray-100">
             <input

@@ -183,12 +183,16 @@ const OrderPage = () => {
               <p className="text-lg font-bold text-gray-700">Shipping</p>
               <p className="text-lg font-bold text-green-500">FREE</p>
             </div>
+            <div className="flex justify-between">
+              <p className="text-lg font-bold text-gray-700">Tax</p>
+              <p className="text-lg font-bold text-green-500">₹20.2</p>
+            </div>
             <div className="flex justify-between font-bold text-xl mt-2">
               <p className="text-gray-800">Total</p>
               <p className="text-green-500">
                 INR ₹
                 {sessionData
-                  ? sessionData.currentPrice * sessionData.number
+                  ? sessionData.currentPrice * sessionData.number+20.2
                   : ""}
               </p>
             </div>
