@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { IoReorderThreeOutline, IoSearchOutline } from "react-icons/io5";
 import { IoBagHandleOutline } from "react-icons/io5";
 import { IoCloseOutline } from "react-icons/io5";
 
 import { Link } from "react-router-dom";
+ 
 const navItems = [
   { to: "/", text: "HOME" },
   { to: "/new-arrivals", text: "NEW ARRIVALS" },
@@ -15,6 +16,7 @@ const navItems = [
   { to: "/", text: "Register", className: "text-gray-400 md:hidden block" },
 ];
 const NavBar = () => {
+ 
   const [navRes, setNavRes] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const [searchData, setSearchData] = useState(false);
@@ -37,7 +39,7 @@ const NavBar = () => {
         <div className="absolute z-[51] top-0 bottom-0 right-0 left-0 bg-white">
           <div className="bg-white p-16">
             <div className=" flex justify-between text-gray-700 font-thin cursor-pointer">
-              <p>WHAT ARE YOU LOOKING FOR?</p>
+              <p>WHAT ARE YOU LOOKING FOR? </p>
               <IoCloseOutline
                 className="text-2xl text-gray-600"
                 onClick={() => {

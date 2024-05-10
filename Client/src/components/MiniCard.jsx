@@ -5,7 +5,7 @@ const MiniCard = ({ value }) => {
   const { _id, title, image, rating,price } = value;
 
   return (
-    <div style={{width:'50vw'}} className=" bg-white border hover:border-gray-900 rounded-lg shadow  ">
+    <div   className=" bg-white borde w-[40vw] hover:border-gray-900 rounded-lg shadow  ">
       <Link to={"/" + _id} className="">
         {image && (
           <img

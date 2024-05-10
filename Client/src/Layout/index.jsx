@@ -32,6 +32,7 @@ const Layout = () => {
       // console.log(email,pass);
     }
   }, []);
+   
   return (
     <BrowserRouter>
       <Routes>

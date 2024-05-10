@@ -23,10 +23,10 @@ const ArrivalShow = ({setDetailsPopup,setAddId}) => {
           Sustain your wardrobe with our best selling products.
         </p>
         <div className="flex items-center my-5 justify-center ">
-          <div className="flex items-center bg-[#ac384b] text-white p-2 md:w-[40vw] w-[60vw]  justify-center rounded-full hover:scale-105 hover:shadow-sm hover:shadow-gray-600 transition-all duration-200">
+          <Link to={'/new-arrivals'} className="flex items-center bg-[#ac384b] text-white p-2 md:w-[40vw] w-[60vw]  justify-center rounded-full hover:scale-105 hover:shadow-sm hover:shadow-gray-600 transition-all duration-200">
             <MdAddShoppingCart />
             <p>Store</p>
-          </div>
+          </Link>
         </div>
       </div>
       <div className="flex md:justify-between justify-center  flex-wrap gap-4 gap-y-7 sm:px-10 lg:px-10">

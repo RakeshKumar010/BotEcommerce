@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "./global/NavBar";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaVanShuttle } from "react-icons/fa6";
 import { MdChangeCircle } from "react-icons/md";
 import Footer from "./global/Footer";
 import RelatedProduct from "./RelatedProduct";
+import { IoCash } from "react-icons/io5";
 
 const ProductDetails = () => {
   const location = useLocation();
+  const navigater = useNavigate();
+  const [sizes, setSizes] = useState("M");
+  const [massage, setMassage] = useState();
+  const [number, setNumber] = useState(1);
   const [imageUrl, setImageUrl] = useState(null);
   const [data, setData] = useState("");
   let offer = data.offer; // "20% off"
@@ -52,10 +57,10 @@ const ProductDetails = () => {
 
               <div className="flex flex-row md:flex-col justify-center items-center gap-2 ">
                 {data.image &&
-                  [...data.image].reverse().map((value,index) => {
+                  [...data.image].reverse().map((value, index) => {
                     return (
                       <img
-                      key={index}
+                        key={index}
                         onClick={() => {
                           setImageUrl(value);
                         }}
@@ -107,12 +112,22 @@ const ProductDetails = () => {
                 </span>
               </div>
               <div>
-                <span className="font-bold text-gray-700 ">Select Size:</span>
+                <span className="font-bold text-gray-700 ">Select Size: </span>
                 <div className="flex items-center mt-2 md:flex-nowrap gap-y-2 flex-wrap">
                   {data.selectedSizes &&
-                    data.selectedSizes.map((value,index) => {
+                    data.selectedSizes.map((value, index) => {
                       return (
-                        <button key={index} className="bg-gray-300  text-gray-700  py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 ">
+                        <button
+                          key={index}
+                          onClick={() => {
+                            setSizes(value);
+                          }}
+                          className={`  text-gray-700  py-2 px-4 rounded-full font-bold mr-2 ${
+                            sizes == value
+                              ? "bg-[#388e3c] text-white"
+                              : "bg-gray-300"
+                          }`}
+                        >
                           {value}
                         </button>
                       );
@@ -123,6 +138,10 @@ const ProductDetails = () => {
               <div>
                 <p className="font-bold">Customize your order:</p>
                 <textarea
+                  value={massage}
+                  onChange={(e) => {
+                    setMassage(e.target.value);
+                  }}
                   className="w-full focus:ring-0 focus:outline-none bg-gray-200"
                   rows="5"
                   placeholder="Add special instructions or customization..."
@@ -132,7 +151,11 @@ const ProductDetails = () => {
               <div className="flex -mx-2">
                 <input
                   type="number"
-                  defaultValue={1}
+                  value={number}
+                  min={1}
+                  onChange={(e) => {
+                    setNumber(e.target.value);
+                  }}
                   className="w-20 border-0 border-b-[1px] focus:ring-0    bg-gray-100 px-0"
                 />
                 <div className="w-1/2 px-2">
@@ -141,11 +164,23 @@ const ProductDetails = () => {
                   </p>
                 </div>
                 <div className="w-1/2 px-2">
-                  <Link to={"buy-now"}>
-                    <p className="w-full bg-uiColor  text-center text-white   py-2 px-4 rounded-md font-bold hover:bg-uiColor/90 ">
-                      Buy Now
-                    </p>
-                  </Link>
+                  <p
+                    onClick={() => {
+                      navigater("buy-now");
+                      const obj = {
+                        title: data.title,
+                        currentPrice,
+                        sizes,
+                        number,
+                        massage,
+                        imageUrl:data.image[3]
+                      };
+                      sessionStorage.setItem("myObject", JSON.stringify(obj));
+                    }}
+                    className="w-full bg-uiColor text-nowrap  text-center text-white   py-2 px-4 rounded-md font-bold hover:bg-uiColor/90 "
+                  >
+                    Buy Now
+                  </p>
                 </div>
               </div>
               <div className="flex gap-10">
@@ -156,6 +191,10 @@ const ProductDetails = () => {
                 <div className="w-28">
                   <FaVanShuttle className="text-5xl" />
                   <p>Free Delivery within India</p>
+                </div>
+                <div className="w-28">
+                  <IoCash className="text-5xl" />
+                  <p>Cash On Delivery</p>
                 </div>
               </div>
               <table className="border-collapse border border-gray-300">
@@ -185,7 +224,7 @@ const ProductDetails = () => {
           </p>
           <div className="my-5">
             {data.points &&
-              data.points.map((value,index) => {
+              data.points.map((value, index) => {
                 return <p key={index}>&#10687;{value}</p>;
               })}
           </div>

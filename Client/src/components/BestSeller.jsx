@@ -18,13 +18,13 @@ const BestSeller = ({ setDetailsPopup, setAddId }) => {
   return (
     <div className="md:p-10 p-0 mt-16">
       <div className="text-center py-5">
-        <p className="font-semibold text-lg md:text-2xl">BEST SELLER</p>
+        <Link to={'/best-seller'}  className="font-semibold text-lg md:text-2xl">BEST SELLER</Link>
         <p className="">Explore suit sets</p>
         <div className="flex items-center my-5 justify-center ">
-          <div className="flex items-center bg-[#ac384b] text-white p-2 md:w-[40vw] w-[60vw]  justify-center rounded-full hover:scale-105 hover:shadow-sm hover:shadow-gray-600 transition-all duration-200">
+          <Link to={'/best-seller'} className="flex items-center bg-[#ac384b] text-white p-2 md:w-[40vw] w-[60vw]  justify-center rounded-full hover:scale-105 hover:shadow-sm hover:shadow-gray-600 transition-all duration-200">
             <MdAddShoppingCart />
             <p>Store</p>
-          </div>
+          </Link>
         </div>
       </div>
       <div className="flex md:justify-between justify-center  flex-wrap gap-4 gap-y-7 sm:px-10 lg:px-10">
