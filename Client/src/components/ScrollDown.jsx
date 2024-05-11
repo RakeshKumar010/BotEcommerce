@@ -27,7 +27,7 @@ const ScrollDown = () => {
   
     return (
       <button
-        className={`fixed bottom-2 animate-bounce right-2 z-50 p-2 rounded-full text-white bg-[#ac384b] hover:bg-red-600 ${visible ? '' : 'hidden'}`}
+        className={`fixed bottom-16 md:bottom-2 animate-bounce right-2 z-50 p-2 rounded-full text-white bg-[#ac384b] hover:bg-red-600 ${visible ? '' : 'hidden'}`}
         onClick={scrollToBottom}
       >
         <FaArrowCircleDown size={30} />

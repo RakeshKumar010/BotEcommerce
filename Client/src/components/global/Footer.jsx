@@ -36,7 +36,7 @@ const Footer = () => {
                 )}
               </Link>
               <p className="text-lg">
-                In 2021, ‘Bhavini Paris’ was launched, With Imaginative fashion
+                In 2024, ‘CartCraze’ was launched, With Imaginative fashion
                 as a fashion destination to busy fast paced woman with a strong
                 sense of fashion.
               </p>
@@ -69,17 +69,17 @@ const Footer = () => {
           <div className="flex flex-col text-center md:text-start gap-7 lg:gap-10 mt-8 w-80">
             <h3 className="text-lg font-semibold">FOOTER MENU</h3>
             <ul className="flex flex-col gap-3">
-              <Link to={"/"}>
+              <Link to={"/about"}>
                 {" "}
                 <li>About Us</li>
               </Link>
-              <Link to={"/"}>
+              <Link to={"/return-policy"}>
                 {" "}
                 <li>RETURN & EXCHANGE POLICY</li>
               </Link>
-              <Link to={"/"}>
+              <Link to={"/terms-and-conditions"}>
                 {" "}
-                <li>Cancellation Policy</li>
+                <li>Terms and Conditions</li>
               </Link>
             </ul>
           </div>

@@ -26,18 +26,21 @@ const Home = () => {
       {detailsPopup ? (
         <ProDetailsPopup addId={addId} setDetailsPopup={setDetailsPopup} />
       ) : null}
-      {screenWidth > 600 ? (
-        <>
-          <HeaderTop />
-          <NavBar />
-          <Banner />
-        </>
-      ) : null}
+
+      <div id="nav-desktop" >
+        <div className="fixed top-0 z-10 right-0 left-0 ">
+        <HeaderTop />
+        <NavBar />
+        </div>
+        <div className="mt-28">
+        <Banner />
+        </div>
+      </div>
 
       <div className=" sticky top-0 z-10 block  sm:hidden md:bg-gray-200 bg-white pb-2 shadow-xl ">
         <HeaderTop />
         <NavBar />
-        <Banner />
+        {/* <Banner /> */}
       </div>
       <DreshList />
       <ArrivalShow setAddId={setAddId} setDetailsPopup={setDetailsPopup} />

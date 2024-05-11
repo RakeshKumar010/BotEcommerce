@@ -20,6 +20,9 @@ import EditAccounts from "../components/admin/EditAccounts.jsx";
 import RecycleData from "../components/admin/RecycleData.jsx";
 import AddLogo from "../components/admin/AddLogo.jsx";
 import AddToCart from "../pages/AddToCart.jsx";
+import About from "../pages/About.jsx";
+import ReturnPolicy from "../pages/ReturnPolicy.jsx";
+import TermsAndConditions from "../pages/TermsAndConditions.jsx";
 
 const Layout = () => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -39,6 +42,9 @@ const Layout = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/add-to-cart" element={<AddToCart />} />
+        <Route path="/return-policy" element={<ReturnPolicy />} />
+        <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+        <Route path="/about" element={<About />} />
         <Route path=":id" element={<ProductDetails />} />
         <Route path=":id/buy-now" element={<OrderPage />} />
         <Route

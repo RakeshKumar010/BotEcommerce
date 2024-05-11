@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import NavBar from "./global/NavBar";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaVanShuttle } from "react-icons/fa6";
-import { MdChangeCircle } from "react-icons/md";
+import { MdChangeCircle, MdOutlineAddBusiness } from "react-icons/md";
 import Footer from "./global/Footer";
 import RelatedProduct from "./RelatedProduct";
 import { IoCash } from "react-icons/io5";
+import HeaderTop from "./HeaderTop";
+import { BsCartCheckFill } from "react-icons/bs";
+
 
 const ProductDetails = () => {
   const location = useLocation();
@@ -38,7 +41,10 @@ const ProductDetails = () => {
   }, [location.pathname]);
   return (
     <>
-      <NavBar />
+      <div className="sticky top-0 z-10 right-0 left-0 ">
+        <HeaderTop />
+        <NavBar />
+      </div>
       <div className="bg-gray-100  py-8">
         <div className="sm:w-[90vw] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col  lg:flex-row">
@@ -158,58 +164,55 @@ const ProductDetails = () => {
                   }}
                   className="w-20 border-0 border-b-[1px] focus:ring-0    bg-gray-100 px-0"
                 />
-                <div className="w-1/2 px-2">
-                  <p
-                    onClick={() => {
-                      navigater("/add-to-cart");
-                      const obj = {
-                        title: data.title,
-                        currentPrice,
-                        sizes,
-                        number,
-                        imageUrl: data.image[3],
-                      };
-
-                      // Check if any items already exist in local storage
-                      let existingItems = localStorage.getItem("myCart");
-
-                      // Parse the existing items back into an array
-                      existingItems = existingItems
-                        ? JSON.parse(existingItems)
-                        : [];
-
-                      // Push the new item into the array
-                      existingItems.push(obj);
-
-                      // Store the updated array back into local storage
-                      localStorage.setItem(
-                        "myCart",
-                        JSON.stringify(existingItems)
-                      );
-                    }}
-                    className="w-full cursor-pointer hover:scale-105 hover:shadow-md hover:bg-gray-600 transition-all duration-200 bg-uiColor text-center text-nowrap text-white py-2 px-4 rounded-md font-bold hover:bg-uiColor/90 "
-                  >
-                    Add to Cart
-                  </p>
-                </div>
-                <div className="w-1/2 px-2">
-                  <p
-                    onClick={() => {
-                      navigater("buy-now");
-                      const obj = {
-                        title: data.title,
-                        currentPrice,
-                        sizes,
-                        number,
-                        massage,
-                        imageUrl: data.image[3],
-                      };
-                      sessionStorage.setItem("myObject", JSON.stringify(obj));
-                    }}
-                    className="w-full cursor-pointer hover:scale-105 hover:shadow-md hover:bg-gray-600 transition-all duration-200 bg-uiColor text-nowrap  text-center text-white   py-2 px-4 rounded-md font-bold hover:bg-uiColor/90 "
-                  >
-                    Buy Now
-                  </p>
+                <div className="flex md:static bg-white py-2 fixed bottom-0 right-0 left-0">
+                  <div className="w-1/2 px-2">
+                    <p
+                      onClick={() => {
+                        navigater("/add-to-cart");
+                        const obj = {
+                          title: data.title,
+                          currentPrice,
+                          sizes,
+                          number,
+                          imageUrl: data.image[3],
+                        };
+                        let existingItems = localStorage.getItem("myCart");
+                        existingItems = existingItems
+                          ? JSON.parse(existingItems)
+                          : [];
+                        existingItems.push(obj);
+                        localStorage.setItem(
+                          "myCart",
+                          JSON.stringify(existingItems)
+                        );
+                      }}
+                      className="w-full flex items-center gap-2 justify-center cursor-pointer hover:scale-105 hover:shadow-md 
+                      hover:bg-gray-600 transition-all duration-200 bg-uiColor text-center text-nowrap text-white py-2 px-4 rounded-md font-bold hover:bg-uiColor/90 "
+                    >
+                      <MdOutlineAddBusiness className="w-10  "/>
+                      Add to Cart
+                    </p>
+                  </div>
+                  <div className="w-1/2 px-2">
+                    <p
+                      onClick={() => {
+                        navigater("buy-now");
+                        const obj = {
+                          title: data.title,
+                          currentPrice,
+                          sizes,
+                          number,
+                          massage,
+                          imageUrl: data.image[3],
+                        };
+                        sessionStorage.setItem("myObject", JSON.stringify(obj));
+                      }}
+                      className="w-full flex items-center gap-2 justify-center cursor-pointer hover:scale-105 hover:shadow-md hover:bg-gray-600 transition-all duration-200 bg-uiColor text-nowrap  text-center text-white   py-2 px-4 rounded-md font-bold hover:bg-uiColor/90 "
+                    >
+                      <BsCartCheckFill/>
+                      Buy Now
+                    </p>
+                  </div>
                 </div>
               </div>
               <div className="flex gap-10">
@@ -230,7 +233,7 @@ const ProductDetails = () => {
                 <tbody>
                   <tr className="border border-gray-300">
                     <td className="p-2 border border-gray-300">VENDOR:</td>
-                    <td className="p-2 border border-gray-300">BHAVINIPARIS</td>
+                    <td className="p-2 border border-gray-300">CartCraze</td>
                   </tr>
                   <tr className="border border-gray-300">
                     <td className="p-2 border border-gray-300">TYPE:</td>

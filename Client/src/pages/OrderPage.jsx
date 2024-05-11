@@ -24,8 +24,10 @@ const OrderPage = () => {
   }, [pageLoad]);
   return (
     <>
-      <HeaderTop />
-      <NavBar />
+   <div className="sticky top-0 z-10 right-0 left-0 ">
+        <HeaderTop />
+        <NavBar />
+        </div>
       <div className="flex md:flex-row flex-col-reverse  md:w-[80vw] w-[95vw] mx-auto gap-5 p-3 md:p-5">
         <div className="md:w-1/2 w-full flex flex-col gap-4 ">
           <div className="flex justify-between">
@@ -100,10 +102,11 @@ const OrderPage = () => {
               <input type="checkbox" className="rounded-full" />
               <p>Use a different billing address</p>
             </div>
-
+          <div className="md:static bg-white md:p-0 p-2  fixed bottom-0 right-0 left-0">
             <p className="text-center p-4 w-full bg-[#ac384b] text-white rounded-md  hover:scale-105 transition-all duration-200  hover:shadow-md hover:shadow-gray-600">
               Pay now
             </p>
+            </div>
           </div>
         </div>
         <div className="md:w-1/2 w-full md:p-5 flex flex-col gap-5">

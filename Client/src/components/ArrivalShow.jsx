@@ -29,7 +29,7 @@ const ArrivalShow = ({setDetailsPopup,setAddId}) => {
           </Link>
         </div>
       </div>
-      <div className="flex md:justify-between justify-center  flex-wrap gap-4 gap-y-7 sm:px-10 lg:px-10">
+      <div className="flex   justify-center  flex-wrap gap-4 gap-y-7 sm:px-2 xl:px-10">
         {data &&
           [...data].reverse().map((value,index) => {
             return <Card value={value} key={index} setAddId={setAddId}  setDetailsPopup={setDetailsPopup}/>;

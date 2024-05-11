@@ -5,6 +5,9 @@
 .header-top-animation {
   animation: slider 15s linear infinite;
 }
+#nav-desktop {
+  display: block;
+}
 /* .card-eye{
 animation: slideUp 2s linear  forwards;
 }
@@ -27,12 +30,13 @@ animation: slideUp 2s linear  forwards;
   }
 }
 
-
-@media only screen and (max-width: 600px) {
-  
-.header-top-animation {
-  animation: slider 7s linear infinite;
-}
+@media only screen and (max-width: 640px) {
+  #nav-desktop {
+    display: none;
+  }
+  .header-top-animation {
+    animation: slider 7s linear infinite;
+  }
   @keyframes slider {
     from {
       transform: translateX(52vw);
@@ -43,7 +47,6 @@ animation: slideUp 2s linear  forwards;
   }
 }
 
-
-.carousel-main div{
+.carousel-main div {
   border-radius: 0;
 }

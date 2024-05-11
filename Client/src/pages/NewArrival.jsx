@@ -27,10 +27,12 @@ const NewArrival = ({ title }) => {
   }, []);
   return (
     <div className="bg-gray-100">
-      <HeaderTop />
-      <NavBar />
+     <div className="sticky top-0 z-10 right-0 left-0 ">
+        <HeaderTop />
+        <NavBar />
+        </div>
       <div>
-        <h2 className="text-3xl font-bold tracking-widest my-10 text-uiColor text-center ">
+        <h2 className="text-2xl md:text-3xl font-bold tracking-widest my-10 text-uiColor text-center ">
           {title}
         </h2>
         <div className="flex justify-between px-5 sm:px-10 lg:px-20">
@@ -62,7 +64,7 @@ const NewArrival = ({ title }) => {
             </select>
           </div>
         </div>
-        <div className="flex md:justify-between justify-center  flex-wrap gap-4 gap-y-7 sm:px-10 lg:px-20">
+        <div className="flex   justify-center  flex-wrap gap-4 gap-y-7 sm:px-2 xl:px-10">
           {data &&
             [...data].reverse().map((value) => {
               return <Card value={value} />;
