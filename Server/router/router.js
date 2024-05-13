@@ -117,7 +117,7 @@ app.get("/coupon/:id", async (req, res) => {
 
 // delete
 app.delete("/carousel/:id", async (req, res) => {
-  let result = await userSchema.deleteOne({ _id: req.params.id });
+  let result = await carouselSchema.deleteOne({ _id: req.params.id });
   res.send(result);
 });
 app.delete("/admins/:id", async (req, res) => {
