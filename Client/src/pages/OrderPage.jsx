@@ -213,11 +213,14 @@ const OrderPage = () => {
             <div className="flex justify-between font-bold text-xl mt-2">
               <p className="text-gray-800">Total</p>
               <p className="text-green-500">
-                INR ₹
-                {sessionData
-                  ? ((sessionData.currentPrice * sessionData.number + 20.2) -(sessionData.currentPrice * sessionData.number + 20.2) * parseInt(couponData.discount)/100).toFixed(1)
-                  : ""}
-              </p>
+    INR ₹
+    {sessionData 
+        ? couponData
+            ? ((sessionData.currentPrice * sessionData.number + 20.2) - (sessionData.currentPrice * sessionData.number + 20.2) * parseInt(couponData.discount)/100).toFixed(1)
+            : (sessionData.currentPrice * sessionData.number + 20.2)
+        : ""}
+</p>
+
             </div>
           </div>
         </div>
