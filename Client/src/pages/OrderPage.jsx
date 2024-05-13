@@ -8,6 +8,7 @@ const OrderPage = () => {
   const [sessionData, setSessionData] = useState();
   const [discountCode, setDiscountCode] = useState("");
   const [data, setData] = useState();
+  const [couponData,setCouponData]=useState('')
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -160,11 +161,14 @@ const OrderPage = () => {
           </div>
 
           <form
-            onSubmit={async () => {
+            onSubmit={async (e) => {
+              e.preventDefault()
               let result = await fetch(
                 `https://botecommerce.onrender.com/coupon/${discountCode}`
               );
-              console.log(result);
+              result =await result.json()
+              setCouponData(result);
+              console.log(result.discount);
             }}
             className="flex w-full gap-3 justify-between items-center bg-white p-3 rounded-md shadow-md"
           >
@@ -202,12 +206,16 @@ const OrderPage = () => {
               <p className="text-lg font-bold text-gray-700">Tax</p>
               <p className="text-lg font-bold text-green-500">₹20.2</p>
             </div>
+          {couponData?  <div className="flex justify-between">
+              <p className="text-lg font-bold text-gray-700">Discount</p>
+              <p className="text-lg font-bold text-green-500">{couponData.discount}</p>
+            </div>:null}
             <div className="flex justify-between font-bold text-xl mt-2">
               <p className="text-gray-800">Total</p>
               <p className="text-green-500">
                 INR ₹
                 {sessionData
-                  ? sessionData.currentPrice * sessionData.number + 20.2
+                  ? ((sessionData.currentPrice * sessionData.number + 20.2) -(sessionData.currentPrice * sessionData.number + 20.2) * parseInt(couponData.discount)/100).toFixed(1)
                   : ""}
               </p>
             </div>
