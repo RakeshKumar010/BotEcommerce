@@ -1,25 +1,33 @@
-
-import Banner1 from "../assets/image/offerBanner1.webp";
-import Banner2 from "../assets/image/offerBanner2.webp";
-import Banner0 from '../assets/image/offerBanner.jpg'
 import { Carousel } from "flowbite-react";
+import { useEffect, useState } from "react";
 const Banner = () => {
-  const data = [Banner0,Banner1, Banner2];
+  const [data,setData]=useState()
+
+  useEffect(() => {
+    
+    const getFun = async () => {
+    let result= await fetch('https://botecommerce.onrender.com/add-carousel')
+    result = await result.json()
+    setData(result);
+    console.log(result);
+    }
+    getFun()
+  }, []);
+
   return (
-    <div className="relative h-[12vh]  md:h-[40vh] carousel-main">
-      <Carousel >
+    <div className="relative h-[12vh]  md:h-[60vh] carousel-main">
+      <Carousel>
         {data &&
-          data.map((value) => {
+          data.map(({carousel}) => {
             return (
               <img
-                src={value}
+              src={`https://botecommerce.onrender.com/${carousel}`}
                 alt="..."
-                className="w-full h-full  bg-contain "
+                className="w-full h-full  bg-cover "
               />
             );
           })}
       </Carousel>
-      
     </div>
   );
 };

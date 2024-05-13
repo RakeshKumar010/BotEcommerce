@@ -97,7 +97,7 @@ app.get("/add-logo", async (req, res) => {
   let result = await LogoSchema.find();
   res.send(result);
 });
-app.get("/add-carousel", async (req, res) => {
+app.get("/carousel", async (req, res) => {
   let result = await carouselSchema.find();
   res.send(result);
 });
@@ -116,6 +116,10 @@ app.get("/coupon/:id", async (req, res) => {
 });
 
 // delete
+app.delete("/carousel/:id", async (req, res) => {
+  let result = await userSchema.deleteOne({ _id: req.params.id });
+  res.send(result);
+});
 app.delete("/admins/:id", async (req, res) => {
   let result = await userSchema.deleteOne({ _id: req.params.id });
   res.send(result);

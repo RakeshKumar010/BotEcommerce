@@ -24,6 +24,8 @@ import About from "../pages/About.jsx";
 import ReturnPolicy from "../pages/ReturnPolicy.jsx";
 import TermsAndConditions from "../pages/TermsAndConditions.jsx";
 import AddCarousel from "../components/admin/AddCarousel.jsx";
+import FixedBtn from "../components/global/FixedBtn.jsx";
+import Carousel from "../components/admin/Carousel.jsx";
 
 const Layout = () => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -40,6 +42,7 @@ const Layout = () => {
    
   return (
     <BrowserRouter>
+    <FixedBtn/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/add-to-cart" element={<AddToCart />} />
@@ -76,6 +79,7 @@ const Layout = () => {
           <Route path="recycle-bin" element={<RecycleData />} />
           <Route path="product/:id" element={<EditProduct />} />
           <Route path="coupon" element={<Coupon />} />
+          <Route path="carousel" element={<Carousel />} />
           <Route path="coupon/:id" element={<EditCoupon />} />
           <Route path="add-coupon" element={<AddCoupon />} />
           <Route path="add-products" element={<AddProduct />} />

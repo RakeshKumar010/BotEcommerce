@@ -8,6 +8,7 @@ import {
   MdOutlineDashboardCustomize,
   MdProductionQuantityLimits,
 } from "react-icons/md";
+import { TfiLayoutSlider } from "react-icons/tfi";
 import { TfiLayoutSliderAlt } from "react-icons/tfi";
 import { FaRegUser } from "react-icons/fa";
 import { LuRecycle } from "react-icons/lu";
@@ -71,6 +72,11 @@ const SideBar = () => {
       to: "coupon",
       text: "Coupon",
       icon: <RiCoupon2Line className="text-xl" />,
+    },
+    {
+      to: "carousel",
+      text: "Carousel",
+      icon: <TfiLayoutSlider  className="text-xl" />,
     },
     ...(sAdminId == "1"
       ? [

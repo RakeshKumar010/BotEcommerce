@@ -22,7 +22,7 @@ const Home = () => {
     }, 10000);
   }, []);
 
-  let screenWidth = window.innerWidth;
+
   return (
     <>
       {detailsPopup ? (

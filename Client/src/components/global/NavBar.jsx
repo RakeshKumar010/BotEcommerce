@@ -43,6 +43,7 @@ const NavBar = () => {
     };
     getFun();
   }, []);
+  
   return (
     <div
       className="flex items-center justify-between  md:py-1 p-5 sm:px-8 lg:px-16
