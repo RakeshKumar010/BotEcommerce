@@ -25,15 +25,9 @@ const Footer = () => {
                   <img
                     src={`https://botecommerce.onrender.com/${logos}`}
                     alt="..."
-                    className="h-10 mb-5"
+                    className="h-16 mb-5"
                   />
-                ) : (
-                  <img
-                    src="https://bhaviniparis.com/cdn/shop/files/bhavini_paris_logo_file-01_360x.jpg?v=1702467865"
-                    alt="..."
-                    className="h-10 mb-5"
-                  />
-                )}
+                ) : ''}
               </Link>
               <p className="text-lg">
                 In 2024, ‘CartCraze’ was launched, With Imaginative fashion

@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import HeaderTop from "../components/HeaderTop";
 import NavBar from "../components/global/NavBar";
 import Footer from "../components/global/Footer";
 
 const About = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
   return (
     <>
   <div className="sticky top-0 z-10 right-0 left-0 bg-white shadow-md">

@@ -7,6 +7,7 @@ const userSchema = require("../schema/userSchema");
 const couponSchema = require("../schema/couponSchema");
 const productSchema = require("../schema/productSchema");
 const LogoSchema = require("../schema/LogoSchema");
+const carouselSchema=require("../schema/carouselSchema")
 
 // post
 app.post("/add-products", upload.array("image"), async (req, res) => {
@@ -28,10 +29,21 @@ app.post("/add-logo", upload.single("image"), async (req, res) => {
   try {
     let logoData = {};
     logoData.logo = req.file.path; // Add image paths to logo data
-
-
-
     let result = new LogoSchema(logoData);
+    result = await result.save();
+    res.send(result);
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occurred while saving the product.");
+  }
+});
+
+app.post("/add-carousel", upload.single("image"), async (req, res) => {
+  try {
+    let carouselData = {};
+    carouselData.carousel = req.file.path; // Add image paths to carousel data
+    let result = new carouselSchema(carouselData);
     result = await result.save();
     res.send(result);
     console.log(result);
@@ -83,6 +95,10 @@ app.get("/admins", async (req, res) => {
 });
 app.get("/add-logo", async (req, res) => {
   let result = await LogoSchema.find();
+  res.send(result);
+});
+app.get("/add-carousel", async (req, res) => {
+  let result = await carouselSchema.find();
   res.send(result);
 });
 app.get("/admins/:id", async (req, res) => {

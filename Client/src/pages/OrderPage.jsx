@@ -10,6 +10,7 @@ const OrderPage = () => {
   const [data, setData] = useState();
 
   useEffect(() => {
+   
     const storedObject = JSON.parse(sessionStorage.getItem("myObject"));
     setSessionData(storedObject);
     const getFun = async () => {

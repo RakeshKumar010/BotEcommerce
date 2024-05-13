@@ -10,6 +10,8 @@ const AddToCart = () => {
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     const storedObject = JSON.parse(localStorage.getItem("myCart"));
     if (storedObject) {
       setLocalData(storedObject);

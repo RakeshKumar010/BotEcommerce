@@ -23,6 +23,7 @@ import AddToCart from "../pages/AddToCart.jsx";
 import About from "../pages/About.jsx";
 import ReturnPolicy from "../pages/ReturnPolicy.jsx";
 import TermsAndConditions from "../pages/TermsAndConditions.jsx";
+import AddCarousel from "../components/admin/AddCarousel.jsx";
 
 const Layout = () => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -79,6 +80,7 @@ const Layout = () => {
           <Route path="add-coupon" element={<AddCoupon />} />
           <Route path="add-products" element={<AddProduct />} />
           <Route path="add-logo" element={<AddLogo />} />
+          <Route path="add-carousel" element={<AddCarousel />} />
           <Route path="account" element={<Admins />} />
           <Route path="account/:id" element={<EditAccounts />} />
           <Route path="sign-up" element={<SignUp />} />

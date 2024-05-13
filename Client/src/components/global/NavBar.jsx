@@ -84,13 +84,7 @@ const NavBar = () => {
             alt="..."
             className="h-8 lg:h-12 xl:h-16"
           />
-        ) : (
-          <img
-            src="https://bhaviniparis.com/cdn/shop/files/bhavini_paris_logo_file-01_360x.jpg?v=1702467865"
-            alt="..."
-            className="h-8  lg:h-16"
-          />
-        )}
+        ) :''}
       </Link>
       <div
         className={`md:sticky absolute    md:left-auto left-0 top-0 bottom-0 right-0 z-50   ${

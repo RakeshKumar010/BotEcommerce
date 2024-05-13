@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Footer from "../components/global/Footer";
 import HeaderTop from "../components/HeaderTop";
 import NavBar from "../components/global/NavBar";
 
 const TermsAndConditions = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
   return (
     <>
       <div className="sticky top-0 z-10 right-0 left-0 ">

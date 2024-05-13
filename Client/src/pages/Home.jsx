@@ -16,10 +16,12 @@ const Home = () => {
   const [addId, setAddId] = useState(false);
   const [popUp, setPopUp] = useState(false);
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     setTimeout(() => {
       setPopUp(true);
     }, 10000);
   }, []);
+
   let screenWidth = window.innerWidth;
   return (
     <>

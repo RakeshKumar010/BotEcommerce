@@ -8,8 +8,8 @@ import {
   MdOutlineDashboardCustomize,
   MdProductionQuantityLimits,
 } from "react-icons/md";
+import { TfiLayoutSliderAlt } from "react-icons/tfi";
 import { FaRegUser } from "react-icons/fa";
-
 import { LuRecycle } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import { RiCoupon2Line } from "react-icons/ri";
@@ -118,6 +118,15 @@ const SideBar = () => {
           },
         ]
       : []),
+      ...(sAdminId == "1"
+      ? [
+          {
+            to: "add-carousel ",
+            text: "Add Carousel ",
+            icon: <TfiLayoutSliderAlt className="text-xl" />,
+          },
+        ]
+      : []),
   ];
   return (
     <>
@@ -155,7 +164,7 @@ const SideBar = () => {
               {logos?<img
                 src={`https://botecommerce.onrender.com/${logos}`}
                 alt="..."
-                className="h-10  lg:h-12"
+                className="h-14  lg:h-20"
               />:''}
             </Link>
             {links.map((link, index) => (
