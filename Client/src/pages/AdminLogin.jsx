@@ -20,9 +20,13 @@ const AdminLogin = ({ setIsAdmin }) => {
  
     if (response.ok) {
       setIsAdmin(true);
-      // Store login details in local storage
-      localStorage.setItem("email", email);
-      localStorage.setItem("pass", pass);
+      let user = {
+        email, 
+        pass
+    };
+    let userString = JSON.stringify(user);
+    localStorage.setItem('user', userString);
+ 
       navigate("/admin");
     } else {
       Swal.fire({

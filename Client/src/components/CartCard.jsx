@@ -22,7 +22,6 @@ const CartCard = ({ value }) => {
           );
           localStorage.setItem("myCart", JSON.stringify(existingItems));
           window.location.reload();
-
         }}
       />
       <div className="grid grid-cols-1 lg:grid-cols-2 min-[550px]:gap-6    ">
@@ -55,8 +54,29 @@ const CartCard = ({ value }) => {
           </h6>
           <div className="flex items-center w-full mx-auto justify-center">
             <button
+              
               onClick={() => {
-                setNumOfProduct(numOfProduct - 1);
+                if (parseInt(numOfProduct) >1) {
+                  // setNumOfProduct(parseInt(numOfProduct) + 1);
+                  let existingItems = localStorage.getItem("myCart");
+                  existingItems = existingItems
+                    ? JSON.parse(existingItems)
+                    : [];
+                  existingItems = existingItems.map((item) => {
+                    if (
+                      item.title === title &&
+                      item.currentPrice === currentPrice &&
+                      item.sizes === sizes &&
+                      item.imageUrl === imageUrl
+                    ) {
+                      return { ...item, number: parseInt(numOfProduct) - 1 }; // update the number to 55
+                    } else {
+                      return item; // return the item unchanged
+                    }
+                  });
+                  localStorage.setItem("myCart", JSON.stringify(existingItems));
+                  window.location.reload();
+                }
               }}
               className="group rounded-l-full px-6 py-[18px] border border-gray-200 flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-gray-300 hover:bg-gray-50"
             >
@@ -92,6 +112,7 @@ const CartCard = ({ value }) => {
             </button>
             <input
               type="text"
+              min={0}
               className="border-y border-gray-200 outline-none text-gray-900 font-semibold text-lg w-full max-w-[118px] min-w-[80px] placeholder:text-gray-900 py-[15px] text-center bg-transparent"
               value={numOfProduct}
               onChange={(e) => {
@@ -100,7 +121,27 @@ const CartCard = ({ value }) => {
             />
             <button
               onClick={() => {
-                setNumOfProduct(parseInt(numOfProduct) + 1);
+                if (parseInt(numOfProduct) <5) {
+                  // setNumOfProduct(parseInt(numOfProduct) + 1);
+                  let existingItems = localStorage.getItem("myCart");
+                  existingItems = existingItems
+                    ? JSON.parse(existingItems)
+                    : [];
+                  existingItems = existingItems.map((item) => {
+                    if (
+                      item.title === title &&
+                      item.currentPrice === currentPrice &&
+                      item.sizes === sizes &&
+                      item.imageUrl === imageUrl
+                    ) {
+                      return { ...item, number: parseInt(numOfProduct) + 1 }; // update the number to 55
+                    } else {
+                      return item; // return the item unchanged
+                    }
+                  });
+                  localStorage.setItem("myCart", JSON.stringify(existingItems));
+                  window.location.reload();
+                }
               }}
               className="group rounded-r-full px-6 py-[18px] border border-gray-200 flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-gray-300 hover:bg-gray-50"
             >

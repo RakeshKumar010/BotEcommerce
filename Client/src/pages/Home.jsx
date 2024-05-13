@@ -10,32 +10,40 @@ import DreshList from "../components/DreshList";
 import ProDetailsPopup from "../components/ProDetailsPopup";
 import OfferImg from "../assets/image/offerImg.jpg";
 import { IoCloseCircleOutline } from "react-icons/io5";
-
+import FixedBtn from "../components/global/FixedBtn";
 const Home = () => {
   const [detailsPopup, setDetailsPopup] = useState(false);
   const [addId, setAddId] = useState(false);
   const [popUp, setPopUp] = useState(false);
+  const [data, setData] = useState();
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
     setTimeout(() => {
       setPopUp(true);
     }, 10000);
+    const getFun = async () => {
+      let result = await fetch("https://botecommerce.onrender.com/carousel");
+      result = await result.json();
+      setData(result);
+      console.log(result);
+    };
+    getFun();
   }, []);
-
 
   return (
     <>
+      <FixedBtn data={data} />
       {detailsPopup ? (
         <ProDetailsPopup addId={addId} setDetailsPopup={setDetailsPopup} />
       ) : null}
 
-      <div id="nav-desktop" >
+      <div id="nav-desktop">
         <div className="fixed top-0 z-10 right-0 left-0 ">
-        <HeaderTop />
-        <NavBar />
+          <HeaderTop />
+          <NavBar data={data} />
         </div>
         <div className="mt-28">
-        <Banner />
+          <Banner data={data} />
         </div>
       </div>
 
@@ -58,7 +66,7 @@ const Home = () => {
             className="text-white text-5xl cursor-pointer"
           />
           <img
-            src={OfferImg}
+            src={data?`https://botecommerce.onrender.com/${data[4].carousel}`:OfferImg}
             alt="..."
             className="md:w-1/2 w-full rounded-md shadow-md"
           />

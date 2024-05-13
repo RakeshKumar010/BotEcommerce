@@ -4,6 +4,7 @@ import NavBar from "../components/global/NavBar";
 import CartCard from "../components/CartCard";
 import { FaChevronRight } from "react-icons/fa6";
 import Footer from "../components/global/Footer";
+import { Link } from "react-router-dom";
 
 const AddToCart = () => {
   const [localData, setLocalData] = useState();
@@ -80,10 +81,10 @@ const AddToCart = () => {
             </div>
           </div>
           <div className="flex md:static fixed bottom-0 right-0 left-0 md:bg-transparent bg-white p-3 items-center flex-col sm:flex-row justify-center gap-3 mt-8">
-            <button className="md:rounded-full rounded-lg w-full  md:max-w-[280px] py-2 md:py-4 text-center justify-center items-center bg-[#ac384b] font-semibold text-lg text-white flex gap-2 transition-all duration-500 hover:scale-105 hover:shadow-lg   ">
+            <Link to={'cart-order'} className="md:rounded-full rounded-lg w-full  md:max-w-[280px] py-2 md:py-4 text-center justify-center items-center bg-[#ac384b] font-semibold text-lg text-white flex gap-2 transition-all duration-500 hover:scale-105 hover:shadow-lg   ">
               Continue to Payment
               <FaChevronRight />
-            </button>
+            </Link>
           </div>
         </div>
       </section>

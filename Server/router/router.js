@@ -89,6 +89,10 @@ app.get("/coupon", async (req, res) => {
   let result = await couponSchema.find();
   res.send(result);
 });
+app.get("/coupon/:code", async (req, res) => {
+  let result = await couponSchema.findOne({code:req.params.code});
+  res.send(result);
+});
 app.get("/admins", async (req, res) => {
   let result = await userSchema.find();
   res.send(result);

@@ -9,7 +9,6 @@ import { IoCash } from "react-icons/io5";
 import HeaderTop from "./HeaderTop";
 import { BsCartCheckFill } from "react-icons/bs";
 
-
 const ProductDetails = () => {
   const location = useLocation();
   const navigater = useNavigate();
@@ -189,7 +188,7 @@ const ProductDetails = () => {
                       className="w-full flex items-center gap-2 justify-center cursor-pointer hover:scale-105 hover:shadow-md 
                       hover:bg-gray-600 transition-all duration-200 bg-uiColor text-center text-nowrap text-white py-2 px-4 rounded-md font-bold hover:bg-uiColor/90 "
                     >
-                      <MdOutlineAddBusiness className="w-10  "/>
+                      <MdOutlineAddBusiness className="w-10  " />
                       Add to Cart
                     </p>
                   </div>
@@ -209,7 +208,7 @@ const ProductDetails = () => {
                       }}
                       className="w-full flex items-center gap-2 justify-center cursor-pointer hover:scale-105 hover:shadow-md hover:bg-gray-600 transition-all duration-200 bg-uiColor text-nowrap  text-center text-white   py-2 px-4 rounded-md font-bold hover:bg-uiColor/90 "
                     >
-                      <BsCartCheckFill/>
+                      <BsCartCheckFill />
                       Buy Now
                     </p>
                   </div>

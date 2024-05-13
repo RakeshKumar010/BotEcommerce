@@ -24,17 +24,17 @@ import About from "../pages/About.jsx";
 import ReturnPolicy from "../pages/ReturnPolicy.jsx";
 import TermsAndConditions from "../pages/TermsAndConditions.jsx";
 import AddCarousel from "../components/admin/AddCarousel.jsx";
-import FixedBtn from "../components/global/FixedBtn.jsx";
 import Carousel from "../components/admin/Carousel.jsx";
+import CartOrder from "../pages/CartOrder.jsx";
 
 const Layout = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   // Check local storage for admin details on component mount
   useEffect(() => {
-    const email = localStorage.getItem("email");
-    const pass = localStorage.getItem("pass");
+    const user = localStorage.getItem("user");
+ 
 
-    if (email) {
+    if (user) {
       setIsAdmin(true);
       // console.log(email,pass);
     }
@@ -42,10 +42,11 @@ const Layout = () => {
    
   return (
     <BrowserRouter>
-    <FixedBtn/>
+   
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/add-to-cart" element={<AddToCart />} />
+        <Route path="/add-to-cart/cart-order" element={<CartOrder />} />
         <Route path="/return-policy" element={<ReturnPolicy />} />
         <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
         <Route path="/about" element={<About />} />

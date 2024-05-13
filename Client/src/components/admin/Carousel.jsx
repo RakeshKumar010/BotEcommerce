@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { BiEdit } from "react-icons/bi";
 import { CgRemove } from "react-icons/cg";
-import { Link } from "react-router-dom";
 const Carousel = () => {
   const [data, setData] = useState();
-  const [access, setAccess] = useState("");
   const [pageLoad, setPageLoad] = useState();
 
   useEffect(() => {
@@ -47,9 +44,7 @@ const Carousel = () => {
                   />
                 </td>
                 <td className=" p-2">
-                  <Link to={_id}>
-                    <BiEdit className="text-2xl text-teal-400 hover:scale-110" />
-                  </Link>
+                  
                   <CgRemove
                     onClick={async () => {
                       let result = await fetch(

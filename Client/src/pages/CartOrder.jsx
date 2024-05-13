@@ -4,20 +4,29 @@ import HeaderTop from "../components/HeaderTop";
 import NavBar from "../components/global/NavBar";
 import Footer from "../components/global/Footer";
 
-const OrderPage = () => {
-  const [sessionData, setSessionData] = useState();
-  const [discountCode, setDiscountCode] = useState("");
+const CartOrder = () => {
+  const [localData, setLocalData] = useState();
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [discountCode,setDiscountCode]=useState('')
   const [data, setData] = useState();
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    const storedObject = JSON.parse(sessionStorage.getItem("myObject"));
-    setSessionData(storedObject);
+    const storedObject = JSON.parse(localStorage.getItem("myCart"));
+    if (storedObject) {
+      setLocalData(storedObject);
+      const total = storedObject.reduce((total, item) => {
+        return total + item.currentPrice * item.number;
+      }, 0);
+
+      setTotalPrice(total.toFixed(1));
+    }
+    setLocalData(storedObject);
     const getFun = async () => {
       let result = await fetch("https://botecommerce.onrender.com/coupon");
       result = await result.json();
       setData(result);
     };
+
     getFun();
   }, []);
   return (
@@ -107,34 +116,28 @@ const OrderPage = () => {
           </div>
         </div>
         <div className="md:w-1/2 w-full md:p-5 flex flex-col gap-5">
-          <div className="flex gap-3 items-start">
-            <img
-              src={`https://botecommerce.onrender.com/${
-                sessionData
-                  ? sessionData.imageUrl
-                  : "https://cdn.shopify.com/s/files/1/0839/4647/1697/files/DSC_1321copy_64x64.jpg?v=1711732690"
-              }`}
-              alt="Product Image"
-              className="h-16 rounded-sm shadow-md"
-            />
-            <div>
-              <p className="text-lg font-bold text-gray-700">
-                {sessionData ? sessionData.title : null}
-              </p>
-              <p className="text-sm text-gray-500">
-                {sessionData ? sessionData.sizes : null}
-              </p>
-            </div>
-            <p className="text-lg font-bold text-green-500">
-              ₹
-              {sessionData ? sessionData.currentPrice * sessionData.number : ""}
-            </p>
-          </div>
-          <div className="bg-gray-200 p-3 rounded-md">
-            <p className="text-sm text-gray-700">
-              {sessionData ? sessionData.massage : ""}
-            </p>
-          </div>
+          {localData &&
+            localData.map(
+              ({ title, currentPrice, sizes, number, imageUrl }) => {
+                return (
+                  <div className="flex gap-3 items-start">
+                    <img
+                      src={`https://botecommerce.onrender.com/${imageUrl}`}
+                      alt="Product Image"
+                      className="h-16 rounded-sm shadow-md"
+                    />
+                    <div>
+                      <p className="text-lg font-bold text-gray-700">{title}</p>
+                      <p className="text-sm text-gray-500">{sizes}</p>
+                    </div>
+                    <p className="text-lg font-bold text-green-500">
+                      ₹{currentPrice}
+                    </p>
+                  </div>
+                );
+              }
+            )}
+
           <div className="p-5 bg-gray-100">
             {data &&
               data.map(({ title, discount, code, expiryDate }) => {
@@ -159,15 +162,7 @@ const OrderPage = () => {
               })}
           </div>
 
-          <form
-            onSubmit={async () => {
-              let result = await fetch(
-                `https://botecommerce.onrender.com/coupon/${discountCode}`
-              );
-              console.log(result);
-            }}
-            className="flex w-full gap-3 justify-between items-center bg-white p-3 rounded-md shadow-md"
-          >
+          <div className="flex w-full gap-3 justify-between items-center bg-white p-3 rounded-md shadow-md">
             <input
               type="text"
               value={discountCode}
@@ -177,22 +172,14 @@ const OrderPage = () => {
               placeholder="Discount Code"
               className="w-full rounded-md p-2 border border-gray-300"
             />
-            <button
-              type="submit"
-              className="bg-[#ac384b] text-white p-2 rounded-md hover:scale-105 transition-all duration-200  hover:shadow-md hover:shadow-gray-600 "
-            >
-              Apply
+            <button className="bg-[#ac384b] text-white p-2 rounded-md hover:scale-105 transition-all duration-200  hover:shadow-md hover:shadow-gray-600 ">
+              Apply 
             </button>
-          </form>
+          </div>
           <div className="flex flex-col gap-2 mt-5">
             <div className="flex justify-between">
               <p className="text-lg font-bold text-gray-700">Subtotal</p>
-              <p className="text-lg font-bold text-gray-700">
-                ₹
-                {sessionData
-                  ? sessionData.currentPrice * sessionData.number
-                  : ""}
-              </p>
+              <p className="text-lg font-bold text-gray-700">₹{totalPrice}</p>
             </div>
             <div className="flex justify-between">
               <p className="text-lg font-bold text-gray-700">Shipping</p>
@@ -204,12 +191,7 @@ const OrderPage = () => {
             </div>
             <div className="flex justify-between font-bold text-xl mt-2">
               <p className="text-gray-800">Total</p>
-              <p className="text-green-500">
-                INR ₹
-                {sessionData
-                  ? sessionData.currentPrice * sessionData.number + 20.2
-                  : ""}
-              </p>
+              <p className="text-green-500">INR ₹{totalPrice + 20.2}</p>
             </div>
           </div>
         </div>
@@ -219,4 +201,4 @@ const OrderPage = () => {
   );
 };
 
-export default OrderPage;
+export default CartOrder;

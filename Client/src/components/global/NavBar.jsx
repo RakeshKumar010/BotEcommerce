@@ -4,7 +4,6 @@ import { IoBagHandleOutline } from "react-icons/io5";
 import { IoCloseOutline } from "react-icons/io5";
 
 import { Link, useLocation } from "react-router-dom";
- 
 
 const navItems = [
   { to: "/", text: "HOME" },
@@ -13,8 +12,16 @@ const navItems = [
   { to: "/celebrity-stylists", text: "CELEBRITY STYLISTS" },
   { to: "/best-seller", text: "BEST SELLER" },
   { to: "/lehenga-sets", text: "LEHENGA SETS" },
-  { to: "/sign-in", text: "Sign In", className: "text-gray-400 md:hidden block" },
-  { to: "/register", text: "Register", className: "text-gray-400 md:hidden block" },
+  {
+    to: "/sign-in",
+    text: "Sign In",
+    className: "text-gray-400 md:hidden block",
+  },
+  {
+    to: "/register",
+    text: "Register",
+    className: "text-gray-400 md:hidden block",
+  },
 ];
 const NavBar = () => {
   const [navRes, setNavRes] = useState(false);
@@ -22,16 +29,16 @@ const NavBar = () => {
   const [searchData, setSearchData] = useState(false);
   const [logos, setLogos] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [numOfProduct,setNumOfProduct]=useState(0)
-  
-  const location =useLocation()
+  const [numOfProduct, setNumOfProduct] = useState(0);
+
+  const location = useLocation();
 
   useEffect(() => {
     const storedObject = JSON.parse(localStorage.getItem("myCart"));
     if (storedObject) {
-      setNumOfProduct(storedObject.length)
+      setNumOfProduct(storedObject.length);
       const total = storedObject.reduce((total, item) => {
-        return total + item.currentPrice;
+        return total + item.currentPrice * item.number;
       }, 0);
       setTotalPrice(total.toFixed(1));
     }
@@ -43,7 +50,7 @@ const NavBar = () => {
     };
     getFun();
   }, []);
-  
+
   return (
     <div
       className="flex items-center justify-between  md:py-1 p-5 sm:px-8 lg:px-16
@@ -85,7 +92,9 @@ const NavBar = () => {
             alt="..."
             className="h-8 lg:h-12 xl:h-16"
           />
-        ) :''}
+        ) : (
+          ""
+        )}
       </Link>
       <div
         className={`md:sticky absolute    md:left-auto left-0 top-0 bottom-0 right-0 z-50   ${
@@ -114,7 +123,11 @@ const NavBar = () => {
               <li
                 className={`"text-base hover:bg-[#ac384b] shadow-sm  px-3
                hover:text-white p-2 rounded-full hover:shadow-md hover:scale-105 transition-all duration-200 hover:shadow-gray-600
-               sm:text-[12px] lg:text-[15px] xl:text-base ${location.pathname==item.to?'bg-[#ac384b] text-white shadow-md  scale-105 shadow-gray-600':null}`}
+               sm:text-[12px] lg:text-[15px] xl:text-base ${
+                 location.pathname == item.to
+                   ? "bg-[#ac384b] text-white shadow-md  scale-105 shadow-gray-600"
+                   : null
+               }`}
               >
                 {item.text}
               </li>
@@ -158,7 +171,12 @@ const NavBar = () => {
               </p>
             </div>
             <div>
-              <Link to={"/add-to-cart"}>
+              <Link
+                to={"/add-to-cart"}
+                onClick={() => {
+                  setShowCart(!showCart);
+                }}
+              >
                 <p className="py-2 w-full text-white text-center bg-[#ac384b] rounded-md hover:shadow-md hover:shadow-gray-400">
                   {" "}
                   CHECK OUT

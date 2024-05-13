@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { IoTrailSignOutline } from "react-icons/io5";
-import {  IoMdAddCircleOutline } from "react-icons/io";
+import { IoMdAddCircleOutline } from "react-icons/io";
 import {
   MdAddChart,
   MdLogout,
@@ -10,7 +10,7 @@ import {
 } from "react-icons/md";
 import { TfiLayoutSlider } from "react-icons/tfi";
 import { TfiLayoutSliderAlt } from "react-icons/tfi";
-import { FaRegUser } from "react-icons/fa";
+import { FaRegUser, FaSortDown } from "react-icons/fa";
 import { LuRecycle } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import { RiCoupon2Line } from "react-icons/ri";
@@ -19,30 +19,33 @@ const SideBar = () => {
   const [navOpen, setNavOpen] = useState(true);
   const [sAdminId, setSAdminId] = useState();
   const [access, setAccess] = useState("");
-  const [logos,setLogos]=useState(false)
+  const [logos, setLogos] = useState(false);
+  const [accountTab, setAccountTab] = useState(false);
+  const [productTab, setProductTab] = useState(false);
+  const [couponTab, setCouponTab] = useState(false);
+  const [carouselTab, setCarouselTab] = useState(false);
 
   useEffect(() => {
     const getFun = async () => {
       let result = await fetch("https://botecommerce.onrender.com/admins");
       result = await result.json();
+      let userString = localStorage.getItem("user");
+      let user = JSON.parse(userString);
       result.map((value) => {
-        if (value.email == localStorage.getItem("email")) {
+        if (value.email == user.email) {
           setSAdminId(value.sAdmin);
         }
       });
       let result2 = await fetch("https://botecommerce.onrender.com/admins");
       result2 = await result2.json();
       result2.map((value) => {
-        if (value.email == localStorage.getItem("email")) {
+        if (value.email == user.email) {
           setAccess(value);
-       
         }
       });
-
-      let result3=await fetch("https://botecommerce.onrender.com/add-logo")
-      result3 =await result3.json()
-      setLogos(result3[result3.length - 1].logo)
-  
+      let result3 = await fetch("https://botecommerce.onrender.com/add-logo");
+      result3 = await result3.json();
+      setLogos(result3[result3.length - 1].logo);
     };
     getFun();
   }, []);
@@ -57,79 +60,9 @@ const SideBar = () => {
     ...(sAdminId == "1"
       ? [
           {
-            to: "account",
-            text: "Account",
-            icon: <FaRegUser className="text-xl" />,
-          },
-        ]
-      : []),
-    {
-      to: "product",
-      text: "Products",
-      icon: <MdProductionQuantityLimits className="text-xl" />,
-    },
-    {
-      to: "coupon",
-      text: "Coupon",
-      icon: <RiCoupon2Line className="text-xl" />,
-    },
-    {
-      to: "carousel",
-      text: "Carousel",
-      icon: <TfiLayoutSlider  className="text-xl" />,
-    },
-    ...(sAdminId == "1"
-      ? [
-          {
-            to: "sign-up",
-            text: "Add Account",
-            icon: <IoTrailSignOutline className="text-xl" />,
-          },
-        ]
-      : []),
-    ...(access.addProduct == "yes"
-      ? [
-          {
-            to: "add-products",
-            text: "Add Products",
-            icon: <MdAddChart className="text-xl" />,
-          },
-        ]
-      : []),
-    ...(access.addCoupon == "yes"
-      ? [
-          {
-            to: "add-coupon",
-            text: "Add Coupon",
-            icon: <MdOutlineAddPhotoAlternate className="text-xl" />,
-          },
-        ]
-      : []),
-
-    ...(sAdminId == "1"
-      ? [
-          {
-            to: "recycle-bin",
-            text: "Recycle Bin",
-            icon: <LuRecycle className="text-xl" />,
-          },
-        ]
-      : []),
-    ...(sAdminId == "1"
-      ? [
-          {
             to: "add-logo",
             text: "Add Logo",
             icon: <IoMdAddCircleOutline className="text-xl" />,
-          },
-        ]
-      : []),
-      ...(sAdminId == "1"
-      ? [
-          {
-            to: "add-carousel ",
-            text: "Add Carousel ",
-            icon: <TfiLayoutSliderAlt className="text-xl" />,
           },
         ]
       : []),
@@ -165,13 +98,17 @@ const SideBar = () => {
         } lg:translate-x-0`}
       >
         <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 ">
-          <ul className="space-y-2 font-medium">
+          <ul className="space-y-2 font-medium select-none">
             <Link to={"/admin"}>
-              {logos?<img
-                src={`https://botecommerce.onrender.com/${logos}`}
-                alt="..."
-                className="h-14  lg:h-20"
-              />:''}
+              {logos ? (
+                <img
+                  src={`https://botecommerce.onrender.com/${logos}`}
+                  alt="..."
+                  className="h-14  lg:h-20"
+                />
+              ) : (
+                ""
+              )}
             </Link>
             {links.map((link, index) => (
               <li key={index}>
@@ -187,13 +124,172 @@ const SideBar = () => {
                 </Link>
               </li>
             ))}
+            {sAdminId == "1" ? (
+              <li>
+                <p
+                  className="flex hover:bg-[#9d4253] hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group"
+                  onClick={() => {
+                    setAccountTab(!accountTab);
+                  }}
+                >
+                  <FaRegUser className="text-xl" />
+                  <span className="flex-1 ms-3 whitespace-nowrap">Account</span>
+                  <FaSortDown />
+                </p>
+                {accountTab ? (
+                  <div className="p-2   bg-gray-200 rounded-lg">
+                    <Link
+                      to={"account"}
+                      className="flex hover:bg-[#9d4253] hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group"
+                    >
+                      <FaRegUser className="text-xl" />
+                      <span className="flex-1 ms-3 whitespace-nowrap">
+                        Account
+                      </span>
+                    </Link>
+                    <Link
+                      to={"sign-up"}
+                      className="flex hover:bg-[#9d4253] hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group"
+                    >
+                      <IoTrailSignOutline className="text-xl" />
+                      <span className="flex-1 ms-3 whitespace-nowrap">
+                        Add Account
+                      </span>
+                    </Link>
+                    <Link
+                      to={"recycle-bin"}
+                      className="flex hover:bg-[#9d4253] hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group"
+                    >
+                      <LuRecycle className="text-xl" />
+                      <span className="flex-1 ms-3 whitespace-nowrap">
+                        Recycle Bin
+                      </span>
+                    </Link>
+                  </div>
+                ) : null}
+              </li>
+            ) : null}
+
+            <li>
+              <p
+                className="flex hover:bg-[#9d4253] hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group"
+                onClick={() => {
+                  setProductTab(!productTab);
+                }}
+              >
+                <MdProductionQuantityLimits className="text-xl" />
+                <span className="flex-1 ms-3 whitespace-nowrap">Products</span>
+                <FaSortDown />
+              </p>
+              {productTab ? (
+                <div className="p-2   bg-gray-200 rounded-lg">
+                  <Link
+                    to={"product"}
+                    className="flex hover:bg-[#9d4253] hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group"
+                  >
+                    <MdProductionQuantityLimits className="text-xl" />
+                    <span className="flex-1 ms-3 whitespace-nowrap">
+                      Products
+                    </span>
+                  </Link>
+                  {access.addProduct == "yes" ? (
+                    <Link
+                      to={"add-products"}
+                      className="flex hover:bg-[#9d4253] hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group"
+                    >
+                      <MdAddChart className="text-xl" />
+                      <span className="flex-1 ms-3 whitespace-nowrap">
+                        Add Products
+                      </span>
+                    </Link>
+                  ) : null}
+                </div>
+              ) : null}
+            </li>
+
+            <li>
+              <p
+                className="flex hover:bg-[#9d4253] hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group"
+                onClick={() => {
+                  setCouponTab(!couponTab);
+                }}
+              >
+                <RiCoupon2Line className="text-xl" />
+                <span className="flex-1 ms-3 whitespace-nowrap">Coupon</span>
+                <FaSortDown />
+              </p>
+              {couponTab ? (
+                <div className="p-2   bg-gray-200 rounded-lg">
+                  <Link
+                    to={"product"}
+                    className="flex hover:bg-[#9d4253] hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group"
+                  >
+                    <RiCoupon2Line className="text-xl" />
+                    <span className="flex-1 ms-3 whitespace-nowrap">
+                      Coupon
+                    </span>
+                  </Link>
+                  {access.addCoupon == "yes" ? (
+                    <Link
+                      to={"add-coupon"}
+                      className="flex hover:bg-[#9d4253] hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group"
+                    >
+                      <MdOutlineAddPhotoAlternate className="text-xl" />
+                      <span className="flex-1 ms-3 whitespace-nowrap">
+                        Add Coupon
+                      </span>
+                    </Link>
+                  ) : null}
+                </div>
+              ) : null}
+            </li>
+            {sAdminId == "1" ? (
+              <li>
+                <p
+                  className="flex hover:bg-[#9d4253] hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group"
+                  onClick={() => {
+                    setCarouselTab(!carouselTab);
+                  }}
+                >
+                  <TfiLayoutSlider className="text-xl" />
+                  <span className="flex-1 ms-3 whitespace-nowrap">
+                    carousel
+                  </span>
+                  <FaSortDown />
+                </p>
+                {carouselTab ? (
+                  <div className="p-2   bg-gray-200 rounded-lg">
+                    <Link
+                      to={"carousel"}
+                      className="flex hover:bg-[#9d4253] hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group"
+                    >
+                      <TfiLayoutSlider className="text-xl" />
+                      <span className="flex-1 ms-3 whitespace-nowrap">
+                        carousel
+                      </span>
+                    </Link>
+                    {access.addCoupon == "yes" ? (
+                      <Link
+                        to={"add-carousel"}
+                        className="flex hover:bg-[#9d4253] hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group"
+                      >
+                        <TfiLayoutSliderAlt className="text-xl" />
+                        <span className="flex-1 ms-3 whitespace-nowrap">
+                          Add carousel
+                        </span>
+                      </Link>
+                    ) : null}
+                  </div>
+                ) : null}
+              </li>
+            ) : null}
+
             <li>
               <Link
                 to={"/"}
                 className="flex hover:bg-[#9d4253] hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group"
                 onClick={() => {
-                  localStorage.clear();
-                  setIsAdmin(false);
+                  localStorage.removeItem('user');
                 }}
               >
                 <MdLogout className="text-xl" />
