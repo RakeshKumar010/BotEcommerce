@@ -7,7 +7,7 @@ const Footer = () => {
 
   useEffect(() => {
     const getFun = async () => {
-      let result = await fetch("https://botecommerce.onrender.com/add-logo");
+      let result = await fetch("http://43.205.209.43:3000/add-logo");
       result = await result.json();
       setLogos(result[result.length - 1].logo);
     };
@@ -23,7 +23,7 @@ const Footer = () => {
               <Link to={"/"}>
                 {logos ? (
                   <img
-                    src={`https://botecommerce.onrender.com/${logos}`}
+                    src={`http://43.205.209.43:3000/${logos}`}
                     alt="..."
                     className="h-16 mb-5"
                   />
