@@ -9,8 +9,15 @@ const CartOrder = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [discountCode,setDiscountCode]=useState('')
   const [data, setData] = useState();
+  const [currentDate, setCurrentDate] = useState();
 
   useEffect(() => {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed in JavaScript
+    const day = String(date.getDate()).padStart(2, '0');
+
+    setCurrentDate(`${year}-${month}-${day}`);
     const storedObject = JSON.parse(localStorage.getItem("myCart"));
     if (storedObject) {
       setLocalData(storedObject);
@@ -118,7 +125,7 @@ const CartOrder = () => {
         <div className="md:w-1/2 w-full md:p-5 flex flex-col gap-5">
           {localData &&
             localData.map(
-              ({ title, currentPrice, sizes, number, imageUrl }) => {
+              ({ title, currentPrice, sizes, imageUrl }) => {
                 return (
                   <div className="flex gap-3 items-start">
                     <img
@@ -138,23 +145,24 @@ const CartOrder = () => {
               }
             )}
 
-          <div className="p-5 bg-gray-100">
+          <div className="p-5 bg-gray-100 h-72  overflow-y-scroll">
             {data &&
               data.map(({ title, discount, code, expiryDate }) => {
                 return (
-                  <div className="flex flex-wrap justify-between w-full bg-white shadow-lg rounded-lg p-5 mb-5">
+                  <div className={`flex  flex-wrap justify-between w-full  shadow-lg rounded-lg p-5 mb-5 ${expiryDate<currentDate?'bg-red-100':'bg-white'}`}>
                     <div>
                       <h2 className="text-xl font-bold text-gray-700">
                         {title}
                       </h2>
+                 
                       <p className="text-sm text-gray-500">Code: {code}</p>
                     </div>
                     <div className="flex md:flex-row flex-row-reverse justify-between  w-full items-center">
                       <span className="text-lg font-bold text-green-500">
                         {discount} off
                       </span>
-                      <span className="md:ml-3 text-sm text-gray-500">
-                        Expires on: {expiryDate}
+                      <span className={`md:ml-3 text-sm  ${expiryDate<currentDate?'text-red-500':'text-gray-500'}`}>
+                        Expires on: {expiryDate}  
                       </span>
                     </div>
                   </div>

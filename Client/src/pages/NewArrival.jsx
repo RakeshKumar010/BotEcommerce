@@ -4,10 +4,15 @@ import HeaderTop from "../components/HeaderTop";
 import Footer from "../components/global/Footer";
 import NavBar from "../components/global/NavBar";
 import { VscSettings } from "react-icons/vsc";
-import { GoArrowRight } from "react-icons/go";
+import { GoArrowLeft, GoArrowRight } from "react-icons/go";
 import FilterSide from "../components/FilterSide";
+import { useLocation } from "react-router-dom";
 
 const NewArrival = ({ title }) => {
+  const itemsPerPage = 8;
+  const [currentPage, setCurrentPage] = useState(1);
+  const location =useLocation()
+  const [totalItem,setTotalItem]=useState()
   const [data, setData] = useState();
   const [filterOpen, setFilterOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("created-descending");
@@ -16,25 +21,41 @@ const NewArrival = ({ title }) => {
     setSelectedOption(event.target.value);
     // You can perform additional actions based on the selected option here.
   };
- 
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalItem) {
+      setCurrentPage(newPage);
+    }
+  };
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    setCurrentPage(1)
     const getFun = async () => {
       let result = await fetch("http://65.2.144.134:3000/product");
       result = await result.json();
-      setData(result);
+
+      let array=[]
+      result.map((value)=>{
+        if(location.pathname.substring(1).toUpperCase()==value.section.toUpperCase()){
+          array.push(value)
+        }
+        setData(array);
+      })
+      const totalPages = Math.ceil(array.length / itemsPerPage);
+      setTotalItem(totalPages);
+    
     };
     getFun();
-  }, []);
+    
+  }, [location.pathname]);
   return (
     <div className="bg-gray-100">
      <div className="sticky top-0 z-10 right-0 left-0 ">
         <HeaderTop />
         <NavBar />
         </div>
-      <div>
+      <div className="pb-10">
         <h2 className="text-2xl md:text-3xl font-bold tracking-widest my-10 text-uiColor text-center ">
-          {title}
+          {title} {totalItem}
         </h2>
         <div className="flex justify-between px-5 sm:px-10 lg:px-20">
           <div onClick={()=>{
@@ -65,22 +86,42 @@ const NewArrival = ({ title }) => {
             </select>
           </div>
         </div>
-        <div className="flex   justify-center  flex-wrap gap-4 gap-y-7 sm:px-2 xl:px-10">
-          {data &&
-            [...data].reverse().map((value) => {
-              return <Card value={value} />;
-            })}
-        </div>
+        <div className="flex justify-center flex-wrap gap-4 gap-y-7 sm:px-2 xl:px-10">
+    {data &&
+      [...data]
+        .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+        .map((value) => {
+          return <Card value={value} location={location} />;
+        })}
+  </div>
       </div>
       {/* pagination  */}
 
-      <div className="flex items-center justify-center py-10 gap-3 ">
-        <p className="bg-uiColor flex justify-center items-center w-10 h-10 text-white">
-          1
-        </p>
-        <p className=" flex justify-center items-center w-10 h-10 ">2</p>
-        <GoArrowRight className="text-lg" />
-      </div>
+      <div className="flex items-center select-none cursor-pointer justify-center py-10 gap-3 ">
+    {currentPage > 1 && (
+      <GoArrowLeft
+        className="text-lg"
+        onClick={() => handlePageChange(currentPage - 1)}
+      />
+    )}
+    {[...Array(totalItem)].map((_, index) => (
+      <p
+        key={index}
+        className={`${
+          currentPage === index + 1 ? "bg-uiColor text-white" : null
+        } flex justify-center items-center w-10 h-10  `}
+        onClick={() => handlePageChange(index + 1)}
+      >
+        {index + 1}
+      </p>
+    ))}
+    {currentPage < totalItem && (
+      <GoArrowRight
+        className="text-lg"
+        onClick={() => handlePageChange(currentPage + 1)}
+      />
+    )}
+  </div>
      {filterOpen? <FilterSide setFilterOpen={setFilterOpen} />:null}
       <Footer />
     </div>

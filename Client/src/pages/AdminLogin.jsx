@@ -17,16 +17,16 @@ const AdminLogin = ({ setIsAdmin }) => {
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ email, pass }),
     });
- 
+
     if (response.ok) {
       setIsAdmin(true);
       let user = {
-        email, 
-        pass
-    };
-    let userString = JSON.stringify(user);
-    localStorage.setItem('user', userString);
- 
+        email,
+        pass,
+      };
+      let userString = JSON.stringify(user);
+      localStorage.setItem("user", userString);
+
       navigate("/admin");
     } else {
       Swal.fire({
@@ -89,27 +89,11 @@ const AdminLogin = ({ setIsAdmin }) => {
           <div className="flex flex-col gap-3 justify-center ">
             <button
               type="submit"
-              className="flex w-full  justify-center rounded-md bg-gray-900 px-3 py-2 text-lg font-semibold leading-6 text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600 transform hover:scale-110 transition-transform duration-300 ease-in-out"
+              className="p-3 w-full bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600 transition-colors duration-200"
             >
-              Sign in
+              <i className="fas fa-user-shield mr-2"></i> Sign in
             </button>
-       
-            {/* <GoogleLogin
-              width={screenWidth>500?400:265}
-              onSuccess={(credentialResponse) => {
-                const decoded = jwtDecode(credentialResponse?.credential);
-                const email = decoded.email;
-                localStorage.setItem("email", email);
-                setIsAdmin(true);
-                  navigate("/admin");
-             
-              }}
-              onError={() => {
-                console.log("Login Failed");
-              }}
-            /> */}
-            </div>
- 
+          </div>
         </form>
       </div>
     </div>

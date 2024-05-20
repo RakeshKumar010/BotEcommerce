@@ -50,7 +50,6 @@ const Home = () => {
       <div className=" sticky top-0 z-10 block  sm:hidden md:bg-gray-200 bg-white pb-2 shadow-xl ">
         <HeaderTop />
         <NavBar />
-        {/* <Banner /> */}
       </div>
       <DreshList />
       <ArrivalShow setAddId={setAddId} setDetailsPopup={setDetailsPopup} />
@@ -66,7 +65,7 @@ const Home = () => {
             className="text-white text-5xl cursor-pointer"
           />
           <img
-            src={data?`http://65.2.144.134:3000/${data[4].carousel}`:OfferImg}
+            src={data?`http://65.2.144.134:3000/${data[1].carousel}`:OfferImg}
             alt="..."
             className="md:w-1/2 w-full rounded-md shadow-md"
           />
