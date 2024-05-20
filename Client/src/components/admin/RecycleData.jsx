@@ -14,7 +14,7 @@ const RecycleData = () => {
       result = await result.json();
       setData(result);
       console.log(result);
-      setPageLoad(result);
+      
     };
     getFun();
   }, [pageLoad]);
@@ -57,6 +57,7 @@ const RecycleData = () => {
                   recycle={true}
                   setPageLoad={setPageLoad}
                   value={value}
+                  
                   index={index+1}
                 />
               );

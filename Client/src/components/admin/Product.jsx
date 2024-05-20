@@ -11,7 +11,7 @@ const Product = () => {
       let result = await fetch("http://65.2.144.134:3000/product");
       result = await result.json();
       setData(result);
-      setPageLoad(result);
+     
     };
     getFun();
   }, [pageLoad]);

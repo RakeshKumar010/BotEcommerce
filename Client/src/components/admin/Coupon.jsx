@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BiEdit } from "react-icons/bi";
 import { CgRemove } from "react-icons/cg";
 import { Link } from "react-router-dom";
-
+import Swal from "sweetalert2";
 const Coupon = () => {
   const [data, setData] = useState();
   const [access, setAccess] = useState("");
@@ -12,16 +12,19 @@ const Coupon = () => {
     const getFun = async () => {
       let result = await fetch("http://65.2.144.134:3000/coupon");
       result = await result.json();
+      console.log(result);
       let result2 = await fetch("http://65.2.144.134:3000/admins");
       result2 = await result2.json();
+
+      let userString = localStorage.getItem("user");
+      let user = JSON.parse(userString);
+
       result2.map((value) => {
-        if (value.email == localStorage.getItem("email")) {
+        if (value.email == user.email) {
           setAccess(value);
-          console.log(value);
         }
       });
       setData(result);
-      setPageLoad(result);
     };
 
     getFun();
@@ -46,10 +49,10 @@ const Coupon = () => {
         {data &&
           [...data]
             .reverse()
-            .map(({ _id, title, discount, code, expiryDate },index) => {
+            .map(({ _id, title, discount, code, expiryDate }, index) => {
               return (
-                <tr className="border-2">
-                  <td className=" p-2">{index+1}</td>
+                <tr className="border-2" key={index}>
+                  <td className=" p-2">{index + 1}</td>
                   <td className=" p-2">{title}</td>
                   <td className=" p-2">{discount}</td>
                   <td className=" p-2">{code}</td>
@@ -70,7 +73,17 @@ const Coupon = () => {
                               headers: { "content-type": "application/json" },
                             }
                           );
-                          setPageLoad(result);
+                          
+                          if (result.ok) {
+                            setPageLoad(result);
+                            Swal.fire({
+                              title: "Success",
+                              text: "Coupon Deleted successfully!",
+                              icon: "success",
+                            });
+                          } else {
+                            alert("HTTP-Error: " + response.status);
+                          }
                         }}
                         className="text-2xl text-[#9b3d4e] hover:scale-110"
                       />

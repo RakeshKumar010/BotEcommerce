@@ -76,10 +76,12 @@ const ProductCard = ({ value, index, setPageLoad, recycle }) => {
     const getFun = async () => {
       let result = await fetch("http://65.2.144.134:3000/admins");
       result = await result.json();
+      let userString = localStorage.getItem('user');
+      let user = JSON.parse(userString);
       result.map((value) => {
-        if (value.email == localStorage.getItem("email")) {
+        if (value.email == user.email) {
           setAccess(value);
-          console.log(value);
+         
         }
       });
     };
