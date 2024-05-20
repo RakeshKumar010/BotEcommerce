@@ -10,7 +10,7 @@ const Banner = ({data}) => {
           data.map(({ carousel }) => {
             return (
               <img
-                src={`https://botecommerce.onrender.com/${carousel}`}
+                src={`http://43.205.209.43:3000/${carousel}`}
                 alt="..."
                 className="w-full h-full  bg-cover "
               />

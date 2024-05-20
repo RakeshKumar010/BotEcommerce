@@ -10,9 +10,9 @@ const Coupon = () => {
 
   useEffect(() => {
     const getFun = async () => {
-      let result = await fetch("https://botecommerce.onrender.com/coupon");
+      let result = await fetch("http://43.205.209.43:3000/coupon");
       result = await result.json();
-      let result2 = await fetch("https://botecommerce.onrender.com/admins");
+      let result2 = await fetch("http://43.205.209.43:3000/admins");
       result2 = await result2.json();
       result2.map((value) => {
         if (value.email == localStorage.getItem("email")) {
@@ -64,7 +64,7 @@ const Coupon = () => {
                       <CgRemove
                         onClick={async () => {
                           let result = await fetch(
-                            `https://botecommerce.onrender.com/coupon/${_id}`,
+                            `http://43.205.209.43:3000/coupon/${_id}`,
                             {
                               method: "delete",
                               headers: { "content-type": "application/json" },

@@ -27,7 +27,7 @@ const SideBar = () => {
 
   useEffect(() => {
     const getFun = async () => {
-      let result = await fetch("https://botecommerce.onrender.com/admins");
+      let result = await fetch("http://43.205.209.43:3000/admins");
       result = await result.json();
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);
@@ -36,14 +36,14 @@ const SideBar = () => {
           setSAdminId(value.sAdmin);
         }
       });
-      let result2 = await fetch("https://botecommerce.onrender.com/admins");
+      let result2 = await fetch("http://43.205.209.43:3000/admins");
       result2 = await result2.json();
       result2.map((value) => {
         if (value.email == user.email) {
           setAccess(value);
         }
       });
-      let result3 = await fetch("https://botecommerce.onrender.com/add-logo");
+      let result3 = await fetch("http://43.205.209.43:3000/add-logo");
       result3 = await result3.json();
       setLogos(result3[result3.length - 1].logo);
     };
@@ -102,7 +102,7 @@ const SideBar = () => {
             <Link to={"/admin"}>
               {logos ? (
                 <img
-                  src={`https://botecommerce.onrender.com/${logos}`}
+                  src={`http://43.205.209.43:3000/${logos}`}
                   alt="..."
                   className="h-14  lg:h-20"
                 />

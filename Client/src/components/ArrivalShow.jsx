@@ -8,7 +8,7 @@ const ArrivalShow = ({setDetailsPopup,setAddId}) => {
 
   useEffect(() => {
     const getFun = async () => {
-      let result = await fetch("https://botecommerce.onrender.com/product");
+      let result = await fetch("http://43.205.209.43:3000/product");
       result = await result.json();
       setData(result);
     };

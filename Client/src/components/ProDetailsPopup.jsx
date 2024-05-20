@@ -6,7 +6,7 @@ const ProDetailsPopup = ({ setDetailsPopup, addId }) => {
   const location = useLocation();
   const [data, setData] = useState("");
   async function getFun() {
-    let result = await fetch(`https://botecommerce.onrender.com/${addId}`);
+    let result = await fetch(`http://43.205.209.43:3000/${addId}`);
     result = await result.json();
     if (result) {
       setData(result);

@@ -10,7 +10,7 @@ const RelatedProduct = () => {
 
   useEffect(() => {
     const getFun = async () => {
-      let result = await fetch("https://botecommerce.onrender.com/product");
+      let result = await fetch("http://43.205.209.43:3000/product");
       result = await result.json();
       setData(result);
     };
@@ -55,7 +55,7 @@ const RelatedProduct = () => {
   };
 
   return (
-    <div className="px-5 overflow-hidden">
+    <div className="px-5">
       <p className="font-semibold text-2xl text-center my-6 mt-10 md:my-10 md:mt-40">
         You May Also Like
       </p>

@@ -61,7 +61,7 @@ const AddProduct = () => {
     }
     // Append other fields...
   
-    let response = await fetch("https://botecommerce.onrender.com/add-products", {
+    let response = await fetch("http://43.205.209.43:3000/add-products", {
       method: "POST",
       body: formData,
     });

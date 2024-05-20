@@ -12,7 +12,7 @@ const AdminLogin = ({ setIsAdmin }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let response = await fetch("https://botecommerce.onrender.com/login", {
+    let response = await fetch("http://43.205.209.43:3000/login", {
       method: "post",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ email, pass }),

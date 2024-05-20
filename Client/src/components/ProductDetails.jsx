@@ -27,7 +27,7 @@ const ProductDetails = () => {
 
   async function getFun() {
     let result = await fetch(
-      `https://botecommerce.onrender.com${location.pathname}`
+      `http://43.205.209.43:3000${location.pathname}`
     );
     result = await result.json();
     if (result) {
@@ -44,7 +44,7 @@ const ProductDetails = () => {
         <HeaderTop />
         <NavBar />
       </div>
-      <div className="bg-gray-100  py-8">
+      <div className="bg-gray-100  py-8 overflow-hidden">
         <div className="sm:w-[90vw] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col  lg:flex-row">
             <div className="flex flex-col md:flex-row  gap-2  px-4 ">
@@ -52,7 +52,7 @@ const ProductDetails = () => {
                 {data.image && (
                   <img
                     className="w-full h-full object-cover rounded-md object-top"
-                    src={`https://botecommerce.onrender.com/${
+                    src={`http://43.205.209.43:3000/${
                       imageUrl == null ? data.image[3] : imageUrl
                     }`}
                     alt="Product Image"
@@ -70,7 +70,7 @@ const ProductDetails = () => {
                           setImageUrl(value);
                         }}
                         className=" rounded-md w-16 md:w-36"
-                        src={`https://botecommerce.onrender.com/${value}`}
+                        src={`http://43.205.209.43:3000/${value}`}
                         alt="Product Image"
                       />
                     );

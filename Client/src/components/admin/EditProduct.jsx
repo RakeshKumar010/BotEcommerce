@@ -60,7 +60,7 @@ const EditProduct = () => {
     // Append other fields...
 
     let response = await fetch(
-      "https://botecommerce.onrender.com/product/" +
+      "http://43.205.209.43:3000/product/" +
         location.pathname.split("/").pop(),
       {
         method: "PUT",
@@ -99,7 +99,7 @@ const EditProduct = () => {
   useEffect(() => {
     const getFun = async () => {
       let result = await fetch(
-        "https://botecommerce.onrender.com/" +
+        "http://43.205.209.43:3000/" +
           location.pathname.split("/").pop()
       );
       result = await result.json();
@@ -152,7 +152,7 @@ const EditProduct = () => {
                   <>
                     <img
                       className="rounded-sm w-20 object-cover "
-                      src={`https://botecommerce.onrender.com/${value}`}
+                      src={`http://43.205.209.43:3000/${value}`}
                       alt="product image"
                     />
                   </>

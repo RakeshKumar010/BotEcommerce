@@ -13,7 +13,7 @@ const EditCoupon = () => {
     e.preventDefault();
 
     let response = await fetch(
-      "https://botecommerce.onrender.com/coupon/" +
+      "http://43.205.209.43:3000/coupon/" +
         location.pathname.split("/").pop(),
       {
         method: "put",
@@ -39,7 +39,7 @@ const EditCoupon = () => {
   useEffect(() => {
     const getFun = async () => {
       let result = await fetch(
-        "https://botecommerce.onrender.com/coupon/" +
+        "http://43.205.209.43:3000/coupon/" +
           location.pathname.split("/").pop()
       );
       result = await result.json();
