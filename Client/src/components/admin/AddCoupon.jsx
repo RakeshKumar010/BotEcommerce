@@ -8,7 +8,7 @@ const AddCoupon = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let response = await fetch("http://43.205.209.43:3000/add-coupon", {
+    let response = await fetch("http://65.2.144.134:3000/add-coupon", {
       method: "post",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ title, discount,code,expiryDate }),

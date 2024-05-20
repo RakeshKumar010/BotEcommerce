@@ -69,19 +69,19 @@ const DashBoard = () => {
 
   useEffect(() => {
     const getFun = async () => {
-      let result1 = await fetch("http://43.205.209.43:3000/product");
+      let result1 = await fetch("http://65.2.144.134:3000/product");
       result1 = await result1.json();
       setProduct(result1.length);
 
-      let result2 = await fetch("http://43.205.209.43:3000/coupon");
+      let result2 = await fetch("http://65.2.144.134:3000/coupon");
       result2 = await result2.json();
       setAdmin(result2.length);
 
-      let result3 = await fetch("http://43.205.209.43:3000/admins");
+      let result3 = await fetch("http://65.2.144.134:3000/admins");
       result3 = await result3.json();
       setCoupon(result3.length);
 
-      let result4 = await fetch("http://43.205.209.43:3000/carousel");
+      let result4 = await fetch("http://65.2.144.134:3000/carousel");
       result4 = await result4.json();
       setCarousel(result4.length);
     };

@@ -22,7 +22,7 @@ const CartOrder = () => {
     }
     setLocalData(storedObject);
     const getFun = async () => {
-      let result = await fetch("http://43.205.209.43:3000/coupon");
+      let result = await fetch("http://65.2.144.134:3000/coupon");
       result = await result.json();
       setData(result);
     };
@@ -122,7 +122,7 @@ const CartOrder = () => {
                 return (
                   <div className="flex gap-3 items-start">
                     <img
-                      src={`http://43.205.209.43:3000/${imageUrl}`}
+                      src={`http://65.2.144.134:3000/${imageUrl}`}
                       alt="Product Image"
                       className="h-16 rounded-sm shadow-md"
                     />

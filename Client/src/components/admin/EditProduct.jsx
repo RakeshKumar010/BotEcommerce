@@ -60,7 +60,7 @@ const EditProduct = () => {
     // Append other fields...
 
     let response = await fetch(
-      "http://43.205.209.43:3000/product/" +
+      "http://65.2.144.134:3000/product/" +
         location.pathname.split("/").pop(),
       {
         method: "PUT",
@@ -99,7 +99,7 @@ const EditProduct = () => {
   useEffect(() => {
     const getFun = async () => {
       let result = await fetch(
-        "http://43.205.209.43:3000/" +
+        "http://65.2.144.134:3000/" +
           location.pathname.split("/").pop()
       );
       result = await result.json();
@@ -152,7 +152,7 @@ const EditProduct = () => {
                   <>
                     <img
                       className="rounded-sm w-20 object-cover "
-                      src={`http://43.205.209.43:3000/${value}`}
+                      src={`http://65.2.144.134:3000/${value}`}
                       alt="product image"
                     />
                   </>

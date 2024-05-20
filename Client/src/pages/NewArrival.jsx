@@ -20,7 +20,7 @@ const NewArrival = ({ title }) => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     const getFun = async () => {
-      let result = await fetch("http://43.205.209.43:3000/product");
+      let result = await fetch("http://65.2.144.134:3000/product");
       result = await result.json();
       setData(result);
     };

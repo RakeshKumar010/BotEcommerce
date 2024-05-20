@@ -26,7 +26,7 @@ const ProductCard = ({ value, index, setPageLoad, recycle }) => {
   } = value;
 
   const deleteFun = async () => {
-    let result = await fetch(`http://43.205.209.43:3000/${_id}`, {
+    let result = await fetch(`http://65.2.144.134:3000/${_id}`, {
       method: "delete",
       headers: { "content-type": "application/json" },
     });
@@ -34,7 +34,7 @@ const ProductCard = ({ value, index, setPageLoad, recycle }) => {
   };
   const recycleBinFun = async () => {
     let result = await fetch(
-      `http://43.205.209.43:3000/recycle/${_id}`,
+      `http://65.2.144.134:3000/recycle/${_id}`,
       {
         method: "put",
         headers: { "content-type": "application/json" },
@@ -54,7 +54,7 @@ const ProductCard = ({ value, index, setPageLoad, recycle }) => {
   };
   const restoreFun = async () => {
     let result = await fetch(
-      `http://43.205.209.43:3000/restore/${_id}`,
+      `http://65.2.144.134:3000/restore/${_id}`,
       {
         method: "put",
         headers: { "content-type": "application/json" },
@@ -74,7 +74,7 @@ const ProductCard = ({ value, index, setPageLoad, recycle }) => {
   };
   useEffect(() => {
     const getFun = async () => {
-      let result = await fetch("http://43.205.209.43:3000/admins");
+      let result = await fetch("http://65.2.144.134:3000/admins");
       result = await result.json();
       result.map((value) => {
         if (value.email == localStorage.getItem("email")) {
@@ -94,7 +94,7 @@ const ProductCard = ({ value, index, setPageLoad, recycle }) => {
         {image.length > 0 && (
           <img
             className="   rounded-sm object-cover   "
-            src={`http://43.205.209.43:3000/${image[image.length - 1]}`}
+            src={`http://65.2.144.134:3000/${image[image.length - 1]}`}
             alt="product image"
           />
         )}

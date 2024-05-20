@@ -61,7 +61,7 @@ const AddProduct = () => {
     }
     // Append other fields...
   
-    let response = await fetch("http://43.205.209.43:3000/add-products", {
+    let response = await fetch("http://65.2.144.134:3000/add-products", {
       method: "POST",
       body: formData,
     });

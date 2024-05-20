@@ -22,7 +22,7 @@ const Home = () => {
       setPopUp(true);
     }, 10000);
     const getFun = async () => {
-      let result = await fetch("http://43.205.209.43:3000/carousel");
+      let result = await fetch("http://65.2.144.134:3000/carousel");
       result = await result.json();
       setData(result);
       console.log(result);
@@ -66,7 +66,7 @@ const Home = () => {
             className="text-white text-5xl cursor-pointer"
           />
           <img
-            src={data?`http://43.205.209.43:3000/${data[4].carousel}`:OfferImg}
+            src={data?`http://65.2.144.134:3000/${data[4].carousel}`:OfferImg}
             alt="..."
             className="md:w-1/2 w-full rounded-md shadow-md"
           />

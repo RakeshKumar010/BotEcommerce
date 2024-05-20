@@ -9,7 +9,7 @@ const FixedBtn = ({data}) => {
       {offerImg ? (
         <div
           style={{
-            background: `url(${data?`http://43.205.209.43:3000/${data[4].carousel}`:OfferImg}) no-repeat center center`,
+            background: `url(${data?`http://65.2.144.134:3000/${data[4].carousel}`:OfferImg}) no-repeat center center`,
             backgroundSize: "cover",
           }}
           className="h-60 absolute shadow-lg  right-32 w-[90vw] md:w-[50vw]"
