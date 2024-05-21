@@ -6,7 +6,7 @@ const ProDetailsPopup = ({ setDetailsPopup, addId }) => {
   const location = useLocation();
   const [data, setData] = useState("");
   async function getFun() {
-    let result = await fetch(`http://65.2.144.134:3000/${addId}`);
+    let result = await fetch(`http://3.110.181.1:3000/${addId}`);
     result = await result.json();
     if (result) {
       setData(result);

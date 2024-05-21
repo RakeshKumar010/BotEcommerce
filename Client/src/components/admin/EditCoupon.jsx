@@ -13,7 +13,7 @@ const EditCoupon = () => {
     e.preventDefault();
 
     let response = await fetch(
-      "http://65.2.144.134:3000/coupon/" +
+      "http://3.110.181.1:3000/coupon/" +
         location.pathname.split("/").pop(),
       {
         method: "put",
@@ -39,7 +39,7 @@ const EditCoupon = () => {
   useEffect(() => {
     const getFun = async () => {
       let result = await fetch(
-        "http://65.2.144.134:3000/coupon/" +
+        "http://3.110.181.1:3000/coupon/" +
           location.pathname.split("/").pop()
       );
       result = await result.json();

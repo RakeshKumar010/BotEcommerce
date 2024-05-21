@@ -12,7 +12,7 @@ const AdminLogin = ({ setIsAdmin }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let response = await fetch("http://65.2.144.134:3000/login", {
+    let response = await fetch("http://3.110.181.1:3000/login", {
       method: "post",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ email, pass }),

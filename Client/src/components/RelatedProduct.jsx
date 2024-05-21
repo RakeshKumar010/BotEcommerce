@@ -10,7 +10,7 @@ const RelatedProduct = () => {
 
   useEffect(() => {
     const getFun = async () => {
-      let result = await fetch("http://65.2.144.134:3000/product");
+      let result = await fetch("http://3.110.181.1:3000/product");
       result = await result.json();
       setData(result);
     };

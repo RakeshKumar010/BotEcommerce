@@ -10,7 +10,7 @@ const Banner = ({data}) => {
           data.map(({ carousel }) => {
             return (
               <img
-                src={`http://65.2.144.134:3000/${carousel}`}
+                src={`http://3.110.181.1:3000/${carousel}`}
                 alt="..."
                 className="w-full h-full  bg-cover "
               />

@@ -10,10 +10,10 @@ const Coupon = () => {
 
   useEffect(() => {
     const getFun = async () => {
-      let result = await fetch("http://65.2.144.134:3000/coupon");
+      let result = await fetch("http://3.110.181.1:3000/coupon");
       result = await result.json();
       console.log(result);
-      let result2 = await fetch("http://65.2.144.134:3000/admins");
+      let result2 = await fetch("http://3.110.181.1:3000/admins");
       result2 = await result2.json();
 
       let userString = localStorage.getItem("user");
@@ -67,7 +67,7 @@ const Coupon = () => {
                       <CgRemove
                         onClick={async () => {
                           let result = await fetch(
-                            `http://65.2.144.134:3000/coupon/${_id}`,
+                            `http://3.110.181.1:3000/coupon/${_id}`,
                             {
                               method: "delete",
                               headers: { "content-type": "application/json" },
