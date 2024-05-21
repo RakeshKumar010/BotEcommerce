@@ -10,6 +10,11 @@ const CartOrder = () => {
   const [discountCode,setDiscountCode]=useState('')
   const [data, setData] = useState();
   const [currentDate, setCurrentDate] = useState();
+  const [paymentMValue, setPaymentMValue] = useState("");
+
+  const paymentMethod = (event) => {
+    setPaymentMValue(event.target.value);
+  };
 
   useEffect(() => {
     const date = new Date();
@@ -43,18 +48,18 @@ const CartOrder = () => {
         <NavBar />
       </div>
       <div className="flex md:flex-row flex-col-reverse  md:w-[80vw] w-[95vw] mx-auto gap-5 p-3 md:p-5">
-        <div className="md:w-1/2 w-full flex flex-col gap-4 ">
+      <div className="md:w-1/2 w-full flex flex-col gap-4 ">
           <div className="flex justify-between">
-            <p className="text-lg font-bold">Contact</p>
-            <Link to={"#"} className="underline">
-              Log In
-            </Link>
+            <p className="text-lg font-bold">Login or Sigup</p>
           </div>
           <input
             type="text"
             placeholder="Email or mobile phone number"
             className="w-full rounded-md"
           />
+          <button className="bg-[#ac384b] p-3 text-white uppercase rounded-md">
+            Generate otp
+          </button>
           <div className="flex items-center gap-1">
             <input type="checkbox" className="rounded-md" />
             <p>Email me with news and offers</p>
@@ -101,20 +106,30 @@ const CartOrder = () => {
               />
             </div>
             <input type="text" placeholder="phone" className="rounded-md" />
-            <p className="text-lg font-bold ">Delivery</p>
-            <div className="flex justify-between border-2 border-gray-400 p-2 rounded-md">
-              <p>Standard</p>
-              <p>Free</p>
+            <p className="text-lg font-bold ">Delivery Method</p>
+            <div className="w-full">
+              <div className="relative">
+                <select
+                  onChange={paymentMethod}
+                  value={paymentMValue}
+                  className="block appearance-none w-full bg-white border focus:ring-0 focus:outline-0 border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  id="grid-state"
+                >
+                  <option value="cod">Cash On Delivery</option>
+                  <option value="direct-pay">Direct Payment</option>
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                  <svg
+                    className="fill-current h-4 w-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M0 6l10 10 10-10z" />
+                  </svg>
+                </div>
+              </div>
             </div>
-            <p className="text-lg font-bold ">Billing address</p>
-            <div className="flex border py-4 px-2 gap-2 items-center border-gray-500 rounded-md">
-              <input type="checkbox" className="rounded-full " />
-              <p>Same as shipping address</p>
-            </div>
-            <div className="flex border py-4 px-2 gap-2 items-center border-gray-500 rounded-md">
-              <input type="checkbox" className="rounded-full" />
-              <p>Use a different billing address</p>
-            </div>
+            
             <div className="md:static bg-white md:p-0 p-2  fixed bottom-0 right-0 left-0">
               <p className="text-center p-4 w-full bg-[#ac384b] text-white rounded-md  hover:scale-105 transition-all duration-200  hover:shadow-md hover:shadow-gray-600">
                 Pay now

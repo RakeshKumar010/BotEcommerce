@@ -55,7 +55,7 @@ const NewArrival = ({ title }) => {
         </div>
       <div className="pb-10">
         <h2 className="text-2xl md:text-3xl font-bold tracking-widest my-10 text-uiColor text-center ">
-          {title} {totalItem}
+          {title} 
         </h2>
         <div className="flex justify-between px-5 sm:px-10 lg:px-20">
           <div onClick={()=>{
