@@ -7,7 +7,7 @@ const Carousel = () => {
   useEffect(() => {
     const getFun = async () => {
       let result = await fetch(
-        "http://3.110.181.1:3000/carousel"
+        "http://43.204.35.127:3000/carousel"
       );
       result = await result.json();
 
@@ -38,7 +38,7 @@ const Carousel = () => {
                 <td className=" p-2">{index + 1}</td>
                 <td className=" p-2 bg-black ">
                   <img
-                    src={`http://3.110.181.1:3000/${carousel}`}
+                    src={`http://43.204.35.127:3000/${carousel}`}
                     alt="..."
                     className="h-32  bg-cover "
                   />
@@ -48,7 +48,7 @@ const Carousel = () => {
                   <CgRemove
                     onClick={async () => {
                       let result = await fetch(
-                        `http://3.110.181.1:3000/carousel/${_id}`,
+                        `http://43.204.35.127:3000/carousel/${_id}`,
                         {
                           method: "delete",
                           headers: { "content-type": "application/json" },

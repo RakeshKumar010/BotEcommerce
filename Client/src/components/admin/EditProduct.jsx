@@ -60,25 +60,11 @@ const EditProduct = () => {
     // Append other fields...
 
     let response = await fetch(
-      "http://3.110.181.1:3000/product/" +
+      "http://43.204.35.127:3000/product/" +
         location.pathname.split("/").pop(),
       {
         method: "PUT",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          title,
-          rating,
-          price,
-          offer,
-          fabric,
-          dispatchTime,
-          pieces,
-          availability,
-          section,
-          image,
-          points,
-          selectedSizes,
-        }),
+        body: formData, 
       }
     );
     console.log(response);
@@ -99,7 +85,7 @@ const EditProduct = () => {
   useEffect(() => {
     const getFun = async () => {
       let result = await fetch(
-        "http://3.110.181.1:3000/" +
+        "http://43.204.35.127:3000/" +
           location.pathname.split("/").pop()
       );
       result = await result.json();
@@ -140,7 +126,7 @@ const EditProduct = () => {
           />
         </div>
 
-        {/* <div>
+        <div>
           <p className="block text-gray-700 gap-5 text-sm font-bold mb-2">
             Image
           </p>
@@ -152,7 +138,7 @@ const EditProduct = () => {
                   <>
                     <img
                       className="rounded-sm w-20 object-cover "
-                      src={`http://3.110.181.1:3000/${value}`}
+                      src={`http://43.204.35.127:3000/${value}`}
                       alt="product image"
                     />
                   </>
@@ -165,7 +151,7 @@ const EditProduct = () => {
             onChange={(e) => setImage(e.target.files)}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
-        </div> */}
+        </div>
         <div className="flex items-center justify-between">
           <div>
             <p className="block text-gray-700 text-sm font-bold mb-2">

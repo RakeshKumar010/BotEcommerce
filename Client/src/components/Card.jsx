@@ -13,7 +13,7 @@ const Card = ({ value, setDetailsPopup, setAddId }) => {
           {image && (
             <img
               className="rounded-t-lg  w-full"
-              src={`http://3.110.181.1:3000/${image[3]}`}
+              src={`http://43.204.35.127:3000/${image[3]}`}
               alt="product image"
               onMouseEnter={() => {
                 setAddStyle(true);

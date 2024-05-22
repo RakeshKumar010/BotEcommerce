@@ -7,7 +7,7 @@ const Footer = () => {
 
   useEffect(() => {
     const getFun = async () => {
-      let result = await fetch("http://3.110.181.1:3000/add-logo");
+      let result = await fetch("http://43.204.35.127:3000/add-logo");
       result = await result.json();
       setLogos(result[result.length - 1].logo);
     };
@@ -23,7 +23,7 @@ const Footer = () => {
               <Link to={"/"}>
                 {logos ? (
                   <img
-                    src={`http://3.110.181.1:3000/${logos}`}
+                    src={`http://43.204.35.127:3000/${logos}`}
                     alt="..."
                     className="h-16 mb-5"
                   />

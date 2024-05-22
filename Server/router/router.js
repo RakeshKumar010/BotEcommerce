@@ -24,6 +24,23 @@ app.post("/add-products", upload.array("image"), async (req, res) => {
     res.status(500).send("An error occurred while saving the product.");
   }
 });
+app.put("/product/:id", upload.array("image"), async (req, res) => {
+  try {
+    let productData = req.body;
+    if (req.files) {
+      productData.image = req.files.map((file) => file.path); // Add new image paths to product data
+    }
+
+    let result = await productSchema.updateOne(
+      { _id: req.params.id },
+      { $set: productData }
+    );
+    res.send(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("An error occurred while updating the product.");
+  }
+});
 
 app.post("/add-logo", upload.single("image"), async (req, res) => {
   try {

@@ -9,7 +9,7 @@ const RecycleData = () => {
   useEffect(() => {
     const getFun = async () => {
       let result = await fetch(
-        "http://3.110.181.1:3000/product/recycle-bin"
+        "http://43.204.35.127:3000/product/recycle-bin"
       );
       result = await result.json();
       setData(result);

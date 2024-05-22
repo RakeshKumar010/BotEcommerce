@@ -9,7 +9,7 @@ const AddCarousel = () => {
       const formData = new FormData();
       formData.append('image', image);
   
-      let response = await fetch("http://3.110.181.1:3000/add-carousel", {
+      let response = await fetch("http://43.204.35.127:3000/add-carousel", {
         method: "post",
         body: formData,
       });

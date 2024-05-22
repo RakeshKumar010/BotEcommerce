@@ -17,7 +17,7 @@ const EditAccounts = () => {
   
     const handleSubmit = async (e) => {
       e.preventDefault();
-      let result = await fetch("http://3.110.181.1:3000/admins/"+location.pathname.split("/").pop(), {
+      let result = await fetch("http://43.204.35.127:3000/admins/"+location.pathname.split("/").pop(), {
         method: "put",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ name, email, pass,addProduct,editProduct,deleteProduct,addCoupon,editCoupon,deleteCoupon }),
@@ -38,7 +38,7 @@ const EditAccounts = () => {
     };
     useEffect(() => {
         const getFun = async () => {
-          let result = await fetch("http://3.110.181.1:3000/admins/"+location.pathname.split("/").pop());
+          let result = await fetch("http://43.204.35.127:3000/admins/"+location.pathname.split("/").pop());
           result = await result.json();
           setName(result.name)
           setEmail(result.email)

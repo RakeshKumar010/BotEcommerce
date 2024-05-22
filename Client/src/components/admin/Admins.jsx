@@ -10,7 +10,7 @@ const Admins = () => {
 
   useEffect(() => {
     const getFun = async () => {
-      let result = await fetch("http://3.110.181.1:3000/admins");
+      let result = await fetch("http://43.204.35.127:3000/admins");
       result = await result.json();
       setData(result);
       setPageLoad(result);
@@ -71,7 +71,7 @@ const Admins = () => {
                       <CgRemove
                         onClick={async () => {
                           let result = await fetch(
-                            `http://3.110.181.1:3000/admins/${_id}`,
+                            `http://43.204.35.127:3000/admins/${_id}`,
                             {
                               method: "delete",
                               headers: { "content-type": "application/json" },
