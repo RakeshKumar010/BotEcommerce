@@ -27,7 +27,7 @@ const ProductDetails = () => {
 
   async function getFun() {
     let result = await fetch(
-      `http://43.204.35.127:3000${location.pathname}`
+      `http://13.201.55.203:3000${location.pathname}`
     );
     result = await result.json();
     if (result) {
@@ -52,7 +52,7 @@ const ProductDetails = () => {
                 {data.image && (
                   <img
                     className="w-full h-full object-cover rounded-md object-top"
-                    src={`http://43.204.35.127:3000/${
+                    src={`http://13.201.55.203:3000/${
                       imageUrl == null ? data.image[3] : imageUrl
                     }`}
                     alt="Product Image"
@@ -70,7 +70,7 @@ const ProductDetails = () => {
                           setImageUrl(value);
                         }}
                         className=" rounded-md w-16 md:w-36"
-                        src={`http://43.204.35.127:3000/${value}`}
+                        src={`http://13.201.55.203:3000/${value}`}
                         alt="Product Image"
                       />
                     );

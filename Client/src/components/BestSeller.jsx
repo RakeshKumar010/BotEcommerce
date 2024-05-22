@@ -8,7 +8,7 @@ const BestSeller = ({ setDetailsPopup, setAddId }) => {
 
   useEffect(() => {
     const getFun = async () => {
-      let result = await fetch("http://43.204.35.127:3000/product");
+      let result = await fetch("http://13.201.55.203:3000/product");
       result = await result.json();
       setData(result);
     };

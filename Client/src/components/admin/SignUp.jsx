@@ -13,7 +13,7 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let result = await fetch("http://43.204.35.127:3000/admins", {
+    let result = await fetch("http://13.201.55.203:3000/admins", {
       method: "post",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ name, email, pass,addProduct,editProduct,deleteProduct,addCoupon,editCoupon,deleteCoupon }),

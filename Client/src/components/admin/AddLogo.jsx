@@ -9,7 +9,7 @@ const AddLogo = () => {
     const formData = new FormData();
     formData.append('image', image);
 
-    let response = await fetch("http://43.204.35.127:3000/add-logo", {
+    let response = await fetch("http://13.201.55.203:3000/add-logo", {
       method: "post",
       body: formData,
     });
