@@ -2,8 +2,13 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const dotenv = require('dotenv')
+const corsOptions = {
+    origin: ['https://bot-ecommerce-gamma.vercel.app','http://localhost:5173'], // This should be the origin you want to allow
+    optionsSuccessStatus: 200 // For legacy browser support
+  };
+
 app.use('/uploads', express.static('uploads'));
-app.use(cors())
+app.use(cors(corsOptions))
 dotenv.config({path:'./config.env'})
 require('./db/conn')
 app.use(express.json())

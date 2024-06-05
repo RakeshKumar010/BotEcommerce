@@ -18,7 +18,7 @@ app.post("/add-products", upload.array("image"), async (req, res) => {
     let result = new productModel(productData);
     result = await result.save();
     res.send(result);
-    console.log(result);
+    
   } catch (error) {
     console.error(error);
     res.status(500).send("An error occurred while saving the product.");
@@ -49,7 +49,7 @@ app.post("/add-logo", upload.single("image"), async (req, res) => {
     let result = new LogoSchema(logoData);
     result = await result.save();
     res.send(result);
-    console.log(result);
+  
   } catch (error) {
     console.error(error);
     res.status(500).send("An error occurred while saving the product.");
@@ -63,7 +63,7 @@ app.post("/add-carousel", upload.single("image"), async (req, res) => {
     let result = new carouselSchema(carouselData);
     result = await result.save();
     res.send(result);
-    console.log(result);
+  
   } catch (error) {
     console.error(error);
     res.status(500).send("An error occurred while saving the product.");
@@ -97,6 +97,10 @@ app.post("/login", async (req, res) => {
 app.get("/product", async (req, res) => {
   let result = await productModel.find({ recycleId: "0" });
   res.send(result);
+});
+app.get("/",  (req, res) => {
+   
+  res.send({'mess':'Api is ok'});
 });
 app.get("/product/recycle-bin", async (req, res) => {
   let result = await productModel.find({ recycleId: "1" });
