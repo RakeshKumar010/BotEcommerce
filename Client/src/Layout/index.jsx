@@ -32,17 +32,15 @@ const Layout = () => {
   // Check local storage for admin details on component mount
   useEffect(() => {
     const user = localStorage.getItem("user");
- 
 
     if (user) {
       setIsAdmin(true);
       // console.log(email,pass);
     }
   }, []);
-   
+
   return (
     <BrowserRouter>
-   
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/add-to-cart" element={<AddToCart />} />

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "./global/NavBar";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import {  useLocation, useNavigate } from "react-router-dom";
 import { FaVanShuttle } from "react-icons/fa6";
 import { MdChangeCircle, MdOutlineAddBusiness } from "react-icons/md";
 import Footer from "./global/Footer";
@@ -18,17 +18,19 @@ const ProductDetails = () => {
   const [imageUrl, setImageUrl] = useState(null);
   const [data, setData] = useState("");
   let offer = data.offer; // "20% off"
-  let discount = parseInt(offer); // 20
+  let discount = offer ? parseInt(offer) : 0; // 20 or default to 0 if 'offer' is not defined
   let price = data.price;
-  let priceNumber = parseInt(price); // 5299.00
-
+  let priceNumber = price ? parseInt(price.replace(/,/g, "")) : 0; // Convert price to number or default to 0
   let currentPrice = priceNumber - priceNumber * (discount / 100);
+  currentPrice = currentPrice.toFixed();
+
+  let extraoff = priceNumber * (discount / 100);
+  extraoff = extraoff.toFixed();
+
   // currentPrice=currentPrice-discount
 
   async function getFun() {
-    let result = await fetch(
-      `https://psyrealestate.in${location.pathname}`
-    );
+    let result = await fetch(`https://psyrealestate.in${location.pathname}`);
     result = await result.json();
     if (result) {
       setData(result);
@@ -91,7 +93,7 @@ const ProductDetails = () => {
 
               <div>
                 <span className="text-[#388e3c] font-semibold">
-                  Extra ₹{priceNumber * (discount / 100)} off
+                  Extra ₹{extraoff} off
                 </span>
                 <div className=" flex gap-3 items-center">
                   <span className=" text-xl font-bold">₹{currentPrice}</span>
