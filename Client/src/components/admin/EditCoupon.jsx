@@ -13,7 +13,7 @@ const EditCoupon = () => {
     e.preventDefault();
 
     let response = await fetch(
-      "http://13.201.55.203:3000/coupon/" +
+      "https://psyrealestate.in/coupon/" +
         location.pathname.split("/").pop(),
       {
         method: "put",
@@ -39,7 +39,7 @@ const EditCoupon = () => {
   useEffect(() => {
     const getFun = async () => {
       let result = await fetch(
-        "http://13.201.55.203:3000/coupon/" +
+        "https://psyrealestate.in/coupon/" +
           location.pathname.split("/").pop()
       );
       result = await result.json();

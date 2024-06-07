@@ -9,7 +9,7 @@ const AddCarousel = () => {
       const formData = new FormData();
       formData.append('image', image);
   
-      let response = await fetch("http://13.201.55.203:3000/add-carousel", {
+      let response = await fetch("https://psyrealestate.in/add-carousel", {
         method: "post",
         body: formData,
       });

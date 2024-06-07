@@ -8,7 +8,7 @@ const AddCoupon = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let response = await fetch("http://13.201.55.203:3000/add-coupon", {
+    let response = await fetch("https://psyrealestate.in/add-coupon", {
       method: "post",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ title, discount,code,expiryDate }),

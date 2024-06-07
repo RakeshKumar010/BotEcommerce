@@ -27,7 +27,7 @@ const ProductDetails = () => {
 
   async function getFun() {
     let result = await fetch(
-      `http://13.201.55.203:3000${location.pathname}`
+      `https://psyrealestate.in${location.pathname}`
     );
     result = await result.json();
     if (result) {
@@ -52,7 +52,7 @@ const ProductDetails = () => {
                 {data.image && (
                   <img
                     className="w-full h-full object-cover rounded-md object-top"
-                    src={`http://13.201.55.203:3000/${
+                    src={`https://psyrealestate.in/${
                       imageUrl == null ? data.image[3] : imageUrl
                     }`}
                     alt="Product Image"
@@ -70,7 +70,7 @@ const ProductDetails = () => {
                           setImageUrl(value);
                         }}
                         className=" rounded-md w-16 md:w-36"
-                        src={`http://13.201.55.203:3000/${value}`}
+                        src={`https://psyrealestate.in/${value}`}
                         alt="Product Image"
                       />
                     );

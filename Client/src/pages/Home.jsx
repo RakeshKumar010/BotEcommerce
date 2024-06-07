@@ -22,7 +22,7 @@ const Home = () => {
       setPopUp(true);
     }, 10000);
     const getFun = async () => {
-      let result = await fetch("http://13.201.55.203:3000/carousel");
+      let result = await fetch("https://psyrealestate.in/carousel");
       result = await result.json();
       setData(result);
       console.log(result);
@@ -65,7 +65,7 @@ const Home = () => {
             className="text-white text-5xl cursor-pointer"
           />
           <img
-            src={data?`http://13.201.55.203:3000/${data[1].carousel}`:OfferImg}
+            src={data?`https://psyrealestate.in/${data[1].carousel}`:OfferImg}
             alt="..."
             className="md:w-1/2 w-full rounded-md shadow-md"
           />

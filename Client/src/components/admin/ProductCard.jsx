@@ -26,7 +26,7 @@ const ProductCard = ({ value, index, setPageLoad, recycle }) => {
   } = value;
 
   const deleteFun = async () => {
-    let result = await fetch(`http://13.201.55.203:3000/${_id}`, {
+    let result = await fetch(`https://psyrealestate.in/${_id}`, {
       method: "delete",
       headers: { "content-type": "application/json" },
     });
@@ -34,7 +34,7 @@ const ProductCard = ({ value, index, setPageLoad, recycle }) => {
   };
   const recycleBinFun = async () => {
     let result = await fetch(
-      `http://13.201.55.203:3000/recycle/${_id}`,
+      `https://psyrealestate.in/recycle/${_id}`,
       {
         method: "put",
         headers: { "content-type": "application/json" },
@@ -54,7 +54,7 @@ const ProductCard = ({ value, index, setPageLoad, recycle }) => {
   };
   const restoreFun = async () => {
     let result = await fetch(
-      `http://13.201.55.203:3000/restore/${_id}`,
+      `https://psyrealestate.in/restore/${_id}`,
       {
         method: "put",
         headers: { "content-type": "application/json" },
@@ -74,7 +74,7 @@ const ProductCard = ({ value, index, setPageLoad, recycle }) => {
   };
   useEffect(() => {
     const getFun = async () => {
-      let result = await fetch("http://13.201.55.203:3000/admins");
+      let result = await fetch("https://psyrealestate.in/admins");
       result = await result.json();
       let userString = localStorage.getItem('user');
       let user = JSON.parse(userString);
@@ -96,7 +96,7 @@ const ProductCard = ({ value, index, setPageLoad, recycle }) => {
         {image.length > 0 && (
           <img
             className="   rounded-sm object-cover   "
-            src={`http://13.201.55.203:3000/${image[image.length - 1]}`}
+            src={`https://psyrealestate.in/${image[image.length - 1]}`}
             alt="product image"
           />
         )}

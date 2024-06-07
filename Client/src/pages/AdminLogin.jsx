@@ -12,7 +12,7 @@ const AdminLogin = ({ setIsAdmin }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let response = await fetch("http://13.201.55.203:3000/login", {
+    let response = await fetch("https://psyrealestate.in/login", {
       method: "post",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ email, pass }),

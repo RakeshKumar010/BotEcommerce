@@ -27,7 +27,7 @@ const OrderPage = () => {
     const storedObject = JSON.parse(sessionStorage.getItem("myObject"));
     setSessionData(storedObject);
     const getFun = async () => {
-      let result = await fetch("http://13.201.55.203:3000/coupon");
+      let result = await fetch("https://psyrealestate.in/coupon");
       result = await result.json();
       setData(result);
     };
@@ -132,7 +132,7 @@ const OrderPage = () => {
         <div className="md:w-1/2 w-full md:p-5 flex flex-col gap-5">
           <div className="flex gap-3 items-start">
             <img
-              src={`http://13.201.55.203:3000/${
+              src={`https://psyrealestate.in/${
                 sessionData
                   ? sessionData.imageUrl
                   : "https://cdn.shopify.com/s/files/1/0839/4647/1697/files/DSC_1321copy_64x64.jpg?v=1711732690"
@@ -197,7 +197,7 @@ const OrderPage = () => {
             onSubmit={async (e) => {
               e.preventDefault();
               let result = await fetch(
-                `http://13.201.55.203:3000/coupon/${discountCode}`
+                `https://psyrealestate.in/coupon/${discountCode}`
               );
               result = await result.json();
               setCouponData(result);

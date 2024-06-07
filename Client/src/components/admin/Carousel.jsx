@@ -7,7 +7,7 @@ const Carousel = () => {
   useEffect(() => {
     const getFun = async () => {
       let result = await fetch(
-        "http://13.201.55.203:3000/carousel"
+        "https://psyrealestate.in/carousel"
       );
       result = await result.json();
 
@@ -38,7 +38,7 @@ const Carousel = () => {
                 <td className=" p-2">{index + 1}</td>
                 <td className=" p-2 bg-black ">
                   <img
-                    src={`http://13.201.55.203:3000/${carousel}`}
+                    src={`https://psyrealestate.in/${carousel}`}
                     alt="..."
                     className="h-32  bg-cover "
                   />
@@ -48,7 +48,7 @@ const Carousel = () => {
                   <CgRemove
                     onClick={async () => {
                       let result = await fetch(
-                        `http://13.201.55.203:3000/carousel/${_id}`,
+                        `https://psyrealestate.in/carousel/${_id}`,
                         {
                           method: "delete",
                           headers: { "content-type": "application/json" },

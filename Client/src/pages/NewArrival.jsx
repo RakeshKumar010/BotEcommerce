@@ -30,7 +30,7 @@ const NewArrival = ({ title }) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setCurrentPage(1)
     const getFun = async () => {
-      let result = await fetch("http://13.201.55.203:3000/product");
+      let result = await fetch("https://psyrealestate.in/product");
       result = await result.json();
 
       let array=[]
