@@ -10,13 +10,14 @@ const ProDetailsPopup = ({ setDetailsPopup, addId }) => {
     result = await result.json();
     if (result) {
       setData(result);
+      console.log(result.image);
     }
   }
   useEffect(() => {
     getFun();
   }, []);
   return (
-    <div className="flex justify-center items-center z-[100] fixed p-3 md:p-0   w-full h-screen bg-black/30">
+    <div className="flex justify-center items-center z-[100] fixed p-3 md:p-0   w-full   mt-5" style={{overflowY:'scroll'}}>
       <div className="flex flex-col md:flex-row -mx-4 md:w-[70vw] w-full md:h-[80vh] h-[90vh] p-4 md:p-10 rounded-md  relative  bg-white">
         <IoMdClose
           onClick={() => {
@@ -28,7 +29,7 @@ const ProDetailsPopup = ({ setDetailsPopup, addId }) => {
           <div className="w-full h-full rounded-lg bg-gray-300   ">
             <img
               className="w-full  h-[40vh] md:h-full object-cover rounded-md object-top"
-              src={data.image}
+              src={data?`https://psyrealestate.in/${data.image[0]}`:null}
               alt="Product Image"
             />
           </div>
