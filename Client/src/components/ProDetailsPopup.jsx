@@ -10,7 +10,7 @@ const ProDetailsPopup = ({ setDetailsPopup, addId }) => {
     result = await result.json();
     if (result) {
       setData(result);
-      console.log(result.image);
+ 
     }
   }
   useEffect(() => {
