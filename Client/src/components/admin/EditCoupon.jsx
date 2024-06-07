@@ -27,6 +27,7 @@ const EditCoupon = () => {
         title: "Success",
         text: "Edited successfully!",
         icon: "success",
+        confirmButtonColor:"#16bdca"
       });
       setTimeout(() => {
         navigater("/admin/coupon");

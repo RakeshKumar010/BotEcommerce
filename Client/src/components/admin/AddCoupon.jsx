@@ -20,7 +20,8 @@ const AddCoupon = () => {
       Swal.fire({
         title: "Success",
         text: "Coupon added successfully!",
-        icon: "success"
+        icon: "success",
+        confirmButtonColor:"#16bdca"
       });
     } else {
       alert("HTTP-Error: " + response.status);

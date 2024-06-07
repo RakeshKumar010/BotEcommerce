@@ -76,6 +76,7 @@ const EditProduct = () => {
         title: "Success",
         text: "Product added successfully!",
         icon: "success",
+        confirmButtonColor:"#16bdca"
       });
     } else {
       alert("HTTP-Error: " + response.status);

@@ -47,6 +47,7 @@ const ProductCard = ({ value, index, setPageLoad, recycle }) => {
         title: "Success",
         text: "Product Deleted successfully!",
         icon: "success",
+        confirmButtonColor:"#16bdca"
       });
     } else {
       alert("HTTP-Error: " + response.status);
@@ -67,6 +68,8 @@ const ProductCard = ({ value, index, setPageLoad, recycle }) => {
         title: "Success",
         text: "Product Restore successfully!",
         icon: "success",
+        confirmButtonColor:"#16bdca"
+
       });
     } else {
       alert("HTTP-Error: " + response.status);

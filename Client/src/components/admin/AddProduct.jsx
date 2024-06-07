@@ -72,7 +72,8 @@ const AddProduct = () => {
       Swal.fire({
         title: "Success",
         text: "Product added successfully!",
-        icon: "success"
+        icon: "success",
+        confirmButtonColor:"#16bdca"
       });
     } else {
       alert("HTTP-Error: " + response.status);
