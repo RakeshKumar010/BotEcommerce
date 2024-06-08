@@ -10,7 +10,14 @@ const BestSeller = ({ setDetailsPopup, setAddId }) => {
     const getFun = async () => {
       let result = await fetch("https://psyrealestate.in/product");
       result = await result.json();
-      setData(result);
+      let array = [];
+      result.map((value) => {
+        console.log(value.section);
+        if ("Best-Seller" == value.section) {
+          array.push(value);
+        }
+        setData(array);
+      });
     };
     getFun();
   }, []);

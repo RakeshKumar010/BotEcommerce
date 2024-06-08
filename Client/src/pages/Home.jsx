@@ -25,7 +25,8 @@ const Home = () => {
       let result = await fetch("https://psyrealestate.in/carousel");
       result = await result.json();
       setData(result);
-      console.log(result);
+      // console.log(result);
+      
     };
     getFun();
   }, []);

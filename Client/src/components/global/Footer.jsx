@@ -83,13 +83,13 @@ const Footer = () => {
               <p className="text-lg">
                 Join the conscious fashion movement with us.
               </p>
-              <div className="flex gap-5">
+              <div className="flex items-end gap-5">
                 <input
                   type="text"
                   placeholder="Your email"
-                  className="border-0 placeholder:text-white border-b-2 border-white bg-transparent px-0"
+                  className="border-0 placeholder:text-white focus:ring-0 focus:border-white focus:outline-none border-b-2 border-white bg-transparent px-0"
                 />
-                <p className="border-b-2 border-white">SUBSCRIBE </p>
+                <p className="shadow-sm shadow-black/30 rounded-md text-white py-2 px-5">SUBSCRIBE </p>
               </div>
               <div className="flex gap-5 text-xl mb-5">
                 <FaFacebookF />
