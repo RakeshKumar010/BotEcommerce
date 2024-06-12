@@ -56,7 +56,7 @@ const NavBar = () => {
     }
     getColor()
   }, []);
- 
+ let bga=`bg-[${ApiColor}]`
  
   return (
     <div
@@ -131,7 +131,7 @@ const NavBar = () => {
               <li
               // style={{}}
               style={location.pathname == item.to?{backgroundColor:ApiColor}:null}
-                className={`text-base hover:bg-[#236927] shadow-sm  px-3
+                className={`text-base hover:bg-gray-600 shadow-sm  px-3
                hover:text-white p-2 rounded-full hover:shadow-md hover:scale-105 transition-all duration-200 hover:shadow-gray-600
                sm:text-[12px] lg:text-[15px] xl:text-base ${
                  location.pathname == item.to
