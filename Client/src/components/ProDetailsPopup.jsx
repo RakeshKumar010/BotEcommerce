@@ -5,6 +5,7 @@ import { BsCartCheckFill } from "react-icons/bs";
 import { IoMdClose } from "react-icons/io";
 import { IoCash } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import { ApiColor } from "./api/data";
 
 const ProDetailsPopup = ({ setDetailsPopup, addId }) => {
   const navigater = useNavigate();
@@ -32,6 +33,7 @@ const ProDetailsPopup = ({ setDetailsPopup, addId }) => {
   useEffect(() => {
     getFun();
   }, []);
+  let bg=`bg-[${ApiColor}]/90`
   return (
     <div
       className="flex   z-[100] justify-center items-center fixed top-0 bottom-0 right-0 left-0 bg-black/30 p-3 md:p-0 backdrop-blur-sm  w-full   "
@@ -55,7 +57,7 @@ const ProDetailsPopup = ({ setDetailsPopup, addId }) => {
           </div>
         </div>
         <div className="flex flex-col justify-between my-5 md:my-0 px-4">
-          <p>{addId}</p>
+    
           <h2 className="text-2xl font-bold text-gray-800  ">{data.title}</h2>
           <div className="flex items-center  gap-2">
             <span className="bg-[#388e3c] text-white text-[12px] font-bold p-1 px-2 rounded-md">
@@ -158,8 +160,9 @@ const ProDetailsPopup = ({ setDetailsPopup, addId }) => {
                       JSON.stringify(existingItems)
                     );
                   }}
-                  className="w-full flex items-center gap-2 justify-center cursor-pointer hover:scale-105 hover:shadow-md 
-                      hover:bg-gray-600 transition-all duration-200 bg-uiColor text-center text-nowrap text-white py-2 px-4 rounded-md font-bold hover:bg-uiColor/90 "
+                  style={{backgroundColor:ApiColor}}
+                  className={`w-full flex items-center gap-2 justify-center cursor-pointer hover:scale-105 hover:shadow-md 
+                      hover:bg-gray-600 transition-all duration-200  text-center text-nowrap text-white py-2 px-4 rounded-md font-bold hover:${bg} `}
                 >
                   <MdOutlineAddBusiness className="w-10  " />
                   Add to Cart
@@ -180,7 +183,8 @@ const ProDetailsPopup = ({ setDetailsPopup, addId }) => {
                     };
                     sessionStorage.setItem("myObject", JSON.stringify(obj));
                   }}
-                  className="w-full flex items-center gap-2 justify-center cursor-pointer hover:scale-105 hover:shadow-md hover:bg-gray-600 transition-all duration-200 bg-uiColor text-nowrap  text-center text-white   py-2 px-4 rounded-md font-bold hover:bg-uiColor/90 "
+                  style={{backgroundColor:ApiColor}}
+                  className={`w-full flex items-center gap-2 justify-center cursor-pointer hover:scale-105 hover:shadow-md hover:bg-gray-600 transition-all duration-200   text-nowrap  text-center text-white   py-2 px-4 rounded-md font-bold hover:${bg} `}
                 >
                   <BsCartCheckFill />
                   Buy Now

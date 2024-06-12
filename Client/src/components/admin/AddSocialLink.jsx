@@ -1,57 +1,41 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { FaFacebook } from "react-icons/fa";
+import { FaSquareXTwitter } from "react-icons/fa6";
+import { RiInstagramFill } from "react-icons/ri";
+import { SiYoutubemusic } from "react-icons/si";
+
 import Swal from "sweetalert2";
 import { ApiColor } from "../api/data";
+const AddSocialLink = () => {
+  const [facebook, setFacebook] = useState("");
+  const [insta, setInsta] = useState("");
+  const [youtube, setYoutube] = useState("");
+  const [twitter, setTwitter] = useState("");
 
-const EditCoupon = () => {
-  const location = useLocation();
-  const navigater = useNavigate();
-  const [title, setTitle] = useState("");
-  const [discount, setDiscount] = useState("");
-  const [code, setCode] = useState("");
-  const [expiryDate, setExpiryDate] = useState("");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     let response = await fetch(
-      "https://psyrealestate.in/coupon/" +
-        location.pathname.split("/").pop(),
+      "https://psyrealestate.in/add-social-link",
       {
-        method: "put",
+        method: "post",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ title, discount, code, expiryDate }),
+        body: JSON.stringify({ facebook,insta,youtube,twitter }),
       }
     );
 
     if (response.ok) {
       Swal.fire({
         title: "Success",
-        text: "Edited successfully!",
+        text: "Social link added successfully!",
         icon: "success",
-        confirmButtonColor:"#16bdca"
+        confirmButtonColor: "#16bdca",
       });
-      setTimeout(() => {
-        navigater("/admin/coupon");
-      }, 1000);
     } else {
       alert("HTTP-Error: " + response.status);
     }
   };
-
-  useEffect(() => {
-    const getFun = async () => {
-      let result = await fetch(
-        "https://psyrealestate.in/coupon/" +
-          location.pathname.split("/").pop()
-      );
-      result = await result.json();
-      setTitle(result.title);
-      setDiscount(result.discount);
-      setCode(result.code);
-      setExpiryDate(result.expiryDate);
-    };
-    getFun();
-  }, []);
   return (
     <div className="absolute flex justify-center items-center bg-gray-100 right-0 border-dotted border-black border-2 min-h-screen w-full lg:w-[82%]">
       <form
@@ -59,43 +43,41 @@ const EditCoupon = () => {
         className="space-y-4 w-[90vw] md:w-[50vw] bg-white shadow-md rounded px-8  pt-6 pb-8 mb-4"
       >
         <h1 className="text-center text-2xl font-bold " style={{color:ApiColor}}>
-          Edit Coupon
+          Add Social Media
         </h1>
         <div>
-          <p className="block text-gray-700 text-sm font-bold mb-2">Title</p>
+          <p className="text-gray-700 text-sm font-bold mb-2 flex items-center gap-1"><FaFacebook/>Facebook </p>
           <input
             type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={facebook}
+            onChange={(e) => setFacebook(e.target.value)}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
         <div>
-          <p className="block text-gray-700 text-sm font-bold mb-2">Discount</p>
+          <p className="text-gray-700 text-sm font-bold mb-2 flex items-center gap-1"><RiInstagramFill/> Instagram</p>
           <input
             type="text"
-            value={discount}
-            onChange={(e) => setDiscount(e.target.value)}
+            value={insta}
+            onChange={(e) => setInsta(e.target.value)}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
         <div>
-          <p className="block text-gray-700 text-sm font-bold mb-2">Code</p>
+          <p className="text-gray-700 text-sm font-bold mb-2 flex items-center gap-1"><SiYoutubemusic/> Youtube</p>
           <input
             type="text"
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
+            value={youtube}
+            onChange={(e) => setYoutube(e.target.value)}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
         <div>
-          <p className="block text-gray-700 text-sm font-bold mb-2">
-            Expiry Date
-          </p>
+          <p className="text-gray-700 text-sm font-bold mb-2 flex items-center gap-1"><FaSquareXTwitter />Twitter</p>
           <input
-            type="date"
-            value={expiryDate}
-            onChange={(e) => setExpiryDate(e.target.value)}
+            type="text"
+            value={twitter}
+            onChange={(e) => setTwitter(e.target.value)}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
@@ -112,4 +94,4 @@ const EditCoupon = () => {
   );
 };
 
-export default EditCoupon;
+export default AddSocialLink;

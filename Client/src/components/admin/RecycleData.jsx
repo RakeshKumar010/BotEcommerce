@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import * as XLSX from 'xlsx';
+import { ApiColor } from "../api/data";
 
 const RecycleData = () => {
   const [data, setData] = useState();
@@ -33,16 +34,16 @@ const RecycleData = () => {
     <>
       <div className="absolute right-0 border-dotted border-black border-0 md:border-2 min-h-screen w-full lg:w-[82%] px-2">
         <div className="text-center py-5">
-          <p className="font-bold text-3xl text-teal-400">Deleted Products</p>
+          <p className="font-bold text-3xl " style={{color:ApiColor}}>Deleted Products</p>
           <div className="flex justify-end">
-          <p onClick={downloadExcal} className="bg-teal-400 cursor-pointer text-white p-5 py-3 rounded-md mx-2 hover:scale-105 transition-all duration-200 hover:shadow-lg">
+          <p onClick={downloadExcal}      style={{backgroundColor:ApiColor}} className=" cursor-pointer text-white p-5 py-3 rounded-md mx-2 hover:scale-105 transition-all duration-200 hover:shadow-lg">
             Export to Excel
           </p>
           </div>
         </div>
 
         <table className="table-auto  ">
-          <tr className=" bg-teal-400 text-white">
+          <tr      style={{backgroundColor:ApiColor}} className=" text-white">
             <th>S.No.</th>
             <th>Image</th>
             <th>Points</th>

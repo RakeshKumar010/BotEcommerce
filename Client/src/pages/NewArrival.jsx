@@ -8,6 +8,7 @@ import { GoArrowLeft, GoArrowRight } from "react-icons/go";
 import FilterSide from "../components/FilterSide";
 import { useLocation } from "react-router-dom";
 import ProDetailsPopup from "../components/ProDetailsPopup";
+import { ApiColor } from "../components/api/data";
 
 const NewArrival = ({ title }) => {
   const itemsPerPage = 8;
@@ -62,7 +63,7 @@ const NewArrival = ({ title }) => {
           <NavBar />
         </div>
         <div className="pb-10">
-          <h2 className="text-2xl md:text-3xl font-bold tracking-widest my-10 text-uiColor text-center ">
+          <h2 style={{color:ApiColor}} className="text-2xl md:text-3xl font-bold tracking-widest my-10   text-center ">
             {title}
           </h2>
           <div className="flex justify-between px-5 sm:px-10 lg:px-20">
@@ -70,7 +71,8 @@ const NewArrival = ({ title }) => {
               onClick={() => {
                 setFilterOpen(true);
               }}
-              className="flex bg-uiColor cursor-pointer text-white items-center py-2 px-1 md:px-16 my-5 gap-2"
+              style={{backgroundColor:ApiColor}}
+              className="flex   cursor-pointer text-white items-center py-2 px-1 md:px-16 my-5 gap-2"
             >
               <VscSettings />
               <p>Filter</p>
@@ -129,7 +131,7 @@ const NewArrival = ({ title }) => {
             <p
               key={index}
               className={`${
-                currentPage === index + 1 ? "bg-uiColor text-white" : null
+                currentPage === index + 1 ? `bg-[${ApiColor}] text-white` : null
               } flex justify-center items-center w-10 h-10  `}
               onClick={() => handlePageChange(index + 1)}
             >

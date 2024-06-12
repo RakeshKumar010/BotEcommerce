@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CgRemove } from "react-icons/cg";
+import { ApiColor } from "../api/data";
 const Carousel = () => {
   const [data, setData] = useState();
   const [pageLoad, setPageLoad] = useState();
@@ -20,11 +21,11 @@ const Carousel = () => {
 
   return (
     <div className="bg-gray-50 border-0 md:border-2 border-dotted border-black min-h-screen w-full lg:w-[83%] absolute right-0 ">
-      <p className="text-3xl font-bold text-center my-10 text-teal-400">
+      <p className="text-3xl font-bold text-center my-10 " style={{color:ApiColor}}>
         All Carousel
       </p>
       <table className=" mx-auto text-center table-fixed shadow-lg ">
-        <tr className="border-2 bg-teal-400 text-white ">
+        <tr style={{backgroundColor:ApiColor}} className="border-2   text-white ">
           <th className="p-2">S.No.</th>
           <th className="p-2">Image</th>
 
@@ -56,7 +57,7 @@ const Carousel = () => {
                       );
                       setPageLoad(result);
                     }}
-                    className="text-2xl text-[#9b3d4e] hover:scale-110"
+                    className="text-2xl text-red-600 hover:scale-110"
                   />
                 </td>
               </tr>

@@ -8,6 +8,7 @@ import RelatedProduct from "./RelatedProduct";
 import { IoCash } from "react-icons/io5";
 import HeaderTop from "./HeaderTop";
 import { BsCartCheckFill } from "react-icons/bs";
+import { ApiColor } from "./api/data";
 
 const ProductDetails = () => {
   const location = useLocation();
@@ -40,6 +41,7 @@ const ProductDetails = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     getFun();
   }, [location.pathname]);
+    let bg=`bg-[${ApiColor}]/90`
   return (
     <>
       <div className="sticky top-0 z-10 right-0 left-0 ">
@@ -187,8 +189,9 @@ const ProductDetails = () => {
                           JSON.stringify(existingItems)
                         );
                       }}
-                      className="w-full flex items-center gap-2 justify-center cursor-pointer hover:scale-105 hover:shadow-md 
-                      hover:bg-gray-600 transition-all duration-200 bg-uiColor text-center text-nowrap text-white py-2 px-4 rounded-md font-bold hover:bg-uiColor/90 "
+                      style={{backgroundColor:ApiColor}}
+                      className={`w-full flex items-center gap-2 justify-center cursor-pointer hover:scale-105 hover:shadow-md 
+                      hover:bg-gray-600 transition-all duration-200  text-center text-nowrap text-white py-2 px-4 rounded-md font-bold hover:${bg} `}
                     >
                       <MdOutlineAddBusiness className="w-10  " />
                       Add to Cart
@@ -208,7 +211,8 @@ const ProductDetails = () => {
                         };
                         sessionStorage.setItem("myObject", JSON.stringify(obj));
                       }}
-                      className="w-full flex items-center gap-2 justify-center cursor-pointer hover:scale-105 hover:shadow-md hover:bg-gray-600 transition-all duration-200 bg-uiColor text-nowrap  text-center text-white   py-2 px-4 rounded-md font-bold hover:bg-uiColor/90 "
+                      style={{backgroundColor:ApiColor}}
+                      className={`w-full flex items-center gap-2 justify-center cursor-pointer hover:scale-105 hover:shadow-md hover:bg-gray-600 transition-all duration-200    text-nowrap  text-center text-white   py-2 px-4 rounded-md font-bold hover:${bg}`}
                     >
                       <BsCartCheckFill />
                       Buy Now
@@ -251,7 +255,7 @@ const ProductDetails = () => {
             </div>
           </div>
         </div>
-        <div className="md:w-[90%]  text-uiColor mx-auto font-bold my-10 p-5 shadow-lg rounded-lg">
+        <div style={{color:ApiColor}} className="md:w-[90%]   mx-auto font-bold my-10 p-5 shadow-lg rounded-lg">
           <h2 className="text-center text-2xl text-black bg-gray-200 font-bold my-10 underline-offset-4">
             DESCRIPTION
           </h2>

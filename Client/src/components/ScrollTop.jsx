@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaArrowCircleUp } from 'react-icons/fa';
+import { ApiColor } from './api/data';
 
 const ScrollTop = () => {
     const [visible, setVisible] = useState(false);
@@ -24,10 +25,11 @@ const ScrollTop = () => {
       window.addEventListener('scroll', toggleVisible);
       return () => window.removeEventListener('scroll', toggleVisible);
     }, []);
-  
+     let bg=`bg-[${ApiColor}]/90`
     return (
       <button
-        className={`fixed bottom-16 md:bottom-2 animate-bounce right-2 z-50 p-2 rounded-full text-white bg-[#ac384b] hover:bg-red-600 ${visible ? '' : 'hidden'}`}
+      style={{backgroundColor:ApiColor}}
+        className={`fixed bottom-16 md:bottom-2 animate-bounce right-2 z-50 p-2 rounded-full text-white   hover:${bg} ${visible ? '' : 'hidden'}`}
         onClick={scrollToTop}
       >
         <FaArrowCircleUp size={30} />

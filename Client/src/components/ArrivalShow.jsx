@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import { Link } from "react-router-dom";
 import { MdAddShoppingCart } from "react-icons/md";
+import { ApiColor } from "./api/data";
 
 const ArrivalShow = ({ setDetailsPopup, setAddId }) => {
   const [data, setData] = useState();
@@ -37,7 +38,7 @@ const ArrivalShow = ({ setDetailsPopup, setAddId }) => {
         <div className="flex items-center my-5 justify-center ">
           <Link
             to={"/new-arrivals"}
-            className="flex items-center bg-[#ac384b] text-white p-2 md:w-[40vw] w-[60vw]  justify-center rounded-full hover:scale-105 hover:shadow-sm hover:shadow-gray-600 transition-all duration-200"
+            className={`flex items-center bg-[${ApiColor}] text-white p-2 md:w-[40vw] w-[60vw]  justify-center rounded-full hover:scale-105 hover:shadow-sm hover:shadow-gray-600 transition-all duration-200`}
           >
             <MdAddShoppingCart />
             <p>Store</p>

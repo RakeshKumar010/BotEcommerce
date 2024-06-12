@@ -1,57 +1,33 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { ApiColor } from "../api/data";
+const AddNavItem = () => {
+  const [nav1, setNav1] = useState("");
+  const [nav2, setNav2] = useState("");
+  const [nav3, setNav3] = useState("");
+  const [nav4, setNav4] = useState("");
+  const [nav5, setNav5] = useState("");
 
-const EditCoupon = () => {
-  const location = useLocation();
-  const navigater = useNavigate();
-  const [title, setTitle] = useState("");
-  const [discount, setDiscount] = useState("");
-  const [code, setCode] = useState("");
-  const [expiryDate, setExpiryDate] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let response = await fetch(
-      "https://psyrealestate.in/coupon/" +
-        location.pathname.split("/").pop(),
-      {
-        method: "put",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ title, discount, code, expiryDate }),
-      }
-    );
+    let response = await fetch("https://psyrealestate.in/add-nav-item/6669704ce85375d536db4f78", {
+      method: "put",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ nav1, nav2, nav3, nav4, nav5 }),
+    });
 
     if (response.ok) {
       Swal.fire({
         title: "Success",
-        text: "Edited successfully!",
+        text: "Navbar Text added successfully!",
         icon: "success",
-        confirmButtonColor:"#16bdca"
+        confirmButtonColor: "#16bdca",
       });
-      setTimeout(() => {
-        navigater("/admin/coupon");
-      }, 1000);
     } else {
       alert("HTTP-Error: " + response.status);
     }
   };
-
-  useEffect(() => {
-    const getFun = async () => {
-      let result = await fetch(
-        "https://psyrealestate.in/coupon/" +
-          location.pathname.split("/").pop()
-      );
-      result = await result.json();
-      setTitle(result.title);
-      setDiscount(result.discount);
-      setCode(result.code);
-      setExpiryDate(result.expiryDate);
-    };
-    getFun();
-  }, []);
   return (
     <div className="absolute flex justify-center items-center bg-gray-100 right-0 border-dotted border-black border-2 min-h-screen w-full lg:w-[82%]">
       <form
@@ -59,43 +35,60 @@ const EditCoupon = () => {
         className="space-y-4 w-[90vw] md:w-[50vw] bg-white shadow-md rounded px-8  pt-6 pb-8 mb-4"
       >
         <h1 className="text-center text-2xl font-bold " style={{color:ApiColor}}>
-          Edit Coupon
+          Add Navbar Item
         </h1>
         <div>
-          <p className="block text-gray-700 text-sm font-bold mb-2">Title</p>
+          <p className="block text-gray-700 text-sm font-bold mb-2">
+            Navbar Text 1
+          </p>
           <input
             type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          />
-        </div>
-        <div>
-          <p className="block text-gray-700 text-sm font-bold mb-2">Discount</p>
-          <input
-            type="text"
-            value={discount}
-            onChange={(e) => setDiscount(e.target.value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          />
-        </div>
-        <div>
-          <p className="block text-gray-700 text-sm font-bold mb-2">Code</p>
-          <input
-            type="text"
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
+            value={nav1}
+            onChange={(e) => setNav1(e.target.value)}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
         <div>
           <p className="block text-gray-700 text-sm font-bold mb-2">
-            Expiry Date
+            Navbar Text 2
           </p>
           <input
-            type="date"
-            value={expiryDate}
-            onChange={(e) => setExpiryDate(e.target.value)}
+            type="text"
+            value={nav2}
+            onChange={(e) => setNav2(e.target.value)}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          />
+        </div>
+        <div>
+          <p className="block text-gray-700 text-sm font-bold mb-2">
+            Navbar Text 3
+          </p>
+          <input
+            type="text"
+            value={nav3}
+            onChange={(e) => setNav3(e.target.value)}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          />
+        </div>
+        <div>
+          <p className="block text-gray-700 text-sm font-bold mb-2">
+            Navbar Text 4
+          </p>
+          <input
+            type="text"
+            value={nav4}
+            onChange={(e) => setNav4(e.target.value)}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          />
+        </div>
+        <div>
+          <p className="block text-gray-700 text-sm font-bold mb-2">
+            Navbar Text 5
+          </p>
+          <input
+            type="text"
+            value={nav5}
+            onChange={(e) => setNav5(e.target.value)}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
@@ -112,4 +105,4 @@ const EditCoupon = () => {
   );
 };
 
-export default EditCoupon;
+export default AddNavItem;

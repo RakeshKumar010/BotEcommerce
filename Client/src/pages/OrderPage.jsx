@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import HeaderTop from "../components/HeaderTop";
 import NavBar from "../components/global/NavBar";
 import Footer from "../components/global/Footer";
+import { ApiColor } from "../components/api/data";
 
 const OrderPage = () => {
   const [sessionData, setSessionData] = useState();
@@ -48,7 +49,7 @@ const OrderPage = () => {
             placeholder="Email or mobile phone number"
             className="w-full rounded-md"
           />
-          <button className="bg-[#ac384b] p-3 text-white uppercase rounded-md">
+          <button style={{backgroundColor:ApiColor}} className=" p-3 text-white uppercase rounded-md">
             Generate otp
           </button>
           <div className="flex items-center gap-1">
@@ -122,7 +123,7 @@ const OrderPage = () => {
             </div>
             
             <div className="md:static bg-white md:p-0 p-2  fixed bottom-0 right-0 left-0">
-              <p className="text-center p-4 w-full bg-[#ac384b] text-white rounded-md  hover:scale-105 transition-all duration-200  hover:shadow-md hover:shadow-gray-600">
+              <p style={{backgroundColor:ApiColor}}  className="text-center p-4 w-full  text-white rounded-md  hover:scale-105 transition-all duration-200  hover:shadow-md hover:shadow-gray-600">
                 Pay now
               </p>
             </div>
@@ -215,7 +216,8 @@ const OrderPage = () => {
             />
             <button
               type="submit"
-              className="bg-[#ac384b] text-white p-2 rounded-md hover:scale-105 transition-all duration-200  hover:shadow-md hover:shadow-gray-600 "
+              style={{backgroundColor:ApiColor}} 
+              className="  text-white p-2 rounded-md hover:scale-105 transition-all duration-200  hover:shadow-md hover:shadow-gray-600 "
             >
               Apply
             </button>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
+import { ApiColor } from "./api/data";
 
 const CartCard = ({ value }) => {
   const { title, currentPrice, sizes, number, imageUrl } = value;
@@ -38,9 +39,11 @@ const CartCard = ({ value }) => {
               {title}
             </h5>
             <p className="font-normal text-lg leading-8 text-gray-500 my-2 min-[550px]:my-3 max-[550px]:text-center">
-              Size: {sizes}
+              Size : {sizes}
             </p>
-            <h6 className="font-medium text-lg leading-8 text-[#ac384b]  max-[550px]:text-center">
+            <h6 style={{
+              color:ApiColor
+            }} className={`font-medium text-lg leading-8   max-[550px]:text-center`}>
               ₹{(currentPrice * numOfProduct).toFixed(1)}
             </h6>
           </div>
@@ -176,7 +179,7 @@ const CartCard = ({ value }) => {
               </svg>
             </button>
           </div>
-          <h6 className="text-[#ac384b] font-manrope font-bold text-2xl leading-9 w-full max-w-[176px] text-center">
+          <h6 style={{color:ApiColor}} className=" font-manrope font-bold text-2xl leading-9 w-full max-w-[176px] text-center">
             ₹{(currentPrice * numOfProduct).toFixed(1)}
           </h6>
         </div>

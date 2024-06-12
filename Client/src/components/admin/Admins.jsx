@@ -3,6 +3,7 @@ import { BiEdit } from "react-icons/bi";
 import { CgRemove } from "react-icons/cg";
 import { MdStars } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { ApiColor } from "../api/data";
 
 const Admins = () => {
   const [data, setData] = useState();
@@ -19,11 +20,11 @@ const Admins = () => {
   }, [pageLoad]);
   return (
     <div className="bg-gray-50 border-0 md:border-2 border-dotted border-black h-screen w-full lg:w-[83%] absolute right-0 ">
-      <p className="text-3xl font-bold text-center my-10  text-teal-400">
+      <p className="text-3xl font-bold text-center my-10  " style={{color:ApiColor}}>
         All Account
       </p>
       <table className="w-[90%]  mx-auto text-center shadow-lg ">
-        <tr className=" border-2 bg-teal-400 text-white ">
+        <tr style={{backgroundColor:ApiColor}} className=" border-2  text-white ">
           <th className="p-2">S.No.</th>
           <th className="p-2">Name</th>
           <th className="p-2">Email</th>
@@ -79,7 +80,7 @@ const Admins = () => {
                           );
                           setPageLoad(result);
                         }}
-                        className="text-2xl text-[#9b3d4e] hover:scale-110"
+                        className="text-2xl text-red-600 hover:scale-110"
                       />
                       </div>
                     </td>

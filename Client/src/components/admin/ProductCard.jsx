@@ -122,7 +122,7 @@ const ProductCard = ({ value, index, setPageLoad, recycle }) => {
           {access.deleteProduct == "yes" ? (
             <CgRemove
               onClick={recycle ? deleteFun : recycleBinFun}
-              className="text-[#9d4253] hover:scale-110 transition-all duration-200"
+              className="text-red-600 hover:scale-110 transition-all duration-200"
             />
           ) : null}
           {recycle ? (

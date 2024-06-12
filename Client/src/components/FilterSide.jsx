@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { ApiColor } from "./api/data";
 
 const FilterSide = ({ setFilterOpen }) => {
   const [intRate, setIntRate] = useState(7);
@@ -6,7 +7,7 @@ const FilterSide = ({ setFilterOpen }) => {
   return (
     <div className="fixed  top-0 bottom-0 left-0 right-0 bg-black/50 z-50 flex">
       <div className="w-96  bg-white h-full p-10">
-        <p className="text-uiColor text-lg">PRICE RANGE</p>
+        <p style={{color:ApiColor}} className=" text-lg">PRICE RANGE</p>
         <div className="flex flex-col gap-5">
           <div className="">
             <p className="text-end">Under {intRate * 500}₹</p>
@@ -16,12 +17,12 @@ const FilterSide = ({ setFilterOpen }) => {
               onChange={(e) => {
                 setIntRate(e.target.value);
               }}
-              className="w-full accent-uiColor  "
+              className={`w-full accent-[${ApiColor}]  `}
             />
           </div>
 
           <div className="flex flex-col gap-5">
-            <p className="text-uiColor text-lg">Availability</p>
+            <p style={{color:ApiColor}} className=" text-lg">Availability</p>
             <div className="mt-2 flex  justify-start items-start flex-wrap">
               <label>
                 <input
@@ -46,7 +47,7 @@ const FilterSide = ({ setFilterOpen }) => {
             </div>
           </div>
           <div className="flex flex-col gap-5">
-            <p className="text-uiColor text-lg">Fabric</p>
+            <p style={{color:ApiColor}} className="  text-lg">Fabric</p>
             <div className="flex justify-start items-start flex-wrap gap-4 ">
               <div className="flex items-center gap-3">
                 <input
@@ -83,7 +84,7 @@ const FilterSide = ({ setFilterOpen }) => {
             </div>
           </div>
           <div className="flex flex-col gap-5">
-            <p className="text-uiColor text-lg">SIZE</p>
+            <p style={{color:ApiColor}} className="  text-lg">SIZE</p>
             <div className="flex flex-wrap justify-start items-start gap-4 ">
               <div className="flex items-center gap-3">
                 <input type="checkbox" className="rounded-full" name="xs" />

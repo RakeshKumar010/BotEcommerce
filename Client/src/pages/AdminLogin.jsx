@@ -1,13 +1,12 @@
 // import { GoogleLogin } from "@react-oauth/google";
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 // import { jwtDecode } from "jwt-decode";
 const AdminLogin = ({ setIsAdmin }) => {
- 
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [pass, setPass] = useState('');
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
   const [countWPass, setCountWPass] = useState(0);
   const [counter, setCounter] = useState(30);
 
@@ -37,16 +36,16 @@ const AdminLogin = ({ setIsAdmin }) => {
 
     if (countWPass >= 3) {
       Swal.fire({
-        icon: 'error',
-        title: 'Too Many Attempts',
+        icon: "error",
+        title: "Too Many Attempts",
         text: `Please wait for ${counter} seconds before trying again.`,
       });
       return;
     }
 
-    let response = await fetch('https://psyrealestate.in/login', {
-      method: 'post',
-      headers: { 'content-type': 'application/json' },
+    let response = await fetch("https://psyrealestate.in/login", {
+      method: "post",
+      headers: { "content-type": "application/json" },
       body: JSON.stringify({ email, pass }),
     });
 
@@ -55,14 +54,14 @@ const AdminLogin = ({ setIsAdmin }) => {
       setIsAdmin(true);
       let user = { email, pass };
       let userString = JSON.stringify(user);
-      localStorage.setItem('user', userString);
-      navigate('/admin');
+      localStorage.setItem("user", userString);
+      navigate("/admin");
     } else {
       // Increment the wrong password count
       setCountWPass((prevCount) => prevCount + 1);
       Swal.fire({
-        icon: 'error',
-        title: 'Incorrect Password',
+        icon: "error",
+        title: "Incorrect Password",
         text: `You have ${3 - countWPass} attempts left.`,
       });
     }
@@ -71,7 +70,7 @@ const AdminLogin = ({ setIsAdmin }) => {
     <div className="flex min-h-full h-screen flex-col justify-center px-6 py-12 lg:px-8 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 transition-all duration-500 ease-in-out">
       <div className="animate-bounce">
         <h2 className="mt-10 text-center text-3xl font-bold leading-9 tracking-tight text-white transform hover:scale-110 transition-transform duration-300 ease-in-out">
-           {countWPass==3?counter:'Sign in to your account'}
+          {countWPass == 3 ? counter : "Sign in to your account"}
         </h2>
       </div>
 
@@ -118,16 +117,15 @@ const AdminLogin = ({ setIsAdmin }) => {
           </div>
 
           <div className="flex flex-col gap-3 justify-center ">
-          <button
-  type="submit"
-  disabled={countWPass >= 3} // This will disable the button when countWPass is 3 or more
-  className={`p-3 w-full bg-blue-500 text-white rounded-md shadow-md ${
-    countWPass >= 3 ? 'bg-blue-300' : 'hover:bg-blue-600'
-  } transition-colors duration-200`}
->
-  <i className="fas fa-user-shield mr-2"></i> Sign in
-</button>
-
+            <button
+              type="submit"
+              disabled={countWPass >= 3} // This will disable the button when countWPass is 3 or more
+              className={`p-3 w-full bg-blue-500 text-white rounded-md shadow-md ${
+                countWPass >= 3 ? "bg-blue-300" : "hover:bg-blue-600"
+              } transition-colors duration-200`}
+            >
+              <i className="fas fa-user-shield mr-2"></i> Sign in
+            </button>
           </div>
         </form>
       </div>

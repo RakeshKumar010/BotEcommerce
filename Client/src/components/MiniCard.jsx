@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { ApiColor } from "./api/data";
 
 const MiniCard = ({ value }) => {
   const { _id, title, image, rating,price } = value;
@@ -17,7 +18,7 @@ const MiniCard = ({ value }) => {
       </Link>
       <div className="py-4 px-6 text-center">
         <Link to={"/" + _id}>
-          <h5 className="text-lg text-[#ac384b] font-semibold">{title}</h5>
+          <h5 style={{color:ApiColor}} className="text-lg  font-semibold">{title}</h5>
           <div className="flex justify-center items-center mt-2 mb-3">
             <div className="flex items-center space-x-1">
               {[...Array(ratingNumber)].map((_, index) => (

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
+import { ApiColor } from "../api/data";
 const SignUp = () => {
   const [name, setName] = useState("");
   const [addProduct, setAddProduct] = useState("");
@@ -36,7 +37,7 @@ const SignUp = () => {
         onSubmit={handleSubmit}
         className="space-y-4 w-[95vw] md:w-[50vw] bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
       >
-        <h1 className="text-center text-2xl font-bold text-teal-400">
+        <h1 className="text-center text-2xl font-bold " style={{color:ApiColor}}>
           Create Account
         </h1>
         <div>
@@ -90,7 +91,7 @@ const SignUp = () => {
           />
         </div>
         <div className="flex flex-col gap-8 py-5">
-        <p className="text-center font-semibold text-teal-400">Accessibility</p>
+        <p className="text-center font-semibold " style={{color:ApiColor}}>Accessibility</p>
           <div className="flex items-center justify-between">
             <div className="">
               <label
@@ -230,7 +231,8 @@ const SignUp = () => {
         </div>
         <button
           type="submit"
-          className="bg-teal-400 w-full hover:shadow-xl text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          style={{backgroundColor:ApiColor}}
+          className="  w-full hover:shadow-xl text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
           Add Product
         </button>

@@ -26,6 +26,9 @@ import TermsAndConditions from "../pages/TermsAndConditions.jsx";
 import AddCarousel from "../components/admin/AddCarousel.jsx";
 import Carousel from "../components/admin/Carousel.jsx";
 import CartOrder from "../pages/CartOrder.jsx";
+import AddColor from "../components/admin/AddColor.jsx";
+import AddNavItem from "../components/admin/AddNavItem.jsx";
+import AddSocialLink from "../components/admin/AddSocialLink.jsx";
 
 const Layout = () => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -83,6 +86,9 @@ const Layout = () => {
           <Route path="add-coupon" element={<AddCoupon />} />
           <Route path="add-products" element={<AddProduct />} />
           <Route path="add-logo" element={<AddLogo />} />
+          <Route path="add-color" element={<AddColor />} />
+          <Route path="add-nav-item" element={<AddNavItem />} />
+          <Route path="add-social-link" element={<AddSocialLink />} />
           <Route path="add-carousel" element={<AddCarousel />} />
           <Route path="account" element={<Admins />} />
           <Route path="account/:id" element={<EditAccounts />} />

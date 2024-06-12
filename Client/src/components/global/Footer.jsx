@@ -2,9 +2,10 @@ import { FaFacebookF, FaYoutube, FaInstagram } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import ScrollUpDown from "./ScrollUpDown";
 import { useEffect, useState } from "react";
+import { ApiColor } from "../api/data";
 const Footer = () => {
   const [logos, setLogos] = useState(false);
-
+ 
   useEffect(() => {
     const getFun = async () => {
       let result = await fetch("https://psyrealestate.in/add-logo");
@@ -13,12 +14,14 @@ const Footer = () => {
     };
     getFun();
   }, []);
+   
+ 
   return (
     <>
       <div>
-        <div className="flex justify-center md:justify-between flex-wrap bg-uiColor text-white md:p-5 lg:p-16 ">
+        <div style={{backgroundColor:ApiColor}} className={`flex justify-center md:justify-between flex-wrap   text-white md:p-5 lg:p-16`}>
           <div className="flex flex-col text-center md:text-start gap-7 lg:gap-10 mt-8 w-80">
-            <h3 className="text-lg font-semibold">KNOW ABOUT US</h3>
+            <h3 className="text-lg font-semibold">KNOW ABOUT US </h3>
             <div className="flex flex-col items-center md:items-start">
               <Link to={"/"}>
                 {logos ? (

@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { IoMdEye } from "react-icons/io";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
+import { ApiColor } from "./api/data";
 
 const Card = ({ value, setDetailsPopup, setAddId }) => {
   const { _id, title, image, rating, price } = value;
   const [addStyle, setAddStyle] = useState(false);
+ 
   return (
     <div className="hover:scale-105 transition-all duration-200 w-[43vw] sm:w-[28vw] md:w-[19vw] lg:[20vw]  xl:w-[20vw] bg-white border hover:border-gray-900 rounded-lg shadow  ">
       <p className="relative">
@@ -38,13 +40,15 @@ const Card = ({ value, setDetailsPopup, setAddId }) => {
               console.log(_id);
               setDetailsPopup(true);
             }}
-            className={`w-10 cursor-pointer text-white flex justify-center rounded-full transition-all  items-center relative  h-10 bg-uiColor bottom-16 `}
+            style={{backgroundColor:ApiColor}}
+            className={`w-10 cursor-pointer text-white flex justify-center rounded-full transition-all  items-center relative  h-10   bottom-16 `}
           >
             <IoMdEye className="" />
           </div>
           <Link
             to={"/" + _id}
-            className={`w-10 text-white flex justify-center rounded-full transition-all items-center h-10 relative  bg-uiColor bottom-16`}
+            style={{backgroundColor:ApiColor}}
+            className={`w-10 text-white flex justify-center rounded-full transition-all items-center h-10 relative   bottom-16`}
           >
             <HiOutlineShoppingBag />
           </Link>
@@ -52,7 +56,9 @@ const Card = ({ value, setDetailsPopup, setAddId }) => {
       </p>
       <div className="px-5  py-2 text-center">
         <Link to={"/" + _id}>
-          <h5 className="xl:text-lg md:text-base sm:text-[15px]   tracking-tight text-[#ac384b] ">{title}</h5>
+          <h5 style={{
+            color:ApiColor
+          }} className={`xl:text-lg md:text-base sm:text-[15px]   tracking-tight  `}>{title}</h5>
         </Link>
         <div className="flex items-center justify-center mt-2.5 mb-5">
           <div className="flex items-center space-x-1 rtl:space-x-reverse">

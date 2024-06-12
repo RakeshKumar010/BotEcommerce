@@ -1,0 +1,10 @@
+const mongoose = require("mongoose");
+const navMobel = mongoose.Schema({
+  nav1: String,
+  nav2: String,
+  nav3: String,
+  nav4: String,
+  nav5: String,
+});
+
+module.exports = mongoose.model("navs", navMobel);

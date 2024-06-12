@@ -1,25 +1,28 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
+import { SketchPicker } from "react-color";
 import { ApiColor } from "../api/data";
-
-const AddLogo = () => {
-  const [image, setImage] = useState();
-
+const AddColor = () => {
+  const [currentColor, setCurrentColor] = useState();
+  const handleColorChange = (color) => {
+    setCurrentColor(color.hex);
+    // console.log(color.hex);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('image', image);
+    
 
-    let response = await fetch("https://psyrealestate.in/add-logo/666293f920ed05a04b455521", {
+    let response = await fetch("https://psyrealestate.in/add-color/6669600095cbcdd32221dd49", {
       method: "put",
-      body: formData,
+      headers: { "content-type": "application/json" },
+      body:JSON.stringify({ color: currentColor }),
     });
     if (response.ok) {
       Swal.fire({
         title: "Success",
-        text: "Logo added successfully!",
+        text: "Color added successfully!",
         icon: "success",
-        confirmButtonColor:"#16bdca"
+        confirmButtonColor: "#16bdca",
       });
     } else {
       alert("HTTP-Error: " + response.status);
@@ -32,14 +35,13 @@ const AddLogo = () => {
         onSubmit={handleSubmit}
         className="space-y-4 w-[90vw] md:w-[50vw] bg-white shadow-md rounded px-8  pt-6 pb-8 mb-4"
       >
-        <h1 className="text-center text-2xl font-bold  " style={{color:ApiColor}}>
-          Add Logo
+        <h1 style={{color:ApiColor}} className="text-center text-2xl font-bold ">
+          Add Colors
         </h1>
-        <div>
-          <input
-            type="file"
-            onChange={(e) => setImage(e.target.files[0])}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        <div className="flex justify-center">
+          <SketchPicker
+            color={currentColor}
+            onChangeComplete={handleColorChange}
           />
         </div>
 
@@ -55,4 +57,4 @@ const AddLogo = () => {
   );
 };
 
-export default AddLogo;
+export default AddColor;

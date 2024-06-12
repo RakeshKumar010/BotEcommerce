@@ -6,8 +6,11 @@ const productModel = require("../schema/productSchema");
 const userSchema = require("../schema/userSchema");
 const couponSchema = require("../schema/couponSchema");
 const productSchema = require("../schema/productSchema");
-const LogoSchema = require("../schema/LogoSchema");
-const carouselSchema=require("../schema/carouselSchema")
+const logoSchema = require("../schema/logoSchema");
+const carouselSchema = require("../schema/carouselSchema");
+const colorSchema = require("../schema/colorSchema");
+const navSchema = require("../schema/navSchema");
+const socialSchema = require("../schema/socialSchema");
 
 // post
 app.post("/add-products", upload.array("image"), async (req, res) => {
@@ -18,38 +21,6 @@ app.post("/add-products", upload.array("image"), async (req, res) => {
     let result = new productModel(productData);
     result = await result.save();
     res.send(result);
-    
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("An error occurred while saving the product.");
-  }
-});
-app.put("/product/:id", upload.array("image"), async (req, res) => {
-  try {
-    let productData = req.body;
-    if (req.files) {
-      productData.image = req.files.map((file) => file.path); // Add new image paths to product data
-    }
-
-    let result = await productSchema.updateOne(
-      { _id: req.params.id },
-      { $set: productData }
-    );
-    res.send(result);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send("An error occurred while updating the product.");
-  }
-});
-
-app.post("/add-logo", upload.single("image"), async (req, res) => {
-  try {
-    let logoData = {};
-    logoData.logo = req.file.path; // Add image paths to logo data
-    let result = new LogoSchema(logoData);
-    result = await result.save();
-    res.send(result);
-  
   } catch (error) {
     console.error(error);
     res.status(500).send("An error occurred while saving the product.");
@@ -63,7 +34,6 @@ app.post("/add-carousel", upload.single("image"), async (req, res) => {
     let result = new carouselSchema(carouselData);
     result = await result.save();
     res.send(result);
-  
   } catch (error) {
     console.error(error);
     res.status(500).send("An error occurred while saving the product.");
@@ -80,6 +50,13 @@ app.post("/add-coupon", async (req, res) => {
   result = await result.save();
   res.send(result);
 });
+app.post("/add-social-link", async (req, res) => {
+  let result = await new socialSchema(req.body);
+  result = await result.save();
+  res.send(result);
+  console.log(result);
+});
+
 app.post("/login", async (req, res) => {
   let result = await userSchema.findOne({
     email: req.body.email,
@@ -98,9 +75,8 @@ app.get("/product", async (req, res) => {
   let result = await productModel.find({ recycleId: "0" });
   res.send(result);
 });
-app.get("/",  (req, res) => {
-   
-  res.send({'mess':'Api is ok'});
+app.get("/", (req, res) => {
+  res.send({ mess: "Api is ok" });
 });
 app.get("/product/recycle-bin", async (req, res) => {
   let result = await productModel.find({ recycleId: "1" });
@@ -111,7 +87,7 @@ app.get("/coupon", async (req, res) => {
   res.send(result);
 });
 app.get("/coupon/:code", async (req, res) => {
-  let result = await couponSchema.findOne({code:req.params.code});
+  let result = await couponSchema.findOne({ code: req.params.code });
   res.send(result);
 });
 app.get("/admins", async (req, res) => {
@@ -119,11 +95,15 @@ app.get("/admins", async (req, res) => {
   res.send(result);
 });
 app.get("/add-logo", async (req, res) => {
-  let result = await LogoSchema.find();
+  let result = await logoSchema.find();
   res.send(result);
 });
 app.get("/carousel", async (req, res) => {
   let result = await carouselSchema.find();
+  res.send(result);
+});
+app.get("/color", async (req, res) => {
+  let result = await colorSchema.find()
   res.send(result);
 });
 app.get("/admins/:id", async (req, res) => {
@@ -194,6 +174,49 @@ app.put("/coupon/:id", async (req, res) => {
     { $set: req.body }
   );
   res.send(result);
+});
+app.put("/add-logo/:id", upload.single("image"), async (req, res) => {
+  let logoData = {};
+  logoData.logo = req.file.path; // Add image paths to logo data
+  let result = await logoSchema.updateOne(
+    { _id: req.params.id },
+    { $set: logoData }
+  );
+
+  res.send(result);
+});
+app.put("/add-color/:id", async (req, res) => {
+  let result = await colorSchema.updateOne(
+    { _id: req.params.id },
+    { $set: req.body }
+  );
+  res.send(result);
+});
+app.put("/add-nav-item/:id", async (req, res) => {
+  let result = await navSchema.updateOne(
+    { _id: req.params.id },
+    { $set: req.body }
+  );
+   
+  res.send(result);
+
+});
+app.put("/product/:id", upload.array("image"), async (req, res) => {
+  try {
+    let productData = req.body;
+    if (req.files) {
+      productData.image = req.files.map((file) => file.path); // Add new image paths to product data
+    }
+
+    let result = await productSchema.updateOne(
+      { _id: req.params.id },
+      { $set: productData }
+    );
+    res.send(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("An error occurred while updating the product.");
+  }
 });
 
 module.exports = app;

@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { IoReorderThreeOutline, IoSearchOutline } from "react-icons/io5";
 import { IoBagHandleOutline } from "react-icons/io5";
 import { IoCloseOutline } from "react-icons/io5";
-
 import { Link, useLocation } from "react-router-dom";
-
+import { ApiColor } from "../api/data";
+ 
 const navItems = [
   { to: "/", text: "HOME" },
   { to: "/new-arrivals", text: "NEW ARRIVALS" },
@@ -22,15 +22,15 @@ const navItems = [
     text: "Register",
     className: "text-gray-400 md:hidden block",
   },
-];
+  ];
 const NavBar = () => {
   const [navRes, setNavRes] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const [searchData, setSearchData] = useState(false);
   const [logos, setLogos] = useState(false);
+  const [bgColor,setBgColor]=useState('')
   const [totalPrice, setTotalPrice] = useState(0);
   const [numOfProduct, setNumOfProduct] = useState(0);
-
   const location = useLocation();
 
   useEffect(() => {
@@ -49,8 +49,15 @@ const NavBar = () => {
       setLogos(result[result.length - 1].logo);
     };
     getFun();
+    async function getColor(){
+      let result = await fetch('https://psyrealestate.in/color')
+      result = await result.json()
+      setBgColor(result[result.length-1].color)
+    }
+    getColor()
   }, []);
-
+ 
+ 
   return (
     <div
       className="flex items-center justify-between  md:py-1 p-5 sm:px-8 lg:px-16
@@ -60,7 +67,7 @@ const NavBar = () => {
         <div className="absolute z-[51] top-0 bottom-0 right-0 left-0 bg-white">
           <div className="bg-white p-16">
             <div className=" flex justify-between text-gray-700 font-thin cursor-pointer">
-              <p>WHAT ARE YOU LOOKING FOR? </p>
+              <p>WHAT ARE YOU LOOKING FOR?  </p>
               <IoCloseOutline
                 className="text-2xl text-gray-600"
                 onClick={() => {
@@ -71,7 +78,8 @@ const NavBar = () => {
             <div className="flex items-center justify-between text-2xl  border-b-[1px]">
               <input
                 type="text"
-                className=" placeholder:text-2xl border-0 focus:ring-0 focus:border-0 placeholder:text-uiColor px-0 w-full "
+                
+                className={`placeholder:text-2xl border-0 focus:ring-0 focus:border-0   px-0 w-full `}
                 placeholder="Search Products..."
               />
               <IoSearchOutline className="cursor-pointer" />
@@ -121,11 +129,13 @@ const NavBar = () => {
               className={item.className || ""}
             >
               <li
-                className={`"text-base hover:bg-[#ac384b] shadow-sm  px-3
+              // style={{}}
+              style={location.pathname == item.to?{backgroundColor:ApiColor}:null}
+                className={`text-base hover:bg-[#236927] shadow-sm  px-3
                hover:text-white p-2 rounded-full hover:shadow-md hover:scale-105 transition-all duration-200 hover:shadow-gray-600
                sm:text-[12px] lg:text-[15px] xl:text-base ${
                  location.pathname == item.to
-                   ? "bg-[#ac384b] text-white shadow-md  scale-105 shadow-gray-600"
+                   ? `  text-white shadow-md  scale-105 shadow-gray-600`
                    : null
                }`}
               >
@@ -177,7 +187,7 @@ const NavBar = () => {
                   setShowCart(!showCart);
                 }}
               >
-                <p className="py-2 w-full text-white text-center bg-[#ac384b] rounded-md hover:shadow-md hover:shadow-gray-400">
+                <p style={{backgroundColor:ApiColor}} className={`py-2 w-full text-white text-center  rounded-md hover:shadow-md hover:shadow-gray-400`}>
                   {" "}
                   CHECK OUT
                 </p>
@@ -191,3 +201,4 @@ const NavBar = () => {
 };
 
 export default NavBar;
+

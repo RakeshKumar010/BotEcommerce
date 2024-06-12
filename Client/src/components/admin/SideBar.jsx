@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { IoTrailSignOutline } from "react-icons/io5";
+import { IoColorPaletteOutline, IoTrailSignOutline } from "react-icons/io5";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import {
   MdAddChart,
@@ -14,6 +14,9 @@ import { FaRegUser, FaSortDown } from "react-icons/fa";
 import { LuRecycle } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import { RiCoupon2Line } from "react-icons/ri";
+import { BsMenuButtonWide } from "react-icons/bs";
+import { SlSocialDropbox } from "react-icons/sl";
+import { ApiColor } from "../api/data";
 
 const SideBar = () => {
   const [navOpen, setNavOpen] = useState(true);
@@ -45,6 +48,7 @@ const SideBar = () => {
       });
       let result3 = await fetch("https://psyrealestate.in/add-logo");
       result3 = await result3.json();
+     
       setLogos(result3[result3.length - 1].logo);
     };
     getFun();
@@ -66,7 +70,35 @@ const SideBar = () => {
           },
         ]
       : []),
+    ...(sAdminId == "1"
+      ? [
+          {
+            to: "add-color",
+            text: "Add Color",
+            icon: <IoColorPaletteOutline className="text-xl" />,
+          },
+        ]
+      : []),
+    ...(sAdminId == "1"
+      ? [
+          {
+            to: "add-nav-item",
+            text: "Add Nav Item",
+            icon: <BsMenuButtonWide className="text-xl" />,
+          },
+        ]
+      : []),
+    ...(sAdminId == "1"
+      ? [
+          {
+            to: "add-social-link",
+            text: "Add Social Link",
+            icon: <SlSocialDropbox className="text-xl" />,
+          },
+        ]
+      : []),
   ];
+  const bgHover=`bg-[${ApiColor}]`
   return (
     <>
       <button
@@ -127,7 +159,7 @@ const SideBar = () => {
             {sAdminId == "1" ? (
               <li>
                 <p
-                  className="flex hover:bg-[#9d4253] hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group"
+                  className={`flex hover:${bgHover} hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group`}
                   onClick={() => {
                     setAccountTab(!accountTab);
                   }}
@@ -140,7 +172,7 @@ const SideBar = () => {
                   <div className="p-2   bg-gray-200 rounded-lg">
                     <Link
                       to={"account"}
-                      className="flex hover:bg-[#9d4253] hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group"
+                      className={`flex hover:${bgHover} hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group`}
                     >
                       <FaRegUser className="text-xl" />
                       <span className="flex-1 ms-3 whitespace-nowrap">
@@ -149,7 +181,7 @@ const SideBar = () => {
                     </Link>
                     <Link
                       to={"sign-up"}
-                      className="flex hover:bg-[#9d4253] hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group"
+                      className={`flex hover:${bgHover} hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group`}
                     >
                       <IoTrailSignOutline className="text-xl" />
                       <span className="flex-1 ms-3 whitespace-nowrap">
@@ -158,7 +190,7 @@ const SideBar = () => {
                     </Link>
                     <Link
                       to={"recycle-bin"}
-                      className="flex hover:bg-[#9d4253] hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group"
+                      className={`flex hover:${bgHover} hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group`}
                     >
                       <LuRecycle className="text-xl" />
                       <span className="flex-1 ms-3 whitespace-nowrap">
@@ -172,7 +204,7 @@ const SideBar = () => {
 
             <li>
               <p
-                className="flex hover:bg-[#9d4253] hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group"
+                className={`flex hover:${bgHover} hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group`}
                 onClick={() => {
                   setProductTab(!productTab);
                 }}
@@ -185,7 +217,7 @@ const SideBar = () => {
                 <div className="p-2   bg-gray-200 rounded-lg">
                   <Link
                     to={"product"}
-                    className="flex hover:bg-[#9d4253] hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group"
+                    className={`flex hover:${bgHover} hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group`}
                   >
                     <MdProductionQuantityLimits className="text-xl" />
                     <span className="flex-1 ms-3 whitespace-nowrap">
@@ -195,7 +227,7 @@ const SideBar = () => {
                   {access.addProduct == "yes" ? (
                     <Link
                       to={"add-products"}
-                      className="flex hover:bg-[#9d4253] hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group"
+                      className={`flex hover:${bgHover} hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group`}
                     >
                       <MdAddChart className="text-xl" />
                       <span className="flex-1 ms-3 whitespace-nowrap">
@@ -209,7 +241,7 @@ const SideBar = () => {
 
             <li>
               <p
-                className="flex hover:bg-[#9d4253] hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group"
+                className={`flex hover:${bgHover} hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group`}
                 onClick={() => {
                   setCouponTab(!couponTab);
                 }}
@@ -222,7 +254,7 @@ const SideBar = () => {
                 <div className="p-2   bg-gray-200 rounded-lg">
                   <Link
                     to={"coupon"}
-                    className="flex hover:bg-[#9d4253] hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group"
+                    className={`flex hover:${bgHover} hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group`}
                   >
                     <RiCoupon2Line className="text-xl" />
                     <span className="flex-1 ms-3 whitespace-nowrap">
@@ -232,7 +264,7 @@ const SideBar = () => {
                   {access.addCoupon == "yes" ? (
                     <Link
                       to={"add-coupon"}
-                      className="flex hover:bg-[#9d4253] hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group"
+                      className={`flex hover:${bgHover} hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group`}
                     >
                       <MdOutlineAddPhotoAlternate className="text-xl" />
                       <span className="flex-1 ms-3 whitespace-nowrap">
@@ -246,7 +278,7 @@ const SideBar = () => {
             {sAdminId == "1" ? (
               <li>
                 <p
-                  className="flex hover:bg-[#9d4253] hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group"
+                  className={`flex hover:${bgHover} hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group`}
                   onClick={() => {
                     setCarouselTab(!carouselTab);
                   }}
@@ -261,7 +293,7 @@ const SideBar = () => {
                   <div className="p-2   bg-gray-200 rounded-lg">
                     <Link
                       to={"carousel"}
-                      className="flex hover:bg-[#9d4253] hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group"
+                      className={`flex hover:${bgHover} hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group`}
                     >
                       <TfiLayoutSlider className="text-xl" />
                       <span className="flex-1 ms-3 whitespace-nowrap">
@@ -271,7 +303,7 @@ const SideBar = () => {
                     {access.addCoupon == "yes" ? (
                       <Link
                         to={"add-carousel"}
-                        className="flex hover:bg-[#9d4253] hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group"
+                        className={`flex hover:${bgHover} hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group`}
                       >
                         <TfiLayoutSliderAlt className="text-xl" />
                         <span className="flex-1 ms-3 whitespace-nowrap">
@@ -287,7 +319,7 @@ const SideBar = () => {
             <li>
               <Link
                 to={"/"}
-                className="flex hover:bg-[#9d4253] hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group"
+                className={`flex hover:${bgHover} hover:text-white items-center p-2 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group`}
                 onClick={() => {
                   localStorage.removeItem('user');
                 }}

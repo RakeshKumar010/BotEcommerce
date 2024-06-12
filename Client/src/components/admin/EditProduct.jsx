@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
+import { ApiColor } from "../api/data";
 const sizes = ["XS", "S", "M", "L", "XL", "XXL", "3XL", "4XL"];
 const categories = [
   "New-Arrivals",
@@ -114,7 +115,7 @@ const EditProduct = () => {
         onSubmit={handleSubmit}
         className="space-y-4 w-[90vw] md:w-[50vw] bg-white shadow-md rounded px-8  pt-6 pb-8 mb-4"
       >
-        <h1 className="text-center text-2xl font-bold text-teal-400">
+        <h1 className="text-center text-2xl font-bold " style={{color:ApiColor}}>
           Edit Product
         </h1>
         <div>
@@ -312,7 +313,8 @@ const EditProduct = () => {
           ))}
           <div className="flex justify-end my-1">
             <p
-              className="text-end bg-teal-400 text-white py-2 px-5 rounded-md cursor-pointer"
+                 style={{backgroundColor:ApiColor}}
+              className="text-end   text-white py-2 px-5 rounded-md cursor-pointer"
               onClick={() => {
                 setPoints([...points, ""]);
               }}
@@ -324,7 +326,8 @@ const EditProduct = () => {
 
         <button
           type="submit"
-          className="bg-teal-400 w-full hover:shadow-xl text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          style={{backgroundColor:ApiColor}}
+          className=" w-full hover:shadow-xl text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
           Add Product
         </button>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import { Link } from "react-router-dom";
 import { MdAddShoppingCart } from "react-icons/md";
+import { ApiColor } from "./api/data";
 
 const BestSeller = ({ setDetailsPopup, setAddId }) => {
   const [data, setData] = useState();
@@ -28,7 +29,7 @@ const BestSeller = ({ setDetailsPopup, setAddId }) => {
         <Link to={'/best-seller'}  className="font-semibold text-lg md:text-2xl">BEST SELLER</Link>
         <p className="">Explore suit sets</p>
         <div className="flex items-center my-5 justify-center ">
-          <Link to={'/best-seller'} className="flex items-center bg-[#ac384b] text-white p-2 md:w-[40vw] w-[60vw]  justify-center rounded-full hover:scale-105 hover:shadow-sm hover:shadow-gray-600 transition-all duration-200">
+          <Link to={'/best-seller'} className={`flex items-center bg-[${ApiColor}] text-white p-2 md:w-[40vw] w-[60vw]  justify-center rounded-full hover:scale-105 hover:shadow-sm hover:shadow-gray-600 transition-all duration-200`}>
             <MdAddShoppingCart />
             <p>Store</p>
           </Link>

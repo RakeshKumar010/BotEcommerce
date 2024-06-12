@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Swal from 'sweetalert2'
+import { ApiColor } from "../api/data";
 const AddCoupon = () => {
   const [title, setTitle] = useState("");
   const [discount, setDiscount] = useState("");
@@ -33,7 +34,7 @@ const AddCoupon = () => {
         onSubmit={handleSubmit}
         className="space-y-4 w-[90vw] md:w-[50vw] bg-white shadow-md rounded px-8  pt-6 pb-8 mb-4"
       >
-        <h1 className="text-center text-2xl font-bold text-teal-400">Add Coupon</h1>
+        <h1 style={{color:ApiColor}} className="text-center text-2xl font-bold ">Add Coupon</h1>
         <div>
           <p className="block text-gray-700 text-sm font-bold mb-2">Title</p>
           <input
@@ -75,7 +76,8 @@ const AddCoupon = () => {
 
         <button
           type="submit"
-          className="bg-teal-400 w-full hover:shadow-xl text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          style={{backgroundColor:ApiColor}}
+          className=" w-full hover:shadow-xl text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
           Submit
         </button>
