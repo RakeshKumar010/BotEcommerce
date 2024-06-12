@@ -25,7 +25,7 @@ const SignUp = () => {
         title: "Success",
         text: "Created successfully!",
         icon: "success",
-        confirmButtonColor:"#16bdca"
+        confirmButtonColor:`${ApiColor}`
       });
     } else {
       console.log("error");

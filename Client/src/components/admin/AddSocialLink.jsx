@@ -30,7 +30,7 @@ const AddSocialLink = () => {
         title: "Success",
         text: "Social link added successfully!",
         icon: "success",
-        confirmButtonColor: "#16bdca",
+        confirmButtonColor: `${ApiColor}`,
       });
     } else {
       alert("HTTP-Error: " + response.status);

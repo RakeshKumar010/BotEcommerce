@@ -19,7 +19,7 @@ const AddCarousel = () => {
           title: "Success",
           text: "Logo added successfully!",
           icon: "success",
-          confirmButtonColor:"#16bdca"
+          confirmButtonColor:`${ApiColor}`
         });
       } else {
         alert("HTTP-Error: " + response.status);

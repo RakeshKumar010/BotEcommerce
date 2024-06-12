@@ -4,6 +4,7 @@ import { CgRemove } from "react-icons/cg";
 import { MdRestorePage } from "react-icons/md";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { ApiColor } from "../api/data";
 
 const ProductCard = ({ value, index, setPageLoad, recycle }) => {
   const [access, setAccess] = useState("");
@@ -47,7 +48,7 @@ const ProductCard = ({ value, index, setPageLoad, recycle }) => {
         title: "Success",
         text: "Product Deleted successfully!",
         icon: "success",
-        confirmButtonColor:"#16bdca"
+        confirmButtonColor:`${ApiColor}`
       });
     } else {
       alert("HTTP-Error: " + response.status);
@@ -68,7 +69,7 @@ const ProductCard = ({ value, index, setPageLoad, recycle }) => {
         title: "Success",
         text: "Product Restore successfully!",
         icon: "success",
-        confirmButtonColor:"#16bdca"
+        confirmButtonColor:`${ApiColor}`
 
       });
     } else {

@@ -22,7 +22,7 @@ const AddNavItem = () => {
         title: "Success",
         text: "Navbar Text added successfully!",
         icon: "success",
-        confirmButtonColor: "#16bdca",
+        confirmButtonColor: `${ApiColor}`,
       });
     } else {
       alert("HTTP-Error: " + response.status);

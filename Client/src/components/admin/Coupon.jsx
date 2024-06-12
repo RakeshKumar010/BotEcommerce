@@ -81,7 +81,7 @@ const Coupon = () => {
                               title: "Success",
                               text: "Coupon Deleted successfully!",
                               icon: "success",
-                              confirmButtonColor:"#16bdca"
+                              confirmButtonColor:`${ApiColor}`
                             });
                           } else {
                             alert("HTTP-Error: " + response.status);
