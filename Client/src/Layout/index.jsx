@@ -30,6 +30,7 @@ import AddColor from "../components/admin/AddColor.jsx";
 import AddNavItem from "../components/admin/AddNavItem.jsx";
 import AddSocialLink from "../components/admin/AddSocialLink.jsx";
 import ThankuPage from "../pages/ThankuPage.jsx";
+import AllOrder from "../pages/AllOrder.jsx";
 
 const Layout = () => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -49,6 +50,10 @@ const Layout = () => {
         <Route path="/" element={<Home />} />
         <Route path="/thanku-page" element={<ThankuPage />} />
         <Route path="/add-to-cart" element={<AddToCart />} />
+        <Route
+          path="orders"
+          element={<AllOrder />}
+        />
         <Route path="/add-to-cart/cart-order" element={<CartOrder />} />
         <Route path="/return-policy" element={<ReturnPolicy />} />
         <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
@@ -59,6 +64,7 @@ const Layout = () => {
           path="admin-login"
           element={<AdminLogin setIsAdmin={setIsAdmin} />}
         />
+        
         <Route
           path="new-arrivals"
           element={<NewArrival title={"NEW ARRIVALS"} />}

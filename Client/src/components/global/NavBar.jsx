@@ -1,10 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { IoReorderThreeOutline, IoSearchOutline } from "react-icons/io5";
-import { IoBagHandleOutline } from "react-icons/io5";
-import { IoCloseOutline } from "react-icons/io5";
+
 import { Link, useLocation } from "react-router-dom";
 import { ApiColor } from "../api/data";
- 
+import {  FaShoppingCart } from "react-icons/fa";
+import { HiShoppingBag } from "react-icons/hi2";
+
 const navItems = [
   { to: "/", text: "HOME" },
   { to: "/new-arrivals", text: "NEW ARRIVALS" },
@@ -22,13 +23,13 @@ const navItems = [
     text: "Register",
     className: "text-gray-400 md:hidden block",
   },
-  ];
+];
 const NavBar = () => {
   const [navRes, setNavRes] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const [searchData, setSearchData] = useState(false);
   const [logos, setLogos] = useState(false);
-  const [bgColor,setBgColor]=useState('')
+  const [bgColor, setBgColor] = useState("");
   const [totalPrice, setTotalPrice] = useState(0);
   const [numOfProduct, setNumOfProduct] = useState(0);
   const location = useLocation();
@@ -49,21 +50,21 @@ const NavBar = () => {
       setLogos(result[result.length - 1].logo);
     };
     getFun();
-    async function getColor(){
-      let result = await fetch('https://psyrealestate.in/color')
-      result = await result.json()
-      setBgColor(result[result.length-1].color)
+    async function getColor() {
+      let result = await fetch("https://psyrealestate.in/color");
+      result = await result.json();
+      setBgColor(result[result.length - 1].color);
     }
-    getColor()
+    getColor();
   }, []);
- let bga=`bg-[${ApiColor}]`
- 
+  let bga = `bg-[${ApiColor}]`;
+
   return (
     <div
       className="flex items-center justify-between  md:py-1 p-5 sm:px-8 lg:px-16
      bg-white/80 backdrop-blur-md sm:shadow-xl"
     >
-      {searchData ? (
+      {/* {searchData ? (
         <div className="absolute z-[51] top-0 bottom-0 right-0 left-0 bg-white">
           <div className="bg-white p-16">
             <div className=" flex justify-between text-gray-700 font-thin cursor-pointer">
@@ -86,7 +87,7 @@ const NavBar = () => {
             </div>
           </div>
         </div>
-      ) : null}
+      ) : null} */}
       <IoReorderThreeOutline
         className="cursor-pointer text-3xl md:hidden block"
         onClick={() => {
@@ -120,9 +121,9 @@ const NavBar = () => {
             />
             <IoSearchOutline className="text-xl" />
           </div>
-          {navItems.map((item,index) => (
+          {navItems.map((item, index) => (
             <Link
-            key={index}
+              key={index}
               to={item.to}
               onClick={() => {
                 setNavRes(!navRes);
@@ -130,8 +131,12 @@ const NavBar = () => {
               className={item.className || ""}
             >
               <li
-              // style={{}}
-              style={location.pathname == item.to?{backgroundColor:ApiColor}:null}
+                // style={{}}
+                style={
+                  location.pathname == item.to
+                    ? { backgroundColor: ApiColor }
+                    : null
+                }
                 className={`text-base hover:bg-gray-600 shadow-sm  px-3
                hover:text-white p-2 rounded-full hover:shadow-md hover:scale-105 transition-all duration-200 hover:shadow-gray-600
                sm:text-[12px] lg:text-[15px] xl:text-base ${
@@ -154,18 +159,23 @@ const NavBar = () => {
         ></div>
       </div>
       <div className="flex gap-6 relative select-none">
-        <IoSearchOutline
-          onClick={() => {
-            setSearchData(true);
-          }}
-          className="text-2xl hidden md:block cursor-pointer"
+        <Link to={'/orders'} className="text-[10px] uppercase flex flex-col items-center">
+        <HiShoppingBag
+          style={{ color: ApiColor }}
+          className="text-2xl   cursor-pointer"
         />
-        <IoBagHandleOutline
-          className="text-2xl cursor-pointer"
+        Order
+        </Link>
+        <p className="text-[10px]  uppercase flex flex-col items-center">
+        <FaShoppingCart
+          className="text-2xl pr-1 cursor-pointer"
+          style={{ color: ApiColor }}
           onClick={() => {
             setShowCart(!showCart);
           }}
         />
+        Cart
+        </p>
         {showCart ? (
           <div className="absolute flex flex-col gap-5  top-11 z-50 p-5 shadow-lg shadow-black/30 rounded-md w-72 md:w-[350px] bg-white right-0">
             <p className="text-center text-gray-700 font-thin">
@@ -188,7 +198,10 @@ const NavBar = () => {
                   setShowCart(!showCart);
                 }}
               >
-                <p style={{backgroundColor:ApiColor}} className={`py-2 w-full text-white text-center  rounded-md hover:shadow-md hover:shadow-gray-400`}>
+                <p
+                  style={{ backgroundColor: ApiColor }}
+                  className={`py-2 w-full text-white text-center  rounded-md hover:shadow-md hover:shadow-gray-400`}
+                >
                   {" "}
                   CHECK OUT
                 </p>
@@ -202,4 +215,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-
