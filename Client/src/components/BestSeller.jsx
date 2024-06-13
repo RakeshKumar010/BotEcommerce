@@ -13,7 +13,7 @@ const BestSeller = ({ setDetailsPopup, setAddId }) => {
       result = await result.json();
       let array = [];
       result.map((value) => {
-        console.log(value.section);
+ 
         if ("Best-Seller" == value.section) {
           array.push(value);
         }

@@ -50,12 +50,7 @@ const NavBar = () => {
       setLogos(result[result.length - 1].logo);
     };
     getFun();
-    async function getColor() {
-      let result = await fetch("https://psyrealestate.in/color");
-      result = await result.json();
-      setBgColor(result[result.length - 1].color);
-    }
-    getColor();
+ 
   }, []);
 
   return (

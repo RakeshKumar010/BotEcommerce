@@ -13,7 +13,7 @@ const ArrivalShow = ({ setDetailsPopup, setAddId }) => {
       result = await result.json();
       let array = [];
       result.map((value) => {
-        console.log(value.section);
+         
         if ("New-Arrivals" == value.section) {
           array.push(value);
         }

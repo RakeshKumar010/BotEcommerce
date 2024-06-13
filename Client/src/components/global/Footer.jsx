@@ -50,7 +50,7 @@ const Footer = () => {
               </p>
             </div>
           </div>
-          <div className="flex flex-col text-center md:text-start gap-7 lg:gap-10 mt-8 w-80">
+          <div className="flex flex-col text-center md:text-start gap-3 md:gap-7 lg:gap-10 mt-8 w-80">
             <h3 className="text-lg font-semibold">MAIN MENU</h3>
             <ul className="flex flex-col gap-3">
               <Link to={"/"}>
@@ -97,7 +97,7 @@ const Footer = () => {
               <p className="text-lg">
                 Join the conscious fashion movement with us.
               </p>
-              <div className="flex items-end gap-5">
+              <div className="flex items-end flex-wrap justify-center gap-5">
                 <input
                   type="text"
                   placeholder="Your email"
@@ -140,7 +140,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="bg-black text-white py-4 px-16">
+        <div className="bg-black text-white md:text-base text-[10px] py-4 md:px-16">
           <p>© 2024 botmediadigital.com | Developed by BotMedia Digital</p>
         </div>
       </div>
