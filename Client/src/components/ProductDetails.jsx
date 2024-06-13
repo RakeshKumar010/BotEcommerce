@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "./global/NavBar";
-import {  useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate,Link } from "react-router-dom";
 import { FaVanShuttle } from "react-icons/fa6";
 import { MdChangeCircle, MdOutlineAddBusiness } from "react-icons/md";
 import Footer from "./global/Footer";
@@ -9,6 +9,7 @@ import { IoCash } from "react-icons/io5";
 import HeaderTop from "./HeaderTop";
 import { BsCartCheckFill } from "react-icons/bs";
 import { ApiColor } from "./api/data";
+import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 
 const ProductDetails = () => {
   const location = useLocation();
@@ -18,6 +19,7 @@ const ProductDetails = () => {
   const [number, setNumber] = useState(1);
   const [imageUrl, setImageUrl] = useState(null);
   const [data, setData] = useState("");
+  const [socialLink, setSocialLink] = useState("");
   let offer = data.offer; // "20% off"
   let discount = offer ? parseInt(offer) : 0; // 20 or default to 0 if 'offer' is not defined
   let price = data.price;
@@ -36,12 +38,17 @@ const ProductDetails = () => {
     if (result) {
       setData(result);
     }
+    let socialResult = await fetch(
+      "https://psyrealestate.in/social-link/66697d798873e6507de4ca20"
+    );
+    socialResult = await socialResult.json();
+    setSocialLink(socialResult);
   }
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     getFun();
   }, [location.pathname]);
-    let bg=`bg-[${ApiColor}]/90`
+  let bg = `bg-[${ApiColor}]/90`;
   return (
     <>
       <div className="sticky top-0 z-10 right-0 left-0 ">
@@ -189,7 +196,7 @@ const ProductDetails = () => {
                           JSON.stringify(existingItems)
                         );
                       }}
-                      style={{backgroundColor:ApiColor}}
+                      style={{ backgroundColor: ApiColor }}
                       className={`w-full flex items-center gap-2 justify-center cursor-pointer hover:scale-105 hover:shadow-md 
                       hover:bg-gray-600 transition-all duration-200  text-center text-nowrap text-white py-2 px-4 rounded-md font-bold hover:${bg} `}
                     >
@@ -211,7 +218,7 @@ const ProductDetails = () => {
                         };
                         sessionStorage.setItem("myObject", JSON.stringify(obj));
                       }}
-                      style={{backgroundColor:ApiColor}}
+                      style={{ backgroundColor: ApiColor }}
                       className={`w-full flex items-center gap-2 justify-center cursor-pointer hover:scale-105 hover:shadow-md hover:bg-gray-600 transition-all duration-200    text-nowrap  text-center text-white   py-2 px-4 rounded-md font-bold hover:${bg}`}
                     >
                       <BsCartCheckFill />
@@ -250,12 +257,46 @@ const ProductDetails = () => {
                       {data.availability}
                     </td>
                   </tr>
+                
                 </tbody>
               </table>
+              <div className="flex gap-5 text-xl mb-5 cursor-pointer">
+                {socialLink.facebook == "" ? (
+                  ""
+                ) : (
+                  <Link target="_blank" to={socialLink.facebook}>
+                    <FaFacebookF />
+                  </Link>
+                )}
+                {socialLink.insta == "" ? (
+                  ""
+                ) : (
+                  <Link target="_blank" to={socialLink.insta}>
+                    <FaInstagram />
+                  </Link>
+                )}
+                {socialLink.youtube == "" ? (
+                  ""
+                ) : (
+                  <Link target="_blank" to={socialLink.youtube}>
+                    <FaYoutube />
+                  </Link>
+                )}
+                {socialLink.twitter == "" ? (
+                  ""
+                ) : (
+                  <Link target="_blank" to={socialLink.twitter}>
+                    <FaTwitter />
+                  </Link>
+                )}
+              </div>
             </div>
           </div>
         </div>
-        <div style={{color:ApiColor}} className="md:w-[90%]   mx-auto font-bold my-10 p-5 shadow-lg rounded-lg">
+        <div
+          style={{ color: ApiColor }}
+          className="md:w-[90%]   mx-auto font-bold my-10 p-5 shadow-lg rounded-lg"
+        >
           <h2 className="text-center text-2xl text-black bg-gray-200 font-bold my-10 underline-offset-4">
             DESCRIPTION
           </h2>

@@ -17,9 +17,9 @@ const AddSocialLink = () => {
     e.preventDefault();
 
     let response = await fetch(
-      "https://psyrealestate.in/add-social-link",
+      "https://psyrealestate.in/add-social-link/66697d798873e6507de4ca20",
       {
-        method: "post",
+        method: "put",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ facebook,insta,youtube,twitter }),
       }

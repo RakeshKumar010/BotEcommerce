@@ -5,12 +5,11 @@ import CartCard from "../components/CartCard";
 import { FaChevronRight } from "react-icons/fa6";
 import Footer from "../components/global/Footer";
 import { Link } from "react-router-dom";
-import { ApiColor } from "../components/api/data";
 
 const AddToCart = () => {
   const [localData, setLocalData] = useState();
   const [totalPrice, setTotalPrice] = useState(0);
-
+  const [apiDataColor,setApiDataColor]=useState('')
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
@@ -23,7 +22,17 @@ const AddToCart = () => {
 
       setTotalPrice(total.toFixed(1));
     }
+
+    async function getColor(){
+      let result = await fetch('https://psyrealestate.in/color')
+      result = await result.json()
+   
+      setApiDataColor(result[result.length-1].color)
+    }
+    getColor()
   }, []);
+  
+  
   return (
     <>
       <div className="sticky top-0 z-10 right-0 left-0 ">
@@ -32,7 +41,7 @@ const AddToCart = () => {
       </div>
       <section className="md:py-24 py-12 relative bg-gray-100">
         <div className="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto">
-          <h2 style={{color:ApiColor}} className="title font-manrope font-bold text-3xl md:text-4xl leading-10 mb-8 text-center  ">
+          <h2 style={{color:apiDataColor}} className="title font-manrope font-bold text-3xl md:text-4xl leading-10 mb-8 text-center  ">
             Shopping Cart
           </h2>
           <div className="hidden lg:grid grid-cols-2 py-6">
@@ -76,13 +85,13 @@ const AddToCart = () => {
               <p className="font-manrope font-medium text-2xl leading-9 text-gray-900">
                 Total
               </p>
-              <h6 style={{color:ApiColor}} className="font-manrope font-medium text-2xl leading-9 ">
+              <h6 style={{color:apiDataColor}} className="font-manrope font-medium text-2xl leading-9 ">
                 ₹{totalPrice}
               </h6>
             </div>
           </div>
           <div className="flex md:static fixed bottom-0 right-0 left-0 md:bg-transparent bg-white p-3 items-center flex-col sm:flex-row justify-center gap-3 mt-8">
-            <Link style={{backgroundColor:ApiColor}} to={'cart-order'} className={`md:rounded-full rounded-lg w-full  md:max-w-[280px] py-2 md:py-4 text-center justify-center items-center  font-semibold text-lg text-white flex gap-2 transition-all duration-500 hover:scale-105 hover:shadow-lg   `}>
+            <Link style={{backgroundColor:apiDataColor}} to={'cart-order'} className={`md:rounded-full rounded-lg w-full  md:max-w-[280px] py-2 md:py-4 text-center justify-center items-center  font-semibold text-lg text-white flex gap-2 transition-all duration-500 hover:scale-105 hover:shadow-lg   `}>
               Continue to Payment
               <FaChevronRight />
             </Link>

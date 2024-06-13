@@ -6,7 +6,7 @@ const MiniCard = ({ value }) => {
   const { _id, title, image, rating,price } = value;
   const ratingNumber = parseInt(rating);
   return (
-    <div   className=" bg-white border md:w-80 w-96 hover:border-gray-900 rounded-lg shadow  ">
+    <div   className=" bg-white border w-full md:w-80 hover:border-gray-900 rounded-lg shadow  ">
       <Link to={"/" + _id} className="">
         {image && (
           <img

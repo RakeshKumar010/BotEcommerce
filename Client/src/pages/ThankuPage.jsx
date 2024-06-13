@@ -2,9 +2,20 @@ import { Link } from "react-router-dom";
 import HeaderTop from "../components/HeaderTop";
 import NavBar from "../components/global/NavBar";
 import Footer from "../components/global/Footer";
-import { ApiColor } from "../components/api/data";
+ 
+import { useEffect, useState } from "react";
 const ThankuPage = () => {
-  
+  const [apiDataColor,setApiDataColor]=useState('')
+  useEffect(()=>{
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    async function getColor(){
+      let result = await fetch('https://psyrealestate.in/color')
+      result = await result.json()
+   
+      setApiDataColor(result[result.length-1].color)
+    }
+    getColor()
+  })
   return (
     <>
       <div className="bg-gray-100">
@@ -37,7 +48,7 @@ const ThankuPage = () => {
               </p>
               <Link
                 to={"/"}
-                style={{ backgroundColor: ApiColor }}
+                style={{ backgroundColor: apiDataColor }}
                 className="flex items-center px-4 py-2 text-white   rounded-full  "
               >
                 <svg

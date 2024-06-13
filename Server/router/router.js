@@ -50,12 +50,7 @@ app.post("/add-coupon", async (req, res) => {
   result = await result.save();
   res.send(result);
 });
-app.post("/add-social-link", async (req, res) => {
-  let result = await new socialSchema(req.body);
-  result = await result.save();
-  res.send(result);
-  console.log(result);
-});
+
 
 app.post("/login", async (req, res) => {
   let result = await userSchema.findOne({
@@ -115,6 +110,10 @@ app.get("/:id", async (req, res) => {
   let result = await productModel.findOne({ _id: req.params.id });
   res.send(result);
 });
+app.get("/social-link/:id", async (req, res) => {
+  let result = await socialSchema.findOne({ _id: req.params.id });
+  res.send(result);
+});
 app.get("/coupon/:id", async (req, res) => {
   let result = await couponSchema.findOne({ _id: req.params.id });
   res.send(result);
@@ -170,6 +169,13 @@ app.put("/restore/:id", async (req, res) => {
 
 app.put("/coupon/:id", async (req, res) => {
   let result = await couponSchema.updateOne(
+    { _id: req.params.id },
+    { $set: req.body }
+  );
+  res.send(result);
+});
+app.put("/add-social-link/:id", async (req, res) => {
+  let result = await socialSchema.updateOne(
     { _id: req.params.id },
     { $set: req.body }
   );
