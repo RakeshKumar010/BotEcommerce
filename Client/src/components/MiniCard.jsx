@@ -16,11 +16,12 @@ const MiniCard = ({ value }) => {
           />
         )}
       </Link>
-      <div className="py-4 px-6 text-center">
+      <div className="md:py-4 py-1 md:px-6 px-1 text-center">
         <Link to={"/" + _id}>
-          <h5 style={{color:ApiColor}} className="text-lg  font-semibold">{title}</h5>
+          <h5 style={{color:ApiColor}} className="md:text-lg text-sm md:hidden block  font-semibold">  {title.substring(0, 11)}</h5>
+          <h5 style={{color:ApiColor}} className="md:text-lg text-sm hidden md:block  font-semibold">  {title}</h5>
           <div className="flex justify-center items-center mt-2 mb-3">
-            <div className="flex items-center space-x-1">
+            <div className="md:flex hidden items-center space-x-1">
               {[...Array(ratingNumber)].map((_, index) => (
                 <svg
                   key={index}
@@ -37,7 +38,7 @@ const MiniCard = ({ value }) => {
               </span>
             </div>
           </div>
-          <div className="text-lg text-gray-900 font-semibold">₹{price}</div>
+          <div className="md:text-lg text-gray-900 font-semibold">₹{price}</div>
         </Link>
       </div>
     </div>
