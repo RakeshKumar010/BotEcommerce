@@ -136,8 +136,8 @@ const NavBar = () => {
                     ? { backgroundColor: ApiColor }
                     : null
                 }
-                className={`text-base hover:bg-gray-600 shadow-sm  px-3
-               hover:text-white p-2 rounded-full hover:shadow-md hover:scale-105 transition-all duration-200 hover:shadow-gray-600
+                className={`text-base   shadow-sm  px-3
+                 p-2 rounded-full hover:shadow-md hover:scale-105 transition-all duration-200 hover:shadow-gray-400
                sm:text-[12px] lg:text-[15px] xl:text-base ${
                  location.pathname == item.to
                    ? `  text-white shadow-md  scale-105 shadow-gray-600`
