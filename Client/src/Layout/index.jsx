@@ -50,10 +50,7 @@ const Layout = () => {
         <Route path="/" element={<Home />} />
         <Route path="/thanku-page" element={<ThankuPage />} />
         <Route path="/add-to-cart" element={<AddToCart />} />
-        <Route
-          path="orders"
-          element={<AllOrder />}
-        />
+        <Route path="orders" element={<AllOrder />} />
         <Route path="/add-to-cart/cart-order" element={<CartOrder />} />
         <Route path="/return-policy" element={<ReturnPolicy />} />
         <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
@@ -64,7 +61,11 @@ const Layout = () => {
           path="admin-login"
           element={<AdminLogin setIsAdmin={setIsAdmin} />}
         />
-        
+        <Route
+          path="super-admin-login"
+          element={<AdminLogin setIsAdmin={setIsAdmin} />}
+        />
+
         <Route
           path="new-arrivals"
           element={<NewArrival title={"NEW ARRIVALS"} />}
@@ -101,6 +102,14 @@ const Layout = () => {
           <Route path="account" element={<Admins />} />
           <Route path="account/:id" element={<EditAccounts />} />
           <Route path="sign-up" element={<SignUp />} />
+        </Route>
+        <Route
+          path="/super-admin"
+          element={isAdmin ? <Admin /> : <RedirectPage />}
+        >
+          <Route index element={<DashBoard />} />
+          <Route path="product" element={<Product />} />
+          <Route path="recycle-bin/:id" element={<EditProduct />} />
         </Route>
       </Routes>
     </BrowserRouter>

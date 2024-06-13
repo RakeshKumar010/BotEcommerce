@@ -11,6 +11,9 @@ const carouselSchema = require("../schema/carouselSchema");
 const colorSchema = require("../schema/colorSchema");
 const navSchema = require("../schema/navSchema");
 const socialSchema = require("../schema/socialSchema");
+const superAdminSchema = require("../schema/superAdminSchema");
+const clientSchema = require("../schema/clientSchema");
+ 
 
 // post
 app.post("/add-products", upload.array("image"), async (req, res) => {
@@ -45,8 +48,18 @@ app.post("/admins", async (req, res) => {
   result = await result.save();
   res.send(result);
 });
+app.post("/add-super-admin", async (req, res) => {
+  let result = await new superAdminSchema(req.body);
+  result = await result.save();
+  res.send(result);
+});
 app.post("/add-coupon", async (req, res) => {
   let result = await new couponSchema(req.body);
+  result = await result.save();
+  res.send(result);
+});
+app.post("/add-client", async (req, res) => {
+  let result = await new clientSchema(req.body);
   result = await result.save();
   res.send(result);
 });
@@ -54,6 +67,18 @@ app.post("/add-coupon", async (req, res) => {
 
 app.post("/login", async (req, res) => {
   let result = await userSchema.findOne({
+    email: req.body.email,
+    pass: req.body.pass,
+  });
+  if (result) {
+    res.status(200).send("OK");
+  } else {
+    res.status(401).send("Invalid Information");
+    console.log("Login failed for:", req.body.email);
+  }
+});
+app.post("/super-admin-login", async (req, res) => {
+  let result = await superAdminSchema.findOne({
     email: req.body.email,
     pass: req.body.pass,
   });
@@ -79,6 +104,10 @@ app.get("/product/recycle-bin", async (req, res) => {
 });
 app.get("/coupon", async (req, res) => {
   let result = await couponSchema.find();
+  res.send(result);
+});
+app.get("/show-client", async (req, res) => {
+  let result = await clientSchema.find();
   res.send(result);
 });
 app.get("/coupon/:code", async (req, res) => {
@@ -124,6 +153,10 @@ app.delete("/carousel/:id", async (req, res) => {
   let result = await carouselSchema.deleteOne({ _id: req.params.id });
   res.send(result);
 });
+app.delete("/delete-client/:id", async (req, res) => {
+  let result = await clientSchema.deleteOne({ _id: req.params.id });
+  res.send(result);
+});
 app.delete("/admins/:id", async (req, res) => {
   let result = await userSchema.deleteOne({ _id: req.params.id });
   res.send(result);
@@ -140,6 +173,13 @@ app.delete("/:id", async (req, res) => {
 // put
 app.put("/admins/:id", async (req, res) => {
   let result = await userSchema.updateOne(
+    { _id: req.params.id },
+    { $set: req.body }
+  );
+  res.send(result);
+});
+app.put("/edit-client/:id", async (req, res) => {
+  let result = await clientSchema.updateOne(
     { _id: req.params.id },
     { $set: req.body }
   );
