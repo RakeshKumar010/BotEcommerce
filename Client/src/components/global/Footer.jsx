@@ -29,7 +29,7 @@ const Footer = () => {
           style={{ backgroundColor: ApiColor }}
           className={`flex justify-center md:justify-between flex-wrap   text-white md:p-5 lg:p-16`}
         >
-          <div className="flex flex-col text-center md:text-start gap-7 lg:gap-10 mt-8 w-80">
+          <div className="flex flex-col text-center md:text-start gap-3 md:gap-7 lg:gap-10 mt-8 w-80">
             <h3 className="text-lg font-semibold">KNOW ABOUT US </h3>
             <div className="flex flex-col items-center md:items-start">
               <Link to={"/"}>
@@ -50,9 +50,9 @@ const Footer = () => {
               </p>
             </div>
           </div>
-          <div className="flex flex-col text-center md:text-start gap-3 md:gap-7 lg:gap-10 mt-8 w-80">
+          <div className="flex flex-col text-center md:text-start gap-2 md:gap-7 lg:gap-10 mt-8 w-80">
             <h3 className="text-lg font-semibold">MAIN MENU</h3>
-            <ul className="flex flex-col gap-3">
+            <ul className="flex flex-col gap-1 md:gap-3">
               <Link to={"/"}>
                 {" "}
                 <li>Home</li>
@@ -74,9 +74,9 @@ const Footer = () => {
               </Link>
             </ul>
           </div>
-          <div className="flex flex-col text-center md:text-start gap-7 lg:gap-10 mt-8 w-80">
+          <div className="flex flex-col text-center md:text-start gap-2 md:gap-7 lg:gap-10 mt-8 w-80">
             <h3 className="text-lg font-semibold">FOOTER MENU</h3>
-            <ul className="flex flex-col gap-3">
+            <ul className="flex flex-col gap-1 md:gap-3">
               <Link to={"/about"}>
                 {" "}
                 <li>About Us</li>
@@ -91,7 +91,7 @@ const Footer = () => {
               </Link>
             </ul>
           </div>
-          <div className="flex flex-col text-center md:text-start gap-7 lg:gap-10 mt-8 w-80">
+          <div className="flex flex-col text-center md:text-start gap-2 md:gap-7 lg:gap-10 mt-8 w-80">
             <h3 className="text-lg font-semibold">NEWSLETTER</h3>
             <div className="flex flex-col gap-5">
               <p className="text-lg">
