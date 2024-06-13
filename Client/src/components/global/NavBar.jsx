@@ -120,8 +120,9 @@ const NavBar = () => {
             />
             <IoSearchOutline className="text-xl" />
           </div>
-          {navItems.map((item) => (
+          {navItems.map((item,index) => (
             <Link
+            key={index}
               to={item.to}
               onClick={() => {
                 setNavRes(!navRes);

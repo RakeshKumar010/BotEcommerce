@@ -26,7 +26,6 @@ const Home = () => {
       result = await result.json();
       setData(result);
       // console.log(result);
-      
     };
     getFun();
   }, []);
@@ -41,7 +40,7 @@ const Home = () => {
       <div id="nav-desktop">
         <div className="fixed top-0 z-10 right-0 left-0 ">
           <HeaderTop />
-          <NavBar data={data} />
+          <NavBar />
         </div>
         <div className="mt-28">
           <Banner data={data} />
@@ -66,7 +65,9 @@ const Home = () => {
             className="text-white text-5xl cursor-pointer"
           />
           <img
-            src={data?`https://psyrealestate.in/${data[1].carousel}`:OfferImg}
+            src={
+              data ? `https://psyrealestate.in/${data[1].carousel}` : OfferImg
+            }
             alt="..."
             className="md:w-1/2 w-full rounded-md shadow-md"
           />

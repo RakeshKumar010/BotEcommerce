@@ -82,7 +82,7 @@ const AddToCart = () => {
             </div>
           </div>
           <div className="flex md:static fixed bottom-0 right-0 left-0 md:bg-transparent bg-white p-3 items-center flex-col sm:flex-row justify-center gap-3 mt-8">
-            <Link to={'cart-order'} className={`md:rounded-full rounded-lg w-full  md:max-w-[280px] py-2 md:py-4 text-center justify-center items-center bg-[${ApiColor}] font-semibold text-lg text-white flex gap-2 transition-all duration-500 hover:scale-105 hover:shadow-lg   `}>
+            <Link style={{backgroundColor:ApiColor}} to={'cart-order'} className={`md:rounded-full rounded-lg w-full  md:max-w-[280px] py-2 md:py-4 text-center justify-center items-center  font-semibold text-lg text-white flex gap-2 transition-all duration-500 hover:scale-105 hover:shadow-lg   `}>
               Continue to Payment
               <FaChevronRight />
             </Link>

@@ -29,6 +29,7 @@ import CartOrder from "../pages/CartOrder.jsx";
 import AddColor from "../components/admin/AddColor.jsx";
 import AddNavItem from "../components/admin/AddNavItem.jsx";
 import AddSocialLink from "../components/admin/AddSocialLink.jsx";
+import ThankuPage from "../pages/ThankuPage.jsx";
 
 const Layout = () => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -46,6 +47,7 @@ const Layout = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/thanku-page" element={<ThankuPage />} />
         <Route path="/add-to-cart" element={<AddToCart />} />
         <Route path="/add-to-cart/cart-order" element={<CartOrder />} />
         <Route path="/return-policy" element={<ReturnPolicy />} />

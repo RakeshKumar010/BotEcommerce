@@ -3,6 +3,7 @@ import HeaderTop from "../components/HeaderTop";
 import NavBar from "../components/global/NavBar";
 import Footer from "../components/global/Footer";
 import { ApiColor } from "../components/api/data";
+import { Link } from "react-router-dom";
 
 const OrderPage = () => {
   const [sessionData, setSessionData] = useState();
@@ -122,11 +123,11 @@ const OrderPage = () => {
               </div>
             </div>
             
-            <div className="md:static bg-white md:p-0 p-2  fixed bottom-0 right-0 left-0">
+            <Link to={'/thanku-page'} className="md:static bg-white md:p-0 p-2  fixed bottom-0 right-0 left-0">
               <p style={{backgroundColor:ApiColor}}  className="text-center p-4 w-full  text-white rounded-md  hover:scale-105 transition-all duration-200  hover:shadow-md hover:shadow-gray-600">
                 Pay now
               </p>
-            </div>
+            </Link>
           </div>
         </div>
         <div className="md:w-1/2 w-full md:p-5 flex flex-col gap-5">
