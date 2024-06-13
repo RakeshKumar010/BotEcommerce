@@ -107,7 +107,7 @@ const Footer = () => {
                   SUBSCRIBE{" "}
                 </p>
               </div>
-              <div className="flex gap-5 text-xl mb-5 cursor-pointer">
+              <div className="flex gap-5 text-xl mb-5 cursor-pointer justify-center">
                 {socialLink.facebook == "" ? (
                   ""
                 ) : (
