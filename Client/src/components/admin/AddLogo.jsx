@@ -8,18 +8,25 @@ const AddLogo = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('image', image);
+    formData.append("image", image);
 
-    let response = await fetch("https://psyrealestate.in/add-logo/666293f920ed05a04b455521", {
-      method: "put",
-      body: formData,
-    });
+    let response = await fetch(
+      "https://psyrealestate.in/add-logo/666293f920ed05a04b455521",
+      {
+        method: "put",
+        body: formData,
+      }
+    );
     if (response.ok) {
       Swal.fire({
         title: "Success",
         text: "Logo added successfully!",
         icon: "success",
-        confirmButtonColor:`${ApiColor}`
+        confirmButtonColor: `${ApiColor}`,
+      }).then((result) => {
+        if (result.value) {
+          location.reload();
+        }
       });
     } else {
       alert("HTTP-Error: " + response.status);
@@ -32,7 +39,10 @@ const AddLogo = () => {
         onSubmit={handleSubmit}
         className="space-y-4 w-[90vw] md:w-[50vw] bg-white shadow-md rounded px-8  pt-6 pb-8 mb-4"
       >
-        <h1 className="text-center text-2xl font-bold  " style={{color:ApiColor}}>
+        <h1
+          className="text-center text-2xl font-bold  "
+          style={{ color: ApiColor }}
+        >
           Add Logo
         </h1>
         <div>
@@ -45,7 +55,7 @@ const AddLogo = () => {
 
         <button
           type="submit"
-          style={{backgroundColor:ApiColor}}
+          style={{ backgroundColor: ApiColor }}
           className=" w-full hover:shadow-xl text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
           Submit

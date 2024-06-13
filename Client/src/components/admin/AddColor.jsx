@@ -22,7 +22,7 @@ const AddColor = () => {
         title: "Success",
         text: "Color added successfully!",
         icon: "success",
-        confirmButtonColor: '#0000',
+        confirmButtonColor: '#000',
       }).then((result) => {
         if (result.value) {
           location.reload();
