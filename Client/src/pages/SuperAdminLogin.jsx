@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const SuperAdminLogin = () => {
+const SuperAdminLogin = ({setIsSuperAdmin}) => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [pass, setPass] = useState("");
@@ -43,7 +43,7 @@ const SuperAdminLogin = () => {
         return;
       }
   
-      let response = await fetch("https://psyrealestate.in/login", {
+      let response = await fetch("https://psyrealestate.in/super-admin-login", {
         method: "post",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ email, pass }),
@@ -51,11 +51,11 @@ const SuperAdminLogin = () => {
   
       if (response.ok) {
         // Handle successful login
-        setIsAdmin(true);
+        setIsSuperAdmin(true);
         let user = { email, pass };
         let userString = JSON.stringify(user);
-        localStorage.setItem("user", userString);
-        navigate("/admin");
+        localStorage.setItem("superadmin", userString);
+        navigate("/super-admin");
       } else {
         // Increment the wrong password count
         setCountWPass((prevCount) => prevCount + 1);
@@ -70,7 +70,7 @@ const SuperAdminLogin = () => {
       <div className="flex min-h-full h-screen flex-col justify-center px-6 py-12 lg:px-8 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 transition-all duration-500 ease-in-out">
         <div className="animate-bounce">
           <h2 className="mt-10 text-center text-3xl font-bold leading-9 tracking-tight text-white transform hover:scale-110 transition-transform duration-300 ease-in-out">
-            {countWPass == 3 ? counter : "Sign in to your account"}
+            {countWPass == 3 ? counter : "Super Admin"}
           </h2>
         </div>
   

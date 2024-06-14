@@ -80,7 +80,7 @@ const ProductDetails = () => {
                         onClick={() => {
                           setImageUrl(value);
                         }}
-                        className=" rounded-md w-16 md:w-36"
+                        className="cursor-pointer rounded-md w-16 md:w-36"
                         src={`https://psyrealestate.in/${value}`}
                         alt="Product Image"
                       />

@@ -66,14 +66,20 @@ app.post("/add-client", async (req, res) => {
 
 
 app.post("/login", async (req, res) => {
-  let result = await userSchema.findOne({
+  let result = await clientSchema.findOne({
     email: req.body.email,
     pass: req.body.pass,
   });
+ 
   if (result) {
-    res.status(200).send("OK");
+    if(result.status=="1"){
+
+      res.status(200).send({"status":"activate"})
+    }else{
+      res.status(200).send({"status":"deactivate"})
+    }
   } else {
-    res.status(401).send("Invalid Information");
+    res.status(401).send({"status":"Invalid Information"});
     console.log("Login failed for:", req.body.email);
   }
 });
@@ -110,6 +116,16 @@ app.get("/show-client", async (req, res) => {
   let result = await clientSchema.find();
   res.send(result);
 });
+app.get("/client/:domain", async (req, res) => {
+  let result = await clientSchema.findOne({ domain: req.params.domain });
+  res.send(result);
+
+});
+app.get("/show-client/:id", async (req, res) => {
+  let result = await clientSchema.findOne({ _id: req.params.id });
+  res.send(result);
+
+});
 app.get("/coupon/:code", async (req, res) => {
   let result = await couponSchema.findOne({ code: req.params.code });
   res.send(result);
@@ -134,6 +150,7 @@ app.get("/admins/:id", async (req, res) => {
   let result = await userSchema.findOne({ _id: req.params.id });
   res.send(result);
 });
+
 
 app.get("/:id", async (req, res) => {
   let result = await productModel.findOne({ _id: req.params.id });

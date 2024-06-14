@@ -48,14 +48,22 @@ const AdminLogin = ({ setIsAdmin }) => {
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ email, pass }),
     });
+    response = await response.json()
+ 
 
-    if (response.ok) {
+    if (response.status=="activate") {
       // Handle successful login
       setIsAdmin(true);
       let user = { email, pass };
       let userString = JSON.stringify(user);
       localStorage.setItem("user", userString);
       navigate("/admin");
+    }else if(response.status=="deactivate"){
+      Swal.fire({
+        icon: "error",
+        title: "Deactivated Account",
+        text: `Your Account is Deactivated`,
+      });
     } else {
       // Increment the wrong password count
       setCountWPass((prevCount) => prevCount + 1);

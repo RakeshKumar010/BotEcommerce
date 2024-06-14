@@ -31,17 +31,24 @@ import AddNavItem from "../components/admin/AddNavItem.jsx";
 import AddSocialLink from "../components/admin/AddSocialLink.jsx";
 import ThankuPage from "../pages/ThankuPage.jsx";
 import AllOrder from "../pages/AllOrder.jsx";
+import Sdashboard from "../components/superadmin/Sdashboard.jsx";
+import SuperAdmin from "../pages/SuperAdmin.jsx";
+import AddClient from "../components/superadmin/AddClient.jsx";
+import AllClient from "../components/superadmin/AllClient.jsx";
+import EditClient from "../components/superadmin/EditClient.jsx";
+import SuperAdminLogin from "../pages/SuperAdminLogin.jsx";
 
 const Layout = () => {
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false);
   // Check local storage for admin details on component mount
   useEffect(() => {
     const user = localStorage.getItem("user");
+    const superAdmin = localStorage.getItem("superadmin");
+    superAdmin ? setIsSuperAdmin(true) : null;
+    user ? setIsAdmin(true) : null;
 
-    if (user) {
-      setIsAdmin(true);
-      // console.log(email,pass);
-    }
+   
   }, []);
 
   return (
@@ -63,7 +70,7 @@ const Layout = () => {
         />
         <Route
           path="super-admin-login"
-          element={<AdminLogin setIsAdmin={setIsAdmin} />}
+          element={<SuperAdminLogin setIsSuperAdmin={setIsSuperAdmin} />}
         />
 
         <Route
@@ -83,7 +90,7 @@ const Layout = () => {
           path="/lehenga-sets"
           element={<NewArrival title={"LEHENGA SETS"} />}
         />
-        <Route path="/admin" element={isAdmin ? <Admin /> : <RedirectPage />}>
+        <Route path="/admin" element={isAdmin ? <Admin /> : <RedirectPage title={'Admin'} router={'/admin-login'}/>}>
           <Route index element={<DashBoard />} />
           <Route path="product" element={<Product />} />
           <Route path="recycle-bin/:id" element={<EditProduct />} />
@@ -103,13 +110,11 @@ const Layout = () => {
           <Route path="account/:id" element={<EditAccounts />} />
           <Route path="sign-up" element={<SignUp />} />
         </Route>
-        <Route
-          path="/super-admin"
-          element={isAdmin ? <Admin /> : <RedirectPage />}
-        >
-          <Route index element={<DashBoard />} />
-          <Route path="product" element={<Product />} />
-          <Route path="recycle-bin/:id" element={<EditProduct />} />
+        <Route path="/super-admin" element={isSuperAdmin?<SuperAdmin />:<RedirectPage title={'Super Admin'} router={'/super-admin-login'}/>}>
+          <Route index element={<Sdashboard />} />
+          <Route path="add-client" element={<AddClient />} />
+          <Route path="all-client" element={<AllClient />} />
+          <Route path="all-client/:id" element={<EditClient />} />
         </Route>
       </Routes>
     </BrowserRouter>
