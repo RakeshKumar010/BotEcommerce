@@ -11,7 +11,7 @@ const Card = ({ value, setDetailsPopup, setAddId }) => {
   return (
     <div className="hover:scale-105 transition-all duration-200 w-[43vw] sm:w-[28vw] md:w-[19vw] lg:[20vw]  xl:w-[20vw] bg-white border hover:border-gray-900 rounded-lg shadow  ">
       <p className="relative">
-        <Link to={"/" + _id}>
+        <Link to={"/product/" + _id}>
           {image && (
             <img
               className="rounded-t-lg  w-full"

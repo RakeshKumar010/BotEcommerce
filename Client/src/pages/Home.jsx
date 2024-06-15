@@ -11,7 +11,9 @@ import ProDetailsPopup from "../components/ProDetailsPopup";
 import OfferImg from "../assets/image/offerImg.jpg";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import FixedBtn from "../components/global/FixedBtn";
+import { useNavigate } from "react-router-dom";
 const Home = () => {
+ 
   const [detailsPopup, setDetailsPopup] = useState(false);
   const [addId, setAddId] = useState(false);
   const [popUp, setPopUp] = useState(false);
@@ -22,27 +24,13 @@ const Home = () => {
       setPopUp(true);
     }, 10000);
     // trim url
-    function trimUrl(url) {
-      const parsedUrl = new URL(url);
-      return parsedUrl.hostname + (parsedUrl.port ? ":" + parsedUrl.port : "");
-    }
-
-    let currentUrl = window.location.href;
-    currentUrl = trimUrl(currentUrl);
-    // console.log(currentUrl);
+   
     const getFun = async () => {
       let result = await fetch("https://psyrealestate.in/carousel");
       result = await result.json();
       setData(result);
-      // console.log(result);
-      let result2 = await fetch(
-        "https://psyrealestate.in/show-client/" + currentUrl
-      );
-      result2 = await result2.json();
-      console.log(result2);
-      if (result2.status == "0") {
-        console.log("ERROR");
-      }
+   
+     
     };
     getFun();
   }, []);

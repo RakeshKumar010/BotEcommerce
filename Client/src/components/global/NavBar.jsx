@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { IoReorderThreeOutline, IoSearchOutline } from "react-icons/io5";
 
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ApiColor } from "../api/data";
 import { FaShoppingCart } from "react-icons/fa";
 import { HiShoppingBag } from "react-icons/hi2";
@@ -25,6 +25,7 @@ const navItems = [
   },
 ];
 const NavBar = () => {
+  const navigate = useNavigate();
   const [navRes, setNavRes] = useState(false);
   const [showCart, setShowCart] = useState(false);
 
@@ -48,9 +49,26 @@ const NavBar = () => {
       let result = await fetch("https://psyrealestate.in/add-logo");
       result = await result.json();
       setLogos(result[result.length - 1].logo);
+
+      function trimUrl(url) {
+        const parsedUrl = new URL(url);
+        return (
+          parsedUrl.hostname + (parsedUrl.port ? ":" + parsedUrl.port : "")
+        );
+      }
+      let currentUrl = window.location.href;
+      currentUrl = trimUrl(currentUrl);
+      let result2 = await fetch(
+        "https://psyrealestate.in/client/" + currentUrl
+      );
+      result2 = await result2.json();
+      console.log(result2);
+      if (result2.status == "0") {
+        // console.log("ERROR");
+        navigate("error");
+      }
     };
     getFun();
- 
   }, []);
 
   return (

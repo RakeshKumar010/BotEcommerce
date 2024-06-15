@@ -33,7 +33,11 @@ const ProductDetails = () => {
   // currentPrice=currentPrice-discount
 
   async function getFun() {
-    let result = await fetch(`https://psyrealestate.in${location.pathname}`);
+    const pathSegments = location.pathname.split('/');
+    const id = pathSegments[pathSegments.length - 1];
+    
+    // Use the extracted ID in your fetch request
+    let result = await fetch(`https://psyrealestate.in/${id}`);
     result = await result.json();
     if (result) {
       setData(result);

@@ -33,8 +33,8 @@ const AllClient = () => {
           <th className="p-2">S.No.</th>
           <th className="p-2">Name</th>
           <th className="p-2">Email</th>
-          <th className="p-2">Number</th>
           <th className="p-2">Passwod</th>
+          <th className="p-2">Number</th>
           <th className="p-2">Expiry Date</th>
           <th className="p-2">Domain</th>
           <th className="p-2">Status</th>

@@ -50,11 +50,13 @@ const AdminLogin = ({ setIsAdmin }) => {
     });
     response = await response.json()
  
-
-    if (response.status=="activate") {
+// console.log(response);
+    if (response.status=="1") {
+    let {_id,email,pass}=response
+  
       // Handle successful login
       setIsAdmin(true);
-      let user = { email, pass };
+      let user = { _id,email,pass };
       let userString = JSON.stringify(user);
       localStorage.setItem("user", userString);
       navigate("/admin");

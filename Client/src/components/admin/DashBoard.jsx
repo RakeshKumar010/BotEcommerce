@@ -7,12 +7,15 @@ import { MdAdminPanelSettings } from "react-icons/md";
 import { LiaShippingFastSolid } from "react-icons/lia";
 import DashBoardCard from "./DashBoardCard";
 import { TfiLayoutSlider } from "react-icons/tfi";
+import { Link } from "react-router-dom";
 
 const DashBoard = () => {
   const [product, setProduct] = useState();
   const [admin, setAdmin] = useState();
   const [coupon, setCoupon] = useState();
   const [carousel, setCarousel] = useState();
+  const [isOldUer, setIsOldUser] = useState();
+
 
   const cardData = [
     {
@@ -81,15 +84,34 @@ const DashBoard = () => {
       result3 = await result3.json();
       setAdmin(result3.length);
 
+      let userString = localStorage.getItem("user");
+      let user = JSON.parse(userString);
+      result3.map((value) => {
+        if (value.email == user.email) {
+          if (value.clientId == user._id) {
+      
+            setIsOldUser(true);
+          } else {
+            setIsOldUser(false);
+          }
+        }
+      });
+
+
+
+
       let result4 = await fetch("https://psyrealestate.in/carousel");
       result4 = await result4.json();
       setCarousel(result4.length);
+
+
+     
     };
     getFun();
   }, []);
   return (
     <div className="absolute right-0 border-dotted border-black border-2 min-h-screen w-full lg:w-[82%]">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4">
+     {isOldUer? <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4">
         {cardData.map((card, index) => (
           <DashBoardCard
             key={index}
@@ -98,7 +120,10 @@ const DashBoard = () => {
             icon={card.icon}
           />
         ))}
-      </div>
+      </div>:<div className="flex flex-col items-center justify-center  h-screen gap-5">
+        <p className="text-3xl text-center font-bold">Complate Your Profile</p>
+        <Link to={'/complate-your-profile'} className="bg-green-500 text-white p-2 transition-all px-10 rounded-md shadow-md hover:scale-105">Get Start</Link>
+        </div>}
     </div>
   );
 };

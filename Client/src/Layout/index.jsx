@@ -37,18 +37,17 @@ import AddClient from "../components/superadmin/AddClient.jsx";
 import AllClient from "../components/superadmin/AllClient.jsx";
 import EditClient from "../components/superadmin/EditClient.jsx";
 import SuperAdminLogin from "../pages/SuperAdminLogin.jsx";
+import ErrorPage from "../components/ErrorPage.jsx";
 
 const Layout = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isSuperAdmin, setIsSuperAdmin] = useState(false);
   // Check local storage for admin details on component mount
   useEffect(() => {
-    const user = localStorage.getItem("user");
+    const admin = localStorage.getItem("user");
     const superAdmin = localStorage.getItem("superadmin");
     superAdmin ? setIsSuperAdmin(true) : null;
-    user ? setIsAdmin(true) : null;
-
-   
+    admin ? setIsAdmin(true) : null;
   }, []);
 
   return (
@@ -62,8 +61,8 @@ const Layout = () => {
         <Route path="/return-policy" element={<ReturnPolicy />} />
         <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
         <Route path="/about" element={<About />} />
-        <Route path=":id" element={<ProductDetails />} />
-        <Route path=":id/buy-now" element={<OrderPage />} />
+        <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/product/:id/buy-now" element={<OrderPage />} />
         <Route
           path="admin-login"
           element={<AdminLogin setIsAdmin={setIsAdmin} />}
@@ -116,6 +115,7 @@ const Layout = () => {
           <Route path="all-client" element={<AllClient />} />
           <Route path="all-client/:id" element={<EditClient />} />
         </Route>
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
   );
