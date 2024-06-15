@@ -8,10 +8,12 @@ const Footer = () => {
   const [socialLink, setSocialLink] = useState("");
 
   useEffect(() => {
+
+    
     const getFun = async () => {
-      let result = await fetch("https://psyrealestate.in/add-logo");
+      let result = await fetch("https://psyrealestate.in/logo");
       result = await result.json();
-      setLogos(result[result.length - 1].logo);
+      setLogos(result[0].logo);
       let socialResult = await fetch(
         "https://psyrealestate.in/social-link/66697d798873e6507de4ca20"
       );

@@ -37,7 +37,7 @@ const SideBar = () => {
       let user = JSON.parse(userString);
       result.map((value) => {
         if (value.email == user.email) {
-          console.log(value.clientId == user._id);
+      
           if (value.clientId == user._id) {
             setSAdminId(value.sAdmin);
             setAccess(value);
@@ -48,10 +48,10 @@ const SideBar = () => {
         }
       });
 
-      let result3 = await fetch("https://psyrealestate.in/add-logo");
+      let result3 = await fetch("https://psyrealestate.in/logo");
       result3 = await result3.json();
 
-      setLogos(result3[result3.length - 1].logo);
+      setLogos(result3[0].logo);
     };
     getFun();
   }, []);

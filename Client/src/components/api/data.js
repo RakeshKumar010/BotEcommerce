@@ -7,6 +7,6 @@ async function getColor(){
     result = await result.json()
     ApiColor=result[result.length-1].color
   }
-  getColor()
+  getColor() 
 
 export {ApiColor}

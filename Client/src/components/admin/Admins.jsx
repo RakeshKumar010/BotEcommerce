@@ -11,9 +11,16 @@ const Admins = () => {
 
   useEffect(() => {
     const getFun = async () => {
+      let userString = localStorage.getItem("user");
+      let user = JSON.parse(userString);
       let result = await fetch("https://psyrealestate.in/admins");
       result = await result.json();
-      setData(result);
+      let filteredResults = result.filter(
+        (value) => value.clientId == user._id
+      );
+
+      setData(filteredResults);
+    
       setPageLoad(result);
     };
     getFun();

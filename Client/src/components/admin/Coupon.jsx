@@ -11,21 +11,25 @@ const Coupon = () => {
 
   useEffect(() => {
     const getFun = async () => {
-      let result = await fetch("https://psyrealestate.in/coupon");
-      result = await result.json();
-      console.log(result);
-      let result2 = await fetch("https://psyrealestate.in/admins");
-      result2 = await result2.json();
-
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);
+
+      let result = await fetch("https://psyrealestate.in/coupon");
+      result = await result.json();
+      let filteredResults = result.filter(
+        (value) => value.clientId == user._id
+      );
+
+      setData(filteredResults);
+
+      let result2 = await fetch("https://psyrealestate.in/admins");
+      result2 = await result2.json();
 
       result2.map((value) => {
         if (value.email == user.email) {
           setAccess(value);
         }
       });
-      setData(result);
     };
 
     getFun();
@@ -34,11 +38,17 @@ const Coupon = () => {
   useEffect(() => {}, []);
   return (
     <div className="bg-gray-50 border-0 md:border-2 border-dotted border-black h-screen w-full lg:w-[83%] absolute right-0 ">
-      <p className="text-3xl font-bold text-center my-10 " style={{color:ApiColor}}>
+      <p
+        className="text-3xl font-bold text-center my-10 "
+        style={{ color: ApiColor }}
+      >
         All Coupon
       </p>
       <table className="w-[90%] mx-auto text-center shadow-lg ">
-        <tr style={{backgroundColor:ApiColor}} className="border-2  text-white ">
+        <tr
+          style={{ backgroundColor: ApiColor }}
+          className="border-2  text-white "
+        >
           <th className="p-2">S.No.</th>
           <th className="p-2">Title</th>
           <th className="p-2">Discount</th>
@@ -74,14 +84,14 @@ const Coupon = () => {
                               headers: { "content-type": "application/json" },
                             }
                           );
-                          
+
                           if (result.ok) {
                             setPageLoad(result);
                             Swal.fire({
                               title: "Success",
                               text: "Coupon Deleted successfully!",
                               icon: "success",
-                              confirmButtonColor:`${ApiColor}`
+                              confirmButtonColor: `${ApiColor}`,
                             });
                           } else {
                             alert("HTTP-Error: " + response.status);

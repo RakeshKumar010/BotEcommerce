@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaFacebook } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { RiInstagramFill } from "react-icons/ri";
@@ -11,17 +11,23 @@ const AddSocialLink = () => {
   const [insta, setInsta] = useState("");
   const [youtube, setYoutube] = useState("");
   const [twitter, setTwitter] = useState("");
+  const [data, setData] = useState();
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let userString = localStorage.getItem("user");
+    let user = JSON.parse(userString);
+    const clientId=user._id
+    console.log(data);
 
+    if (data.length > 0) {
     let response = await fetch(
-      "https://psyrealestate.in/add-social-link/66697d798873e6507de4ca20",
+      "https://psyrealestate.in/update-social-link/"+data[0]._id,
       {
         method: "put",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ facebook,insta,youtube,twitter }),
+        body: JSON.stringify({ clientId,facebook,insta,youtube,twitter }),
       }
     );
 
@@ -31,11 +37,44 @@ const AddSocialLink = () => {
         text: "Social link added successfully!",
         icon: "success",
         confirmButtonColor: `${ApiColor}`,
+      }).then(()=>{
+        location.reload()
       });
     } else {
       alert("HTTP-Error: " + response.status);
     }
+  }else{
+    let response = await fetch(
+      "https://psyrealestate.in/add-social-link",
+      {
+        method: "post",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({clientId, facebook,insta,youtube,twitter }),
+      }
+    );
+
+    if (response.ok) {
+      Swal.fire({
+        title: "Success",
+        text: "Social link added successfully!",
+        icon: "success",
+        confirmButtonColor: `${ApiColor}`,
+      }).then(()=>{
+        location.reload()
+      });
+    } else {
+      alert("HTTP-Error: " + response.status);
+    }
+  }
   };
+  useEffect(() => {
+    const getData = async () => {
+      let result = await fetch("https://psyrealestate.in/social");
+      result = await result.json();
+      setData(result);
+    };
+    getData();
+  }, []);
   return (
     <div className="absolute flex justify-center items-center bg-gray-100 right-0 border-dotted border-black border-2 min-h-screen w-full lg:w-[82%]">
       <form

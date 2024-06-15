@@ -8,11 +8,14 @@ const AddCoupon = () => {
   const [expiryDate, setExpiryDate] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    let userString = localStorage.getItem("user");
+    let user = JSON.parse(userString);
+    let clientId=user._id
+ 
     let response = await fetch("https://psyrealestate.in/add-coupon", {
       method: "post",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ title, discount,code,expiryDate }),
+      body: JSON.stringify({ clientId,title,discount,code,expiryDate }),
     });
 
     if (response.ok) {

@@ -14,10 +14,14 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let userString = localStorage.getItem("user");
+    let user = JSON.parse(userString);
+    let clientId=user._id
+
     let result = await fetch("https://psyrealestate.in/admins", {
       method: "post",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ name, email, pass,addProduct,editProduct,deleteProduct,addCoupon,editCoupon,deleteCoupon }),
+      body: JSON.stringify({clientId, name, email, pass,addProduct,editProduct,deleteProduct,addCoupon,editCoupon,deleteCoupon }),
     });
 
     if (result.ok) {

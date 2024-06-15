@@ -46,7 +46,7 @@ const NavBar = () => {
     }
 
     const getFun = async () => {
-      let result = await fetch("https://psyrealestate.in/add-logo");
+      let result = await fetch("https://psyrealestate.in/logo");
       result = await result.json();
       setLogos(result[result.length - 1].logo);
 

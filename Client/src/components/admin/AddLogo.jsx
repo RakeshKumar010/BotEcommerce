@@ -1,38 +1,69 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { ApiColor } from "../api/data";
 
 const AddLogo = () => {
   const [image, setImage] = useState();
-
+  const [data, setData] = useState();
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let userString = localStorage.getItem("user");
+    let user = JSON.parse(userString);
+    const clientId = user._id;
     const formData = new FormData();
     formData.append("image", image);
-
-    let response = await fetch(
-      "https://psyrealestate.in/add-logo/666293f920ed05a04b455521",
-      {
-        method: "put",
-        body: formData,
-      }
-    );
-    if (response.ok) {
-      Swal.fire({
-        title: "Success",
-        text: "Logo added successfully!",
-        icon: "success",
-        confirmButtonColor: `${ApiColor}`,
-      }).then((result) => {
-        if (result.value) {
-          location.reload();
+    formData.append("clientId", clientId);
+    if (data.length > 0) {
+      let response = await fetch(
+        "https://psyrealestate.in/update-logo/" + data[0]._id,
+        {
+          method: "put",
+          body: formData,
         }
-      });
+      );
+      if (response.ok) {
+        Swal.fire({
+          title: "Success",
+          text: "Logo added successfully!",
+          icon: "success",
+          confirmButtonColor: `${ApiColor}`,
+        }).then((result) => {
+          if (result.value) {
+            location.reload();
+          }
+        });
+      } else {
+        alert("HTTP-Error: " + response.status);
+      }
     } else {
-      alert("HTTP-Error: " + response.status);
+      let response = await fetch("https://psyrealestate.in/add-logo", {
+        method: "post",
+        body: formData,
+      });
+      if (response.ok) {
+        Swal.fire({
+          title: "Success",
+          text: "Logo added successfully!",
+          icon: "success",
+          confirmButtonColor: `${ApiColor}`,
+        }).then((result) => {
+          if (result.value) {
+            location.reload();
+          }
+        });
+      } else {
+        alert("HTTP-Error: " + response.status);
+      }
     }
   };
-
+  useEffect(() => {
+    const getData = async () => {
+      let result = await fetch("https://psyrealestate.in/logo");
+      result = await result.json();
+      setData(result);
+    };
+    getData();
+  }, []);
   return (
     <div className="absolute flex justify-center items-center bg-gray-100 right-0 border-dotted border-black border-2 min-h-screen w-full lg:w-[82%]">
       <form
