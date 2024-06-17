@@ -95,7 +95,7 @@ const AddNavItem = () => {
 
         <button
           type="submit"
-          style={{backgroundColor:ApiColor}}
+          style={ApiColor?{backgroundColor:ApiColor}:{backgroundColor:'black'}}
           className=" w-full hover:shadow-xl text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
           Submit

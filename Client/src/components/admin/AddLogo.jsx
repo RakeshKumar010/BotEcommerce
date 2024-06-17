@@ -64,7 +64,7 @@ const AddLogo = () => {
       let user = JSON.parse(userString);
       const filteredResults = result.filter(value => value.clientId === user._id);
       setData(filteredResults);
-      console.log(filteredResults);
+ 
     };
     getData();
   }, []);
@@ -90,7 +90,7 @@ const AddLogo = () => {
 
         <button
           type="submit"
-          style={{ backgroundColor: ApiColor }}
+          style={ApiColor?{backgroundColor:ApiColor}:{backgroundColor:'black'}}
           className=" w-full hover:shadow-xl text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
           Submit

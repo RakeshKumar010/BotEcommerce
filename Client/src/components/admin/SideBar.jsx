@@ -52,7 +52,7 @@ const SideBar = () => {
       const filteredResults = result3.filter(value => value.clientId === user._id);
 
       setLogos(filteredResults[0].logo);
-      console.log(filteredResults[0].logo);
+   
     };
     getFun();
   }, []);
