@@ -22,7 +22,7 @@ const Home = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     setTimeout(() => {
       setPopUp(true);
-    }, 10000);
+    }, 1000);
     // trim url
    
     const getFun = async () => {
@@ -33,7 +33,7 @@ const Home = () => {
      
     };
     getFun();
-  }, []);
+  }, [popUp]);
 
   return (
     <>
