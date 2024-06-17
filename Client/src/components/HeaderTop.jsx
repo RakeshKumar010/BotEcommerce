@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 const HeaderTop = () => {
   const [apiDataColor, setApiDataColor] = useState();
   useEffect(() => {
- 
     function trimUrl(url) {
       const parsedUrl = new URL(url);
       return parsedUrl.hostname + (parsedUrl.port ? ":" + parsedUrl.port : "");
@@ -22,8 +21,10 @@ const HeaderTop = () => {
         // console.log(value.clientId);
         return value.clientId == clientData._id;
       });
-     const  ApiColor = filteredResults[filteredResults.length - 1].color;
-     setApiDataColor(ApiColor)
+      
+      setApiDataColor(filteredResults[0].color);
+      //  const  ApiColor = filteredResults[filteredResults.length - 1].color;
+      //  setApiDataColor(ApiColor)
     }
     getColor();
   });

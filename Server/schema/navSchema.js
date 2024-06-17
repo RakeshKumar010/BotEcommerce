@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const navMobel = mongoose.Schema({
+  clientId:String,
   nav1: String,
   nav2: String,
   nav3: String,

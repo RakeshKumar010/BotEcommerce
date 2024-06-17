@@ -36,7 +36,7 @@ const SideBar = () => {
       result = await result.json();
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);
-      setLoginUser(user.name)
+      setLoginUser(user.name.split(" ")[0])
       result.map((value) => {
         if (value.email == user.email) {
           if (value.clientId == user._id) {
@@ -335,7 +335,7 @@ const SideBar = () => {
                   }}
                 >
                   <MdLogout className="text-xl" />
-                  <span className="flex-1 ms-3 whitespace-nowrap">Logout ({loginUser.split(" ")[0]})</span>
+                  <span className="flex-1 ms-3 whitespace-nowrap">Logout ({loginUser})</span>
                 </Link>
               </li>
             </ul>
@@ -436,7 +436,7 @@ const SideBar = () => {
                   }}
                 >
                   <MdLogout className="text-xl" />
-                  <span className="flex-1 ms-3 whitespace-nowrap">Logout</span>
+                  <span className="flex-1 ms-3 whitespace-nowrap">Logout ({loginUser})</span>
                 </Link>
               </li>
             </ul>

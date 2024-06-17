@@ -12,40 +12,75 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [isOldUer, setIsOldUser] = useState();
-
+  const [data, setData] = useState();
   const handleSubmit = async (e) => {
     e.preventDefault();
     let userString = localStorage.getItem("user");
     let user = JSON.parse(userString);
     let clientId = user._id;
 
-    let result = await fetch("https://psyrealestate.in/admins", {
-      method: "post",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        clientId,
-        name,
-        email,
-        pass,
-        addProduct,
-        editProduct,
-        deleteProduct,
-        addCoupon,
-        editCoupon,
-        deleteCoupon,
-      }),
-    });
-
-    if (result.ok) {
-      Swal.fire({
-        title: "Success",
-        text: "Created successfully!",
-        icon: "success",
-        confirmButtonColor: `${ApiColor}`,
+     if (data.length > 0) {
+      let result = await fetch("https://psyrealestate.in/admins", {
+        method: "post",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          clientId,
+          name,
+          email,
+          pass,
+          addProduct,
+          editProduct,
+          deleteProduct,
+          addCoupon,
+          editCoupon,
+          deleteCoupon,
+        }),
       });
-    } else {
-      console.log("error");
-    }
+
+      if (result.ok) {
+        Swal.fire({
+          title: "Success",
+          text: "Created successfully!",
+          icon: "success",
+          confirmButtonColor: `${ApiColor}`,
+        }).then(()=>{
+          location.reload()
+        });
+      } else {
+        console.log("error");
+      }
+    }else{
+      let result = await fetch("https://psyrealestate.in/admins", {
+        method: "post",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          clientId,
+          name,
+          email,
+          pass,
+          addProduct,
+          editProduct,
+          deleteProduct,
+          addCoupon,
+          editCoupon,
+          deleteCoupon,
+          sAdmin: "1",
+        }),
+      });
+
+      if (result.ok) {
+        Swal.fire({
+          title: "Success",
+          text: "Your panel is created successfully!",
+          icon: "success",
+          confirmButtonColor: `${ApiColor}`,
+        }).then(()=>{
+          location.reload()
+        });
+      } else {
+        console.log("error");
+      }
+    } 
   };
 
   useEffect(() => {
@@ -66,7 +101,12 @@ const SignUp = () => {
         }
       });
 
- 
+      
+      const filteredResults = result.filter((value) => {
+        return value.clientId == user._id;
+      });
+      setData(filteredResults);
+      // console.log(filteredResults);
     };
     getFun();
   }, []);
@@ -276,7 +316,11 @@ const SignUp = () => {
         </div>
         <button
           type="submit"
-          style={ApiColor?{backgroundColor:ApiColor}:{backgroundColor:'black'}}
+          style={
+            ApiColor
+              ? { backgroundColor: ApiColor }
+              : { backgroundColor: "black" }
+          }
           className="  w-full hover:shadow-xl text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
           Add Product

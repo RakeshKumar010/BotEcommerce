@@ -73,6 +73,11 @@ app.post("/add-color", async (req, res) => {
   result = await result.save();
   res.send(result);
 });
+app.post("/add-nav-item", async (req, res) => {
+  let result = await new navSchema(req.body);
+  result = await result.save();
+  res.send(result);
+});
 app.post("/add-logo", upload.single("image"), async (req, res) => {
   let logoData = req.body;
   logoData.logo = req.file.path;
@@ -132,6 +137,10 @@ app.get("/coupon", async (req, res) => {
 });
 app.get("/show-client", async (req, res) => {
   let result = await clientSchema.find();
+  res.send(result);
+});
+app.get("/nav-item", async (req, res) => {
+  let result = await navSchema.find();
   res.send(result);
 });
 app.get("/client/:domain", async (req, res) => {
@@ -274,7 +283,7 @@ app.put("/update-color/:id", async (req, res) => {
   );
   res.send(result);
 });
-app.put("/add-nav-item/:id", async (req, res) => {
+app.put("/update-nav-item/:id", async (req, res) => {
   let result = await navSchema.updateOne(
     { _id: req.params.id },
     { $set: req.body }
