@@ -170,7 +170,7 @@ const AddClient = () => {
                 onChange={(e) => setStatus(e.target.value)}
                 className="mr-2 leading-tight"
               />
-              <span className="text-sm">Unactive</span>
+              <span className="text-sm">Disactive</span>
             </label>
           </div>
         </div>
@@ -180,7 +180,7 @@ const AddClient = () => {
           style={{ backgroundColor: "#1f2937" }}
           className="  w-full hover:shadow-xl text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
-          Add Product
+          Add Client
         </button>
       </form>
     </div>

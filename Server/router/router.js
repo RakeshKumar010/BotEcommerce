@@ -89,9 +89,10 @@ app.post("/login", async (req, res) => {
   });
  
   if (result) {
+   
     if(result.status=="1"){
 
-      res.status(200).send({"status":"activate"})
+      res.send(result)
     }else{
       res.status(200).send({"status":"deactivate"})
     }

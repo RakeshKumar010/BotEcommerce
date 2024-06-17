@@ -16,7 +16,6 @@ const DashBoard = () => {
   const [carousel, setCarousel] = useState();
   const [isOldUer, setIsOldUser] = useState();
 
-
   const cardData = [
     {
       name: "Products",
@@ -87,9 +86,9 @@ const DashBoard = () => {
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);
       result3.map((value) => {
+        // console.log(value.clientId);
         if (value.email == user.email) {
           if (value.clientId == user._id) {
-      
             setIsOldUser(true);
           } else {
             setIsOldUser(false);
@@ -97,33 +96,38 @@ const DashBoard = () => {
         }
       });
 
-
-
-
       let result4 = await fetch("https://psyrealestate.in/carousel");
       result4 = await result4.json();
       setCarousel(result4.length);
-
-
-     
     };
     getFun();
   }, []);
   return (
     <div className="absolute right-0 border-dotted border-black border-2 min-h-screen w-full lg:w-[82%]">
-     {isOldUer? <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4">
-        {cardData.map((card, index) => (
-          <DashBoardCard
-            key={index}
-            name={card.name}
-            value={card.value}
-            icon={card.icon}
-          />
-        ))}
-      </div>:<div className="flex flex-col items-center justify-center  h-screen gap-5">
-        <p className="text-3xl text-center font-bold">Complate Your Profile</p>
-        <Link to={'/complate-your-profile'} className="bg-green-500 text-white p-2 transition-all px-10 rounded-md shadow-md hover:scale-105">Get Start</Link>
-        </div>}
+      {isOldUer ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4">
+          {cardData.map((card, index) => (
+            <DashBoardCard
+              key={index}
+              name={card.name}
+              value={card.value}
+              icon={card.icon}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="flex flex-col items-center justify-center  h-screen gap-5">
+          <p className="text-3xl text-center font-bold">
+            Complate Your Profile
+          </p>
+          <Link
+            to={"/complate-your-profile"}
+            className="bg-green-500 text-white p-2 transition-all px-10 rounded-md shadow-md hover:scale-105"
+          >
+            Get Start
+          </Link>
+        </div>
+      )}
     </div>
   );
 };
