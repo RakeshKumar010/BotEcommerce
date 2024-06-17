@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { ApiColor } from "../api/data";
 const SignUp = () => {
@@ -11,17 +11,29 @@ const SignUp = () => {
   const [deleteCoupon, setDeleteCoupon] = useState("");
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
+  const [isOldUer, setIsOldUser] = useState();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     let userString = localStorage.getItem("user");
     let user = JSON.parse(userString);
-    let clientId=user._id
+    let clientId = user._id;
 
     let result = await fetch("https://psyrealestate.in/admins", {
       method: "post",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({clientId, name, email, pass,addProduct,editProduct,deleteProduct,addCoupon,editCoupon,deleteCoupon }),
+      body: JSON.stringify({
+        clientId,
+        name,
+        email,
+        pass,
+        addProduct,
+        editProduct,
+        deleteProduct,
+        addCoupon,
+        editCoupon,
+        deleteCoupon,
+      }),
     });
 
     if (result.ok) {
@@ -29,19 +41,46 @@ const SignUp = () => {
         title: "Success",
         text: "Created successfully!",
         icon: "success",
-        confirmButtonColor:`${ApiColor}`
+        confirmButtonColor: `${ApiColor}`,
       });
     } else {
       console.log("error");
     }
   };
+
+  useEffect(() => {
+    const getFun = async () => {
+      let result = await fetch("https://psyrealestate.in/admins");
+      result = await result.json();
+      let userString = localStorage.getItem("user");
+      let user = JSON.parse(userString);
+      result.map((value) => {
+        if (value.email == user.email) {
+          if (value.clientId == user._id) {
+            setSAdminId(value.sAdmin);
+            setAccess(value);
+            setIsOldUser(true);
+          } else {
+            setIsOldUser(false);
+          }
+        }
+      });
+
+ 
+    };
+    getFun();
+  }, []);
+
   return (
     <div className="absolute flex justify-center items-center bg-gray-100 right-0 border-dotted border-black border-2 min-h-screen w-full lg:w-[82%]">
       <form
         onSubmit={handleSubmit}
         className="space-y-4 w-[95vw] md:w-[50vw] bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
       >
-        <h1 className="text-center text-2xl font-bold " style={{color:ApiColor}}>
+        <h1
+          className="text-center text-2xl font-bold "
+          style={{ color: ApiColor }}
+        >
           Create Account
         </h1>
         <div>
@@ -95,7 +134,9 @@ const SignUp = () => {
           />
         </div>
         <div className="flex flex-col gap-8 py-5">
-        <p className="text-center font-semibold " style={{color:ApiColor}}>Accessibility</p>
+          <p className="text-center font-semibold " style={{ color: ApiColor }}>
+            Accessibility
+          </p>
           <div className="flex items-center justify-between">
             <div className="">
               <label
@@ -235,7 +276,7 @@ const SignUp = () => {
         </div>
         <button
           type="submit"
-          style={{backgroundColor:ApiColor}}
+          style={{ backgroundColor: ApiColor }}
           className="  w-full hover:shadow-xl text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
           Add Product

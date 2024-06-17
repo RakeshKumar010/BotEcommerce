@@ -37,7 +37,6 @@ const SideBar = () => {
       let user = JSON.parse(userString);
       result.map((value) => {
         if (value.email == user.email) {
-      
           if (value.clientId == user._id) {
             setSAdminId(value.sAdmin);
             setAccess(value);
@@ -50,8 +49,10 @@ const SideBar = () => {
 
       let result3 = await fetch("https://psyrealestate.in/logo");
       result3 = await result3.json();
+      const filteredResults = result3.filter(value => value.clientId === user._id);
 
-      setLogos(result3[0].logo);
+      setLogos(filteredResults[0].logo);
+      console.log(filteredResults[0].logo);
     };
     getFun();
   }, []);
@@ -370,12 +371,57 @@ const SideBar = () => {
               </li>
               <li>
                 <Link
-                  to="/complate-your-profile"
+                  to="add-logo"
+                  className="flex items-center p-2 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group"
+                >
+                  <IoMdAddCircleOutline />
+                  <span className="flex-1 ms-3 whitespace-nowrap">
+                    Add Logo{" "}
+                  </span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="add-color"
+                  className="flex items-center p-2 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group"
+                >
+                  <IoColorPaletteOutline />
+                  <span className="flex-1 ms-3 whitespace-nowrap">
+                    Add Color{" "}
+                  </span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="add-nav-item"
                   className="flex items-center p-2 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group"
                 >
                   <BsMenuButtonWide />
                   <span className="flex-1 ms-3 whitespace-nowrap">
-                    Complate Your Profile
+                  Add Nav Item{" "}
+                  </span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="add-social-link"
+                  className="flex items-center p-2 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group"
+                >
+                  <SlSocialDropbox />
+                  <span className="flex-1 ms-3 whitespace-nowrap">
+                  Add Social Link{" "}
+                  </span>
+                </Link>
+              </li>
+
+              <li>
+                <Link
+                  to={"sign-up"}
+                  className={`flex hover:${bgHover}   items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group`}
+                >
+                  <IoTrailSignOutline className="text-xl" />
+                  <span className="flex-1 ms-3 whitespace-nowrap">
+                    Add Account
                   </span>
                 </Link>
               </li>
