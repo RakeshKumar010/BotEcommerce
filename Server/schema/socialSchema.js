@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const socialMobel = mongoose.Schema({
+  clientId:String,
   facebook: String,
   insta: String,
   youtube: String,

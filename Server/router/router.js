@@ -32,7 +32,7 @@ app.post("/add-products", upload.array("image"), async (req, res) => {
 
 app.post("/add-carousel", upload.single("image"), async (req, res) => {
   try {
-    let carouselData = {};
+    let carouselData = req.body;
     carouselData.carousel = req.file.path; // Add image paths to carousel data
     let result = new carouselSchema(carouselData);
     result = await result.save();
@@ -45,6 +45,11 @@ app.post("/add-carousel", upload.single("image"), async (req, res) => {
 
 app.post("/admins", async (req, res) => {
   let result = await new userSchema(req.body);
+  result = await result.save();
+  res.send(result);
+});
+app.post("/add-social-link", async (req, res) => {
+  let result = await new socialSchema(req.body);
   result = await result.save();
   res.send(result);
 });
@@ -63,6 +68,18 @@ app.post("/add-client", async (req, res) => {
   result = await result.save();
   res.send(result);
 });
+app.post("/add-color", async (req, res) => {
+  let result = await new colorSchema(req.body);
+  result = await result.save();
+  res.send(result);
+});
+app.post("/add-logo", upload.single("image"), async (req, res) => {
+  let logoData = req.body;
+  logoData.logo = req.file.path;
+  let result = await new logoSchema(logoData);
+  result = await result.save();
+  res.send(result);
+});
 
 
 app.post("/login", async (req, res) => {
@@ -73,9 +90,10 @@ app.post("/login", async (req, res) => {
  
   if (result) {
     if(result.status=="1"){
-      res.send(result)
+
+      res.status(200).send({"status":"activate"})
     }else{
-      res.status(401).send({"status":"deactivate"})
+      res.status(200).send({"status":"deactivate"})
     }
   } else {
     res.status(401).send({"status":"Invalid Information"});
@@ -133,7 +151,7 @@ app.get("/admins", async (req, res) => {
   let result = await userSchema.find();
   res.send(result);
 });
-app.get("/add-logo", async (req, res) => {
+app.get("/logo", async (req, res) => {
   let result = await logoSchema.find();
   res.send(result);
 });
@@ -143,6 +161,10 @@ app.get("/carousel", async (req, res) => {
 });
 app.get("/color", async (req, res) => {
   let result = await colorSchema.find()
+  res.send(result);
+});
+app.get("/social", async (req, res) => {
+  let result = await socialSchema.find()
   res.send(result);
 });
 app.get("/admins/:id", async (req, res) => {
@@ -230,14 +252,14 @@ app.put("/coupon/:id", async (req, res) => {
   );
   res.send(result);
 });
-app.put("/add-social-link/:id", async (req, res) => {
+app.put("/update-social-link/:id", async (req, res) => {
   let result = await socialSchema.updateOne(
     { _id: req.params.id },
     { $set: req.body }
   );
   res.send(result);
 });
-app.put("/add-logo/:id", upload.single("image"), async (req, res) => {
+app.put("/update-logo/:id", upload.single("image"), async (req, res) => {
   let logoData = {};
   logoData.logo = req.file.path; // Add image paths to logo data
   let result = await logoSchema.updateOne(
@@ -247,7 +269,7 @@ app.put("/add-logo/:id", upload.single("image"), async (req, res) => {
 
   res.send(result);
 });
-app.put("/add-color/:id", async (req, res) => {
+app.put("/update-color/:id", async (req, res) => {
   let result = await colorSchema.updateOne(
     { _id: req.params.id },
     { $set: req.body }

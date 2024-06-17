@@ -50,10 +50,10 @@ const AdminLogin = ({ setIsAdmin }) => {
     });
     response = await response.json()
  
-// console.log(response);
-    if (response.status=="1") {
+console.log(response);
+    if (response.status=="activate") {
     let {_id,email,pass}=response
-  
+
       // Handle successful login
       setIsAdmin(true);
       let user = { _id,email,pass };

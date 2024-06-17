@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const couponMobel = mongoose.Schema({
+  clientId:String,
   title: String,
   discount: String,
   code: String,
