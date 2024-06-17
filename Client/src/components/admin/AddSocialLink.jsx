@@ -71,7 +71,10 @@ const AddSocialLink = () => {
     const getData = async () => {
       let result = await fetch("https://psyrealestate.in/social");
       result = await result.json();
-      setData(result);
+      let userString = localStorage.getItem("user");
+      let user = JSON.parse(userString);
+      const filteredResults = result.filter(value => value.clientId === user._id);
+      setData(filteredResults);
     };
     getData();
   }, []);

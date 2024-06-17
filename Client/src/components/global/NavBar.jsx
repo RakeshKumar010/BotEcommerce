@@ -46,9 +46,6 @@ const NavBar = () => {
     }
 
     const getFun = async () => {
-      let result = await fetch("https://psyrealestate.in/logo");
-      result = await result.json();
-      setLogos(result[result.length - 1].logo);
 
       function trimUrl(url) {
         const parsedUrl = new URL(url);
@@ -56,17 +53,28 @@ const NavBar = () => {
           parsedUrl.hostname + (parsedUrl.port ? ":" + parsedUrl.port : "")
         );
       }
-      let currentUrl = window.location.href;
-      currentUrl = trimUrl(currentUrl);
-      let result2 = await fetch(
+      const currentUrl = trimUrl(window.location.href);
+      let response = await fetch(
         "https://psyrealestate.in/client/" + currentUrl
       );
-      result2 = await result2.json();
-      console.log(result2);
-      if (result2.status == "0") {
-        // console.log("ERROR");
+      const clientData = await response.json();
+
+      if (clientData.status == "0") {
         navigate("error");
       }
+
+      let result = await fetch("https://psyrealestate.in/logo");
+      result = await result.json();
+
+      const filteredResults = result.filter((value) => {
+        return value.clientId == clientData._id;
+      });
+      console.log(filteredResults);
+      setLogos(filteredResults[0].logo);
+
+ 
+
+      
     };
     getFun();
   }, []);

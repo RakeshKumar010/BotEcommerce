@@ -52,11 +52,11 @@ const AdminLogin = ({ setIsAdmin }) => {
  
 console.log(response);
     if (response.status=="1") {
-    let {_id,email,pass}=response
+    let {_id,name,email,pass}=response
   
       // Handle successful login
       setIsAdmin(true);
-      let user = { _id,email,pass };
+      let user = { _id,name,email,pass };
       let userString = JSON.stringify(user);
       localStorage.setItem("user", userString);
       navigate("/admin");

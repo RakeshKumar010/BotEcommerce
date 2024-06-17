@@ -8,18 +8,33 @@ const Footer = () => {
   const [socialLink, setSocialLink] = useState("");
 
   useEffect(() => {
-
-    
     const getFun = async () => {
+      function trimUrl(url) {
+        const parsedUrl = new URL(url);
+        return (
+          parsedUrl.hostname + (parsedUrl.port ? ":" + parsedUrl.port : "")
+        );
+      }
+      const currentUrl = trimUrl(window.location.href);
+      let response = await fetch(
+        "https://psyrealestate.in/client/" + currentUrl
+      );
+      const clientData = await response.json();
+
       let result = await fetch("https://psyrealestate.in/logo");
       result = await result.json();
-      setLogos(result[0].logo);
-      let socialResult = await fetch(
-        "https://psyrealestate.in/social-link/66697d798873e6507de4ca20"
-      );
+      const filteredLogoResults = result.filter((value) => {
+        return value.clientId == clientData._id;
+      });
+      setLogos(filteredLogoResults[0].logo);
+
+      let socialResult = await fetch("https://psyrealestate.in/social");
       socialResult = await socialResult.json();
-      setSocialLink(socialResult);
- 
+      const filteredResults = socialResult.filter((value) => {
+        return value.clientId == clientData._id;
+      });
+      // console.log(filteredResults);
+      setSocialLink(filteredResults[0]);
     };
     getFun();
   }, []);
@@ -46,6 +61,7 @@ const Footer = () => {
                 )}
               </Link>
               <p className="text-lg">
+          
                 In 2024, ‘CartCraze’ was launched, With Imaginative fashion as a
                 fashion destination to busy fast paced woman with a strong sense
                 of fashion.
