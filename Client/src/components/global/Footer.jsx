@@ -126,31 +126,31 @@ const Footer = () => {
                 </p>
               </div>
               <div className="flex gap-5 text-xl mb-5 cursor-pointer justify-center">
-                {socialLink.facebook == "" ? (
+                {socialLink && socialLink.facebook == "" ? (
                   ""
                 ) : (
-                  <Link target="_blank" to={socialLink.facebook}>
+                  <Link target="_blank" to={socialLink?.facebook}>
                     <FaFacebookF />
                   </Link>
                 )}
-                {socialLink.insta == "" ? (
+                {socialLink && socialLink.insta == "" ? (
                   ""
                 ) : (
-                  <Link target="_blank" to={socialLink.insta}>
+                  <Link target="_blank" to={socialLink?.insta}>
                     <FaInstagram />
                   </Link>
                 )}
-                {socialLink.youtube == "" ? (
+                {socialLink && socialLink.youtube == "" ? (
                   ""
                 ) : (
-                  <Link target="_blank" to={socialLink.youtube}>
+                  <Link target="_blank" to={socialLink?.youtube}>
                     <FaYoutube />
                   </Link>
                 )}
-                {socialLink.twitter == "" ? (
+                {socialLink && socialLink.twitter == "" ? (
                   ""
                 ) : (
-                  <Link target="_blank" to={socialLink.twitter}>
+                  <Link target="_blank" to={socialLink?.twitter}>
                     <FaTwitter />
                   </Link>
                 )}
