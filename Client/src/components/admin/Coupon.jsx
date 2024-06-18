@@ -35,7 +35,6 @@ const Coupon = () => {
     getFun();
   }, [pageLoad]);
 
- 
   return (
     <div className="bg-gray-50 border-0 md:border-2 border-dotted border-black h-screen w-full lg:w-[83%] absolute right-0 ">
       <p
@@ -57,7 +56,7 @@ const Coupon = () => {
           <th className="p-2">Action</th>
         </tr>
 
-        {data &&
+        {data && data.length > 0 ? (
           [...data]
             .reverse()
             .map(({ _id, title, discount, code, expiryDate }, index) => {
@@ -103,7 +102,14 @@ const Coupon = () => {
                   </td>
                 </tr>
               );
-            })}
+            })
+        ) : (
+          <tr>
+            <td colSpan="6" className="text-center p-2">
+              Data Not Found
+            </td>
+          </tr>
+        )}
       </table>
     </div>
   );

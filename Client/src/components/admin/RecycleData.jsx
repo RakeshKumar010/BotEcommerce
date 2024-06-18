@@ -49,7 +49,7 @@ const RecycleData = () => {
           </div>
         </div>
 
-        <table className="table-auto w-full ">
+        <table className="table-auto w-full shadow-lg ">
           <tr style={{ backgroundColor: ApiColor }} className=" text-white">
             <th>S.No.</th>
             <th>Image</th>
@@ -68,17 +68,24 @@ const RecycleData = () => {
             <th>Actions</th>
           </tr>
 
-          {data &&
-            [...data].reverse().map((value, index) => {
-              return (
+          {data && data.length > 0 ? (
+            [...data]
+              .reverse()
+              .map((value, index) => (
                 <ProductCard
                   recycle={true}
                   setPageLoad={setPageLoad}
                   value={value}
                   index={index + 1}
                 />
-              );
-            })}
+              ))
+          ) : (
+            <tr className="text-center w-full">
+              <td className="font-semibold" colSpan={14}>
+                Data not found
+              </td>
+            </tr>
+          )}
         </table>
       </div>
     </>

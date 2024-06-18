@@ -9,16 +9,14 @@ const Carousel = () => {
     const getFun = async () => {
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);
-      let result = await fetch(
-        "https://psyrealestate.in/carousel"
-      );
+      let result = await fetch("https://psyrealestate.in/carousel");
       result = await result.json();
       let filteredResults = result.filter(
         (value) => value.clientId == user._id
       );
 
       setData(filteredResults);
-   
+
       setPageLoad(result);
     };
 
@@ -27,18 +25,24 @@ const Carousel = () => {
 
   return (
     <div className="bg-gray-50 border-0 md:border-2 border-dotted border-black min-h-screen w-full lg:w-[83%] absolute right-0 ">
-      <p className="text-3xl font-bold text-center my-10 " style={{color:ApiColor}}>
+      <p
+        className="text-3xl font-bold text-center my-10 "
+        style={{ color: ApiColor }}
+      >
         All Carousel
       </p>
-      <table className=" mx-auto text-center table-fixed shadow-lg ">
-        <tr style={{backgroundColor:ApiColor}} className="border-2   text-white ">
+      <table className=" mx-auto text-center   table-fixed shadow-lg ">
+        <tr
+          style={{ backgroundColor: ApiColor }}
+          className="border-2  text-white "
+        >
           <th className="p-2">S.No.</th>
           <th className="p-2">Image</th>
 
           <th className="p-2">Action</th>
         </tr>
 
-        {data &&
+        {data && data.length > 0 ? (
           [...data].reverse().map(({ _id, carousel }, index) => {
             return (
               <tr className="border-2">
@@ -47,11 +51,10 @@ const Carousel = () => {
                   <img
                     src={`https://psyrealestate.in/${carousel}`}
                     alt="..."
-                    className="h-32  bg-cover "
+                    className="  h-52 "
                   />
                 </td>
-                <td className=" p-2">
-                  
+                <td className=" p-2 ">
                   <CgRemove
                     onClick={async () => {
                       let result = await fetch(
@@ -68,7 +71,14 @@ const Carousel = () => {
                 </td>
               </tr>
             );
-          })}
+          })
+        ) : (
+          <tr>
+            <td colSpan="3" className="text-center p-2">
+              Data Not Found
+            </td>
+          </tr>
+        )}
       </table>
     </div>
   );
