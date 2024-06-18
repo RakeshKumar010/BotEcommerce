@@ -132,7 +132,7 @@ console.log(clientData);
             className="h-8 lg:h-12 xl:h-16"
           />
         ) : (
-          <span className="flex-1 ms-3 bg-black font-bold text-3xl whitespace-nowrap">
+          <span className="flex-1 ms-3 text-black font-bold text-3xl whitespace-nowrap">
           Logo
         </span>
         )}
