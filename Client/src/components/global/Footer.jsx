@@ -57,7 +57,16 @@ const Footer = () => {
                     className="h-16 mb-5"
                   />
                 ) : (
-                  ""
+                  <li>
+                    <Link
+                      to="/admin"
+                      className="flex items-center   text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group"
+                    >
+                      <span className="flex-1 ms-3 font-bold text-3xl whitespace-nowrap">
+                        Logo
+                      </span>
+                    </Link>
+                  </li>
                 )}
               </Link>
               <p className="text-lg">

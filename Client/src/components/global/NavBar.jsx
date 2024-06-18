@@ -58,7 +58,7 @@ const NavBar = () => {
         "https://psyrealestate.in/client/" + currentUrl
       );
       const clientData = await response.json();
-
+console.log(clientData);
       if (clientData.status == "0") {
         navigate("error");
       }
@@ -132,7 +132,16 @@ const NavBar = () => {
             className="h-8 lg:h-12 xl:h-16"
           />
         ) : (
-          ""
+          <li>
+          <Link
+            to="/admin"
+            className="flex items-center   text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group"
+          >
+            <span className="flex-1 ms-3 font-bold text-3xl whitespace-nowrap">
+              Logo
+            </span>
+          </Link>
+        </li>
         )}
       </Link>
       <div
