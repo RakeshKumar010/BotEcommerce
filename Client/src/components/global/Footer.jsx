@@ -59,7 +59,7 @@ const Footer = () => {
                 ) : (
          
                   
-                      <span className="flex-1 ms-3 text-white font-bold text-3xl whitespace-nowrap">
+                      <span className=" ms-3 mb-5 text-white font-bold text-3xl whitespace-nowrap">
                         Logo
                       </span>
                  
