@@ -40,6 +40,7 @@ const AddLogo = () => {
         method: "post",
         body: formData,
       });
+      localStorage.removeItem("color");
       if (response.ok) {
         Swal.fire({
           title: "Success",
@@ -62,9 +63,10 @@ const AddLogo = () => {
       result = await result.json();
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);
-      const filteredResults = result.filter(value => value.clientId === user._id);
+      const filteredResults = result.filter(
+        (value) => value.clientId === user._id
+      );
       setData(filteredResults);
- 
     };
     getData();
   }, []);
@@ -90,7 +92,11 @@ const AddLogo = () => {
 
         <button
           type="submit"
-          style={ApiColor?{backgroundColor:ApiColor}:{backgroundColor:'black'}}
+          style={
+            ApiColor
+              ? { backgroundColor: ApiColor }
+              : { backgroundColor: "black" }
+          }
           className=" w-full hover:shadow-xl text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
           Submit

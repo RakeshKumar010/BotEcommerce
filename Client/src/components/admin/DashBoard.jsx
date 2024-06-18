@@ -8,6 +8,7 @@ import { LiaShippingFastSolid } from "react-icons/lia";
 import DashBoardCard from "./DashBoardCard";
 import { TfiLayoutSlider } from "react-icons/tfi";
 import { Link } from "react-router-dom";
+import { ApiColor } from "../api/data";
 
 const DashBoard = () => {
   const [product, setProduct] = useState();
@@ -138,7 +139,8 @@ const DashBoard = () => {
           </p>
           <Link
             to={"add-logo"}
-            className="bg-green-500 text-white p-2 transition-all px-10 rounded-md shadow-md hover:scale-105"
+            style={ApiColor?{backgroundColor:ApiColor}:{backgroundColor:'black'}}
+            className="  text-white p-2 transition-all px-10 rounded-md shadow-md hover:scale-105"
           >
             Get Start
           </Link>
