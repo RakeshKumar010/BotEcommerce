@@ -2,10 +2,8 @@ const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 const express = require("express");
 const app = express.Router();
-const productModel = require("../schema/productSchema");
 const userSchema = require("../schema/userSchema");
 const couponSchema = require("../schema/couponSchema");
-const productSchema = require("../schema/productSchema");
 const logoSchema = require("../schema/logoSchema");
 const carouselSchema = require("../schema/carouselSchema");
 const colorSchema = require("../schema/colorSchema");
@@ -13,6 +11,7 @@ const navSchema = require("../schema/navSchema");
 const socialSchema = require("../schema/socialSchema");
 const superAdminSchema = require("../schema/superAdminSchema");
 const clientSchema = require("../schema/clientSchema");
+const productSchema = require("../schema/productSchema");
  
 
 // post
@@ -21,7 +20,7 @@ app.post("/add-products", upload.array("image"), async (req, res) => {
     let productData = req.body;
     productData.image = req.files.map((file) => file.path); // Add image paths to product data
 
-    let result = new productModel(productData);
+    let result = new productSchema(productData);
     result = await result.save();
     res.send(result);
   } catch (error) {
@@ -29,7 +28,25 @@ app.post("/add-products", upload.array("image"), async (req, res) => {
     res.status(500).send("An error occurred while saving the product.");
   }
 });
+app.put("/product/:id", upload.array("image"), async (req, res) => {
+  try {
+    let productData = req.body;
+    if (req.files && req.files.length > 0) {
+      // Only add image paths if images are uploaded
+      productData.image = req.files.map((file) => file.path);
+    }
 
+    let result = await productSchema.updateOne(
+      { _id: req.params.id },
+      { $set: productData }
+    );
+    res.send(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("An error occurred while updating the product.");
+  }
+});
+ 
 app.post("/add-carousel", upload.single("image"), async (req, res) => {
   try {
     let carouselData = req.body;
@@ -121,14 +138,14 @@ app.post("/super-admin-login", async (req, res) => {
 
 //get
 app.get("/product", async (req, res) => {
-  let result = await productModel.find({ recycleId: "0" });
+  let result = await productSchema.find({ recycleId: "0" });
   res.send(result);
 });
 app.get("/", (req, res) => {
   res.send({ mess: "Api is ok" });
 });
 app.get("/product/recycle-bin", async (req, res) => {
-  let result = await productModel.find({ recycleId: "1" });
+  let result = await productSchema.find({ recycleId: "1" });
   res.send(result);
 });
 app.get("/coupon", async (req, res) => {
@@ -184,7 +201,7 @@ app.get("/admins/:id", async (req, res) => {
 
 
 app.get("/:id", async (req, res) => {
-  let result = await productModel.findOne({ _id: req.params.id });
+  let result = await productSchema.findOne({ _id: req.params.id });
   res.send(result);
 });
  
@@ -211,7 +228,7 @@ app.delete("/coupon/:id", async (req, res) => {
   res.send(result);
 });
 app.delete("/:id", async (req, res) => {
-  let result = await productModel.deleteOne({ _id: req.params.id });
+  let result = await productSchema.deleteOne({ _id: req.params.id });
   res.send(result);
 });
 
@@ -230,13 +247,7 @@ app.put("/edit-client/:id", async (req, res) => {
   );
   res.send(result);
 });
-app.put("/product/:id", async (req, res) => {
-  let result = await productSchema.updateOne(
-    { _id: req.params.id },
-    { $set: req.body }
-  );
-  res.send(result);
-});
+ 
 app.put("/recycle/:id", async (req, res) => {
   let result = await productSchema.updateOne(
     { _id: req.params.id },
@@ -244,13 +255,7 @@ app.put("/recycle/:id", async (req, res) => {
   );
   res.send(result);
 });
-app.put("/restore/:id", async (req, res) => {
-  let result = await productSchema.updateOne(
-    { _id: req.params.id },
-    { $set: req.body }
-  );
-  res.send(result);
-});
+ 
 
 app.put("/coupon/:id", async (req, res) => {
   let result = await couponSchema.updateOne(
@@ -292,22 +297,12 @@ app.put("/update-nav-item/:id", async (req, res) => {
   res.send(result);
 
 });
-app.put("/product/:id", upload.array("image"), async (req, res) => {
-  try {
-    let productData = req.body;
-    if (req.files) {
-      productData.image = req.files.map((file) => file.path); // Add new image paths to product data
-    }
 
-    let result = await productSchema.updateOne(
-      { _id: req.params.id },
-      { $set: productData }
-    );
-    res.send(result);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send("An error occurred while updating the product.");
-  }
-});
 
 module.exports = app;
+
+
+
+
+
+

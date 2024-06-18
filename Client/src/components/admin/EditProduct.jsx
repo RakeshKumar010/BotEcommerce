@@ -14,7 +14,7 @@ const categories = [
 const EditProduct = () => {
   const location = useLocation();
   const [data, setData] = useState();
-
+ 
   const [title, setTitle] = useState("");
   const [section, setSection] = useState("");
   const [image, setImage] = useState([]);
@@ -38,6 +38,7 @@ const EditProduct = () => {
     e.preventDefault();
 
     const formData = new FormData();
+ 
     formData.append("title", title);
     formData.append("rating", rating);
     formData.append("price", price);
@@ -61,14 +62,13 @@ const EditProduct = () => {
     // Append other fields...
 
     let response = await fetch(
-      "https://psyrealestate.in/product/" +
-        location.pathname.split("/").pop(),
+      "https://psyrealestate.in/product/" + location.pathname.split("/").pop(),
       {
         method: "PUT",
-        body: formData, 
+        body: formData,
       }
     );
-    console.log(response);
+
     if (response.ok) {
       // if HTTP-status is 200-299
       // get the response body
@@ -77,7 +77,7 @@ const EditProduct = () => {
         title: "Success",
         text: "Product added successfully!",
         icon: "success",
-        confirmButtonColor:`${ApiColor}`
+        confirmButtonColor: `${ApiColor}`,
       });
     } else {
       alert("HTTP-Error: " + response.status);
@@ -87,25 +87,24 @@ const EditProduct = () => {
   useEffect(() => {
     const getFun = async () => {
       let result = await fetch(
-        "https://psyrealestate.in/" +
-          location.pathname.split("/").pop()
+        "https://psyrealestate.in/" + location.pathname.split("/").pop()
       );
       result = await result.json();
       setData(result);
       setAvailability(result.availability);
+    
       setTitle(result.title);
       setSection(result.section);
       setImage(result.image);
       setRating(result.rating);
       setPrice(result.price);
       setOffer(result.offer);
-      setOffer(result.offer);
       setFabric(result.fabric);
       setDispatchTime(result.dispatchTime);
       setPieces(result.pieces);
-      setAvailability(result.availability);
       setSelectedSizes(result.selectedSizes);
       setPoints(result.points);
+   
     };
     getFun();
   }, []);
@@ -115,9 +114,13 @@ const EditProduct = () => {
         onSubmit={handleSubmit}
         className="space-y-4 w-[90vw] md:w-[50vw] bg-white shadow-md rounded px-8  pt-6 pb-8 mb-4"
       >
-        <h1 className="text-center text-2xl font-bold " style={{color:ApiColor}}>
+        <h1
+          className="text-center text-2xl font-bold "
+          style={{ color: ApiColor }}
+        >
           Edit Product
         </h1>
+        
         <div>
           <p className="block text-gray-700 text-sm font-bold mb-2">Title </p>
           <input
@@ -132,7 +135,7 @@ const EditProduct = () => {
           <p className="block text-gray-700 gap-5 text-sm font-bold mb-2">
             Image
           </p>
-        
+
           <div className="flex w-[70vw] md:w-[40vw] flex-wrap justify-between">
             {image &&
               [...image].reverse().map((value) => {
@@ -313,7 +316,7 @@ const EditProduct = () => {
           ))}
           <div className="flex justify-end my-1">
             <p
-                 style={{backgroundColor:ApiColor}}
+              style={{ backgroundColor: ApiColor }}
               className="text-end   text-white py-2 px-5 rounded-md cursor-pointer"
               onClick={() => {
                 setPoints([...points, ""]);
@@ -326,7 +329,7 @@ const EditProduct = () => {
 
         <button
           type="submit"
-          style={{backgroundColor:ApiColor}}
+          style={{ backgroundColor: ApiColor }}
           className=" w-full hover:shadow-xl text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
           Add Product

@@ -35,7 +35,7 @@ const Coupon = () => {
     getFun();
   }, [pageLoad]);
 
-  useEffect(() => {}, []);
+ 
   return (
     <div className="bg-gray-50 border-0 md:border-2 border-dotted border-black h-screen w-full lg:w-[83%] absolute right-0 ">
       <p
