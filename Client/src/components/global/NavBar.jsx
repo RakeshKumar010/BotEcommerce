@@ -84,30 +84,7 @@ const NavBar = () => {
       className="flex items-center justify-between  md:py-1 p-5 sm:px-8 lg:px-16
      bg-white/80 backdrop-blur-md sm:shadow-xl"
     >
-      {/* {searchData ? (
-        <div className="absolute z-[51] top-0 bottom-0 right-0 left-0 bg-white">
-          <div className="bg-white p-16">
-            <div className=" flex justify-between text-gray-700 font-thin cursor-pointer">
-              <p>WHAT ARE YOU LOOKING FOR?  </p>
-              <IoCloseOutline
-                className="text-2xl text-gray-600"
-                onClick={() => {
-                  setSearchData(false);
-                }}
-              />
-            </div>
-            <div className="flex items-center justify-between text-2xl  border-b-[1px]">
-              <input
-                type="text"
-                
-                className={`placeholder:text-2xl border-0 focus:ring-0 focus:border-0   px-0 w-full `}
-                placeholder="Search Products..."
-              />
-              <IoSearchOutline className="cursor-pointer" />
-            </div>
-          </div>
-        </div>
-      ) : null} */}
+     
       <IoReorderThreeOutline
         className="cursor-pointer text-3xl md:hidden block"
         onClick={() => {
