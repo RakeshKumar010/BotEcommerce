@@ -49,7 +49,7 @@ const RecycleData = () => {
           </div>
         </div>
 
-        <table className="table-auto  ">
+        <table className="table-auto w-full ">
           <tr style={{ backgroundColor: ApiColor }} className=" text-white">
             <th>S.No.</th>
             <th>Image</th>
