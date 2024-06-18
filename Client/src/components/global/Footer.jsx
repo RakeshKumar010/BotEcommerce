@@ -49,23 +49,25 @@ const Footer = () => {
           <div className="flex flex-col text-center md:text-start gap-3 md:gap-7 lg:gap-10 mt-8 w-80">
             <h3 className="text-lg font-semibold">KNOW ABOUT US </h3>
             <div className="flex flex-col items-center md:items-start">
-              <Link to={"/"}>
+             
                 {logos ? (
+                   <Link to={"/"}>
                   <img
                     src={`https://psyrealestate.in/${logos}`}
                     alt="..."
                     className="h-16 mb-5"
                   />
+                   </Link>
                 ) : (
          
-                  
-                      <span className=" ms-3 mb-5 text-white font-bold text-3xl whitespace-nowrap">
+                  <Link to={"/"} className="mb-5">
+                      <span className="   text-white font-bold text-3xl whitespace-nowrap">
                         Logo
                       </span>
-                 
+                 </Link>
            
                 )}
-              </Link>
+             
               <p className="text-lg">
           
                 In 2024, ‘CartCraze’ was launched, With Imaginative fashion as a
