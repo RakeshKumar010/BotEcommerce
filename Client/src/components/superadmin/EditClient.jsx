@@ -191,7 +191,7 @@ const EditClient = () => {
                 onChange={(e) => setStatus(e.target.value)}
                 className="mr-2 leading-tight"
               />
-              <span className="text-sm">Unactive</span>
+              <span className="text-sm">Disactive</span>
             </label>
           </div>
         </div>

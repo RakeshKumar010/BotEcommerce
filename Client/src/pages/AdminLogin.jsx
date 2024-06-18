@@ -48,19 +48,19 @@ const AdminLogin = ({ setIsAdmin }) => {
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ email, pass }),
     });
-    response = await response.json()
- 
-console.log(response);
-    if (response.status=="1") {
-    let {_id,name,email,pass}=response
-  
+    response = await response.json();
+
+    console.log(response);
+    if (response.status == "1") {
+      let { _id, name, email, pass } = response;
+
       // Handle successful login
       setIsAdmin(true);
-      let user = { _id,name,email,pass };
+      let user = { _id, name, email, pass };
       let userString = JSON.stringify(user);
       localStorage.setItem("user", userString);
       navigate("/admin");
-    }else if(response.status=="deactivate"){
+    } else if (response.status == "deactivate") {
       Swal.fire({
         icon: "error",
         title: "Deactivated Account",
