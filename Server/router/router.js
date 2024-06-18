@@ -160,11 +160,7 @@ app.get("/nav-item", async (req, res) => {
   let result = await navSchema.find();
   res.send(result);
 });
-app.get("/nav-item/:id", async (req, res) => {
-  let result = await navSchema.findOne({ _id: req.params.id });
-  res.send(result);
-
-});
+ 
 app.get("/client/:domain", async (req, res) => {
   let result = await clientSchema.findOne({ domain: req.params.domain });
   res.send(result);

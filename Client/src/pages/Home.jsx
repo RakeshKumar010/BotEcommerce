@@ -11,7 +11,7 @@ import ProDetailsPopup from "../components/ProDetailsPopup";
 import OfferImg from "../assets/image/offerImg.jpg";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import FixedBtn from "../components/global/FixedBtn";
-import { useNavigate } from "react-router-dom";
+ 
 const Home = () => {
  
   const [detailsPopup, setDetailsPopup] = useState(false);

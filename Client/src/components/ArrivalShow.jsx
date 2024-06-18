@@ -14,7 +14,7 @@ const ArrivalShow = ({ setDetailsPopup, setAddId }) => {
       let array = [];
       result.map((value) => {
          
-        if ("New-Arrivals" == value.section) {
+        if ("Newarrivals" == value.section) {
           array.push(value);
         }
         setData(array);
@@ -27,7 +27,7 @@ const ArrivalShow = ({ setDetailsPopup, setAddId }) => {
     <div className="md:p-10 p-0 ">
       <div className="text-center py-5 flex flex-col justify-center items-center ">
         <Link
-          to={"/new-arrivals"}
+          to={"/Newarrivals"}
           className="font-semibold text-lg md:text-2xl"
         >
           NEW ARRIVALS
@@ -37,7 +37,7 @@ const ArrivalShow = ({ setDetailsPopup, setAddId }) => {
         </p>
         <div className="flex items-center my-5 justify-center ">
           <Link
-            to={"/new-arrivals"}
+            to={"/Newarrivals"}
             style={{backgroundColor:ApiColor}}
             className={`flex items-center   text-white p-2 md:w-[40vw] w-[60vw]  justify-center rounded-full hover:scale-105 hover:shadow-sm hover:shadow-gray-600 transition-all duration-200`}
           >

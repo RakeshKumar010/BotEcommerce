@@ -6,27 +6,11 @@ import { ApiColor } from "../api/data";
 import { FaShoppingCart } from "react-icons/fa";
 import { HiShoppingBag } from "react-icons/hi2";
 
-const navItems = [
-  { to: "/", text: "HOME" },
-  { to: "/new-arrivals", text: "NEW ARRIVALS" },
-  { to: "/suit-sets", text: "SUIT SETS" },
-  { to: "/celebrity-stylists", text: "CELEBRITY STYLISTS" },
-  { to: "/best-seller", text: "BEST SELLER" },
-  { to: "/lehenga-sets", text: "LEHENGA SETS" },
-  {
-    to: "/sign-in",
-    text: "Sign In",
-    className: "text-gray-400 md:hidden block",
-  },
-  {
-    to: "/register",
-    text: "Register",
-    className: "text-gray-400 md:hidden block",
-  },
-];
+
 const NavBar = () => {
   const navigate = useNavigate();
   const [navRes, setNavRes] = useState(false);
+  const [navItemData, setNavItemData] = useState(false);
   const [showCart, setShowCart] = useState(false);
 
   const [logos, setLogos] = useState(false);
@@ -34,7 +18,24 @@ const NavBar = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [numOfProduct, setNumOfProduct] = useState(0);
   const location = useLocation();
-
+  const navItems = [
+    { to: "/", text: "HOME" },
+    { to: "/"+(navItemData?navItemData.nav1.replace(/\s+/g, ''):"nav1"), text: navItemData?navItemData.nav1:"nav 1" },
+    { to: "/"+(navItemData?navItemData.nav2.replace(/\s+/g, ''):"nav2"), text: navItemData?navItemData.nav2:"nav 2" },
+    { to: "/"+(navItemData?navItemData.nav3.replace(/\s+/g, ''):"nav3"), text: navItemData?navItemData.nav3:"nav 3" },
+    { to: "/"+(navItemData?navItemData.nav4.replace(/\s+/g, ''):"nav4"), text: navItemData?navItemData.nav4:"nav 4" },
+    { to: "/"+(navItemData?navItemData.nav5.replace(/\s+/g, ''):"nav5"), text: navItemData?navItemData.nav5:"nav 5" },
+    {
+      to: "/sign-in",
+      text: "Sign In",
+      className: "text-gray-400 md:hidden block",
+    },
+    {
+      to: "/register",
+      text: "Register",
+      className: "text-gray-400 md:hidden block",
+    },
+  ];
   useEffect(() => {
     const storedObject = JSON.parse(localStorage.getItem("myCart"));
     if (storedObject) {
@@ -57,7 +58,7 @@ const NavBar = () => {
         "https://psyrealestate.in/client/" + currentUrl
       );
       const clientData = await response.json();
-      console.log(clientData._id);
+
       if (clientData.status == "0") {
         navigate("error");
       }
@@ -70,6 +71,16 @@ const NavBar = () => {
       });
 
       setLogos(filteredResults[0].logo);
+
+      let resultNavItem = await fetch("https://psyrealestate.in/nav-item");
+      resultNavItem = await resultNavItem.json();
+
+      const filteredResultNavItems = resultNavItem.filter((value) => {
+        return value.clientId == clientData._id;
+      });
+      setNavItemData(
+        filteredResultNavItems.length >0? filteredResultNavItems[0] : false
+      );
     };
     getFun();
   }, []);
@@ -128,7 +139,7 @@ const NavBar = () => {
                     ? { backgroundColor: ApiColor }
                     : null
                 }
-                className={`text-base   shadow-sm  px-3
+                className={`text-base uppercase  shadow-sm  px-3
                  p-2 rounded-full hover:shadow-md hover:scale-105 transition-all duration-200 hover:shadow-gray-400
                sm:text-[12px] lg:text-[15px] xl:text-base ${
                  location.pathname == item.to

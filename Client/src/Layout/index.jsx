@@ -42,12 +42,40 @@ import ErrorPage from "../components/ErrorPage.jsx";
 const Layout = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isSuperAdmin, setIsSuperAdmin] = useState(false);
+  const [navItemData, setNavItemData] = useState(false);
   // Check local storage for admin details on component mount
   useEffect(() => {
     const admin = localStorage.getItem("user");
     const superAdmin = localStorage.getItem("superadmin");
     superAdmin ? setIsSuperAdmin(true) : null;
     admin ? setIsAdmin(true) : null;
+
+    const getFun = async () => {
+      function trimUrl(url) {
+        const parsedUrl = new URL(url);
+        return (
+          parsedUrl.hostname + (parsedUrl.port ? ":" + parsedUrl.port : "")
+        );
+      }
+      const currentUrl = trimUrl(window.location.href);
+      let response = await fetch(
+        "https://psyrealestate.in/client/" + currentUrl
+      );
+      const clientData = await response.json();
+
+      
+
+      let resultNavItem = await fetch("https://psyrealestate.in/nav-item");
+      resultNavItem = await resultNavItem.json();
+
+      const filteredResultNavItems = resultNavItem.filter((value) => {
+        return value.clientId == clientData._id;
+      });
+      setNavItemData(
+        filteredResultNavItems.length >0? filteredResultNavItems[0] : false
+      );
+    };
+    getFun();
   }, []);
 
   return (
@@ -73,21 +101,21 @@ const Layout = () => {
         />
 
         <Route
-          path="new-arrivals"
-          element={<NewArrival title={"NEW ARRIVALS"} />}
+          path={(navItemData?navItemData.nav1.replace(/\s+/g, ''):"nav1")}
+          element={<NewArrival title={navItemData?navItemData.nav1:"page 1"} />}
         />
-        <Route path="/suit-sets" element={<NewArrival title={"SUIT SETS"} />} />
+        <Route path={(navItemData?navItemData.nav2.replace(/\s+/g, ''):"nav2")} element={<NewArrival title={navItemData?navItemData.nav2:"page 2"} />} />
         <Route
-          path="/celebrity-stylists"
-          element={<NewArrival title={"CELEBRITY STYLISTS"} />}
-        />
-        <Route
-          path="/best-seller"
-          element={<NewArrival title={"BEST SELLER"} />}
+          path={(navItemData?navItemData.nav3.replace(/\s+/g, ''):"nav3")}
+          element={<NewArrival title={navItemData?navItemData.nav3:"page 3"} />}
         />
         <Route
-          path="/lehenga-sets"
-          element={<NewArrival title={"LEHENGA SETS"} />}
+          path={(navItemData?navItemData.nav4.replace(/\s+/g, ''):"nav4")}
+          element={<NewArrival title={navItemData?navItemData.nav4:"page 4"} />}
+        />
+        <Route
+          path={(navItemData?navItemData.nav5.replace(/\s+/g, ''):"nav5")}
+          element={<NewArrival title={navItemData?navItemData.nav5:"page 5"} />}
         />
         <Route path="/admin" element={isAdmin ? <Admin /> : <RedirectPage title={'Admin'} router={'/admin-login'}/>}>
           <Route index element={<DashBoard />} />

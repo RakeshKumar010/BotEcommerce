@@ -4,11 +4,11 @@ import Swal from "sweetalert2";
 import { ApiColor } from "../api/data";
 const sizes = ["XS", "S", "M", "L", "XL", "XXL", "3XL", "4XL"];
 const categories = [
-  "New-Arrivals",
-  "Suit-Sets",
-  "Celebrity-Stylists",
-  "Best-Seller",
-  "Lehenga-Sets",
+  "Newarrivals",
+  "Suitsets",
+  "Celebritystylists",
+  "Bestseller",
+  "Lehengasets",
 ];
 
 const EditProduct = () => {

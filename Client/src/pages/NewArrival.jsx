@@ -38,7 +38,9 @@ const NewArrival = ({ title }) => {
       result = await result.json();
 
       let array = [];
+   
       result.map((value) => {
+        console.log(value.section)
         if (
           location.pathname.substring(1).toUpperCase() ==
           value.section.toUpperCase()
@@ -63,7 +65,7 @@ const NewArrival = ({ title }) => {
           <NavBar />
         </div>
         <div className="pb-10">
-          <h2 style={{color:ApiColor}} className="text-2xl md:text-3xl font-bold tracking-widest my-10   text-center ">
+          <h2 style={{color:ApiColor}} className="text-2xl md:text-3xl uppercase font-bold tracking-widest my-10   text-center ">
             {title}
           </h2>
           <div className="flex justify-between px-5 sm:px-10 lg:px-20">
@@ -130,8 +132,9 @@ const NewArrival = ({ title }) => {
           {[...Array(totalItem)].map((_, index) => (
             <p
               key={index}
+              style={currentPage === index + 1 ?{backgroundColor:ApiColor}:null}
               className={`${
-                currentPage === index + 1 ? `bg-[${ApiColor}] text-white` : null
+                currentPage === index + 1 ? `  text-white` : null
               } flex justify-center items-center w-10 h-10  `}
               onClick={() => handlePageChange(index + 1)}
             >

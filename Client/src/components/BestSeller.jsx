@@ -13,7 +13,7 @@ const BestSeller = ({ setDetailsPopup, setAddId }) => {
       result = await result.json();
       let array = [];
       result.map((value) => {
-        if ("Best-Seller" == value.section) {
+        if ("Bestseller" == value.section) {
           array.push(value);
         }
         setData(array);
@@ -25,14 +25,14 @@ const BestSeller = ({ setDetailsPopup, setAddId }) => {
   return (
     <div className="md:p-10 p-0 mt-16">
       <div className="text-center py-5">
-        <Link to={"/best-seller"} className="font-semibold text-lg md:text-2xl">
+        <Link to={"/Bestseller"} className="font-semibold text-lg md:text-2xl">
           BEST SELLER
         </Link>
         <p className="">Explore suit sets</p>
         <div className="flex items-center my-5 justify-center ">
           <Link
             style={{ backgroundColor: ApiColor }}
-            to={"/best-seller"}
+            to={"/Bestseller"}
             className={`flex items-center  text-white p-2 md:w-[40vw] w-[60vw]  justify-center rounded-full hover:scale-105 hover:shadow-sm hover:shadow-gray-600 transition-all duration-200`}
           >
             <MdAddShoppingCart />
