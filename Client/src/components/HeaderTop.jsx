@@ -21,8 +21,12 @@ const HeaderTop = () => {
         // console.log(value.clientId);
         return value.clientId == clientData._id;
       });
-      
-      setApiDataColor(filteredResults[0].color);
+      if(filteredResults.length>0){
+
+        setApiDataColor(filteredResults[0].color);
+      }else{
+        setApiDataColor('black')
+      }
       //  const  ApiColor = filteredResults[filteredResults.length - 1].color;
       //  setApiDataColor(ApiColor)
     }
