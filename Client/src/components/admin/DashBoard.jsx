@@ -137,7 +137,7 @@ const DashBoard = () => {
             Complate Your Profile
           </p>
           <Link
-            to={"/add-logo"}
+            to={"add-logo"}
             className="bg-green-500 text-white p-2 transition-all px-10 rounded-md shadow-md hover:scale-105"
           >
             Get Start
