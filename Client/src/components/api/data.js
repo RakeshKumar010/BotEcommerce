@@ -16,7 +16,7 @@ async function getColor() {
     // console.log(value.clientId);
     return value.clientId == clientData._id;
   });
-  ApiColor = filteredResults[filteredResults.length - 1].color;
+  ApiColor =filteredResults.length>0? filteredResults[filteredResults.length - 1].color:'black';
   
 }
 getColor();
