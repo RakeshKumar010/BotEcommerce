@@ -40,7 +40,7 @@ const AddLogo = () => {
         method: "post",
         body: formData,
       });
-      localStorage.removeItem("color");
+      
       if (response.ok) {
         Swal.fire({
           title: "Success",

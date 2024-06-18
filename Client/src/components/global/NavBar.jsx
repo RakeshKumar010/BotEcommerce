@@ -46,7 +46,6 @@ const NavBar = () => {
     }
 
     const getFun = async () => {
-
       function trimUrl(url) {
         const parsedUrl = new URL(url);
         return (
@@ -58,7 +57,7 @@ const NavBar = () => {
         "https://psyrealestate.in/client/" + currentUrl
       );
       const clientData = await response.json();
-
+      console.log(clientData._id);
       if (clientData.status == "0") {
         navigate("error");
       }
@@ -69,12 +68,8 @@ const NavBar = () => {
       const filteredResults = result.filter((value) => {
         return value.clientId == clientData._id;
       });
-      console.log(filteredResults);
+
       setLogos(filteredResults[0].logo);
-
- 
-
-      
     };
     getFun();
   }, []);
@@ -84,7 +79,6 @@ const NavBar = () => {
       className="flex items-center justify-between  md:py-1 p-5 sm:px-8 lg:px-16
      bg-white/80 backdrop-blur-md sm:shadow-xl"
     >
-     
       <IoReorderThreeOutline
         className="cursor-pointer text-3xl md:hidden block"
         onClick={() => {
