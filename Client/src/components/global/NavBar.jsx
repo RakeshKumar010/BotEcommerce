@@ -132,16 +132,9 @@ console.log(clientData);
             className="h-8 lg:h-12 xl:h-16"
           />
         ) : (
-          <li>
-          <Link
-            to="/admin"
-            className="flex items-center   text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group"
-          >
-            <span className="flex-1 ms-3 font-bold text-3xl whitespace-nowrap">
-              Logo
-            </span>
-          </Link>
-        </li>
+          <span className="flex-1 ms-3 bg-black font-bold text-3xl whitespace-nowrap">
+          Logo
+        </span>
         )}
       </Link>
       <div
