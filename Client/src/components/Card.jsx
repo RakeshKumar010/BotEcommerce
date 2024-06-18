@@ -40,14 +40,14 @@ const Card = ({ value, setDetailsPopup, setAddId }) => {
               console.log(_id);
               setDetailsPopup(true);
             }}
-            style={{backgroundColor:ApiColor}}
+         style={ApiColor?{ backgroundColor: ApiColor }:{ backgroundColor: 'black' }}
             className={`w-10 cursor-pointer text-white flex justify-center rounded-full transition-all  items-center relative  h-10   bottom-16 `}
           >
             <IoMdEye className="" />
           </div>
           <Link
             to={"/" + _id}
-            style={{backgroundColor:ApiColor}}
+         style={ApiColor?{ backgroundColor: ApiColor }:{ backgroundColor: 'black' }}
             className={`w-10 text-white flex justify-center rounded-full transition-all items-center h-10 relative   bottom-16`}
           >
             <HiOutlineShoppingBag />

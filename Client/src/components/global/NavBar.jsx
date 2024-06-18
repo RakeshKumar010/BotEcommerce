@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { IoReorderThreeOutline, IoSearchOutline } from "react-icons/io5";
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { ApiColor } from "../api/data";
+ 
 import { FaShoppingCart } from "react-icons/fa";
 import { HiShoppingBag } from "react-icons/hi2";
 
@@ -12,7 +12,7 @@ const NavBar = () => {
   const [navRes, setNavRes] = useState(false);
   const [navItemData, setNavItemData] = useState(false);
   const [showCart, setShowCart] = useState(false);
-
+  const [apiDataColor, setApiDataColor] = useState();
   const [logos, setLogos] = useState(false);
 
   const [totalPrice, setTotalPrice] = useState(0);
@@ -82,7 +82,35 @@ const NavBar = () => {
         filteredResultNavItems.length >0? filteredResultNavItems[0] : false
       );
     };
+
+    function trimUrl(url) {
+      const parsedUrl = new URL(url);
+      return parsedUrl.hostname + (parsedUrl.port ? ":" + parsedUrl.port : "");
+    }
+    async function getColor() {
+      const currentUrl = trimUrl(window.location.href);
+      let response = await fetch(
+        "https://psyrealestate.in/client/" + currentUrl
+      );
+      const clientData = await response.json();
+
+      response = await fetch("https://psyrealestate.in/color");
+      const colorsData = await response.json();
+
+      const filteredResults = colorsData.filter((value) => {
+        // console.log(value.clientId);
+        return value.clientId == clientData._id;
+      });
+      if(filteredResults.length>0){
+
+        setApiDataColor(filteredResults[0].color);
+      }else{
+        setApiDataColor('black')
+      }
+     
+    }
     getFun();
+    getColor();
   }, []);
 
   return (
@@ -136,7 +164,7 @@ const NavBar = () => {
                 // style={{}}
                 style={
                   location.pathname == item.to
-                    ? { backgroundColor: ApiColor }
+                    ? { backgroundColor: apiDataColor }
                     : null
                 }
                 className={`text-base uppercase  shadow-sm  px-3
@@ -166,7 +194,7 @@ const NavBar = () => {
           className="text-[10px] uppercase flex flex-col items-center"
         >
           <HiShoppingBag
-            style={{ color: ApiColor }}
+            style={{ color: apiDataColor }}
             className="text-2xl   cursor-pointer"
           />
           Order
@@ -174,7 +202,7 @@ const NavBar = () => {
         <p className="text-[10px]  uppercase flex flex-col items-center">
           <FaShoppingCart
             className="text-2xl pr-1 cursor-pointer"
-            style={{ color: ApiColor }}
+            style={{ color: apiDataColor }}
             onClick={() => {
               setShowCart(!showCart);
             }}
@@ -204,7 +232,7 @@ const NavBar = () => {
                 }}
               >
                 <p
-                  style={{ backgroundColor: ApiColor }}
+                  style={{ backgroundColor: apiDataColor }}
                   className={`py-2 w-full text-white text-center  rounded-md hover:shadow-md hover:shadow-gray-400`}
                 >
                   {" "}

@@ -43,7 +43,7 @@ const Footer = () => {
     <>
       <div>
         <div
-          style={{ backgroundColor: ApiColor }}
+          style={ApiColor?{ backgroundColor: ApiColor }:{ backgroundColor: 'black' }}
           className={`flex justify-center md:justify-between flex-wrap   text-white md:p-5 lg:p-16`}
         >
           <div className="flex flex-col text-center md:text-start gap-3 md:gap-7 lg:gap-10 mt-8 w-80">

@@ -28,7 +28,7 @@ const ScrollDown = () => {
     let bg=`bg-[${ApiColor}]/90`
     return (
       <button
-      style={{backgroundColor:ApiColor}}
+      style={ApiColor?{ backgroundColor: ApiColor }:{ backgroundColor: 'black' }}
         className={`fixed bottom-16 md:bottom-2 animate-bounce right-2 z-50 p-2 rounded-full text-white  hover:${bg} ${visible ? '' : 'hidden'}`}
         onClick={scrollToBottom}
       >

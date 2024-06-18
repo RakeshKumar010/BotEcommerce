@@ -200,7 +200,7 @@ const ProductDetails = () => {
                           JSON.stringify(existingItems)
                         );
                       }}
-                      style={{ backgroundColor: ApiColor }}
+                      style={ApiColor?{ backgroundColor: ApiColor }:{ backgroundColor: 'black' }}
                       className={`w-full flex items-center gap-2 justify-center cursor-pointer hover:scale-105 hover:shadow-md 
                       hover:bg-gray-600 transition-all duration-200  text-center text-nowrap text-white py-2 px-4 rounded-md font-bold hover:${bg} `}
                     >
@@ -222,7 +222,7 @@ const ProductDetails = () => {
                         };
                         sessionStorage.setItem("myObject", JSON.stringify(obj));
                       }}
-                      style={{ backgroundColor: ApiColor }}
+                      style={ApiColor?{ backgroundColor: ApiColor }:{ backgroundColor: 'black' }}
                       className={`w-full flex items-center gap-2 justify-center cursor-pointer hover:scale-105 hover:shadow-md hover:bg-gray-600 transition-all duration-200    text-nowrap  text-center text-white   py-2 px-4 rounded-md font-bold hover:${bg}`}
                     >
                       <BsCartCheckFill />

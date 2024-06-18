@@ -31,7 +31,7 @@ const BestSeller = ({ setDetailsPopup, setAddId }) => {
         <p className="">Explore suit sets</p>
         <div className="flex items-center my-5 justify-center ">
           <Link
-            style={{ backgroundColor: ApiColor }}
+          style={ApiColor?{ backgroundColor: ApiColor }:{ backgroundColor: 'black' }}
             to={"/Bestseller"}
             className={`flex items-center  text-white p-2 md:w-[40vw] w-[60vw]  justify-center rounded-full hover:scale-105 hover:shadow-sm hover:shadow-gray-600 transition-all duration-200`}
           >
