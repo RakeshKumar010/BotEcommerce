@@ -71,20 +71,33 @@ const DashBoard = () => {
 
   useEffect(() => {
     const getFun = async () => {
-      let result1 = await fetch("https://psyrealestate.in/product");
-      result1 = await result1.json();
-      setProduct(result1.length);
-
-      let result2 = await fetch("https://psyrealestate.in/coupon");
-      result2 = await result2.json();
-      setCoupon(result2.length);
-
-      let result3 = await fetch("https://psyrealestate.in/admins");
-      result3 = await result3.json();
-      setAdmin(result3.length);
 
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);
+
+      let result1 = await fetch("https://psyrealestate.in/product");
+      result1 = await result1.json();
+      let filteredResults1 = result1.filter(
+        (value) => value.clientId == user._id
+      );
+
+      setProduct(filteredResults1.length);
+
+      let result2 = await fetch("https://psyrealestate.in/coupon");
+      result2 = await result2.json();
+      let filteredResults2 = result2.filter(
+        (value) => value.clientId == user._id
+      );
+      setCoupon(filteredResults2.length);
+
+      let result3 = await fetch("https://psyrealestate.in/admins");
+      result3 = await result3.json();
+      let filteredResults3 = result3.filter(
+        (value) => value.clientId == user._id
+      );
+      setAdmin(filteredResults3.length);
+
+    
       result3.map((value) => {
         // console.log(value.clientId);
         if (value.email == user.email) {
@@ -98,7 +111,10 @@ const DashBoard = () => {
 
       let result4 = await fetch("https://psyrealestate.in/carousel");
       result4 = await result4.json();
-      setCarousel(result4.length);
+      let filteredResults4 = result4.filter(
+        (value) => value.clientId == user._id
+      );
+      setCarousel(filteredResults4.length);
     };
     getFun();
   }, []);
