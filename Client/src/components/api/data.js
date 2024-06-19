@@ -8,13 +8,15 @@ async function getColor() {
   const currentUrl = trimUrl(window.location.href);
   let response = await fetch("https://psyrealestate.in/client/" + currentUrl);
   const clientData = await response.json();
-  
+  console.log(clientData);
+
   response = await fetch("https://psyrealestate.in/color");
   const colorsData = await response.json();
+  console.log(colorsData);
 
   const filteredResults = colorsData.filter((value) => {
     // console.log(value.clientId);
-    return value.clientId == clientData._id;
+    return value.clientId == clientData.clientId;
   });
   ApiColor = filteredResults[filteredResults.length - 1].color;
   

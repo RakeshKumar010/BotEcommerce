@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { MdChangeCircle, MdOutlineAddBusiness } from "react-icons/md";
-import { FaVanShuttle } from "react-icons/fa6";
+import {  MdOutlineAddBusiness } from "react-icons/md";
+ 
 import { BsCartCheckFill } from "react-icons/bs";
 import { IoMdClose } from "react-icons/io";
-import { IoCash } from "react-icons/io5";
+ 
 import { useNavigate } from "react-router-dom";
 import { ApiColor } from "./api/data";
 

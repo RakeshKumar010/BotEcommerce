@@ -78,7 +78,7 @@ const ProductCard = ({ value, index, setPageLoad, recycle }) => {
   };
   useEffect(() => {
     const getFun = async () => {
-      let result = await fetch("https://psyrealestate.in/admins");
+      let result = await fetch("https://psyrealestate.in/show-client");
       result = await result.json();
       let userString = localStorage.getItem('user');
       let user = JSON.parse(userString);

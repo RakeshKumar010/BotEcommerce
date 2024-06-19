@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { IoReorderThreeOutline, IoSearchOutline } from "react-icons/io5";
-
 import { Link, useLocation, useNavigate } from "react-router-dom";
-
 import { FaShoppingCart } from "react-icons/fa";
 import { HiShoppingBag } from "react-icons/hi2";
 

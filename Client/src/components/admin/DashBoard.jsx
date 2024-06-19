@@ -91,7 +91,7 @@ const DashBoard = () => {
       );
       setCoupon(filteredResults2.length);
 
-      let result3 = await fetch("https://psyrealestate.in/admins");
+      let result3 = await fetch("https://psyrealestate.in/show-client");
       result3 = await result3.json();
       let filteredResults3 = result3.filter(
         (value) => value.clientId == user._id

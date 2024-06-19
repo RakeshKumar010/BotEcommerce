@@ -37,7 +37,7 @@ const SideBar = () => {
 
   useEffect(() => {
     const getFun = async () => {
-      let result = await fetch("https://psyrealestate.in/admins");
+      let result = await fetch("https://psyrealestate.in/show-client");
       result = await result.json();
 
       setNavColor(localStorage.getItem("color"));
@@ -50,7 +50,7 @@ const SideBar = () => {
       setLoginUser(user.name.split(" ")[0]);
       result.map((value) => {
         if (value.email == user.email) {
-          if (value.clientId == user._id) {
+          if (value._id == user._id) {
             setSAdminId(value.sAdmin);
             setAccess(value);
             setIsOldUser(true);

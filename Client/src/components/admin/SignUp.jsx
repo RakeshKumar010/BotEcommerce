@@ -11,7 +11,6 @@ const SignUp = () => {
   const [deleteCoupon, setDeleteCoupon] = useState("");
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-  const [isOldUer, setIsOldUser] = useState();
   const [data, setData] = useState();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,23 +18,26 @@ const SignUp = () => {
     let user = JSON.parse(userString);
     let clientId = user._id;
 
-     if (data.length > 0) {
-      let result = await fetch("https://psyrealestate.in/admins", {
-        method: "post",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          clientId,
-          name,
-          email,
-          pass,
-          addProduct,
-          editProduct,
-          deleteProduct,
-          addCoupon,
-          editCoupon,
-          deleteCoupon,
-        }),
-      });
+    if (data.length > 0) {
+      let result = await fetch(
+        "https://psyrealestate.in/add-client",
+        {
+          method: "post",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            clientId,
+            name,
+            email,
+            pass,
+            addProduct,
+            editProduct,
+            deleteProduct,
+            addCoupon,
+            editCoupon,
+            deleteCoupon,
+          }),
+        }
+      );
 
       if (result.ok) {
         Swal.fire({
@@ -43,15 +45,15 @@ const SignUp = () => {
           text: "Created successfully!",
           icon: "success",
           confirmButtonColor: `${ApiColor}`,
-        }).then(()=>{
-          location.reload()
+        }).then(() => {
+          location.reload();
         });
       } else {
         console.log("error");
       }
-    }else{
-      let result = await fetch("https://psyrealestate.in/admins", {
-        method: "post",
+    } else {
+      let result = await fetch("https://psyrealestate.in/edit-client/" + clientId, {
+        method: "put",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
           clientId,
@@ -64,7 +66,7 @@ const SignUp = () => {
           addCoupon,
           editCoupon,
           deleteCoupon,
-          sAdmin: "1",
+     
         }),
       });
 
@@ -74,39 +76,31 @@ const SignUp = () => {
           text: "Your panel is created successfully!",
           icon: "success",
           confirmButtonColor: `${ApiColor}`,
-        }).then(()=>{
-          location.reload()
+        }).then(() => {
+          location.reload();
         });
       } else {
         console.log("error");
       }
-    } 
+    }
   };
 
   useEffect(() => {
     const getFun = async () => {
-      let result = await fetch("https://psyrealestate.in/admins");
+      let result = await fetch("https://psyrealestate.in/show-client");
       result = await result.json();
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);
-      result.map((value) => {
-        if (value.email == user.email) {
-          if (value.clientId == user._id) {
-            setSAdminId(value.sAdmin);
-            setAccess(value);
-            setIsOldUser(true);
-          } else {
-            setIsOldUser(false);
-          }
-        }
-      });
+      setName(user.name);
+      setEmail(user.email);
+      setPass(user.pass);
 
-      
       const filteredResults = result.filter((value) => {
         return value.clientId == user._id;
       });
       setData(filteredResults);
-      // console.log(filteredResults);
+      
+      console.log(filteredResults);
     };
     getFun();
   }, []);

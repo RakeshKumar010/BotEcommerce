@@ -2,7 +2,7 @@ const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 const express = require("express");
 const app = express.Router();
-const userSchema = require("../schema/userSchema");
+// const userSchema = require("../schema/userSchema");
 const couponSchema = require("../schema/couponSchema");
 const logoSchema = require("../schema/logoSchema");
 const carouselSchema = require("../schema/carouselSchema");
@@ -61,11 +61,11 @@ app.post("/add-carousel", upload.single("image"), async (req, res) => {
   }
 });
 
-app.post("/admins", async (req, res) => {
-  let result = await new userSchema(req.body);
-  result = await result.save();
-  res.send(result);
-});
+// app.post("/admins", async (req, res) => {
+//   let result = await new userSchema(req.body);
+//   result = await result.save();
+//   res.send(result);
+// });
 app.post("/add-social-link", async (req, res) => {
   let result = await new socialSchema(req.body);
   result = await result.save();
@@ -184,10 +184,10 @@ app.get("/coupon/:code", async (req, res) => {
   let result = await couponSchema.findOne({ code: req.params.code });
   res.send(result);
 });
-app.get("/admins", async (req, res) => {
-  let result = await userSchema.find();
-  res.send(result);
-});
+// app.get("/admins", async (req, res) => {
+//   let result = await userSchema.find();
+//   res.send(result);
+// });
 app.get("/logo", async (req, res) => {
   let result = await logoSchema.find();
   res.send(result);
@@ -208,10 +208,10 @@ app.get("/social", async (req, res) => {
   let result = await socialSchema.find()
   res.send(result);
 });
-app.get("/admins/:id", async (req, res) => {
-  let result = await userSchema.findOne({ _id: req.params.id });
-  res.send(result);
-});
+// app.get("/admins/:id", async (req, res) => {
+//   let result = await userSchema.findOne({ _id: req.params.id });
+//   res.send(result);
+// });
 
 
 app.get("/:id", async (req, res) => {
@@ -233,10 +233,10 @@ app.delete("/delete-client/:id", async (req, res) => {
   let result = await clientSchema.deleteOne({ _id: req.params.id });
   res.send(result);
 });
-app.delete("/admins/:id", async (req, res) => {
-  let result = await userSchema.deleteOne({ _id: req.params.id });
-  res.send(result);
-});
+// app.delete("/admins/:id", async (req, res) => {
+//   let result = await userSchema.deleteOne({ _id: req.params.id });
+//   res.send(result);
+// });
 app.delete("/coupon/:id", async (req, res) => {
   let result = await couponSchema.deleteOne({ _id: req.params.id });
   res.send(result);
@@ -247,13 +247,13 @@ app.delete("/:id", async (req, res) => {
 });
 
 // put
-app.put("/admins/:id", async (req, res) => {
-  let result = await userSchema.updateOne(
-    { _id: req.params.id },
-    { $set: req.body }
-  );
-  res.send(result);
-});
+// app.put("/admins/:id", async (req, res) => {
+//   let result = await userSchema.updateOne(
+//     { _id: req.params.id },
+//     { $set: req.body }
+//   );
+//   res.send(result);
+// });
 app.put("/edit-client/:id", async (req, res) => {
   let result = await clientSchema.updateOne(
     { _id: req.params.id },

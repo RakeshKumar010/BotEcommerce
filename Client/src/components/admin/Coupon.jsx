@@ -22,7 +22,7 @@ const Coupon = () => {
 
       setData(filteredResults);
 
-      let result2 = await fetch("https://psyrealestate.in/admins");
+      let result2 = await fetch("https://psyrealestate.in/show-client");
       result2 = await result2.json();
 
       result2.map((value) => {

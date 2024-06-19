@@ -1,14 +1,7 @@
-import React, { useState } from "react";
-import Swal from 'sweetalert2'
+import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import { ApiColor } from "../api/data";
 const sizes = ["XS", "S", "M", "L", "XL", "XXL", "3XL", "4XL"];
-const categories = [
-  "New-Arrivals",
-  "Suit-Sets",
-  "Celebrity-Stylists",
-  "Best-Seller",
-  "Lehenga-Sets",
-];
 
 const AddProduct = () => {
   const [title, setTitle] = useState("");
@@ -23,6 +16,7 @@ const AddProduct = () => {
   const [availability, setAvailability] = useState("");
   const [selectedSizes, setSelectedSizes] = useState([]);
   const [points, setPoints] = useState([""]);
+  const [categories, setCategories] = useState(false);
 
   const handleInputChange = (e, index) => {
     const newPoints = [...points];
@@ -34,12 +28,13 @@ const AddProduct = () => {
     setPoints([...points, ""]);
   };
 
-  
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+    const userString = localStorage.getItem("user");
+    const user = JSON.parse(userString);
+    const clientId=user._id
     const formData = new FormData();
+    formData.append("clientId", clientId);
     formData.append("title", title);
     formData.append("rating", rating);
     formData.append("price", price);
@@ -49,7 +44,7 @@ const AddProduct = () => {
     formData.append("pieces", pieces);
     formData.append("availability", availability);
     formData.append("section", section);
-  
+
     // Append each image file to formData
     for (let i = 0; i < image.length; i++) {
       formData.append("image", image[i]);
@@ -61,33 +56,73 @@ const AddProduct = () => {
       formData.append("selectedSizes", selectedSizes[i]);
     }
     // Append other fields...
-  
+
     let response = await fetch("https://psyrealestate.in/add-products", {
       method: "POST",
       body: formData,
     });
-  
-    if (response.ok) { // if HTTP-status is 200-299
-      // get the response body
-    
+
+    if (response.ok) {
       Swal.fire({
         title: "Success",
         text: "Product added successfully!",
         icon: "success",
-          confirmButtonColor: `${ApiColor?ApiColor:'black'}`,
+        confirmButtonColor: `${ApiColor ? ApiColor : "black"}`,
       });
     } else {
       alert("HTTP-Error: " + response.status);
     }
   };
 
+  useEffect(() => {
+    const getFun = async () => {
+      function trimUrl(url) {
+        const parsedUrl = new URL(url);
+        return (
+          parsedUrl.hostname + (parsedUrl.port ? ":" + parsedUrl.port : "")
+        );
+      }
+      const currentUrl = trimUrl(window.location.href);
+      let response = await fetch(
+        "https://psyrealestate.in/client/" + currentUrl
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      if (response.headers.get("content-length") === "0") {
+        throw new Error("Empty response body");
+      }
+      const clientData = await response.json();
+
+      if (clientData.status == "0") {
+        navigate("error");
+      }
+
+      let resultNavItem = await fetch("https://psyrealestate.in/nav-item");
+      resultNavItem = await resultNavItem.json();
+
+      const filteredResultNavItems = resultNavItem.filter((value) => {
+        return value.clientId == clientData._id;
+      });
+      // console.log(filteredResultNavItems[0]);
+      setCategories(
+        filteredResultNavItems.length > 0 ? filteredResultNavItems[0] : false
+      );
+    };
+    getFun();
+  }, []);
   return (
     <div className="absolute flex justify-center items-center bg-gray-100 right-0 border-dotted border-black border-2 min-h-screen w-full lg:w-[82%]">
       <form
         onSubmit={handleSubmit}
         className="space-y-4 w-[90vw] md:w-[50vw] bg-white shadow-md rounded px-8  pt-6 pb-8 mb-4"
       >
-        <h1 className="text-center text-2xl font-bold " style={{color:ApiColor}}>Add Product</h1>
+        <h1
+          className="text-center text-2xl font-bold "
+          style={{ color: ApiColor }}
+        >
+          Add Product
+        </h1>
         <div>
           <p className="block text-gray-700 text-sm font-bold mb-2">Title</p>
           <input
@@ -99,9 +134,7 @@ const AddProduct = () => {
         </div>
 
         <div>
-          <p className="block text-gray-700 text-sm font-bold mb-2">
-            Image
-          </p>
+          <p className="block text-gray-700 text-sm font-bold mb-2">Image</p>
           <input
             type="file"
             multiple
@@ -205,23 +238,106 @@ const AddProduct = () => {
         <div className="py-6">
           <p className="block text-gray-700 text-sm font-bold mb-2">Section</p>
           <div className="flex justify-between flex-wrap">
-            {categories.map((category) => (
-              <div key={category} className="mb-3">
-                <label className="inline-flex items-center">
-                  <input
-                    type="radio"
-                    className="form-radio rounded-full text-blue-600"
-                    name="category"
-                    value={category}
-                    checked={section === category}
-                    onChange={(e) => {
-                      setSection(e.target.value);
-                    }}
-                  />
-                  <span className="ml-2 text-gray-700 ">{category}</span>
-                </label>
-              </div>
-            ))}
+            <div className="mb-3">
+              <label className="inline-flex items-center">
+                <input
+                  type="radio"
+                  className="form-radio rounded-full text-blue-600"
+                  name="categories"
+                  value={
+                    categories.nav1 ? categories.nav1.replace(/\s+/g, "") : ""
+                  }
+                  checked={
+                    section ===
+                    (categories.nav1 ? categories.nav1.replace(/\s+/g, "") : "")
+                  }
+                  onChange={(e) => {
+                    setSection(e.target.value);
+                  }}
+                />
+                <span className="ml-2 text-gray-700 ">{categories.nav1}</span>
+              </label>
+            </div>
+            <div className="mb-3">
+              <label className="inline-flex items-center">
+                <input
+                  type="radio"
+                  className="form-radio rounded-full text-blue-600"
+                  name="categories"
+                  value={
+                    categories.nav2 ? categories.nav2.replace(/\s+/g, "") : ""
+                  }
+                  checked={
+                    section ===
+                    (categories.nav2 ? categories.nav2.replace(/\s+/g, "") : "")
+                  }
+                  onChange={(e) => {
+                    setSection(e.target.value);
+                  }}
+                />
+                <span className="ml-2 text-gray-700 ">{categories.nav2}</span>
+              </label>
+            </div>
+            <div className="mb-3">
+              <label className="inline-flex items-center">
+                <input
+                  type="radio"
+                  className="form-radio rounded-full text-blue-600"
+                  name="categories"
+                  value={
+                    categories.nav3 ? categories.nav3.replace(/\s+/g, "") : ""
+                  }
+                  checked={
+                    section ===
+                    (categories.nav3 ? categories.nav3.replace(/\s+/g, "") : "")
+                  }
+                  onChange={(e) => {
+                    setSection(e.target.value);
+                  }}
+                />
+                <span className="ml-2 text-gray-700 ">{categories.nav3}</span>
+              </label>
+            </div>
+            <div className="mb-3">
+              <label className="inline-flex items-center">
+                <input
+                  type="radio"
+                  className="form-radio rounded-full text-blue-600"
+                  name="categories"
+                  value={
+                    categories.nav4 ? categories.nav4.replace(/\s+/g, "") : ""
+                  }
+                  checked={
+                    section ===
+                    (categories.nav4 ? categories.nav4.replace(/\s+/g, "") : "")
+                  }
+                  onChange={(e) => {
+                    setSection(e.target.value);
+                  }}
+                />
+                <span className="ml-2 text-gray-700 ">{categories.nav4}</span>
+              </label>
+            </div>
+            <div className="mb-3">
+              <label className="inline-flex items-center">
+                <input
+                  type="radio"
+                  className="form-radio rounded-full text-blue-600"
+                  name="categories"
+                  value={
+                    categories.nav5 ? categories.nav5.replace(/\s+/g, "") : ""
+                  }
+                  checked={
+                    section ===
+                    (categories.nav5 ? categories.nav5.replace(/\s+/g, "") : "")
+                  }
+                  onChange={(e) => {
+                    setSection(e.target.value);
+                  }}
+                />
+                <span className="ml-2 text-gray-700 ">{categories.nav5}</span>
+              </label>
+            </div>
           </div>
         </div>
         <div>
@@ -266,7 +382,7 @@ const AddProduct = () => {
           ))}
           <div className="flex justify-end my-1">
             <p
-            style={{backgroundColor:ApiColor}}
+              style={{ backgroundColor: ApiColor }}
               className="text-end  text-white py-2 px-5 rounded-md cursor-pointer"
               onClick={handleAddClick}
             >
@@ -277,7 +393,11 @@ const AddProduct = () => {
 
         <button
           type="submit"
-          style={ApiColor?{backgroundColor:ApiColor}:{backgroundColor:'black'}}
+          style={
+            ApiColor
+              ? { backgroundColor: ApiColor }
+              : { backgroundColor: "black" }
+          }
           className=" w-full hover:shadow-xl text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
           Add Product
