@@ -35,6 +35,7 @@ const SignUp = () => {
             addCoupon,
             editCoupon,
             deleteCoupon,
+            sAdmin:"0"
           }),
         }
       );
@@ -91,15 +92,18 @@ const SignUp = () => {
       result = await result.json();
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);
-      setName(user.name);
-      setEmail(user.email);
-      setPass(user.pass);
+    
 
       const filteredResults = result.filter((value) => {
         return value.clientId == user._id;
       });
       setData(filteredResults);
-      
+      if(filteredResults.length< 0){
+        setName(user.name);
+        setEmail(user.email);
+        setPass(user.pass);
+      }
+   
       console.log(filteredResults);
     };
     getFun();

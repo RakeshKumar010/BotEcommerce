@@ -3,18 +3,12 @@ import { useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
 import { ApiColor } from "../api/data";
 const sizes = ["XS", "S", "M", "L", "XL", "XXL", "3XL", "4XL"];
-const categories = [
-  "Newarrivals",
-  "Suitsets",
-  "Celebritystylists",
-  "Bestseller",
-  "Lehengasets",
-];
+ 
 
 const EditProduct = () => {
   const location = useLocation();
   const [data, setData] = useState();
- 
+  const [categories, setCategories] = useState(false);
   const [title, setTitle] = useState("");
   const [section, setSection] = useState("");
   const [image, setImage] = useState([]);
@@ -105,6 +99,38 @@ const EditProduct = () => {
       setSelectedSizes(result.selectedSizes);
       setPoints(result.points);
    
+      function trimUrl(url) {
+        const parsedUrl = new URL(url);
+        return (
+          parsedUrl.hostname + (parsedUrl.port ? ":" + parsedUrl.port : "")
+        );
+      }
+      const currentUrl = trimUrl(window.location.href);
+      let response = await fetch(
+        "https://psyrealestate.in/client/" + currentUrl
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      if (response.headers.get("content-length") === "0") {
+        throw new Error("Empty response body");
+      }
+      const clientData = await response.json();
+
+      if (clientData.status == "0") {
+        navigate("error");
+      }
+
+      let resultNavItem = await fetch("https://psyrealestate.in/nav-item");
+      resultNavItem = await resultNavItem.json();
+
+      const filteredResultNavItems = resultNavItem.filter((value) => {
+        return value.clientId == clientData._id;
+      });
+      // console.log(filteredResultNavItems[0]);
+      setCategories(
+        filteredResultNavItems.length > 0 ? filteredResultNavItems[0] : false
+      );
     };
     getFun();
   }, []);
@@ -253,23 +279,106 @@ const EditProduct = () => {
         <div className="py-6">
           <p className="block text-gray-700 text-sm font-bold mb-2">Section</p>
           <div className="flex justify-between flex-wrap">
-            {categories.map((category) => (
-              <div key={category} className="mb-3">
-                <label className="inline-flex items-center">
-                  <input
-                    type="radio"
-                    className="form-radio rounded-full text-blue-600"
-                    name="category"
-                    value={category}
-                    checked={section === category}
-                    onChange={(e) => {
-                      setSection(e.target.value);
-                    }}
-                  />
-                  <span className="ml-2 text-gray-700 ">{category}</span>
-                </label>
-              </div>
-            ))}
+            <div className="mb-3">
+              <label className="inline-flex items-center">
+                <input
+                  type="radio"
+                  className="form-radio rounded-full text-blue-600"
+                  name="categories"
+                  value={
+                    categories.nav1 ? categories.nav1.replace(/\s+/g, "") : ""
+                  }
+                  checked={
+                    section ===
+                    (categories.nav1 ? categories.nav1.replace(/\s+/g, "") : "")
+                  }
+                  onChange={(e) => {
+                    setSection(e.target.value);
+                  }}
+                />
+                <span className="ml-2 text-gray-700 ">{categories.nav1}</span>
+              </label>
+            </div>
+            <div className="mb-3">
+              <label className="inline-flex items-center">
+                <input
+                  type="radio"
+                  className="form-radio rounded-full text-blue-600"
+                  name="categories"
+                  value={
+                    categories.nav2 ? categories.nav2.replace(/\s+/g, "") : ""
+                  }
+                  checked={
+                    section ===
+                    (categories.nav2 ? categories.nav2.replace(/\s+/g, "") : "")
+                  }
+                  onChange={(e) => {
+                    setSection(e.target.value);
+                  }}
+                />
+                <span className="ml-2 text-gray-700 ">{categories.nav2}</span>
+              </label>
+            </div>
+            <div className="mb-3">
+              <label className="inline-flex items-center">
+                <input
+                  type="radio"
+                  className="form-radio rounded-full text-blue-600"
+                  name="categories"
+                  value={
+                    categories.nav3 ? categories.nav3.replace(/\s+/g, "") : ""
+                  }
+                  checked={
+                    section ===
+                    (categories.nav3 ? categories.nav3.replace(/\s+/g, "") : "")
+                  }
+                  onChange={(e) => {
+                    setSection(e.target.value);
+                  }}
+                />
+                <span className="ml-2 text-gray-700 ">{categories.nav3}</span>
+              </label>
+            </div>
+            <div className="mb-3">
+              <label className="inline-flex items-center">
+                <input
+                  type="radio"
+                  className="form-radio rounded-full text-blue-600"
+                  name="categories"
+                  value={
+                    categories.nav4 ? categories.nav4.replace(/\s+/g, "") : ""
+                  }
+                  checked={
+                    section ===
+                    (categories.nav4 ? categories.nav4.replace(/\s+/g, "") : "")
+                  }
+                  onChange={(e) => {
+                    setSection(e.target.value);
+                  }}
+                />
+                <span className="ml-2 text-gray-700 ">{categories.nav4}</span>
+              </label>
+            </div>
+            <div className="mb-3">
+              <label className="inline-flex items-center">
+                <input
+                  type="radio"
+                  className="form-radio rounded-full text-blue-600"
+                  name="categories"
+                  value={
+                    categories.nav5 ? categories.nav5.replace(/\s+/g, "") : ""
+                  }
+                  checked={
+                    section ===
+                    (categories.nav5 ? categories.nav5.replace(/\s+/g, "") : "")
+                  }
+                  onChange={(e) => {
+                    setSection(e.target.value);
+                  }}
+                />
+                <span className="ml-2 text-gray-700 ">{categories.nav5}</span>
+              </label>
+            </div>
           </div>
         </div>
         <div>

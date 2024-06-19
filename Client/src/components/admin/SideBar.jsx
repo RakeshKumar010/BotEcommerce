@@ -50,7 +50,7 @@ const SideBar = () => {
       setLoginUser(user.name.split(" ")[0]);
       result.map((value) => {
         if (value.email == user.email) {
-          if (value._id == user._id) {
+          if (value.clientId == user._id) {
             setSAdminId(value.sAdmin);
             setAccess(value);
             setIsOldUser(true);
