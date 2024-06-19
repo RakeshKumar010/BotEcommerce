@@ -11,32 +11,31 @@ import ProDetailsPopup from "../components/ProDetailsPopup";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import FixedBtn from "../components/global/FixedBtn";
 
-const Home = ({ urlInfo }) => {
+const Home = () => {
   const [detailsPopup, setDetailsPopup] = useState(false);
   const [addId, setAddId] = useState(false);
   const [popUp, setPopUp] = useState(false);
   const [data, setData] = useState();
 
-    
-const dummyData=[
-  {
-    "carousel": "https://vonex.com.au/wp-content/uploads/2021/09/MicrosoftTeams-image-6-768x259.jpg",
+  const dummyData = [
+    {
+      carousel:
+        "https://vonex.com.au/wp-content/uploads/2021/09/MicrosoftTeams-image-6-768x259.jpg",
+    },
+    {
+      carousel:
+        "https://vonex.com.au/wp-content/uploads/2021/09/MicrosoftTeams-image-6-768x259.jpg",
+    },
+    {
+      carousel:
+        "https://vonex.com.au/wp-content/uploads/2021/09/MicrosoftTeams-image-6-768x259.jpg",
+    },
 
-},
-  {
-      "carousel": "https://vonex.com.au/wp-content/uploads/2021/09/MicrosoftTeams-image-6-768x259.jpg",
-
-  },
-  {
-      "carousel": "https://vonex.com.au/wp-content/uploads/2021/09/MicrosoftTeams-image-6-768x259.jpg",
-
-  },
-  
-  {
-      "carousel": "https://vonex.com.au/wp-content/uploads/2021/09/MicrosoftTeams-image-6-768x259.jpg",
-
-  }
-]
+    {
+      carousel:
+        "https://vonex.com.au/wp-content/uploads/2021/09/MicrosoftTeams-image-6-768x259.jpg",
+    },
+  ];
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -46,16 +45,31 @@ const dummyData=[
     // trim url
 
     const getFun = async () => {
+
+      function trimUrl(url) {
+        const parsedUrl = new URL(url);
+        return (
+          parsedUrl.hostname + (parsedUrl.port ? ":" + parsedUrl.port : "")
+        );
+      }
+      const currentUrl = trimUrl(window.location.href);
+      let response = await fetch(
+        "https://psyrealestate.in/client/" + currentUrl
+      );
+      const clientData = await response.json();
+
+      
       let result = await fetch("https://psyrealestate.in/carousel");
       result = await result.json();
- 
+
       const filterResult = result.filter((value) => {
-        return value.clientId == urlInfo._id;
+        return value.clientId == clientData._id;
       });
+      console.log(filterResult);
       if (filterResult.length > 0) {
         setData(filterResult);
       } else {
-        setData(null)
+        setData(null);
       }
     };
     getFun();
@@ -74,7 +88,7 @@ const dummyData=[
           <NavBar />
         </div>
         <div className="mt-28">
-          <Banner data={data} dummyData={dummyData}/>
+          <Banner data={data} dummyData={dummyData} />
         </div>
       </div>
 
@@ -97,7 +111,9 @@ const dummyData=[
           />
           <img
             src={
-              data ? `https://psyrealestate.in/${data[1].carousel}` : "https://vonex.com.au/wp-content/uploads/2021/09/MicrosoftTeams-image-6-768x259.jpg"
+              data
+                ? `https://psyrealestate.in/${data[0].carousel}`
+                : "https://vonex.com.au/wp-content/uploads/2021/09/MicrosoftTeams-image-6-768x259.jpg"
             }
             alt="..."
             className="md:w-1/2 w-full rounded-md shadow-md"

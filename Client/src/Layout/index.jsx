@@ -43,7 +43,7 @@ const Layout = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isSuperAdmin, setIsSuperAdmin] = useState(false);
   const [navItemData, setNavItemData] = useState(false);
-  const [urlInfo,setUrlInfo]=useState()
+   
   // Check local storage for admin details on component mount
   useEffect(() => {
     const admin = localStorage.getItem("user");
@@ -64,7 +64,7 @@ const Layout = () => {
       );
       const clientData = await response.json();
 
-      setUrlInfo(clientData);
+    
 
       let resultNavItem = await fetch("https://psyrealestate.in/nav-item");
       resultNavItem = await resultNavItem.json();
@@ -72,7 +72,7 @@ const Layout = () => {
       const filteredResultNavItems = resultNavItem.filter((value) => {
         return value.clientId == clientData._id;
       });
-      
+
       setNavItemData(
         filteredResultNavItems.length >0? filteredResultNavItems[0] : false
       );
@@ -83,7 +83,7 @@ const Layout = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home urlInfo={urlInfo}/>} />
+        <Route path="/" element={<Home />} />
         <Route path="/thanku-page" element={<ThankuPage />} />
         <Route path="/add-to-cart" element={<AddToCart />} />
         <Route path="orders" element={<AllOrder />} />
