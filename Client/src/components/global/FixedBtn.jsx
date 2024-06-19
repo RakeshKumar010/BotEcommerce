@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { RiArrowUpSFill } from "react-icons/ri";
-import OfferImg from "../../assets/image/offerImg.jpg";
+ 
 
 const FixedBtn = ({data}) => {
   const [offerImg, setOfferImg] = useState(false);

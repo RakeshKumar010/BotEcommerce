@@ -1,14 +1,25 @@
-import Banner from "../assets/image/banner1.webp";
+// import Banner from "../assets/image/banner1.webp";
 
-const DreshList = () => {
+const DreshList = ({ banner }) => {
+ 
   return (
-    <div className="bg-white pb-3">
+    <>
+      {banner ? (
+        <div className="bg-white pb-3">
+          <img
+            src={`https://psyrealestate.in/${banner}`}
+            alt="..."
+            className="w-full"
+          />
+        </div>
+      ) :<div className="bg-white pb-3">
       <img
-        src={Banner}
+        src={`https://www.smallseotools.co.uk/placeholder/600x300/D5D5D5/584959`}
         alt="..."
         className="w-full"
       />
-    </div>
+    </div>}
+    </>
   );
 };
 

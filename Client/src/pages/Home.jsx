@@ -16,6 +16,7 @@ const Home = () => {
   const [addId, setAddId] = useState(false);
   const [popUp, setPopUp] = useState(false);
   const [data, setData] = useState();
+  const [banner, setbanner] = useState();
 
   const dummyData = [
     {
@@ -45,7 +46,6 @@ const Home = () => {
     // trim url
 
     const getFun = async () => {
-
       function trimUrl(url) {
         const parsedUrl = new URL(url);
         return (
@@ -58,18 +58,29 @@ const Home = () => {
       );
       const clientData = await response.json();
 
-      
       let result = await fetch("https://psyrealestate.in/carousel");
       result = await result.json();
 
       const filterResult = result.filter((value) => {
         return value.clientId == clientData._id;
       });
-      console.log(filterResult);
+
       if (filterResult.length > 0) {
         setData(filterResult);
       } else {
         setData(null);
+      }
+      let bannerResult = await fetch("https://psyrealestate.in/banner");
+      bannerResult = await bannerResult.json();
+      // console.log(bannerResult);
+      const filterbannerResult = bannerResult.filter((value) => {
+        return value.clientId == clientData._id;
+      });
+      // console.log(filterbannerResult[0].banner);
+      if (filterbannerResult.length > 0) {
+        setbanner(filterbannerResult[0].banner);
+      } else {
+        setbanner(null);
       }
     };
     getFun();
@@ -96,7 +107,7 @@ const Home = () => {
         <HeaderTop />
         <NavBar />
       </div>
-      <DreshList />
+      <DreshList banner={banner} />
       <ArrivalShow setAddId={setAddId} setDetailsPopup={setDetailsPopup} />
       <BestSeller setAddId={setAddId} setDetailsPopup={setDetailsPopup} />
       <FeatureBottom />
