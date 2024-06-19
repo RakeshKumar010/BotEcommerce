@@ -74,7 +74,7 @@ const AddProduct = () => {
         title: "Success",
         text: "Product added successfully!",
         icon: "success",
-        confirmButtonColor:`${ApiColor}`
+          confirmButtonColor: `${ApiColor?ApiColor:'black'}`,
       });
     } else {
       alert("HTTP-Error: " + response.status);

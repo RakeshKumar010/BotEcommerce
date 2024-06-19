@@ -34,7 +34,7 @@ const AddSocialLink = () => {
           title: "Success",
           text: "Social link added successfully!",
           icon: "success",
-          confirmButtonColor: `${ApiColor}`,
+            confirmButtonColor: `${ApiColor?ApiColor:'black'}`,
         }).then(() => {
           location.reload();
         });
@@ -53,7 +53,7 @@ const AddSocialLink = () => {
           title: "Success",
           text: "Social link added successfully!",
           icon: "success",
-          confirmButtonColor: `${ApiColor}`,
+            confirmButtonColor: `${ApiColor?ApiColor:'black'}`,
         }).then(() => {
           location.reload();
         });

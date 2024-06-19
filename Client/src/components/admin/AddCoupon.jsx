@@ -25,7 +25,7 @@ const AddCoupon = () => {
         title: "Success",
         text: "Coupon added successfully!",
         icon: "success",
-        confirmButtonColor:`${ApiColor}`
+          confirmButtonColor: `${ApiColor?ApiColor:'black'}`,
       });
     } else {
       alert("HTTP-Error: " + response.status);

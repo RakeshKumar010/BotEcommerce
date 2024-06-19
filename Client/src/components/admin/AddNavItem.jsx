@@ -30,7 +30,7 @@ const AddNavItem = () => {
           title: "Success",
           text: "Navbar Text added successfully!",
           icon: "success",
-          confirmButtonColor: `${ApiColor}`,
+            confirmButtonColor: `${ApiColor?ApiColor:'black'}`,
         });
       } else {
         alert("HTTP-Error: " + response.status);
@@ -47,7 +47,7 @@ const AddNavItem = () => {
           title: "Success",
           text: "Social link added successfully!",
           icon: "success",
-          confirmButtonColor: `${ApiColor}`,
+            confirmButtonColor: `${ApiColor?ApiColor:'black'}`,
         }).then(() => {
           location.reload();
         });

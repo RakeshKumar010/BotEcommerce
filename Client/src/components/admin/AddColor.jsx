@@ -27,7 +27,7 @@ const AddColor = () => {
         title: "Success",
         text: "Color added successfully!",
         icon: "success",
-        confirmButtonColor: ApiColor,
+          confirmButtonColor: `${ApiColor?ApiColor:'black'}`,
       }).then((result) => {
         if (result.value) {
           location.reload();
@@ -48,7 +48,7 @@ const AddColor = () => {
         title: "Success",
         text: "Color added successfully!",
         icon: "success",
-        confirmButtonColor: ApiColor,
+          confirmButtonColor: `${ApiColor?ApiColor:'black'}`,
       }).then((result) => {
         if (result.value) {
           location.reload();

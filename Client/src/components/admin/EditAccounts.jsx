@@ -29,7 +29,7 @@ const EditAccounts = () => {
           title: "Success",
           text: "Edited successfully!",
           icon: "success",
-          confirmButtonColor:`${ApiColor}`
+            confirmButtonColor: `${ApiColor?ApiColor:'black'}`
         });
         setTimeout(() => {
             navigate('/admin/account')
