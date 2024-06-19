@@ -46,7 +46,7 @@ const AddLogo = () => {
           title: "Success",
           text: "Logo added successfully!",
           icon: "success",
-          confirmButtonColor: `${ApiColor}`,
+          confirmButtonColor: `${ApiColor?ApiColor:'black'}`,
         }).then((result) => {
           if (result.value) {
             location.reload();
