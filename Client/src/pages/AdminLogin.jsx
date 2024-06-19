@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { ApiColor } from "../components/api/data";
 // import { jwtDecode } from "jwt-decode";
 const AdminLogin = ({ setIsAdmin }) => {
   const navigate = useNavigate();
@@ -73,6 +74,7 @@ const AdminLogin = ({ setIsAdmin }) => {
         icon: "error",
         title: "Incorrect Password",
         text: `You have ${3 - countWPass} attempts left.`,
+        confirmButtonColor: `${ApiColor?ApiColor:'black'}`,
       });
     }
   };
@@ -129,6 +131,7 @@ const AdminLogin = ({ setIsAdmin }) => {
           <div className="flex flex-col gap-3 justify-center ">
             <button
               type="submit"
+              style={ApiColor?{backgroundColor:ApiColor}:{backgroundColor:'black'}}
               disabled={countWPass >= 3} // This will disable the button when countWPass is 3 or more
               className={`p-3 w-full bg-blue-500 text-white rounded-md shadow-md ${
                 countWPass >= 3 ? "bg-blue-300" : "hover:bg-blue-600"

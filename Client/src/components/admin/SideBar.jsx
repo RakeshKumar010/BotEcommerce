@@ -13,7 +13,7 @@ import { TfiLayoutSliderAlt } from "react-icons/tfi";
 import { FaLock, FaRegUser, FaSortDown } from "react-icons/fa";
 import { LuRecycle } from "react-icons/lu";
 import { Link } from "react-router-dom";
-import { RiCoupon2Line } from "react-icons/ri";
+import { RiCoupon2Line, RiImageAddLine } from "react-icons/ri";
 import { BsMenuButtonWide } from "react-icons/bs";
 import { SlSocialDropbox } from "react-icons/sl";
 import { ApiColor } from "../api/data";
@@ -111,6 +111,15 @@ const SideBar = () => {
             to: "add-logo",
             text: "Add Logo",
             icon: <IoMdAddCircleOutline className="text-xl" />,
+          },
+        ]
+      : []),
+    ...(sAdminId == "1"
+      ? [
+          {
+            to: "add-banner",
+            text: "Add Banner",
+            icon: <RiImageAddLine className="text-xl" />,
           },
         ]
       : []),

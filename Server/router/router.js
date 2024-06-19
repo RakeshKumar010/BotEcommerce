@@ -12,6 +12,7 @@ const socialSchema = require("../schema/socialSchema");
 const superAdminSchema = require("../schema/superAdminSchema");
 const clientSchema = require("../schema/clientSchema");
 const productSchema = require("../schema/productSchema");
+const bannerSchema = require("../schema/bannerSchema");
  
 
 // post
@@ -102,6 +103,13 @@ app.post("/add-logo", upload.single("image"), async (req, res) => {
   result = await result.save();
   res.send(result);
 });
+app.post("/add-banner", upload.single("image"), async (req, res) => {
+  let bannerData = req.body;
+  bannerData.banner = req.file.path;
+  let result = await new bannerSchema(bannerData);
+  result = await result.save();
+  res.send(result);
+});
 
 
 app.post("/login", async (req, res) => {
@@ -182,6 +190,10 @@ app.get("/admins", async (req, res) => {
 });
 app.get("/logo", async (req, res) => {
   let result = await logoSchema.find();
+  res.send(result);
+});
+app.get("/banner", async (req, res) => {
+  let result = await bannerSchema.find();
   res.send(result);
 });
 app.get("/carousel", async (req, res) => {
@@ -279,6 +291,16 @@ app.put("/update-logo/:id", upload.single("image"), async (req, res) => {
   let result = await logoSchema.updateOne(
     { _id: req.params.id },
     { $set: logoData }
+  );
+
+  res.send(result);
+});
+app.put("/update-banner/:id", upload.single("image"), async (req, res) => {
+  let bannerData = {};
+  bannerData.banner = req.file.path; // Add image paths to banner data
+  let result = await bannerSchema.updateOne(
+    { _id: req.params.id },
+    { $set: bannerData }
   );
 
   res.send(result);

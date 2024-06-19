@@ -38,6 +38,7 @@ import AllClient from "../components/superadmin/AllClient.jsx";
 import EditClient from "../components/superadmin/EditClient.jsx";
 import SuperAdminLogin from "../pages/SuperAdminLogin.jsx";
 import ErrorPage from "../components/ErrorPage.jsx";
+import AddBanner from "../components/admin/AddBanner.jsx";
 
 const Layout = () => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -132,6 +133,7 @@ const Layout = () => {
           <Route path="add-coupon" element={<AddCoupon />} />
           <Route path="add-products" element={<AddProduct />} />
           <Route path="add-logo" element={<AddLogo />} />
+          <Route path="add-banner" element={<AddBanner />} />
           <Route path="add-color" element={<AddColor />} />
           <Route path="add-nav-item" element={<AddNavItem />} />
           <Route path="add-social-link" element={<AddSocialLink />} />
