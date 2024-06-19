@@ -9,7 +9,7 @@ const FixedBtn = ({data}) => {
       {offerImg ? (
         <div
           style={{
-            background: `url(${data?`https://psyrealestate.in/${data[1].carousel}`:OfferImg}) no-repeat center center`,
+            background: `url(${data?`https://psyrealestate.in/${data[1].carousel}`:"https://vonex.com.au/wp-content/uploads/2021/09/MicrosoftTeams-image-6-768x259.jpg"}) no-repeat center center`,
             // background: `url(${data?'OfferImg':OfferImg}) no-repeat center center`,
             backgroundSize: "cover",
           }}

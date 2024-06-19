@@ -9,6 +9,7 @@ import FilterSide from "../components/FilterSide";
 import { useLocation } from "react-router-dom";
 import ProDetailsPopup from "../components/ProDetailsPopup";
 import { ApiColor } from "../components/api/data";
+import DummyCard from "../components/DummyCard";
 
 const NewArrival = ({ title }) => {
   const itemsPerPage = 8;
@@ -38,16 +39,15 @@ const NewArrival = ({ title }) => {
       result = await result.json();
 
       let array = [];
-   
+
       result.map((value) => {
-        console.log(value.section)
         if (
           location.pathname.substring(1).toUpperCase() ==
           value.section.toUpperCase()
         ) {
           array.push(value);
         }
-        setData(array);
+        array.length > 0 ? setData(array) : setData(null);
       });
       const totalPages = Math.ceil(array.length / itemsPerPage);
       setTotalItem(totalPages);
@@ -65,7 +65,10 @@ const NewArrival = ({ title }) => {
           <NavBar />
         </div>
         <div className="pb-10">
-          <h2 style={{color:ApiColor}} className="text-2xl md:text-3xl uppercase font-bold tracking-widest my-10   text-center ">
+          <h2
+            style={{ color: ApiColor }}
+            className="text-2xl md:text-3xl uppercase font-bold tracking-widest my-10   text-center "
+          >
             {title}
           </h2>
           <div className="flex justify-between px-5 sm:px-10 lg:px-20">
@@ -73,7 +76,11 @@ const NewArrival = ({ title }) => {
               onClick={() => {
                 setFilterOpen(true);
               }}
-              style={{backgroundColor:ApiColor}}
+              style={
+                ApiColor
+                  ? { backgroundColor: ApiColor }
+                  : { backgroundColor: "black" }
+              }
               className="flex   cursor-pointer text-white items-center py-2 px-1 md:px-16 my-5 gap-2"
             >
               <VscSettings />
@@ -101,24 +108,37 @@ const NewArrival = ({ title }) => {
               </select>
             </div>
           </div>
-          <div className="flex justify-center flex-wrap gap-4 gap-y-7 sm:px-2 xl:px-10">
-            {data &&
-              [...data]
-                .slice(
-                  (currentPage - 1) * itemsPerPage,
-                  currentPage * itemsPerPage
-                )
-                .map((value) => {
-                  return (
-                    <Card
-                      setDetailsPopup={setDetailsPopup}
-                      value={value}
-                      setAddId={setAddId}
-                      location={location}
-                    />
-                  );
-                })}
-          </div>
+          {data ? (
+            <div className="flex justify-center flex-wrap gap-4 gap-y-7 sm:px-2 xl:px-10">
+              {data &&
+                [...data]
+                  .slice(
+                    (currentPage - 1) * itemsPerPage,
+                    currentPage * itemsPerPage
+                  )
+                  .map((value) => {
+                    return (
+                      <Card
+                        setDetailsPopup={setDetailsPopup}
+                        value={value}
+                        setAddId={setAddId}
+                        location={location}
+                      />
+                    );
+                  })}
+            </div>
+          ) : (
+            <div className="flex justify-center flex-wrap gap-4 gap-y-7 sm:px-2 xl:px-10">
+              <DummyCard />
+              <DummyCard />
+              <DummyCard />
+              <DummyCard />
+              <DummyCard />
+              <DummyCard />
+              <DummyCard />
+              <DummyCard />
+            </div>
+          )}
         </div>
         {/* pagination  */}
 
@@ -132,7 +152,9 @@ const NewArrival = ({ title }) => {
           {[...Array(totalItem)].map((_, index) => (
             <p
               key={index}
-              style={currentPage === index + 1 ?{backgroundColor:ApiColor}:null}
+              style={
+                currentPage === index + 1 ? { backgroundColor: ApiColor } : null
+              }
               className={`${
                 currentPage === index + 1 ? `  text-white` : null
               } flex justify-center items-center w-10 h-10  `}

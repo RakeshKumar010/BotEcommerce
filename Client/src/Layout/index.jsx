@@ -43,6 +43,7 @@ const Layout = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isSuperAdmin, setIsSuperAdmin] = useState(false);
   const [navItemData, setNavItemData] = useState(false);
+  const [urlInfo,setUrlInfo]=useState()
   // Check local storage for admin details on component mount
   useEffect(() => {
     const admin = localStorage.getItem("user");
@@ -63,7 +64,7 @@ const Layout = () => {
       );
       const clientData = await response.json();
 
-      
+      setUrlInfo(clientData);
 
       let resultNavItem = await fetch("https://psyrealestate.in/nav-item");
       resultNavItem = await resultNavItem.json();
@@ -71,6 +72,7 @@ const Layout = () => {
       const filteredResultNavItems = resultNavItem.filter((value) => {
         return value.clientId == clientData._id;
       });
+      
       setNavItemData(
         filteredResultNavItems.length >0? filteredResultNavItems[0] : false
       );
@@ -81,7 +83,7 @@ const Layout = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home urlInfo={urlInfo}/>} />
         <Route path="/thanku-page" element={<ThankuPage />} />
         <Route path="/add-to-cart" element={<AddToCart />} />
         <Route path="orders" element={<AllOrder />} />
@@ -101,21 +103,22 @@ const Layout = () => {
         />
 
         <Route
-          path={(navItemData?navItemData.nav1.replace(/\s+/g, ''):"nav1")}
-          element={<NewArrival title={navItemData?navItemData.nav1:"page 1"} />}
+          path={(navItemData?navItemData.nav1.replace(/\s+/g, ''):"menu1")}
+          element={<NewArrival title={navItemData?navItemData.nav1:"section 1"} />}
         />
-        <Route path={(navItemData?navItemData.nav2.replace(/\s+/g, ''):"nav2")} element={<NewArrival title={navItemData?navItemData.nav2:"page 2"} />} />
+        <Route path={(navItemData?navItemData.nav2.replace(/\s+/g, ''):"menu2")} 
+        element={<NewArrival title={navItemData?navItemData.nav2:"section 2"} />} />
         <Route
-          path={(navItemData?navItemData.nav3.replace(/\s+/g, ''):"nav3")}
-          element={<NewArrival title={navItemData?navItemData.nav3:"page 3"} />}
-        />
-        <Route
-          path={(navItemData?navItemData.nav4.replace(/\s+/g, ''):"nav4")}
-          element={<NewArrival title={navItemData?navItemData.nav4:"page 4"} />}
+          path={(navItemData?navItemData.nav3.replace(/\s+/g, ''):"menu3")}
+          element={<NewArrival title={navItemData?navItemData.nav3:"section 3"} />}
         />
         <Route
-          path={(navItemData?navItemData.nav5.replace(/\s+/g, ''):"nav5")}
-          element={<NewArrival title={navItemData?navItemData.nav5:"page 5"} />}
+          path={(navItemData?navItemData.nav4.replace(/\s+/g, ''):"menu4")}
+          element={<NewArrival title={navItemData?navItemData.nav4:"section 4"} />}
+        />
+        <Route
+          path={(navItemData?navItemData.nav5.replace(/\s+/g, ''):"menu5")}
+          element={<NewArrival title={navItemData?navItemData.nav5:"section 5"} />}
         />
         <Route path="/admin" element={isAdmin ? <Admin /> : <RedirectPage title={'Admin'} router={'/admin-login'}/>}>
           <Route index element={<DashBoard />} />

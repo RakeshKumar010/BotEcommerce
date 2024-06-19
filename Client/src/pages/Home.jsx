@@ -8,29 +8,55 @@ import FeatureBottom from "../components/FeatureBottom";
 import Footer from "../components/global/Footer";
 import DreshList from "../components/DreshList";
 import ProDetailsPopup from "../components/ProDetailsPopup";
-import OfferImg from "../assets/image/offerImg.jpg";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import FixedBtn from "../components/global/FixedBtn";
- 
-const Home = () => {
- 
+
+const Home = ({ urlInfo }) => {
   const [detailsPopup, setDetailsPopup] = useState(false);
   const [addId, setAddId] = useState(false);
   const [popUp, setPopUp] = useState(false);
   const [data, setData] = useState();
+
+    
+const dummyData=[
+  {
+    "carousel": "https://vonex.com.au/wp-content/uploads/2021/09/MicrosoftTeams-image-6-768x259.jpg",
+
+},
+  {
+      "carousel": "https://vonex.com.au/wp-content/uploads/2021/09/MicrosoftTeams-image-6-768x259.jpg",
+
+  },
+  {
+      "carousel": "https://vonex.com.au/wp-content/uploads/2021/09/MicrosoftTeams-image-6-768x259.jpg",
+
+  },
+  
+  {
+      "carousel": "https://vonex.com.au/wp-content/uploads/2021/09/MicrosoftTeams-image-6-768x259.jpg",
+
+  }
+]
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     setTimeout(() => {
       setPopUp(true);
     }, 10000);
     // trim url
-   
+
     const getFun = async () => {
       let result = await fetch("https://psyrealestate.in/carousel");
       result = await result.json();
-      setData(result);
-   
-     
+ 
+      const filterResult = result.filter((value) => {
+        return value.clientId == urlInfo._id;
+      });
+      if (filterResult.length > 0) {
+        setData(filterResult);
+      } else {
+        setData(null)
+      }
     };
     getFun();
   }, []);
@@ -48,7 +74,7 @@ const Home = () => {
           <NavBar />
         </div>
         <div className="mt-28">
-          <Banner data={data} />
+          <Banner data={data} dummyData={dummyData}/>
         </div>
       </div>
 
@@ -71,7 +97,7 @@ const Home = () => {
           />
           <img
             src={
-              data ? `https://psyrealestate.in/${data[1].carousel}` : OfferImg
+              data ? `https://psyrealestate.in/${data[1].carousel}` : "https://vonex.com.au/wp-content/uploads/2021/09/MicrosoftTeams-image-6-768x259.jpg"
             }
             alt="..."
             className="md:w-1/2 w-full rounded-md shadow-md"

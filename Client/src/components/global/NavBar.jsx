@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import { IoReorderThreeOutline, IoSearchOutline } from "react-icons/io5";
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
- 
+
 import { FaShoppingCart } from "react-icons/fa";
 import { HiShoppingBag } from "react-icons/hi2";
-
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -20,11 +19,26 @@ const NavBar = () => {
   const location = useLocation();
   const navItems = [
     { to: "/", text: "HOME" },
-    { to: "/"+(navItemData?navItemData.nav1.replace(/\s+/g, ''):"nav1"), text: navItemData?navItemData.nav1:"nav 1" },
-    { to: "/"+(navItemData?navItemData.nav2.replace(/\s+/g, ''):"nav2"), text: navItemData?navItemData.nav2:"nav 2" },
-    { to: "/"+(navItemData?navItemData.nav3.replace(/\s+/g, ''):"nav3"), text: navItemData?navItemData.nav3:"nav 3" },
-    { to: "/"+(navItemData?navItemData.nav4.replace(/\s+/g, ''):"nav4"), text: navItemData?navItemData.nav4:"nav 4" },
-    { to: "/"+(navItemData?navItemData.nav5.replace(/\s+/g, ''):"nav5"), text: navItemData?navItemData.nav5:"nav 5" },
+    {
+      to: "/" + (navItemData ? navItemData.nav1.replace(/\s+/g, "") : "menu1"),
+      text: navItemData ? navItemData.nav1 : "menu 1",
+    },
+    {
+      to: "/" + (navItemData ? navItemData.nav2.replace(/\s+/g, "") : "menu2"),
+      text: navItemData ? navItemData.nav2 : "menu 2",
+    },
+    {
+      to: "/" + (navItemData ? navItemData.nav3.replace(/\s+/g, "") : "menu3"),
+      text: navItemData ? navItemData.nav3 : "menu 3",
+    },
+    {
+      to: "/" + (navItemData ? navItemData.nav4.replace(/\s+/g, "") : "menu4"),
+      text: navItemData ? navItemData.nav4 : "menu 4",
+    },
+    {
+      to: "/" + (navItemData ? navItemData.nav5.replace(/\s+/g, "") : "menu5"),
+      text: navItemData ? navItemData.nav5 : "menu 5",
+    },
     {
       to: "/sign-in",
       text: "Sign In",
@@ -54,11 +68,15 @@ const NavBar = () => {
         );
       }
       const currentUrl = trimUrl(window.location.href);
-      let response = await fetch(
-        "https://psyrealestate.in/client/" + currentUrl
-      );
+      let response = await fetch("https://psyrealestate.in/client/" + currentUrl);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      if (response.headers.get('content-length') === '0') {
+        throw new Error('Empty response body');
+      }
       const clientData = await response.json();
-console.log(clientData);
+     
       if (clientData.status == "0") {
         navigate("error");
       }
@@ -79,19 +97,23 @@ console.log(clientData);
         return value.clientId == clientData._id;
       });
       setNavItemData(
-        filteredResultNavItems.length >0? filteredResultNavItems[0] : false
+        filteredResultNavItems.length > 0 ? filteredResultNavItems[0] : false
       );
     };
-
+    getFun();
     function trimUrl(url) {
       const parsedUrl = new URL(url);
       return parsedUrl.hostname + (parsedUrl.port ? ":" + parsedUrl.port : "");
     }
     async function getColor() {
       const currentUrl = trimUrl(window.location.href);
-      let response = await fetch(
-        "https://psyrealestate.in/client/" + currentUrl
-      );
+      let response = await fetch("https://psyrealestate.in/client/" + currentUrl);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      if (response.headers.get('content-length') === '0') {
+        throw new Error('Empty response body');
+      }
       const clientData = await response.json();
 
       response = await fetch("https://psyrealestate.in/color");
@@ -101,15 +123,13 @@ console.log(clientData);
         // console.log(value.clientId);
         return value.clientId == clientData._id;
       });
-      if(filteredResults.length>0){
-
+      if (filteredResults.length > 0) {
         setApiDataColor(filteredResults[0].color);
-      }else{
-        setApiDataColor('black')
+      } else {
+        setApiDataColor(null);
       }
-     
     }
-    getFun();
+  
     getColor();
   }, []);
 
@@ -133,8 +153,8 @@ console.log(clientData);
           />
         ) : (
           <span className="flex-1 ms-3 text-black font-bold text-3xl whitespace-nowrap">
-          Logo
-        </span>
+            Logo
+          </span>
         )}
       </Link>
       <div
@@ -163,10 +183,10 @@ console.log(clientData);
               className={item.className || ""}
             >
               <li
-                // style={{}}
+              
                 style={
                   location.pathname == item.to
-                    ? { backgroundColor: apiDataColor }
+                    ? { backgroundColor:` ${apiDataColor?apiDataColor:'black'}` }
                     : null
                 }
                 className={`text-base uppercase  shadow-sm  px-3
