@@ -22,7 +22,10 @@ const NewArrival = ({ title }) => {
   const [filterOpen, setFilterOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("created-descending");
   const [isLoading, setIsLoading] = useState(true);
-
+  const [intRate, setIntRate] = useState(100);
+  const [isAvailability, setIsAvailability] = useState(null);
+  const [selectedFabric, setSelectedFabric] = useState(null);
+  const [selectedSize, setSelectedSize] = useState(null);
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
     // You can perform additional actions based on the selected option here.
@@ -33,7 +36,7 @@ const NewArrival = ({ title }) => {
     }
   };
   useEffect(() => {
-    setIsLoading(true)
+    setIsLoading(true);
     window.scrollTo({ top: 0, behavior: "smooth" });
     setCurrentPage(1);
     const getFun = async () => {
@@ -67,13 +70,52 @@ const NewArrival = ({ title }) => {
         ) {
           array.push(value);
         }
-        array.length > 0 ? setData(array) : setData(null);
+        if (array.length > 0) {
+          let filteredData = array;
+        
+          // Price filter
+          filteredData = filteredData.filter(({ price }) => {
+            return parseInt(price.replace(/,/g, ""), 10) < intRate * 500;
+          });
+        
+          // Availability filter
+          if (isAvailability) {
+            filteredData = filteredData.filter(({ availability }) => {
+              return availability === isAvailability;
+            });
+          }
+        
+          // Fabric filter
+          if (selectedFabric) {
+            filteredData = filteredData.filter(({ fabric }) => {
+              return fabric === selectedFabric;
+            });
+          }
+        
+          // Size filter
+          if (selectedSize) {
+            filteredData = filteredData.filter(({ selectedSizes }) => {
+              return selectedSizes.includes(selectedSize);
+            });
+          }
+        
+          setData(filteredData);
+          console.log(filteredData);
+        } else {
+          console.log("No data available.");
+        }
       });
       const totalPages = Math.ceil(array.length / itemsPerPage);
       setTotalItem(totalPages);
     };
     getFun();
-  }, [location.pathname]);
+  }, [
+    location.pathname,
+    intRate,
+    isAvailability,
+    selectedFabric,
+    selectedSize,
+  ]);
   return (
     <>
       {detailsPopup ? (
@@ -107,7 +149,7 @@ const NewArrival = ({ title }) => {
               <p>Filter</p>
             </div>
 
-            <div className="flex md:items-center md:gap-5 flex-col md:flex-row  items-end">
+            {/* <div className="flex md:items-center md:gap-5 flex-col md:flex-row  items-end">
               <p>Sort by</p>
               <select
                 className="p-3 border-none"
@@ -126,7 +168,7 @@ const NewArrival = ({ title }) => {
                 <option value="created-ascending">Date, old to new</option>
                 <option value="created-descending">Date, new to old</option>
               </select>
-            </div>
+            </div> */}
           </div>
           {isLoading ? (
             <div className="flex justify-center flex-wrap gap-4 gap-y-7 sm:px-2 xl:px-10">
@@ -190,7 +232,19 @@ const NewArrival = ({ title }) => {
             />
           )}
         </div>
-        {filterOpen ? <FilterSide setFilterOpen={setFilterOpen} /> : null}
+        {filterOpen ? (
+          <FilterSide
+            isAvailability={isAvailability}
+            selectedFabric={selectedFabric}
+            setSelectedFabric={setSelectedFabric}
+            setIsAvailability={setIsAvailability}
+            intRate={intRate}
+            setIntRate={setIntRate}
+            setFilterOpen={setFilterOpen}
+            selectedSize={selectedSize}
+            setSelectedSize={setSelectedSize}
+          />
+        ) : null}
         <Footer />
       </div>
     </>
