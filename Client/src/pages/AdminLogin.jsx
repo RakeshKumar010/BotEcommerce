@@ -30,6 +30,55 @@ const AdminLogin = ({ setIsAdmin }) => {
       setCountWPass(0);
       setCounter(30);
     }
+
+    const getFun = async () => {
+      function trimUrl(url) {
+        const parsedUrl = new URL(url);
+        return (
+          parsedUrl.hostname + (parsedUrl.port ? ":" + parsedUrl.port : "")
+        );
+      }
+      const currentUrl = trimUrl(window.location.href);
+      let response = await fetch(
+        "https://psyrealestate.in/client/" + currentUrl
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      if (response.headers.get("content-length") === "0") {
+        throw new Error("Empty response body");
+      }
+      const clientData = await response.json();
+
+      if (clientData.status == "0") {
+        navigate("error");
+      }
+      let today = new Date();
+      
+      let dd = String(today.getDate()).padStart(2, '0');
+      let mm = String(today.getMonth() + 1).padStart(2, "0"); // January is 0!
+      let yyyy = today.getFullYear();
+
+      let formattedDate = yyyy + "-" + mm + "-" + dd;
+
+      if (clientData.expiryDate < formattedDate) {
+        let result = await fetch(
+          "https://psyrealestate.in/edit-client/" + clientData._id,
+          {
+            method: "put",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+              status: "0",
+            }),
+          }
+        );
+        if(result.ok){
+
+          navigate("error");
+        }
+      }
+    }
+    getFun()
   }, [counter]);
 
   const handleSubmit = async (e) => {

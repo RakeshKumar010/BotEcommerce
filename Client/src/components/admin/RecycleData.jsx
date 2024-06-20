@@ -12,7 +12,7 @@ const RecycleData = () => {
     const getFun = async () => {
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);
-      let result = await fetch("https://psyrealestate.in/product/recycle-bin");
+      let result = await fetch("https://psyrealestate.in/deleted-product");
       result = await result.json();
       let filteredResults = result.filter(
         (value) => value.clientId == user._id

@@ -26,8 +26,13 @@ const Footer = () => {
       const filteredLogoResults = result.filter((value) => {
         return value.clientId == clientData._id;
       });
-      setLogos(filteredLogoResults[0].logo);
+       
+      if(filteredLogoResults.length>0){
 
+        setLogos(filteredLogoResults[0].logo);
+      }else{
+        setLogos(false)
+      }
       let socialResult = await fetch("https://psyrealestate.in/social");
       socialResult = await socialResult.json();
       const filteredResults = socialResult.filter((value) => {

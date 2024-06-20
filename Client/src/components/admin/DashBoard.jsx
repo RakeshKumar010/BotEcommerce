@@ -72,7 +72,6 @@ const DashBoard = () => {
 
   useEffect(() => {
     const getFun = async () => {
-
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);
 
@@ -98,7 +97,6 @@ const DashBoard = () => {
       );
       setAdmin(filteredResults3.length);
 
-    
       result3.map((value) => {
         // console.log(value.clientId);
         if (value.email == user.email) {
@@ -139,7 +137,11 @@ const DashBoard = () => {
           </p>
           <Link
             to={"add-logo"}
-            style={ApiColor?{backgroundColor:ApiColor}:{backgroundColor:'black'}}
+            style={
+              ApiColor
+                ? { backgroundColor: ApiColor }
+                : { backgroundColor: "black" }
+            }
             className="  text-white p-2 transition-all px-10 rounded-md shadow-md hover:scale-105"
           >
             Get Start

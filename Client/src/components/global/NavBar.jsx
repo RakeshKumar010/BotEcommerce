@@ -11,7 +11,7 @@ const NavBar = () => {
   const [showCart, setShowCart] = useState(false);
   const [apiDataColor, setApiDataColor] = useState();
   const [logos, setLogos] = useState(false);
-
+const [pageLoader,setPageLoader]=useState(false)
   const [totalPrice, setTotalPrice] = useState(0);
   const [numOfProduct, setNumOfProduct] = useState(0);
   const location = useLocation();
@@ -80,15 +80,42 @@ const NavBar = () => {
       if (clientData.status == "0") {
         navigate("error");
       }
+      let today = new Date();
+      
+      let dd =  String(today.getDate()).padStart(2, '0');
+      let mm = String(today.getMonth() + 1).padStart(2, "0"); // January is 0!
+      let yyyy = today.getFullYear();
+
+      let formattedDate = yyyy + "-" + mm + "-" + dd;
+
+      if (clientData.expiryDate < formattedDate) {
+        let result = await fetch(
+          "https://psyrealestate.in/edit-client/" + clientData._id,
+          {
+            method: "put",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+              status: "0",
+            }),
+          }
+        );
+        if(result.ok){
+
+          navigate("error");
+        }
+      }
 
       let result = await fetch("https://psyrealestate.in/logo");
       result = await result.json();
-
+      setPageLoader(result)
       const filteredResults = result.filter((value) => {
         return value.clientId == clientData._id;
       });
-
-      setLogos(filteredResults[0].logo);
+      if (filteredResults.length > 0) {
+        setLogos(filteredResults[0].logo);
+      } else {
+        setLogos(false);
+      }
 
       let resultNavItem = await fetch("https://psyrealestate.in/nav-item");
       resultNavItem = await resultNavItem.json();
@@ -133,148 +160,145 @@ const NavBar = () => {
     }
 
     getColor();
-   
-  }, []);
+  }, [pageLoader]);
 
   return (
     <>
- 
-        <div
-          className="flex items-center justify-between  md:py-1 p-5 sm:px-8 lg:px-16
+      <div
+        className="flex items-center justify-between  md:py-1 p-5 sm:px-8 lg:px-16
      bg-white/80 backdrop-blur-md sm:shadow-xl"
+      >
+        <IoReorderThreeOutline
+          className="cursor-pointer text-3xl md:hidden block"
+          onClick={() => {
+            setNavRes(!navRes);
+          }}
+        />
+        <Link to={"/"}>
+          {logos ? (
+            <img
+              src={`https://psyrealestate.in/${logos}`}
+              alt="..."
+              className="h-8 lg:h-12 xl:h-16"
+            />
+          ) : (
+            <span className="flex-1 ms-3 text-black font-bold text-3xl whitespace-nowrap">
+              Logo
+            </span>
+          )}
+        </Link>
+        <div
+          className={`md:sticky absolute    md:left-auto left-0 top-0 bottom-0 right-0 z-50   ${
+            navRes ? "flex" : "hidden md:block"
+          } }`}
         >
-          <IoReorderThreeOutline
-            className="cursor-pointer text-3xl md:hidden block"
-            onClick={() => {
-              setNavRes(!navRes);
-            }}
-          />
-          <Link to={"/"}>
-            {logos ? (
-              <img
-                src={`https://psyrealestate.in/${logos}`}
-                alt="..."
-                className="h-8 lg:h-12 xl:h-16"
-              />
-            ) : (
-              <span className="flex-1 ms-3 text-black font-bold text-3xl whitespace-nowrap">
-                Logo
-              </span>
-            )}
-          </Link>
-          <div
-            className={`md:sticky absolute    md:left-auto left-0 top-0 bottom-0 right-0 z-50   ${
-              navRes ? "flex" : "hidden md:block"
-            } }`}
+          <ul
+            className={`flex md:flex-row flex-col md:static h-screen md:bg-transparent bg-white  sm:gap-4 gap-7 md:gap-5 lg:gap-2 xl:gap-4 p-4  md:h-auto  md:w-auto w-[80%] md:items-center text-nowrap `}
           >
-            <ul
-              className={`flex md:flex-row flex-col md:static h-screen md:bg-transparent bg-white  sm:gap-4 gap-7 md:gap-5 lg:gap-2 xl:gap-4 p-4  md:h-auto  md:w-auto w-[80%] md:items-center text-nowrap `}
-            >
-              <div className="md:hidden flex justify-between items-center  py-2 px-1 w-full bg-gray-100">
-                <input
-                  type="text"
-                  placeholder="Search Products.."
-                  className="w-[70%] border-0 bg-gray-100 px-2"
-                />
-                <IoSearchOutline className="text-xl" />
-              </div>
-              {navItems.map((item, index) => (
-                <Link
-                  key={index}
-                  to={item.to}
-                  onClick={() => {
-                    setNavRes(!navRes);
-                  }}
-                  className={item.className || ""}
-                >
-                  <li
-                    style={
-                      location.pathname == item.to
-                        ? {
-                            backgroundColor: ` ${
-                              apiDataColor ? apiDataColor : "black"
-                            }`,
-                          }
-                        : null
-                    }
-                    className={`text-base uppercase  shadow-sm  px-3
+            <div className="md:hidden flex justify-between items-center  py-2 px-1 w-full bg-gray-100">
+              <input
+                type="text"
+                placeholder="Search Products.."
+                className="w-[70%] border-0 bg-gray-100 px-2"
+              />
+              <IoSearchOutline className="text-xl" />
+            </div>
+            {navItems.map((item, index) => (
+              <Link
+                key={index}
+                to={item.to}
+                onClick={() => {
+                  setNavRes(!navRes);
+                }}
+                className={item.className || ""}
+              >
+                <li
+                  style={
+                    location.pathname == item.to
+                      ? {
+                          backgroundColor: ` ${
+                            apiDataColor ? apiDataColor : "black"
+                          }`,
+                        }
+                      : null
+                  }
+                  className={`text-base uppercase  shadow-sm  px-3
                  p-2 rounded-full hover:shadow-md hover:scale-105 transition-all duration-200 hover:shadow-gray-400
                sm:text-[12px] lg:text-[15px] xl:text-base ${
                  location.pathname == item.to
                    ? `  text-white shadow-md  scale-105 shadow-gray-600`
                    : null
                }`}
-                  >
-                    {item.text}
-                  </li>
-                </Link>
-              ))}
-            </ul>
+                >
+                  {item.text}
+                </li>
+              </Link>
+            ))}
+          </ul>
 
-            <div
-              onClick={() => {
-                setNavRes(!navRes);
-              }}
-              className="  w-[20%] h-screen md:hidden block"
-            ></div>
-          </div>
-          <div className="flex gap-6 relative select-none">
-            <Link
-              to={"/orders"}
-              className="text-[10px] uppercase flex flex-col items-center"
-            >
-              <HiShoppingBag
-                style={{ color: apiDataColor }}
-                className="text-2xl   cursor-pointer"
-              />
-              Order
-            </Link>
-            <p className="text-[10px]  uppercase flex flex-col items-center">
-              <FaShoppingCart
-                className="text-2xl pr-1 cursor-pointer"
-                style={{ color: apiDataColor }}
-                onClick={() => {
-                  setShowCart(!showCart);
-                }}
-              />
-              Cart
-            </p>
-            {showCart ? (
-              <div className="absolute flex flex-col gap-5  top-11 z-50 p-5 shadow-lg shadow-black/30 rounded-md w-72 md:w-[350px] bg-white right-0">
-                <p className="text-center text-gray-700 font-thin">
-                  {numOfProduct} products in the cart.
-                </p>
-                <hr />
-                <div>
-                  <div className="flex items-center justify-between">
-                    <p className="font-semibold">Total:</p>
-                    <p className="font-semibold">Rs. {totalPrice}</p>
-                  </div>
-                  <p className="text-[12px] text-center text-gray-600 font-thin">
-                    Taxes and shipping calculated at checkout
-                  </p>
-                </div>
-                <div>
-                  <Link
-                    to={"/add-to-cart"}
-                    onClick={() => {
-                      setShowCart(!showCart);
-                    }}
-                  >
-                    <p
-                      style={{ backgroundColor: apiDataColor }}
-                      className={`py-2 w-full text-white text-center  rounded-md hover:shadow-md hover:shadow-gray-400`}
-                    >
-                      {" "}
-                      CHECK OUT
-                    </p>
-                  </Link>
-                </div>
-              </div>
-            ) : null}
-          </div>
+          <div
+            onClick={() => {
+              setNavRes(!navRes);
+            }}
+            className="  w-[20%] h-screen md:hidden block"
+          ></div>
         </div>
-      
+        <div className="flex gap-6 relative select-none">
+          <Link
+            to={"/orders"}
+            className="text-[10px] uppercase flex flex-col items-center"
+          >
+            <HiShoppingBag
+              style={{ color: apiDataColor }}
+              className="text-2xl   cursor-pointer"
+            />
+            Order
+          </Link>
+          <p className="text-[10px]  uppercase flex flex-col items-center">
+            <FaShoppingCart
+              className="text-2xl pr-1 cursor-pointer"
+              style={{ color: apiDataColor }}
+              onClick={() => {
+                setShowCart(!showCart);
+              }}
+            />
+            Cart
+          </p>
+          {showCart ? (
+            <div className="absolute flex flex-col gap-5  top-11 z-50 p-5 shadow-lg shadow-black/30 rounded-md w-72 md:w-[350px] bg-white right-0">
+              <p className="text-center text-gray-700 font-thin">
+                {numOfProduct} products in the cart.
+              </p>
+              <hr />
+              <div>
+                <div className="flex items-center justify-between">
+                  <p className="font-semibold">Total:</p>
+                  <p className="font-semibold">Rs. {totalPrice}</p>
+                </div>
+                <p className="text-[12px] text-center text-gray-600 font-thin">
+                  Taxes and shipping calculated at checkout
+                </p>
+              </div>
+              <div>
+                <Link
+                  to={"/add-to-cart"}
+                  onClick={() => {
+                    setShowCart(!showCart);
+                  }}
+                >
+                  <p
+                    style={{ backgroundColor: apiDataColor }}
+                    className={`py-2 w-full text-white text-center  rounded-md hover:shadow-md hover:shadow-gray-400`}
+                  >
+                    {" "}
+                    CHECK OUT
+                  </p>
+                </Link>
+              </div>
+            </div>
+          ) : null}
+        </div>
+      </div>
     </>
   );
 };

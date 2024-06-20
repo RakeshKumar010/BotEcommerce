@@ -215,7 +215,7 @@ const SideBar = () => {
                   </p>
                   {accountTab ? (
                     <div className="p-2   bg-gray-200 rounded-lg">
-                      <Link
+                      {/* <Link
                         to={"account"}
                         className={`flex hover:${bgHover}   items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group`}
                       >
@@ -224,7 +224,7 @@ const SideBar = () => {
                           Account
                         </span>
                       </Link>
-                      {/* <Link
+                      <Link
                         to={"sign-up"}
                         className={`flex hover:${bgHover}   items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group`}
                       >

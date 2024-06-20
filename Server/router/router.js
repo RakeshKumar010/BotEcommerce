@@ -157,7 +157,7 @@ app.get("/product/:clientId", async (req, res) => {
 app.get("/", (req, res) => {
   res.send({ mess: "Api is ok" });
 });
-app.get("/product/recycle-bin", async (req, res) => {
+app.get("/deleted-product", async (req, res) => {
   let result = await productSchema.find({ recycleId: "1" });
   res.send(result);
 });

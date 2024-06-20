@@ -18,7 +18,12 @@ async function getColor() {
     // console.log(value.clientId);
     return value.clientId == clientData._id;
   });
+if(filteredResults.length>0){
+
   ApiColor = filteredResults[filteredResults.length - 1].color;
+}else{
+  ApiColor="#000"
+}
   
 }
 getColor();

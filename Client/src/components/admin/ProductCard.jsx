@@ -56,7 +56,7 @@ const ProductCard = ({ value, index, setPageLoad, recycle }) => {
   };
   const restoreFun = async () => {
     let result = await fetch(
-      `https://psyrealestate.in/restore/${_id}`,
+      `https://psyrealestate.in/recycle/${_id}`,
       {
         method: "put",
         headers: { "content-type": "application/json" },
