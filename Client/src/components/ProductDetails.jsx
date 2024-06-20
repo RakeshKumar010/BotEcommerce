@@ -178,7 +178,7 @@ const ProductDetails = () => {
                   }}
                   className="w-20 border-0 border-b-[1px] focus:ring-0    bg-gray-100 px-0"
                 />
-                <div className="flex md:static bg-white py-2 z-10 md:z-0 fixed bottom-0 right-0 left-0">
+                <div className="flex md:static bg-white py-2 z-[1] md:z-0 fixed bottom-0 right-0 left-0">
                   <div className="w-1/2 px-2">
                     <p
                       onClick={() => {

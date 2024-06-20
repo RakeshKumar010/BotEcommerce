@@ -5,7 +5,7 @@ import { RiArrowUpSFill } from "react-icons/ri";
 const FixedBtn = ({data}) => {
   const [offerImg, setOfferImg] = useState(false);
   return (
-    <div className="fixed flex justify-center items-center  top-1/2 -right-[102px] z-50 ">
+    <div className="fixed flex justify-center items-center  top-1/2 -right-[102px] z-10 ">
       {offerImg ? (
         <div
           style={{

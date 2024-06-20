@@ -21,6 +21,7 @@ const NewArrival = ({ title }) => {
   const [data, setData] = useState();
   const [filterOpen, setFilterOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("created-descending");
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
@@ -32,12 +33,31 @@ const NewArrival = ({ title }) => {
     }
   };
   useEffect(() => {
+    setIsLoading(true)
     window.scrollTo({ top: 0, behavior: "smooth" });
     setCurrentPage(1);
     const getFun = async () => {
-      let result = await fetch("https://psyrealestate.in/product");
+      function trimUrl(url) {
+        const parsedUrl = new URL(url);
+        return (
+          parsedUrl.hostname + (parsedUrl.port ? ":" + parsedUrl.port : "")
+        );
+      }
+      const currentUrl = trimUrl(window.location.href);
+      let response = await fetch(
+        "https://psyrealestate.in/client/" + currentUrl
+      );
+      const clientData = await response.json();
+      // console.log(clientData);
+      let result = await fetch(
+        "https://psyrealestate.in/product/" + clientData.clientId
+      );
       result = await result.json();
-
+      if (result.length > 0) {
+        setIsLoading(false);
+      } else {
+        setIsLoading(true);
+      }
       let array = [];
 
       result.map((value) => {
@@ -108,7 +128,18 @@ const NewArrival = ({ title }) => {
               </select>
             </div>
           </div>
-          {data ? (
+          {isLoading ? (
+            <div className="flex justify-center flex-wrap gap-4 gap-y-7 sm:px-2 xl:px-10">
+              <DummyCard />
+              <DummyCard />
+              <DummyCard />
+              <DummyCard />
+              <DummyCard />
+              <DummyCard />
+              <DummyCard />
+              <DummyCard />
+            </div>
+          ) : (
             <div className="flex justify-center flex-wrap gap-4 gap-y-7 sm:px-2 xl:px-10">
               {data &&
                 [...data]
@@ -126,17 +157,6 @@ const NewArrival = ({ title }) => {
                       />
                     );
                   })}
-            </div>
-          ) : (
-            <div className="flex justify-center flex-wrap gap-4 gap-y-7 sm:px-2 xl:px-10">
-              <DummyCard />
-              <DummyCard />
-              <DummyCard />
-              <DummyCard />
-              <DummyCard />
-              <DummyCard />
-              <DummyCard />
-              <DummyCard />
             </div>
           )}
         </div>

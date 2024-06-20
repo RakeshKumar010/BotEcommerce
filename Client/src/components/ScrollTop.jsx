@@ -29,7 +29,7 @@ const ScrollTop = () => {
     return (
       <button
       style={ApiColor?{ backgroundColor: ApiColor }:{ backgroundColor: 'black' }}
-        className={`fixed bottom-16 md:bottom-2 animate-bounce right-2 z-50 p-2 rounded-full text-white   hover:${bg} ${visible ? '' : 'hidden'}`}
+        className={`fixed bottom-16 md:bottom-2 animate-bounce right-2 z-0 p-2 rounded-full text-white   hover:${bg} ${visible ? '' : 'hidden'}`}
         onClick={scrollToTop}
       >
         <FaArrowCircleUp size={30} />
