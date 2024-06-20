@@ -29,22 +29,17 @@ const SideBar = () => {
   const [carouselTab, setCarouselTab] = useState(false);
   const [isOldUer, setIsOldUser] = useState();
   const [loginUser, setLoginUser] = useState();
-
   const [navColor, setNavColor] = useState();
   const [navItem, setNavItem] = useState();
   const [navSocial, setNavSocial] = useState();
-  const [navAccount, setNavAccount] = useState();
 
   useEffect(() => {
     const getFun = async () => {
       let result = await fetch("https://psyrealestate.in/show-client");
       result = await result.json();
-
       setNavColor(localStorage.getItem("color"));
       setNavItem(localStorage.getItem("nav"));
       setNavSocial(localStorage.getItem("social"));
-      setNavAccount(localStorage.getItem("account"));
-
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);
       setLoginUser(user.name.split(" ")[0]);
@@ -59,7 +54,6 @@ const SideBar = () => {
           }
         }
       });
-
       let result3 = await fetch("https://psyrealestate.in/logo");
       result3 = await result3.json();
       const filteredResults = result3.filter(
@@ -68,7 +62,6 @@ const SideBar = () => {
       filteredResults.length > 0
         ? setLogos(filteredResults[0].logo)
         : setLogos(null);
-
       let resultColor = await fetch("https://psyrealestate.in/color");
       resultColor = await resultColor.json();
       const filteredResultColor = resultColor.filter(
@@ -77,15 +70,12 @@ const SideBar = () => {
       filteredResultColor.length > 0
         ? setNavColor(filteredResultColor[0].color)
         : setNavColor(null);
-
       let resultNavItem = await fetch("https://psyrealestate.in/nav-item");
       resultNavItem = await resultNavItem.json();
       const filteredResultNavItem = resultNavItem.filter(
         (value) => value.clientId === user._id
       );
-      filteredResultNavItem.length > 0
-        ? setNavItem(true)
-        : setNavItem(false);
+      filteredResultNavItem.length > 0 ? setNavItem(true) : setNavItem(false);
       let resultSocialLink = await fetch("https://psyrealestate.in/social");
       resultSocialLink = await resultSocialLink.json();
       const filteredResultSocialLink = resultSocialLink.filter(
@@ -104,7 +94,6 @@ const SideBar = () => {
       text: "Dashboard",
       icon: <MdOutlineDashboardCustomize className="text-xl" />,
     },
-
     ...(sAdminId == "1"
       ? [
           {
@@ -235,7 +224,7 @@ const SideBar = () => {
                           Account
                         </span>
                       </Link>
-                      <Link
+                      {/* <Link
                         to={"sign-up"}
                         className={`flex hover:${bgHover}   items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group`}
                       >
@@ -243,7 +232,7 @@ const SideBar = () => {
                         <span className="flex-1 ms-3 whitespace-nowrap">
                           Add Account
                         </span>
-                      </Link>
+                      </Link> */}
                       <Link
                         to={"recycle-bin"}
                         className={`flex hover:${bgHover}   items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group`}
@@ -463,54 +452,52 @@ const SideBar = () => {
                 )}
               </li>
               <li>
-                {navColor? (
-                  <Link    to="add-nav-item" className="flex items-center p-2  text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group">
+                {navColor ? (
+                  <Link
+                    to="add-nav-item"
+                    className="flex items-center p-2  text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group"
+                  >
                     <BsMenuButtonWide />
                     <span className="flex-1 ms-3 whitespace-nowrap">
                       Add Nav Item{" "}
                     </span>
                   </Link>
                 ) : (
-                  <Link
-                 
-                    className="flex items-center bg-gray-300 p-2 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group"
-                  >
+                  <Link className="flex items-center bg-gray-300 p-2 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group">
                     <BsMenuButtonWide />
                     <span className="flex-1 ms-3 whitespace-nowrap">
                       Add Nav Item{" "}
                     </span>
                     <FaLock />
-
                   </Link>
                 )}
               </li>
               <li>
-                {navItem? (
-                  <Link   to="add-social-link" className="flex items-center  p-2 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group">
+                {navItem ? (
+                  <Link
+                    to="add-social-link"
+                    className="flex items-center  p-2 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group"
+                  >
                     <SlSocialDropbox />
                     <span className="flex-1 ms-3 whitespace-nowrap">
                       Add Social Link{" "}
                     </span>
                   </Link>
                 ) : (
-                  <Link
-                  
-                    className="flex items-center p-2 bg-gray-300 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group"
-                  >
+                  <Link className="flex items-center p-2 bg-gray-300 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group">
                     <SlSocialDropbox />
                     <span className="flex-1 ms-3 whitespace-nowrap">
                       Add Social Link{" "}
                     </span>
                     <FaLock />
-
                   </Link>
                 )}
               </li>
 
               <li>
-                {navSocial? (
+                {navSocial ? (
                   <Link
-                  to={"sign-up"}
+                    to={"sign-up"}
                     className={`flex hover:${bgHover}  items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group`}
                   >
                     <IoTrailSignOutline className="text-xl" />
@@ -520,7 +507,6 @@ const SideBar = () => {
                   </Link>
                 ) : (
                   <Link
-                 
                     className={`flex hover:${bgHover} bg-gray-300    items-center p-2 text-gray-900 rounded-lg  hover:shadow-md  transition-all duration-200  group`}
                   >
                     <IoTrailSignOutline className="text-xl" />
@@ -528,7 +514,6 @@ const SideBar = () => {
                       Add Account
                     </span>
                     <FaLock />
-
                   </Link>
                 )}
               </li>
