@@ -128,7 +128,7 @@ const AdminLogin = ({ setIsAdmin }) => {
     }
   };
   return (
-    <div className="flex min-h-full h-screen flex-col justify-center px-6 py-12 lg:px-8 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 transition-all duration-500 ease-in-out">
+    <div style={{background:'slategrey'}} className="flex min-h-full h-screen flex-col justify-center px-6 py-12 lg:px-8  transition-all duration-500 ease-in-out">
       <div className="animate-bounce">
         <h2 className="mt-10 text-center text-3xl font-bold leading-9 tracking-tight text-white transform   ">
           {countWPass == 3 ? counter : "Sign in to your account"}

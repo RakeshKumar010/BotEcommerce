@@ -41,7 +41,7 @@ const EditCoupon = () => {
   useEffect(() => {
     const getFun = async () => {
       let result = await fetch(
-        "https://psyrealestate.in/coupon/" +
+        "https://psyrealestate.in/coupon-id/" +
           location.pathname.split("/").pop()
       );
       result = await result.json();

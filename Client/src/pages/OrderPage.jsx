@@ -28,9 +28,26 @@ const OrderPage = () => {
     const storedObject = JSON.parse(sessionStorage.getItem("myObject"));
     setSessionData(storedObject);
     const getFun = async () => {
+      function trimUrl(url) {
+        const parsedUrl = new URL(url);
+        return (
+          parsedUrl.hostname + (parsedUrl.port ? ":" + parsedUrl.port : "")
+        );
+      }
+      const currentUrl = trimUrl(window.location.href);
+      let response = await fetch(
+        "https://psyrealestate.in/client/" + currentUrl
+      );
+      const clientData = await response.json();
+
       let result = await fetch("https://psyrealestate.in/coupon");
       result = await result.json();
-      setData(result);
+      
+      const filterCoupan = result.filter((value) => {
+        return value.clientId == clientData._id;
+      });
+      setData(filterCoupan);
+
     };
     getFun();
   }, []);

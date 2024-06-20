@@ -20,16 +20,16 @@ const NewArrival = ({ title }) => {
   const [totalItem, setTotalItem] = useState();
   const [data, setData] = useState();
   const [filterOpen, setFilterOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("created-descending");
+  // const [selectedOption, setSelectedOption] = useState("created-descending");
   const [isLoading, setIsLoading] = useState(true);
   const [intRate, setIntRate] = useState(100);
   const [isAvailability, setIsAvailability] = useState(null);
   const [selectedFabric, setSelectedFabric] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
-  const handleSelectChange = (event) => {
-    setSelectedOption(event.target.value);
-    // You can perform additional actions based on the selected option here.
-  };
+  // const handleSelectChange = (event) => {
+  //   setSelectedOption(event.target.value);
+  //   // You can perform additional actions based on the selected option here.
+  // };
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalItem) {
       setCurrentPage(newPage);
@@ -62,7 +62,6 @@ const NewArrival = ({ title }) => {
         setIsLoading(true);
       }
       let array = [];
-
       result.map((value) => {
         if (
           location.pathname.substring(1).toUpperCase() ==
@@ -71,36 +70,39 @@ const NewArrival = ({ title }) => {
           array.push(value);
         }
         if (array.length > 0) {
+          
           let filteredData = array;
-        
+         
+
           // Price filter
+          // console.log(filteredData);
           filteredData = filteredData.filter(({ price }) => {
-            return parseInt(price.replace(/,/g, ""), 10) < intRate * 500;
+           
+            return parseInt(price.replace(/,/g, ""), 10) < (intRate * 500);
           });
-        
           // Availability filter
           if (isAvailability) {
             filteredData = filteredData.filter(({ availability }) => {
               return availability === isAvailability;
             });
           }
-        
+
           // Fabric filter
           if (selectedFabric) {
             filteredData = filteredData.filter(({ fabric }) => {
               return fabric === selectedFabric;
             });
           }
-        
+
           // Size filter
           if (selectedSize) {
             filteredData = filteredData.filter(({ selectedSizes }) => {
               return selectedSizes.includes(selectedSize);
             });
           }
-        
+
           setData(filteredData);
-          console.log(filteredData);
+          // console.log(filteredData);
         } else {
           console.log("No data available.");
         }

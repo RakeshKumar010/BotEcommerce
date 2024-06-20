@@ -10,9 +10,26 @@ const RelatedProduct = () => {
 
   useEffect(() => {
     const getFun = async () => {
+      function trimUrl(url) {
+        const parsedUrl = new URL(url);
+        return (
+          parsedUrl.hostname + (parsedUrl.port ? ":" + parsedUrl.port : "")
+        );
+      }
+      const currentUrl = trimUrl(window.location.href);
+      let response = await fetch(
+        "https://psyrealestate.in/client/" + currentUrl
+      );
+      const clientData = await response.json();
       let result = await fetch("https://psyrealestate.in/product");
       result = await result.json();
-      setData(result);
+      const filterProduct = result.filter((value) => {
+        //  console.log(value.clientId == clientData._id);
+        return value.clientId == clientData._id;
+      });
+      if (filterProduct.length > 6) {
+        setData(filterProduct);
+      }
     };
     getFun();
   }, []);

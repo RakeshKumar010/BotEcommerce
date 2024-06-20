@@ -5,7 +5,7 @@ const RedirectPage = ({title,router}) => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col justify-center items-center w-full h-screen bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 transition-all duration-500 ease-in-out">
+    <div style={{background:'slategrey'}} className="flex flex-col justify-center items-center w-full h-screen   transition-all duration-500 ease-in-out">
       <div className="bg-white p-10 rounded-lg shadow-md text-center transform hover:scale-105 transition-transform duration-300 ease-in-out">
         <h1 className="text-4xl font-bold mb-4 text-red-600">Access Denied</h1>
         <p className="mb-4 text-lg text-gray-700">You cannot directly open the {title} Panel.</p>
