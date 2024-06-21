@@ -133,7 +133,7 @@ const Layout = () => {
           <Route path="add-coupon" element={<AddCoupon />} />
           <Route path="add-products" element={<AddProduct />} />
           <Route path="add-logo" element={<AddLogo />} />
-          <Route path="add-banner" element={<AddBanner />} />
+    
           <Route path="add-color" element={<AddColor />} />
           <Route path="add-nav-item" element={<AddNavItem />} />
           <Route path="add-social-link" element={<AddSocialLink />} />

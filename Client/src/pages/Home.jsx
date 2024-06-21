@@ -16,6 +16,7 @@ const Home = () => {
   const [addId, setAddId] = useState(false);
   const [popUp, setPopUp] = useState(false);
   const [data, setData] = useState();
+  const [couponData,setCouponData]=useState()
   // const [banner, setbanner] = useState();
 
   const dummyData = [
@@ -71,6 +72,23 @@ const Home = () => {
       } else {
         setData(null);
       }
+
+      
+      let couponresult = await fetch("https://psyrealestate.in/coupon");
+      couponresult = await couponresult.json();
+      
+      const filterCoupan = couponresult.filter((value) => {
+        return value.clientId == clientData._id;
+      });
+      if(filterCoupan.length>0){
+
+        const reversedCoupons = filterCoupan.reverse();
+        setCouponData(reversedCoupons[0].discount);
+        // console.log(reversedCoupons[0].discount);
+      }else{
+        setCouponData('5%')
+      }
+
       // let bannerResult = await fetch("https://psyrealestate.in/banner");
       // bannerResult = await bannerResult.json();
       // // console.log(bannerResult);
@@ -90,19 +108,17 @@ const Home = () => {
 
   return (
     <>
-      <FixedBtn data={data} />
+      <FixedBtn couponData={couponData} data={data} />
       {detailsPopup ? (
         <ProDetailsPopup addId={addId} setDetailsPopup={setDetailsPopup} />
       ) : null}
 
-      <div >
-        <div className="fixed top-0 z-10 right-0 left-0 ">
-          <HeaderTop />
-          <NavBar />
-        </div>
-        <div className="mt-28">
-          <Banner data={data} dummyData={dummyData} />
-        </div>
+      <div className="fixed top-0 z-10 right-0 left-0 ">
+        <HeaderTop couponData={couponData} />
+        <NavBar />
+      </div>
+      <div className="mt-28">
+        <Banner data={data} dummyData={dummyData} />
       </div>
 
       {/* <div className=" sticky top-0 z-10 block  sm:hidden md:bg-gray-200 bg-white pb-2 shadow-xl ">
@@ -115,7 +131,7 @@ const Home = () => {
       <FeatureBottom />
       <Footer />
       {popUp ? (
-        <div className="fixed flex flex-col justify-center items-center top-0 bottom-0 right-0 left-0 bg-black/50 z-[100]">
+        <div className="fixed flex flex-col justify-center items-center top-0 bottom-0 right-0 left-0 bg-black/30 p-3 md:p-0 backdrop-blur-sm  z-10">
           <IoCloseCircleOutline
             onClick={() => {
               setPopUp(false);

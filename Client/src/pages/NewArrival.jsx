@@ -25,7 +25,7 @@ const NewArrival = ({ title }) => {
   const [isAvailability, setIsAvailability] = useState(null);
   const [selectedFabric, setSelectedFabric] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
-const [pageLoad,setPageLoad]=useState()
+
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalItem) {
       setCurrentPage(newPage);
@@ -52,7 +52,7 @@ const [pageLoad,setPageLoad]=useState()
         "https://psyrealestate.in/product/" + clientData.clientId
       );
       result = await result.json();
- 
+
       if (result.length > 0) {
         setIsLoading(false);
       } else {
@@ -66,7 +66,7 @@ const [pageLoad,setPageLoad]=useState()
         ) {
           array.push(value);
         }
-        console.log('array');
+        console.log("array");
         if (array.length > 0) {
           let filteredData = array;
 
@@ -97,7 +97,7 @@ const [pageLoad,setPageLoad]=useState()
           setData(filteredData);
           // console.log(filteredData);
         } else {
-          setData([])
+          setData([]);
         }
       });
       const totalPages = Math.ceil(array.length / itemsPerPage);
@@ -110,7 +110,6 @@ const [pageLoad,setPageLoad]=useState()
     isAvailability,
     selectedFabric,
     selectedSize,
-    
   ]);
   return (
     <>
@@ -157,7 +156,8 @@ const [pageLoad,setPageLoad]=useState()
               <DummyCard />
             </div>
           ) : (
-            <div className="flex justify-center flex-wrap gap-4 gap-y-7 sm:px-2 xl:px-10">
+            <>
+           {data.length>0? <div className="flex justify-center flex-wrap gap-4 gap-y-7 sm:px-2 xl:px-10">
               {data &&
                 [...data]
                   .slice(
@@ -174,7 +174,8 @@ const [pageLoad,setPageLoad]=useState()
                       />
                     );
                   })}
-            </div>
+            </div>:<p style={ApiColor?{color:ApiColor}:{color:'black'}} className="text-center font-bold text-2xl">Data Not Found</p>}
+            </>
           )}
         </div>
         {/* pagination  */}

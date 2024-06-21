@@ -46,7 +46,8 @@ const OrderPage = () => {
       const filterCoupan = result.filter((value) => {
         return value.clientId == clientData._id;
       });
-      setData(filterCoupan);
+      const reversedCoupons = filterCoupan.reverse();
+      setData(reversedCoupons);
 
     };
     getFun();

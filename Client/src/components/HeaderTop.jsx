@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ApiColor } from "./api/data";
 import RiseLoader from "react-spinners/RiseLoader";
 
-const HeaderTop = () => {
+const HeaderTop = ({couponData}) => {
   const [loading, SetLoading] = useState(false);
 
   useEffect(() => {
@@ -10,7 +10,7 @@ const HeaderTop = () => {
 
     setTimeout(() => {
       SetLoading(false);
-    }, 1000);
+    }, 1500);
   }, []);
   return (
     <>
@@ -35,7 +35,7 @@ const HeaderTop = () => {
           }
           className="text-white flex px-8 p-2 uppercase"
         >
-          <p className="header-top-animation text-sm"> 🌟 50% OFF SALE! 🌟 </p>
+          <p className="header-top-animation text-sm"> 🌟 {couponData} OFF SALE! 🌟 </p>
         </div>
       )}
     </>

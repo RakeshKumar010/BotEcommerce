@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { RiArrowUpSFill } from "react-icons/ri";
  
 
-const FixedBtn = ({data}) => {
+const FixedBtn = ({data,couponData}) => {
   const [offerImg, setOfferImg] = useState(false);
   return (
     <div className="fixed flex justify-center items-center  top-1/2 -right-[102px] z-10 ">
@@ -24,7 +24,7 @@ const FixedBtn = ({data}) => {
           setOfferImg(!offerImg);
         }}
       >
-        <p className="">FLAT 50% OFF</p>
+        <p className="">FLAT {couponData} OFF</p>
         <RiArrowUpSFill className="text-4xl" />
       </div>
     </div>

@@ -103,15 +103,7 @@ const SideBar = () => {
           },
         ]
       : []),
-    ...(sAdminId == "1"
-      ? [
-          {
-            to: "add-banner",
-            text: "Add Banner",
-            icon: <RiImageAddLine className="text-xl" />,
-          },
-        ]
-      : []),
+   
     ...(sAdminId == "1"
       ? [
           {

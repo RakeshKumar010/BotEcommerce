@@ -121,7 +121,7 @@ const SuperAdminLogin = ({setIsSuperAdmin}) => {
             <div className="flex flex-col gap-3 justify-center ">
               <button
                 type="submit"
-                style={ApiColor?{backgroundColor:ApiColor}:{backgroundColor:'black'}}
+       
                 disabled={countWPass >= 3} // This will disable the button when countWPass is 3 or more
                 className={`p-3 w-full bg-blue-500 text-white rounded-md shadow-md ${
                   countWPass >= 3 ? "bg-blue-300" : "hover:bg-blue-600"
