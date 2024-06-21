@@ -1,7 +1,7 @@
 // import Banner from "../assets/image/banner1.webp";
 
 const DreshList = ({ banner }) => {
- 
+ console.log(banner);
   return (
     <>
       {banner ? (

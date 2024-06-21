@@ -3,7 +3,7 @@ import { Carousel } from "flowbite-react";
 const Banner = ({data,dummyData}) => {
 
   return (
-    <div className="relative h-[12vh]  md:h-[60vh] carousel-main">
+    <div className="relative h-56 md:h-screen carousel-main">
      {data? <Carousel>
         {data &&
           data.map(({ carousel },index) => {

@@ -20,16 +20,12 @@ const NewArrival = ({ title }) => {
   const [totalItem, setTotalItem] = useState();
   const [data, setData] = useState();
   const [filterOpen, setFilterOpen] = useState(false);
-  // const [selectedOption, setSelectedOption] = useState("created-descending");
   const [isLoading, setIsLoading] = useState(true);
   const [intRate, setIntRate] = useState(100);
   const [isAvailability, setIsAvailability] = useState(null);
   const [selectedFabric, setSelectedFabric] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
-  // const handleSelectChange = (event) => {
-  //   setSelectedOption(event.target.value);
-  //   // You can perform additional actions based on the selected option here.
-  // };
+const [pageLoad,setPageLoad]=useState()
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalItem) {
       setCurrentPage(newPage);
@@ -56,6 +52,7 @@ const NewArrival = ({ title }) => {
         "https://psyrealestate.in/product/" + clientData.clientId
       );
       result = await result.json();
+ 
       if (result.length > 0) {
         setIsLoading(false);
       } else {
@@ -69,16 +66,12 @@ const NewArrival = ({ title }) => {
         ) {
           array.push(value);
         }
+        console.log('array');
         if (array.length > 0) {
-          
           let filteredData = array;
-         
 
-          // Price filter
-          // console.log(filteredData);
           filteredData = filteredData.filter(({ price }) => {
-           
-            return parseInt(price.replace(/,/g, ""), 10) < (intRate * 500);
+            return parseInt(price.replace(/,/g, ""), 10) < intRate * 500;
           });
           // Availability filter
           if (isAvailability) {
@@ -104,7 +97,7 @@ const NewArrival = ({ title }) => {
           setData(filteredData);
           // console.log(filteredData);
         } else {
-          console.log("No data available.");
+          setData([])
         }
       });
       const totalPages = Math.ceil(array.length / itemsPerPage);
@@ -117,6 +110,7 @@ const NewArrival = ({ title }) => {
     isAvailability,
     selectedFabric,
     selectedSize,
+    
   ]);
   return (
     <>
@@ -150,27 +144,6 @@ const NewArrival = ({ title }) => {
               <VscSettings />
               <p>Filter</p>
             </div>
-
-            {/* <div className="flex md:items-center md:gap-5 flex-col md:flex-row  items-end">
-              <p>Sort by</p>
-              <select
-                className="p-3 border-none"
-                name="SortBy"
-                id="js-sortby"
-                aria-describedby="a11y-refresh-page-message a11y-selection-message"
-                value={selectedOption}
-                onChange={handleSelectChange}
-              >
-                <option value="manual">Featured</option>
-                <option value="best-selling">Best selling</option>
-                <option value="title-ascending">Alphabetically, A-Z</option>
-                <option value="title-descending">Alphabetically, Z-A</option>
-                <option value="price-ascending">Price, low to high</option>
-                <option value="price-descending">Price, high to low</option>
-                <option value="created-ascending">Date, old to new</option>
-                <option value="created-descending">Date, new to old</option>
-              </select>
-            </div> */}
           </div>
           {isLoading ? (
             <div className="flex justify-center flex-wrap gap-4 gap-y-7 sm:px-2 xl:px-10">

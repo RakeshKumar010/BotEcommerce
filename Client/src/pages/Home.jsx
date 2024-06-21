@@ -16,7 +16,7 @@ const Home = () => {
   const [addId, setAddId] = useState(false);
   const [popUp, setPopUp] = useState(false);
   const [data, setData] = useState();
-  const [banner, setbanner] = useState();
+  // const [banner, setbanner] = useState();
 
   const dummyData = [
     {
@@ -67,21 +67,23 @@ const Home = () => {
 
       if (filterResult.length > 0) {
         setData(filterResult);
+        // console.log(filterResult);
       } else {
         setData(null);
       }
-      let bannerResult = await fetch("https://psyrealestate.in/banner");
-      bannerResult = await bannerResult.json();
-      // console.log(bannerResult);
-      const filterbannerResult = bannerResult.filter((value) => {
-        return value.clientId == clientData._id;
-      });
-      // console.log(filterbannerResult[0].banner);
-      if (filterbannerResult.length > 0) {
-        setbanner(filterbannerResult[0].banner);
-      } else {
-        setbanner(null);
-      }
+      // let bannerResult = await fetch("https://psyrealestate.in/banner");
+      // bannerResult = await bannerResult.json();
+      // // console.log(bannerResult);
+      // const filterbannerResult = bannerResult.filter((value) => {
+      //   return value.clientId == clientData._id;
+      // });
+      // // console.log(filterbannerResult[0].banner);
+      // if (filterbannerResult.length > 0) {
+      //   setbanner(filterbannerResult[0].banner);
+      //   // console.log(filterbannerResult[0].banner);
+      // } else {
+      //   setbanner(null);
+      // }
     };
     getFun();
   }, []);
@@ -93,7 +95,7 @@ const Home = () => {
         <ProDetailsPopup addId={addId} setDetailsPopup={setDetailsPopup} />
       ) : null}
 
-      <div id="nav-desktop">
+      <div >
         <div className="fixed top-0 z-10 right-0 left-0 ">
           <HeaderTop />
           <NavBar />
@@ -103,11 +105,11 @@ const Home = () => {
         </div>
       </div>
 
-      <div className=" sticky top-0 z-10 block  sm:hidden md:bg-gray-200 bg-white pb-2 shadow-xl ">
+      {/* <div className=" sticky top-0 z-10 block  sm:hidden md:bg-gray-200 bg-white pb-2 shadow-xl ">
         <HeaderTop />
         <NavBar />
-      </div>
-      <DreshList banner={banner} />
+      </div> */}
+      {/* <DreshList banner={banner} /> */}
       <ArrivalShow setAddId={setAddId} setDetailsPopup={setDetailsPopup} />
       <BestSeller setAddId={setAddId} setDetailsPopup={setDetailsPopup} />
       <FeatureBottom />
