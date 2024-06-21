@@ -13,6 +13,8 @@ const superAdminSchema = require("../schema/superAdminSchema");
 const clientSchema = require("../schema/clientSchema");
 const productSchema = require("../schema/productSchema");
 const bannerSchema = require("../schema/bannerSchema");
+const titleSchema = require("../schema/titleSchema");
+const faviconSchema = require("../schema/faviconSchema");
  
 
 // post
@@ -71,6 +73,12 @@ app.post("/add-social-link", async (req, res) => {
   result = await result.save();
   res.send(result);
 });
+app.post("/add-title", async (req, res) => {
+  let result = await new titleSchema(req.body);
+  result = await result.save();
+  res.send(result);
+});
+
 app.post("/add-super-admin", async (req, res) => {
   let result = await new superAdminSchema(req.body);
   result = await result.save();
@@ -103,6 +111,15 @@ app.post("/add-logo", upload.single("image"), async (req, res) => {
   result = await result.save();
   res.send(result);
 });
+app.post("/add-favicon", upload.single("image"), async (req, res) => {
+  let faviconData = req.body;
+  faviconData.favicon = req.file.path;
+  let result = await new faviconSchema(faviconData);
+  result = await result.save();
+  res.send(result);
+});
+
+ 
 app.post("/add-banner", upload.single("image"), async (req, res) => {
   let bannerData = req.body;
   bannerData.banner = req.file.path;
@@ -149,8 +166,16 @@ app.get("/product", async (req, res) => {
   let result = await productSchema.find({ recycleId: "0" });
   res.send(result);
 });
+app.get("/title", async (req, res) => {
+  let result = await titleSchema.find();
+  res.send(result);
+});
+app.get("/favicon", async (req, res) => {
+  let result = await faviconSchema.find();
+  res.send(result);
+});
 app.get("/product/:clientId", async (req, res) => {
-  let result = await productSchema.find({ clientId: req.params.clientId });
+  let result = await productSchema.find({ clientId: req.params.clientId,recycleId: "0"  });
   res.send(result);
 
 });
@@ -300,6 +325,17 @@ app.put("/update-logo/:id", upload.single("image"), async (req, res) => {
 
   res.send(result);
 });
+app.put("/update-favicon/:id", upload.single("image"), async (req, res) => {
+  let faviconData = {};
+  faviconData.favicon = req.file.path; // Add image paths to favicon data
+  let result = await faviconSchema.updateOne(
+    { _id: req.params.id },
+    { $set: faviconData }
+  );
+
+  res.send(result);
+});
+ 
 app.put("/update-banner/:id", upload.single("image"), async (req, res) => {
   let bannerData = {};
   bannerData.banner = req.file.path; // Add image paths to banner data
@@ -317,6 +353,14 @@ app.put("/update-color/:id", async (req, res) => {
   );
   res.send(result);
 });
+app.put("/update-title/:id", async (req, res) => {
+  let result = await titleSchema.updateOne(
+    { _id: req.params.id },
+    { $set: req.body }
+  );
+  res.send(result);
+});
+
 app.put("/update-nav-item/:id", async (req, res) => {
   let result = await navSchema.updateOne(
     { _id: req.params.id },

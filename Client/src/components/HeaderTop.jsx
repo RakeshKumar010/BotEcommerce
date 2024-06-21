@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { ApiColor } from "./api/data";
 import RiseLoader from "react-spinners/RiseLoader";
 
-const HeaderTop = ({couponData}) => {
+const HeaderTop = () => {
   const [loading, SetLoading] = useState(false);
+  const [couponData,setCouponData]=useState()
 
   useEffect(() => {
     SetLoading(true);
@@ -11,6 +12,35 @@ const HeaderTop = ({couponData}) => {
     setTimeout(() => {
       SetLoading(false);
     }, 1500);
+
+    const getFun = async () => {
+      function trimUrl(url) {
+        const parsedUrl = new URL(url);
+        return (
+          parsedUrl.hostname + (parsedUrl.port ? ":" + parsedUrl.port : "")
+        );
+      }
+      const currentUrl = trimUrl(window.location.href);
+      let response = await fetch(
+        "https://psyrealestate.in/client/" + currentUrl
+      );
+      const clientData = await response.json();
+      
+      let couponresult = await fetch("https://psyrealestate.in/coupon");
+      couponresult = await couponresult.json();
+
+      const filterCoupan = couponresult.filter((value) => {
+        return value.clientId == clientData._id;
+      });
+      if (filterCoupan.length > 0) {
+        const reversedCoupons = filterCoupan.reverse();
+        setCouponData(reversedCoupons[0].discount);
+        // console.log(reversedCoupons[0].discount);
+      } else {
+        setCouponData("5%");
+      }
+    };
+    getFun();
   }, []);
   return (
     <>
@@ -35,7 +65,10 @@ const HeaderTop = ({couponData}) => {
           }
           className="text-white flex px-8 p-2 uppercase"
         >
-          <p className="header-top-animation text-sm"> 🌟 {couponData} OFF SALE! 🌟 </p>
+          <p className="header-top-animation text-sm">
+            {" "}
+            🌟 {couponData} OFF SALE! 🌟{" "}
+          </p>
         </div>
       )}
     </>

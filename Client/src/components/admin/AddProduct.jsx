@@ -142,8 +142,8 @@ const AddProduct = () => {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
-        <div className="flex items-center justify-between">
-          <div>
+        <div className="flex items-center flex-wrap justify-between">
+          <div className="md:w-auto w-full">
             <p className="block text-gray-700 text-sm font-bold mb-2">
               No. of pieces in a set
             </p>
@@ -154,7 +154,7 @@ const AddProduct = () => {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
-          <div>
+          <div className="md:w-auto w-full">
             <p className="block text-gray-700 text-sm font-bold mb-2">Rating</p>
             <input
               type="text"
@@ -163,7 +163,7 @@ const AddProduct = () => {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
-          <div>
+          <div className="md:w-auto w-full">
             <p className="block text-gray-700 text-sm font-bold mb-2">Price</p>
             <input
               type="text"
@@ -174,8 +174,8 @@ const AddProduct = () => {
           </div>
         </div>
 
-        <div className="flex items-center justify-between">
-          <div>
+        <div className="flex items-center flex-wrap justify-between">
+          <div className="md:w-auto w-full">
             <p className="block text-gray-700 text-sm font-bold mb-2">
               Dispatch Time in Days
             </p>
@@ -187,7 +187,7 @@ const AddProduct = () => {
             />
           </div>
 
-          <div>
+          <div className="md:w-auto w-full">
             <p className="block text-gray-700 text-sm font-bold mb-2">Offer</p>
             <input
               type="text"
@@ -196,7 +196,7 @@ const AddProduct = () => {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
-          <div>
+          <div className="md:w-auto w-full">
             <p className="block text-gray-700 text-sm font-bold mb-2">Fabric</p>
             <input
               type="text"
@@ -237,7 +237,7 @@ const AddProduct = () => {
 
         <div className="py-6">
           <p className="block text-gray-700 text-sm font-bold mb-2">Section</p>
-          <div className="flex justify-between flex-wrap">
+          <div className="flex  flex-wrap gap-5">
             <div className="mb-3">
               <label className="inline-flex items-center">
                 <input
@@ -382,7 +382,7 @@ const AddProduct = () => {
           ))}
           <div className="flex justify-end my-1">
             <p
-              style={{ backgroundColor: ApiColor }}
+      style={ApiColor?{ backgroundColor: ApiColor }:{ backgroundColor: 'black' }}
               className="text-end  text-white py-2 px-5 rounded-md cursor-pointer"
               onClick={handleAddClick}
             >

@@ -39,12 +39,14 @@ import EditClient from "../components/superadmin/EditClient.jsx";
 import SuperAdminLogin from "../pages/SuperAdminLogin.jsx";
 import ErrorPage from "../components/ErrorPage.jsx";
 import AddBanner from "../components/admin/AddBanner.jsx";
+import AddTitle from "../components/admin/AddTitle.jsx";
+import AddFavicon from "../components/admin/AddFavicon.jsx";
 
 const Layout = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isSuperAdmin, setIsSuperAdmin] = useState(false);
   const [navItemData, setNavItemData] = useState(false);
-   
+
   // Check local storage for admin details on component mount
   useEffect(() => {
     const admin = localStorage.getItem("user");
@@ -65,8 +67,6 @@ const Layout = () => {
       );
       const clientData = await response.json();
 
-    
-
       let resultNavItem = await fetch("https://psyrealestate.in/nav-item");
       resultNavItem = await resultNavItem.json();
 
@@ -75,8 +75,38 @@ const Layout = () => {
       });
 
       setNavItemData(
-        filteredResultNavItems.length >0? filteredResultNavItems[0] : false
+        filteredResultNavItems.length > 0 ? filteredResultNavItems[0] : false
       );
+      let resultTitle = await fetch("https://psyrealestate.in/title");
+      resultTitle = await resultTitle.json();
+
+      const filteredResultTitles = resultTitle.filter((value) => {
+        return value.clientId == clientData._id;
+      });
+
+      const titleData =
+        filteredResultTitles.length > 0 ? filteredResultTitles[0] : false;
+      document.title = `${titleData?titleData.title:'Title'}`;
+      // console.log(titleData);
+
+      let resultFavicon = await fetch("https://psyrealestate.in/favicon");
+      resultFavicon = await resultFavicon.json();
+
+      const filteredResultFavicons = resultFavicon.filter((value) => {
+        return value.clientId == clientData._id;
+      });
+
+      const FaviconData =
+        filteredResultFavicons.length > 0 ? filteredResultFavicons[0] : false;
+        if(FaviconData){
+          const faviconUrl = `https://psyrealestate.in/${FaviconData.favicon}`;
+          const linkTag = document.querySelector('link[rel="icon"]');
+          linkTag.href = faviconUrl;
+        
+
+        }
+
+      // document.Favicon = FaviconData.Favicon;
     };
     getFun();
   }, []);
@@ -104,24 +134,45 @@ const Layout = () => {
         />
 
         <Route
-          path={(navItemData?navItemData.nav1.replace(/\s+/g, ''):"menu1")}
-          element={<NewArrival title={navItemData?navItemData.nav1:"section 1"} />}
-        />
-        <Route path={(navItemData?navItemData.nav2.replace(/\s+/g, ''):"menu2")} 
-        element={<NewArrival title={navItemData?navItemData.nav2:"section 2"} />} />
-        <Route
-          path={(navItemData?navItemData.nav3.replace(/\s+/g, ''):"menu3")}
-          element={<NewArrival title={navItemData?navItemData.nav3:"section 3"} />}
+          path={navItemData ? navItemData.nav1.replace(/\s+/g, "") : "menu1"}
+          element={
+            <NewArrival title={navItemData ? navItemData.nav1 : "section 1"} />
+          }
         />
         <Route
-          path={(navItemData?navItemData.nav4.replace(/\s+/g, ''):"menu4")}
-          element={<NewArrival title={navItemData?navItemData.nav4:"section 4"} />}
+          path={navItemData ? navItemData.nav2.replace(/\s+/g, "") : "menu2"}
+          element={
+            <NewArrival title={navItemData ? navItemData.nav2 : "section 2"} />
+          }
         />
         <Route
-          path={(navItemData?navItemData.nav5.replace(/\s+/g, ''):"menu5")}
-          element={<NewArrival title={navItemData?navItemData.nav5:"section 5"} />}
+          path={navItemData ? navItemData.nav3.replace(/\s+/g, "") : "menu3"}
+          element={
+            <NewArrival title={navItemData ? navItemData.nav3 : "section 3"} />
+          }
         />
-        <Route path="/admin" element={isAdmin ? <Admin /> : <RedirectPage title={'Admin'} router={'/admin-login'}/>}>
+        <Route
+          path={navItemData ? navItemData.nav4.replace(/\s+/g, "") : "menu4"}
+          element={
+            <NewArrival title={navItemData ? navItemData.nav4 : "section 4"} />
+          }
+        />
+        <Route
+          path={navItemData ? navItemData.nav5.replace(/\s+/g, "") : "menu5"}
+          element={
+            <NewArrival title={navItemData ? navItemData.nav5 : "section 5"} />
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            isAdmin ? (
+              <Admin />
+            ) : (
+              <RedirectPage title={"Admin"} router={"/admin-login"} />
+            )
+          }
+        >
           <Route index element={<DashBoard />} />
           <Route path="product" element={<Product />} />
           <Route path="recycle-bin/:id" element={<EditProduct />} />
@@ -132,8 +183,9 @@ const Layout = () => {
           <Route path="coupon/:id" element={<EditCoupon />} />
           <Route path="add-coupon" element={<AddCoupon />} />
           <Route path="add-products" element={<AddProduct />} />
+          <Route path="add-title" element={<AddTitle />} />
+          <Route path="add-favicon" element={<AddFavicon />} />
           <Route path="add-logo" element={<AddLogo />} />
-    
           <Route path="add-color" element={<AddColor />} />
           <Route path="add-nav-item" element={<AddNavItem />} />
           <Route path="add-social-link" element={<AddSocialLink />} />
@@ -142,7 +194,19 @@ const Layout = () => {
           <Route path="account/:id" element={<EditAccounts />} />
           <Route path="sign-up" element={<SignUp />} />
         </Route>
-        <Route path="/super-admin" element={isSuperAdmin?<SuperAdmin />:<RedirectPage title={'Super Admin'} router={'/super-admin-login'}/>}>
+        <Route
+          path="/super-admin"
+          element={
+            isSuperAdmin ? (
+              <SuperAdmin />
+            ) : (
+              <RedirectPage
+                title={"Super Admin"}
+                router={"/super-admin-login"}
+              />
+            )
+          }
+        >
           <Route index element={<Sdashboard />} />
           <Route path="add-client" element={<AddClient />} />
           <Route path="all-client" element={<AllClient />} />

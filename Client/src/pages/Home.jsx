@@ -114,7 +114,7 @@ const Home = () => {
       ) : null}
 
       <div className="fixed top-0 z-10 right-0 left-0 ">
-        <HeaderTop couponData={couponData} />
+        <HeaderTop />
         <NavBar />
       </div>
       <div className="mt-28">

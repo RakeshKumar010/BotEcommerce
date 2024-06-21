@@ -4,7 +4,7 @@ const DummyCard = () => {
   return (
     <div className="hover:scale-105 transition-all duration-200 w-[43vw] sm:w-[28vw] md:w-[19vw] lg:[20vw]  xl:w-[20vw] bg-white border hover:border-gray-900 rounded-lg shadow  ">
                 <div className="relative h-96">
-                  <div className="w-full rounded-t-lg bg-gray-900 h-full"></div>
+                  <div className="w-full rounded-t-lg  bg-gray-900 h-full"></div>
                 </div>
 
                 <div className="px-5  py-2 text-center">

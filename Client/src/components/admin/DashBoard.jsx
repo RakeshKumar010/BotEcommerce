@@ -136,7 +136,7 @@ const DashBoard = () => {
             Complate Your Profile
           </p>
           <Link
-            to={"add-logo"}
+            to={"add-title"}
             style={
               ApiColor
                 ? { backgroundColor: ApiColor }

@@ -37,16 +37,7 @@ const [pageLoader,setPageLoader]=useState(false)
       to: "/" + (navItemData ? navItemData.nav5.replace(/\s+/g, "") : "menu5"),
       text: navItemData ? navItemData.nav5 : "menu 5",
     },
-    {
-      to: "/sign-in",
-      text: "Sign In",
-      className: "text-gray-400 md:hidden block",
-    },
-    {
-      to: "/register",
-      text: "Register",
-      className: "text-gray-400 md:hidden block",
-    },
+ 
   ];
   useEffect(() => {
     const storedObject = JSON.parse(localStorage.getItem("myCart"));
@@ -195,14 +186,22 @@ const [pageLoader,setPageLoader]=useState(false)
           <ul
             className={`flex md:flex-row flex-col md:static h-screen md:bg-transparent bg-white  sm:gap-4 gap-7 md:gap-5 lg:gap-2 xl:gap-4 p-4  md:h-auto  md:w-auto w-[80%] md:items-center text-nowrap `}
           >
-            <div className="md:hidden flex justify-between items-center  py-2 px-1 w-full bg-gray-100">
-              <input
-                type="text"
-                placeholder="Search Products.."
-                className="w-[70%] border-0 bg-gray-100 px-2"
-              />
-              <IoSearchOutline className="text-xl" />
-            </div>
+            <li className="md:hidden flex justify-between items-center  py-2 px-1 w-full  ">
+            <Link to={"/"}>
+          {logos ? (
+            <img
+              src={`https://psyrealestate.in/${logos}`}
+              alt="..."
+              className="h-8 lg:h-12 xl:h-16"
+            />
+          ) : (
+            <span className="flex-1 ms-3 text-black font-bold text-3xl whitespace-nowrap">
+              Logo
+            </span>
+          )}
+        </Link>
+            </li>
+
             {navItems.map((item, index) => (
               <Link
                 key={index}
@@ -222,11 +221,11 @@ const [pageLoader,setPageLoader]=useState(false)
                         }
                       : null
                   }
-                  className={`text-base uppercase  shadow-sm  px-3
-                 p-2 rounded-full hover:shadow-md hover:scale-105 transition-all duration-200 hover:shadow-gray-400
+                  className={`text-base uppercase   shadow-sm  px-3
+                 p-2 rounded-md  hover:shadow-md hover:scale-105 transition-all duration-200 hover:shadow-gray-400
                sm:text-[12px] lg:text-[15px] xl:text-base ${
                  location.pathname == item.to
-                   ? `  text-white shadow-md  scale-105 shadow-gray-600`
+                   ? `  text-white shadow-md   scale-105 shadow-gray-600`
                    : null
                }`}
                 >

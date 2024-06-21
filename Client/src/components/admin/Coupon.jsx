@@ -39,13 +39,13 @@ const Coupon = () => {
     <div className="bg-gray-50 border-0 md:border-2 border-dotted border-black h-screen w-full lg:w-[83%] absolute right-0 ">
       <p
         className="text-3xl font-bold text-center my-10 "
-        style={{ color: ApiColor }}
+        style={ApiColor?{ color: ApiColor }:{ color: 'black'}}
       >
         All Coupon
       </p>
       <table className="w-[90%] mx-auto text-center shadow-lg ">
         <tr
-          style={{ backgroundColor: ApiColor }}
+          style={ApiColor?{ backgroundColor: ApiColor }:{ backgroundColor: 'black'}}
           className="border-2  text-white "
         >
           <th className="p-2">S.No.</th>

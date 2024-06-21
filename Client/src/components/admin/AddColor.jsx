@@ -76,7 +76,7 @@ const AddColor = () => {
         onSubmit={handleSubmit}
         className="space-y-4 w-[90vw] md:w-[50vw] bg-white shadow-md rounded px-8  pt-6 pb-8 mb-4"
       >
-        <h1  style={{color:ApiColor}} className="text-center text-2xl font-bold ">
+        <h1  style={ApiColor?{color:ApiColor}:{color:'black'}}  className="text-center text-2xl font-bold ">
           Add Colors
         </h1>
         <div className="flex justify-center">

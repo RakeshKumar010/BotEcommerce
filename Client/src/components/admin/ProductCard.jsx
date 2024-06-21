@@ -99,7 +99,7 @@ const ProductCard = ({ value, index, setPageLoad, recycle }) => {
       <td className="p-2 border     border-gray-500 ">
         {image.length > 0 && (
           <img
-            className="   rounded-sm object-cover   "
+            className=" w-20  rounded-sm object-cover   "
             src={`https://psyrealestate.in/${image[image.length - 1]}`}
             alt="product image"
           />

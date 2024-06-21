@@ -35,13 +35,13 @@ const Product = () => {
     <>
       <div className="absolute right-0 border-dotted border-black border-0 md:border-2 min-h-screen w-full lg:w-[82%] px-2">
         <div className="text-center py-5">
-          <p className="font-bold text-3xl " style={{ color: ApiColor }}>
+          <p className="font-bold text-3xl " style={ApiColor?{ color: ApiColor }:{ color: 'black'}}>
             All Products
           </p>
           <div className="flex justify-end">
             <p
               onClick={downloadExcal}
-              style={{ backgroundColor: ApiColor }}
+              style={ApiColor?{ backgroundColor: ApiColor }:{ backgroundColor: 'black' }}
               className="cursor-pointer text-white p-5 py-3 rounded-md mx-2 hover:scale-105 transition-all duration-200 hover:shadow-lg"
             >
               Export to Excel
@@ -50,7 +50,7 @@ const Product = () => {
         </div>
 
         <table className="table-auto  w-full shadow-lg  ">
-          <tr style={{ backgroundColor: ApiColor }} className="  text-white">
+          <tr  style={ApiColor?{ backgroundColor: ApiColor }:{ backgroundColor: 'black' }} className="  text-white">
             <th>S.No.</th>
             <th>Image</th>
             <th>Points</th>

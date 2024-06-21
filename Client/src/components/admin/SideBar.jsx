@@ -6,6 +6,7 @@ import {
   MdLogout,
   MdOutlineAddPhotoAlternate,
   MdOutlineDashboardCustomize,
+  MdOutlineTextFields,
   MdProductionQuantityLimits,
 } from "react-icons/md";
 import { TfiLayoutSlider } from "react-icons/tfi";
@@ -23,6 +24,8 @@ const SideBar = () => {
   const [sAdminId, setSAdminId] = useState();
   const [access, setAccess] = useState("");
   const [logos, setLogos] = useState();
+  const [title, setTitle] = useState();
+  const [favicon, setFavicon] = useState();
   const [accountTab, setAccountTab] = useState(false);
   const [productTab, setProductTab] = useState(false);
   const [couponTab, setCouponTab] = useState(false);
@@ -54,6 +57,23 @@ const SideBar = () => {
           }
         }
       });
+      let resultTitle = await fetch("https://psyrealestate.in/title");
+      resultTitle = await resultTitle.json();
+      const filteredTitleResults = resultTitle.filter(
+        (value) => value.clientId === user._id
+      );
+      filteredTitleResults.length > 0
+        ? setTitle(filteredTitleResults[0].title)
+        : setTitle(null);
+      let resultFavicon = await fetch("https://psyrealestate.in/favicon");
+      resultFavicon = await resultFavicon.json();
+      const filteredFaviconResults = resultFavicon.filter(
+        (value) => value.clientId === user._id
+      );
+      filteredFaviconResults.length > 0
+        ? setFavicon(filteredFaviconResults[0].favicon)
+        : setFavicon(null);
+
       let result3 = await fetch("https://psyrealestate.in/logo");
       result3 = await result3.json();
       const filteredResults = result3.filter(
@@ -103,7 +123,24 @@ const SideBar = () => {
           },
         ]
       : []),
-   
+    ...(sAdminId == "1"
+      ? [
+          {
+            to: "add-title",
+            text: "Add Title",
+            icon: <MdOutlineTextFields className="text-xl" />,
+          },
+        ]
+      : []),
+    ...(sAdminId == "1"
+      ? [
+          {
+            to: "add-favicon",
+            text: "Add Favicon",
+            icon: <RiImageAddLine className="text-xl" />,
+          },
+        ]
+      : []),
     ...(sAdminId == "1"
       ? [
           {
@@ -413,15 +450,61 @@ const SideBar = () => {
               </li>
               <li>
                 <Link
-                  to="add-logo"
+                  to="add-title"
                   className="flex items-center p-2 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group"
                 >
-                  <IoMdAddCircleOutline />
+                  <MdOutlineTextFields />
                   <span className="flex-1 ms-3 whitespace-nowrap">
-                    Add Logo{" "}
+                    Add Title{" "}
                   </span>
                 </Link>
               </li>
+              {title ? (
+                <li>
+                  <Link
+                    to="add-favicon"
+                    className="flex items-center p-2 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group"
+                  >
+                    <MdOutlineTextFields />
+                    <span className="flex-1 ms-3 whitespace-nowrap">
+                      Add Favicon{" "}
+                    </span>
+                  </Link>
+                </li>
+              ) : (
+                <li>
+                  <Link className="flex items-center p-2 bg-gray-300 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group">
+                    <MdOutlineTextFields />
+                    <span className="flex-1 ms-3 whitespace-nowrap">
+                      Add Favicon{" "}
+                    </span>
+                    <FaLock />
+                  </Link>
+                </li>
+              )}
+              {favicon ? (
+                <li>
+                  <Link
+                    to="add-logo"
+                    className="flex items-center p-2 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group"
+                  >
+                    <IoMdAddCircleOutline />
+                    <span className="flex-1 ms-3 whitespace-nowrap">
+                      Add Logo{" "}
+                    </span>
+                  </Link>
+                </li>
+              ) : (
+                <li>
+                  <Link className="flex items-center bg-gray-300 p-2 text-gray-900 rounded-lg  hover:shadow-md hover:scale-105 transition-all duration-200  group">
+                    <IoMdAddCircleOutline />
+                    <span className="flex-1 ms-3 whitespace-nowrap">
+                      Add Logo{" "}
+                    </span>
+                    <FaLock />
+                  </Link>
+                </li>
+              )}
               <li>
                 {logos ? (
                   <Link
