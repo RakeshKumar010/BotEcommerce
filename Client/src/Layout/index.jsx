@@ -173,6 +173,7 @@ const Layout = () => {
             )
           }
         >
+          
           <Route index element={<DashBoard />} />
           <Route path="product" element={<Product />} />
           <Route path="recycle-bin/:id" element={<EditProduct />} />
