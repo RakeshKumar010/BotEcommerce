@@ -56,7 +56,7 @@ const EditProduct = () => {
     // Append other fields...
 
     let response = await fetch(
-      "https://psyrealestate.in/product/" + location.pathname.split("/").pop(),
+      "http://localhost:4001/product/" + location.pathname.split("/").pop(),
       {
         method: "PUT",
         body: formData,
@@ -81,7 +81,7 @@ const EditProduct = () => {
   useEffect(() => {
     const getFun = async () => {
       let result = await fetch(
-        "https://psyrealestate.in/" + location.pathname.split("/").pop()
+        "http://localhost:4001/" + location.pathname.split("/").pop()
       );
       result = await result.json();
       setData(result);
@@ -107,7 +107,7 @@ const EditProduct = () => {
       }
       const currentUrl = trimUrl(window.location.href);
       let response = await fetch(
-        "https://psyrealestate.in/client/" + currentUrl
+        "http://localhost:4001/client/" + currentUrl
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -121,7 +121,7 @@ const EditProduct = () => {
         navigate("error");
       }
 
-      let resultNavItem = await fetch("https://psyrealestate.in/nav-item");
+      let resultNavItem = await fetch("http://localhost:4001/nav-item");
       resultNavItem = await resultNavItem.json();
 
       const filteredResultNavItems = resultNavItem.filter((value) => {
@@ -169,7 +169,7 @@ const EditProduct = () => {
                   <>
                     <img
                       className="rounded-sm w-20 object-cover "
-                      src={`https://psyrealestate.in/${value}`}
+                      src={`http://localhost:4001/${value}`}
                       alt="product image"
                     />
                   </>

@@ -7,7 +7,7 @@ const DreshList = ({ banner }) => {
       {banner ? (
         <div className="bg-white pb-3">
           <img
-            src={`https://psyrealestate.in/${banner}`}
+            src={`http://localhost:4001/${banner}`}
             alt="..."
             className="w-full"
           />

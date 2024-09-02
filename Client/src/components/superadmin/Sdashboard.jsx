@@ -26,7 +26,7 @@ const Sdashboard = () => {
   ];
   useEffect(() => {
     const getFun = async () => {
-      let total = await fetch("https://psyrealestate.in/show-client");
+      let total = await fetch("http://localhost:4001/show-client");
       total = await total.json();
       setTotalClient(total.length);
       let deactive = total.filter((user) => user.status === "0");

@@ -13,7 +13,7 @@ const AddTitle = () => {
 
     if (data.length > 0) {
       let response = await fetch(
-        "https://psyrealestate.in/update-title/" + data[0]._id,
+        "http://localhost:4001/update-title/" + data[0]._id,
         {
           method: "put",
           headers: { "content-type": "application/json" },
@@ -36,7 +36,7 @@ const AddTitle = () => {
         alert("HTTP-Error: " + response.status);
       }
     } else {
-      let response = await fetch("https://psyrealestate.in/add-title", {
+      let response = await fetch("http://localhost:4001/add-title", {
         method: "post",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ title, clientId: user._id }),
@@ -61,7 +61,7 @@ const AddTitle = () => {
 
   useEffect(() => {
     const getData = async () => {
-      let result = await fetch("https://psyrealestate.in/title");
+      let result = await fetch("http://localhost:4001/title");
       result = await result.json();
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);

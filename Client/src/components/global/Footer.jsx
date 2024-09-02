@@ -17,11 +17,11 @@ const Footer = () => {
       }
       const currentUrl = trimUrl(window.location.href);
       let response = await fetch(
-        "https://psyrealestate.in/client/" + currentUrl
+        "http://localhost:4001/client/" + currentUrl
       );
       const clientData = await response.json();
 
-      let result = await fetch("https://psyrealestate.in/logo");
+      let result = await fetch("http://localhost:4001/logo");
       result = await result.json();
       const filteredLogoResults = result.filter((value) => {
         return value.clientId == clientData._id;
@@ -33,7 +33,7 @@ const Footer = () => {
       }else{
         setLogos(false)
       }
-      let socialResult = await fetch("https://psyrealestate.in/social");
+      let socialResult = await fetch("http://localhost:4001/social");
       socialResult = await socialResult.json();
       const filteredResults = socialResult.filter((value) => {
         return value.clientId == clientData._id;
@@ -58,7 +58,7 @@ const Footer = () => {
                 {logos ? (
                    <Link to={"/"}>
                   <img
-                    src={`https://psyrealestate.in/${logos}`}
+                    src={`http://localhost:4001/${logos}`}
                     alt="..."
                     className="h-16 mb-5"
                   />

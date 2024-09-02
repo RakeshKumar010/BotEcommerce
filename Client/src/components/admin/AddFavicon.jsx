@@ -16,7 +16,7 @@ const AddFavicon = () => {
         formData.append("clientId", clientId);
         if (data.length > 0) {
           let response = await fetch(
-            "https://psyrealestate.in/update-favicon/" + data[0]._id,
+            "http://localhost:4001/update-favicon/" + data[0]._id,
             {
               method: "put",
               body: formData,
@@ -37,7 +37,7 @@ const AddFavicon = () => {
             alert("HTTP-Error: " + response.status);
           }
         } else {
-          let response = await fetch("https://psyrealestate.in/add-favicon", {
+          let response = await fetch("http://localhost:4001/add-favicon", {
             method: "post",
             body: formData,
           });
@@ -61,7 +61,7 @@ const AddFavicon = () => {
 
     useEffect(() => {
         const getData = async () => {
-          let result = await fetch("https://psyrealestate.in/favicon");
+          let result = await fetch("http://localhost:4001/favicon");
           result = await result.json();
           let userString = localStorage.getItem("user");
           let user = JSON.parse(userString);

@@ -10,7 +10,7 @@ const Banner = ({data,dummyData}) => {
             return (
               <img
               key={index}
-                src={`https://psyrealestate.in/${carousel}`}
+                src={`http://localhost:4001/${carousel}`}
                 alt="..."
                 className="w-full h-full  bg-cover "
               />

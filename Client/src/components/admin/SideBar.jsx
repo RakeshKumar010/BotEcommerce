@@ -38,7 +38,7 @@ const SideBar = () => {
 
   useEffect(() => {
     const getFun = async () => {
-      let result = await fetch("https://psyrealestate.in/show-client");
+      let result = await fetch("http://localhost:4001/show-client");
       result = await result.json();
       setNavColor(localStorage.getItem("color"));
       setNavItem(localStorage.getItem("nav"));
@@ -57,7 +57,7 @@ const SideBar = () => {
           }
         }
       });
-      let resultTitle = await fetch("https://psyrealestate.in/title");
+      let resultTitle = await fetch("http://localhost:4001/title");
       resultTitle = await resultTitle.json();
       const filteredTitleResults = resultTitle.filter(
         (value) => value.clientId === user._id
@@ -65,7 +65,7 @@ const SideBar = () => {
       filteredTitleResults.length > 0
         ? setTitle(filteredTitleResults[0].title)
         : setTitle(null);
-      let resultFavicon = await fetch("https://psyrealestate.in/favicon");
+      let resultFavicon = await fetch("http://localhost:4001/favicon");
       resultFavicon = await resultFavicon.json();
       const filteredFaviconResults = resultFavicon.filter(
         (value) => value.clientId === user._id
@@ -74,7 +74,7 @@ const SideBar = () => {
         ? setFavicon(filteredFaviconResults[0].favicon)
         : setFavicon(null);
 
-      let result3 = await fetch("https://psyrealestate.in/logo");
+      let result3 = await fetch("http://localhost:4001/logo");
       result3 = await result3.json();
       const filteredResults = result3.filter(
         (value) => value.clientId === user._id
@@ -82,7 +82,7 @@ const SideBar = () => {
       filteredResults.length > 0
         ? setLogos(filteredResults[0].logo)
         : setLogos(null);
-      let resultColor = await fetch("https://psyrealestate.in/color");
+      let resultColor = await fetch("http://localhost:4001/color");
       resultColor = await resultColor.json();
       const filteredResultColor = resultColor.filter(
         (value) => value.clientId === user._id
@@ -90,13 +90,13 @@ const SideBar = () => {
       filteredResultColor.length > 0
         ? setNavColor(filteredResultColor[0].color)
         : setNavColor(null);
-      let resultNavItem = await fetch("https://psyrealestate.in/nav-item");
+      let resultNavItem = await fetch("http://localhost:4001/nav-item");
       resultNavItem = await resultNavItem.json();
       const filteredResultNavItem = resultNavItem.filter(
         (value) => value.clientId === user._id
       );
       filteredResultNavItem.length > 0 ? setNavItem(true) : setNavItem(false);
-      let resultSocialLink = await fetch("https://psyrealestate.in/social");
+      let resultSocialLink = await fetch("http://localhost:4001/social");
       resultSocialLink = await resultSocialLink.json();
       const filteredResultSocialLink = resultSocialLink.filter(
         (value) => value.clientId === user._id
@@ -206,7 +206,7 @@ const SideBar = () => {
               <Link to={"/admin"}>
                 {logos ? (
                   <img
-                    src={`https://psyrealestate.in/${logos}`}
+                    src={`http://localhost:4001/${logos}`}
                     alt="..."
                     className="h-14  lg:h-20"
                   />
@@ -420,7 +420,7 @@ const SideBar = () => {
               <Link to={"/admin"}>
                 {logos ? (
                   <img
-                    src={`https://psyrealestate.in/${logos}`}
+                    src={`http://localhost:4001/${logos}`}
                     alt="..."
                     className="h-14  lg:h-20"
                   />

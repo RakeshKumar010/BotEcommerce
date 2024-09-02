@@ -36,11 +36,11 @@ const OrderPage = () => {
       }
       const currentUrl = trimUrl(window.location.href);
       let response = await fetch(
-        "https://psyrealestate.in/client/" + currentUrl
+        "http://localhost:4001/client/" + currentUrl
       );
       const clientData = await response.json();
 
-      let result = await fetch("https://psyrealestate.in/coupon");
+      let result = await fetch("http://localhost:4001/coupon");
       result = await result.json();
       
       const filterCoupan = result.filter((value) => {
@@ -151,7 +151,7 @@ const OrderPage = () => {
         <div className="md:w-1/2 w-full md:p-5 flex flex-col gap-5">
           <div className="flex gap-3 items-start">
             <img
-              src={`https://psyrealestate.in/${
+              src={`http://localhost:4001/${
                 sessionData
                   ? sessionData.imageUrl
                   : "https://cdn.shopify.com/s/files/1/0839/4647/1697/files/DSC_1321copy_64x64.jpg?v=1711732690"
@@ -216,7 +216,7 @@ const OrderPage = () => {
             onSubmit={async (e) => {
               e.preventDefault();
               let result = await fetch(
-                `https://psyrealestate.in/coupon/${discountCode}`
+                `http://localhost:4001/coupon/${discountCode}`
               );
               result = await result.json();
               setCouponData(result);

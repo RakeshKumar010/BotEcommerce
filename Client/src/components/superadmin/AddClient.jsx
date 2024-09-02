@@ -11,7 +11,7 @@ const AddClient = () => {
   const [status, setStatus] = useState("1");
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let result = await fetch("https://psyrealestate.in/add-client", {
+    let result = await fetch("http://localhost:4001/add-client", {
       method: "post",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({

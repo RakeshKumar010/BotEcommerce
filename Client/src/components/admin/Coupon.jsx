@@ -14,7 +14,7 @@ const Coupon = () => {
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);
 
-      let result = await fetch("https://psyrealestate.in/coupon");
+      let result = await fetch("http://localhost:4001/coupon");
       result = await result.json();
       let filteredResults = result.filter(
         (value) => value.clientId == user._id
@@ -22,7 +22,7 @@ const Coupon = () => {
 
       setData(filteredResults);
 
-      let result2 = await fetch("https://psyrealestate.in/show-client");
+      let result2 = await fetch("http://localhost:4001/show-client");
       result2 = await result2.json();
 
       result2.map((value) => {
@@ -77,7 +77,7 @@ const Coupon = () => {
                       <CgRemove
                         onClick={async () => {
                           let result = await fetch(
-                            `https://psyrealestate.in/coupon/${_id}`,
+                            `http://localhost:4001/coupon/${_id}`,
                             {
                               method: "delete",
                               headers: { "content-type": "application/json" },

@@ -44,12 +44,12 @@ const NewArrival = ({ title }) => {
       }
       const currentUrl = trimUrl(window.location.href);
       let response = await fetch(
-        "https://psyrealestate.in/client/" + currentUrl
+        "http://localhost:4001/client/" + currentUrl
       );
       const clientData = await response.json();
       // console.log(clientData);
       let result = await fetch(
-        "https://psyrealestate.in/product/" + clientData.clientId
+        "http://localhost:4001/product/" + clientData.clientId
       );
       result = await result.json();
 

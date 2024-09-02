@@ -14,7 +14,7 @@ const AddCarousel = () => {
     const formData = new FormData();
     formData.append("image", image);
     formData.append("clientId", clientId);
-    let response = await fetch("https://psyrealestate.in/add-carousel", {
+    let response = await fetch("http://localhost:4001/add-carousel", {
       method: "post",
       body: formData,
     });

@@ -29,7 +29,7 @@ const CartCard = ({ value }) => {
         <div className="flex items-center flex-col min-[550px]:flex-row gap-3 min-[550px]:gap-6 w-full max-xl:justify-center max-xl:max-w-xl max-xl:mx-auto">
           <div className="img-box">
             <img
-              src={`https://psyrealestate.in/${imageUrl}`}
+              src={`http://localhost:4001/${imageUrl}`}
               alt="perfume bottle image"
               className="xl:w-[140px]    rounded-lg"
             />

@@ -15,7 +15,7 @@ const AddLogo = () => {
     formData.append("clientId", clientId);
     if (data.length > 0) {
       let response = await fetch(
-        "https://psyrealestate.in/update-logo/" + data[0]._id,
+        "http://localhost:4001/update-logo/" + data[0]._id,
         {
           method: "put",
           body: formData,
@@ -36,7 +36,7 @@ const AddLogo = () => {
         alert("HTTP-Error: " + response.status);
       }
     } else {
-      let response = await fetch("https://psyrealestate.in/add-logo", {
+      let response = await fetch("http://localhost:4001/add-logo", {
         method: "post",
         body: formData,
       });
@@ -59,7 +59,7 @@ const AddLogo = () => {
   };
   useEffect(() => {
     const getData = async () => {
-      let result = await fetch("https://psyrealestate.in/logo");
+      let result = await fetch("http://localhost:4001/logo");
       result = await result.json();
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);

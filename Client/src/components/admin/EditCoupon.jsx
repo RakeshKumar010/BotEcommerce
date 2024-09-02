@@ -14,7 +14,7 @@ const EditCoupon = () => {
     e.preventDefault();
 
     let response = await fetch(
-      "https://psyrealestate.in/coupon/" +
+      "http://localhost:4001/coupon/" +
         location.pathname.split("/").pop(),
       {
         method: "put",
@@ -41,7 +41,7 @@ const EditCoupon = () => {
   useEffect(() => {
     const getFun = async () => {
       let result = await fetch(
-        "https://psyrealestate.in/coupon-id/" +
+        "http://localhost:4001/coupon-id/" +
           location.pathname.split("/").pop()
       );
       result = await result.json();

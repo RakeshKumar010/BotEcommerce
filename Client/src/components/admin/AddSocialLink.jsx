@@ -21,7 +21,7 @@ const AddSocialLink = () => {
 
     if (data.length > 0) {
       let response = await fetch(
-        "https://psyrealestate.in/update-social-link/" + data[0]._id,
+        "http://localhost:4001/update-social-link/" + data[0]._id,
         {
           method: "put",
           headers: { "content-type": "application/json" },
@@ -42,7 +42,7 @@ const AddSocialLink = () => {
         alert("HTTP-Error: " + response.status);
       }
     } else {
-      let response = await fetch("https://psyrealestate.in/add-social-link", {
+      let response = await fetch("http://localhost:4001/add-social-link", {
         method: "post",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ clientId, facebook, insta, youtube, twitter }),
@@ -64,7 +64,7 @@ const AddSocialLink = () => {
   };
   useEffect(() => {
     const getData = async () => {
-      let result = await fetch("https://psyrealestate.in/social");
+      let result = await fetch("http://localhost:4001/social");
       result = await result.json();
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);

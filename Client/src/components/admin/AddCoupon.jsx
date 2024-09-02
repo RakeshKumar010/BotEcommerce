@@ -12,7 +12,7 @@ const AddCoupon = () => {
     let user = JSON.parse(userString);
     let clientId=user._id
  
-    let response = await fetch("https://psyrealestate.in/add-coupon", {
+    let response = await fetch("http://localhost:4001/add-coupon", {
       method: "post",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ clientId,title,discount,code,expiryDate }),

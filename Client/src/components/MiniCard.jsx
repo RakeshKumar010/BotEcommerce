@@ -11,7 +11,7 @@ const MiniCard = ({ value }) => {
         {image && (
           <img
             className=" rounded-t-lg w-full"
-            src={`https://psyrealestate.in/${image[3]}`}
+            src={`http://localhost:4001/${image[3]}`}
             alt="product image"
           />
         )}

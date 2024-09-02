@@ -75,7 +75,7 @@ const DashBoard = () => {
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);
 
-      let result1 = await fetch("https://psyrealestate.in/product");
+      let result1 = await fetch("http://localhost:4001/product");
       result1 = await result1.json();
       let filteredResults1 = result1.filter(
         (value) => value.clientId == user._id
@@ -83,14 +83,14 @@ const DashBoard = () => {
 
       setProduct(filteredResults1.length);
 
-      let result2 = await fetch("https://psyrealestate.in/coupon");
+      let result2 = await fetch("http://localhost:4001/coupon");
       result2 = await result2.json();
       let filteredResults2 = result2.filter(
         (value) => value.clientId == user._id
       );
       setCoupon(filteredResults2.length);
 
-      let result3 = await fetch("https://psyrealestate.in/show-client");
+      let result3 = await fetch("http://localhost:4001/show-client");
       result3 = await result3.json();
       let filteredResults3 = result3.filter(
         (value) => value.clientId == user._id
@@ -108,7 +108,7 @@ const DashBoard = () => {
         }
       });
 
-      let result4 = await fetch("https://psyrealestate.in/carousel");
+      let result4 = await fetch("http://localhost:4001/carousel");
       result4 = await result4.json();
       let filteredResults4 = result4.filter(
         (value) => value.clientId == user._id

@@ -24,7 +24,7 @@ const ProDetailsPopup = ({ setDetailsPopup, addId }) => {
   let extraoff = priceNumber * (discount / 100);
   extraoff = extraoff.toFixed();
   async function getFun() {
-    let result = await fetch(`https://psyrealestate.in/${addId}`);
+    let result = await fetch(`http://localhost:4001/${addId}`);
     result = await result.json();
     if (result) {
       setData(result);
@@ -51,7 +51,7 @@ const ProDetailsPopup = ({ setDetailsPopup, addId }) => {
           <div className="w-full h-full rounded-lg bg-gray-300   ">
             <img
               className="w-full  h-[40vh] md:h-full object-cover rounded-md object-top"
-              src={data ? `https://psyrealestate.in/${data.image[0]}` : null}
+              src={data ? `http://localhost:4001/${data.image[0]}` : null}
               alt="Product Image"
             />
           </div>

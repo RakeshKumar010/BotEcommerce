@@ -19,12 +19,12 @@ const BestSeller = ({ setDetailsPopup, setAddId }) => {
       }
       const currentUrl = trimUrl(window.location.href);
       let response = await fetch(
-        "https://psyrealestate.in/client/" + currentUrl
+        "http://localhost:4001/client/" + currentUrl
       );
       const clientData = await response.json();
  
 
-      let resultNavItem = await fetch("https://psyrealestate.in/nav-item");
+      let resultNavItem = await fetch("http://localhost:4001/nav-item");
       resultNavItem = await resultNavItem.json();
 
       const filteredResultNavItems = resultNavItem.filter((value) => {
@@ -37,7 +37,7 @@ const BestSeller = ({ setDetailsPopup, setAddId }) => {
       const navItemInner =
         filteredResultNavItems.length > 0 ? filteredResultNavItems[0] : false;
 
-      let result = await fetch("https://psyrealestate.in/product");
+      let result = await fetch("http://localhost:4001/product");
       result = await result.json();
       let array = [];
       result.map((value) => {

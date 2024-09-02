@@ -10,7 +10,7 @@ const AllClient = () => {
 
   useEffect(() => {
     const getFun = async () => {
-      let result = await fetch("https://psyrealestate.in/show-client");
+      let result = await fetch("http://localhost:4001/show-client");
       result = await result.json();
       setData(result);
       setPageLoad(result);
@@ -63,7 +63,7 @@ const AllClient = () => {
                     <CgRemove
                       onClick={async () => {
                         let result = await fetch(
-                          `https://psyrealestate.in/delete-client/${_id}`,
+                          `http://localhost:4001/delete-client/${_id}`,
                           {
                             method: "delete",
                             headers: { "content-type": "application/json" },

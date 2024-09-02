@@ -18,10 +18,10 @@ const RelatedProduct = () => {
       }
       const currentUrl = trimUrl(window.location.href);
       let response = await fetch(
-        "https://psyrealestate.in/client/" + currentUrl
+        "http://localhost:4001/client/" + currentUrl
       );
       const clientData = await response.json();
-      let result = await fetch("https://psyrealestate.in/product");
+      let result = await fetch("http://localhost:4001/product");
       result = await result.json();
       const filterProduct = result.filter((value) => {
         //  console.log(value.clientId == clientData._id);

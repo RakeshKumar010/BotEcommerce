@@ -14,7 +14,7 @@ const AddBanner = () => {
       formData.append("clientId", clientId);
       if (data.length > 0) {
         let response = await fetch(
-          "https://psyrealestate.in/update-banner/" + data[0]._id,
+          "http://localhost:4001/update-banner/" + data[0]._id,
           {
             method: "put",
             body: formData,
@@ -35,7 +35,7 @@ const AddBanner = () => {
           alert("HTTP-Error: " + response.status);
         }
       } else {
-        let response = await fetch("https://psyrealestate.in/add-banner", {
+        let response = await fetch("http://localhost:4001/add-banner", {
           method: "post",
           body: formData,
         });
@@ -58,7 +58,7 @@ const AddBanner = () => {
     };
     useEffect(() => {
       const getData = async () => {
-        let result = await fetch("https://psyrealestate.in/banner");
+        let result = await fetch("http://localhost:4001/banner");
         result = await result.json();
         let userString = localStorage.getItem("user");
         let user = JSON.parse(userString);

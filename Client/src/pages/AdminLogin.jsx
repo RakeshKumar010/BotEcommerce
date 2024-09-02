@@ -40,7 +40,7 @@ const AdminLogin = ({ setIsAdmin }) => {
       }
       const currentUrl = trimUrl(window.location.href);
       let response = await fetch(
-        "https://psyrealestate.in/client/" + currentUrl
+        "http://localhost:4001/client/" + currentUrl
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -63,7 +63,7 @@ const AdminLogin = ({ setIsAdmin }) => {
 
       if (clientData.expiryDate < formattedDate) {
         let result = await fetch(
-          "https://psyrealestate.in/edit-client/" + clientData._id,
+          "http://localhost:4001/edit-client/" + clientData._id,
           {
             method: "put",
             headers: { "content-type": "application/json" },
@@ -93,7 +93,7 @@ const AdminLogin = ({ setIsAdmin }) => {
       return;
     }
 
-    let response = await fetch("https://psyrealestate.in/login", {
+    let response = await fetch("http://localhost:4001/login", {
       method: "post",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ email, pass }),

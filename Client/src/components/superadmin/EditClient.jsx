@@ -14,7 +14,7 @@ const EditClient = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let result = await fetch(
-      "https://psyrealestate.in/edit-client/" +
+      "http://localhost:4001/edit-client/" +
         location.pathname.split("/").pop(),
       {
         method: "put",
@@ -49,7 +49,7 @@ const EditClient = () => {
   useEffect(() => {
     const getFun = async () => {
       let result = await fetch(
-        "https://psyrealestate.in/show-client/" +
+        "http://localhost:4001/show-client/" +
           location.pathname.split("/").pop()
       );
       result = await result.json();

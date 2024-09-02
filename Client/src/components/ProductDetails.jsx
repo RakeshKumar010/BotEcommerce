@@ -37,13 +37,13 @@ const ProductDetails = () => {
     const id = pathSegments[pathSegments.length - 1];
     
     // Use the extracted ID in your fetch request
-    let result = await fetch(`https://psyrealestate.in/${id}`);
+    let result = await fetch(`http://localhost:4001/${id}`);
     result = await result.json();
     if (result) {
       setData(result);
     }
     let socialResult = await fetch(
-      "https://psyrealestate.in/social-link/66697d798873e6507de4ca20"
+      "http://localhost:4001/social-link/66697d798873e6507de4ca20"
     );
     socialResult = await socialResult.json();
     setSocialLink(socialResult);
@@ -67,7 +67,7 @@ const ProductDetails = () => {
                 {data.image && (
                   <img
                     className="w-full h-full object-cover rounded-md object-top"
-                    src={`https://psyrealestate.in/${
+                    src={`http://localhost:4001/${
                       imageUrl == null ? data.image[3] : imageUrl
                     }`}
                     alt="Product Image"
@@ -85,7 +85,7 @@ const ProductDetails = () => {
                           setImageUrl(value);
                         }}
                         className="cursor-pointer rounded-md w-16 md:w-36"
-                        src={`https://psyrealestate.in/${value}`}
+                        src={`http://localhost:4001/${value}`}
                         alt="Product Image"
                       />
                     );
