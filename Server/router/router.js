@@ -2,7 +2,6 @@ const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 const express = require("express");
 const app = express.Router();
-// const userSchema = require("../schema/userSchema");
 const couponSchema = require("../schema/couponSchema");
 const logoSchema = require("../schema/logoSchema");
 const carouselSchema = require("../schema/carouselSchema");

@@ -14,7 +14,7 @@ require('./db/conn')
 app.use(express.json())
 
 app.use(require('./router/router'))
-const PORT = process.env.PORT || 4001;
+const PORT = process.env.PORT || 8001;
 
 app.listen(PORT,()=>{
     console.log('Server is open at localhost:'+PORT);
