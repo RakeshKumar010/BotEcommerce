@@ -18,10 +18,10 @@ const RelatedProduct = () => {
       }
       const currentUrl = trimUrl(window.location.href);
       let response = await fetch(
-        "http://localhost:4001/client/" + currentUrl
+        "https://ecserver.estatebot.in/client/" + currentUrl
       );
       const clientData = await response.json();
-      let result = await fetch("http://localhost:4001/product");
+      let result = await fetch("https://ecserver.estatebot.in/product");
       result = await result.json();
       const filterProduct = result.filter((value) => {
         //  console.log(value.clientId == clientData._id);

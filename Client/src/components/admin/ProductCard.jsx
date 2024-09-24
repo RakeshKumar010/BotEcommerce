@@ -27,7 +27,7 @@ const ProductCard = ({ value, index, setPageLoad, recycle }) => {
   } = value;
 
   const deleteFun = async () => {
-    let result = await fetch(`http://localhost:4001/${_id}`, {
+    let result = await fetch(`https://ecserver.estatebot.in/${_id}`, {
       method: "delete",
       headers: { "content-type": "application/json" },
     });
@@ -35,7 +35,7 @@ const ProductCard = ({ value, index, setPageLoad, recycle }) => {
   };
   const recycleBinFun = async () => {
     let result = await fetch(
-      `http://localhost:4001/recycle/${_id}`,
+      `https://ecserver.estatebot.in/recycle/${_id}`,
       {
         method: "put",
         headers: { "content-type": "application/json" },
@@ -56,7 +56,7 @@ const ProductCard = ({ value, index, setPageLoad, recycle }) => {
   };
   const restoreFun = async () => {
     let result = await fetch(
-      `http://localhost:4001/recycle/${_id}`,
+      `https://ecserver.estatebot.in/recycle/${_id}`,
       {
         method: "put",
         headers: { "content-type": "application/json" },
@@ -78,7 +78,7 @@ const ProductCard = ({ value, index, setPageLoad, recycle }) => {
   };
   useEffect(() => {
     const getFun = async () => {
-      let result = await fetch("http://localhost:4001/show-client");
+      let result = await fetch("https://ecserver.estatebot.in/show-client");
       result = await result.json();
       let userString = localStorage.getItem('user');
       let user = JSON.parse(userString);
@@ -100,7 +100,7 @@ const ProductCard = ({ value, index, setPageLoad, recycle }) => {
         {image.length > 0 && (
           <img
             className=" w-20  rounded-sm object-cover   "
-            src={`http://localhost:4001/${image[image.length - 1]}`}
+            src={`https://ecserver.estatebot.in/${image[image.length - 1]}`}
             alt="product image"
           />
         )}

@@ -57,7 +57,7 @@ const AddProduct = () => {
     }
     // Append other fields...
 
-    let response = await fetch("http://localhost:4001/add-products", {
+    let response = await fetch("https://ecserver.estatebot.in/add-products", {
       method: "POST",
       body: formData,
     });
@@ -84,7 +84,7 @@ const AddProduct = () => {
       }
       const currentUrl = trimUrl(window.location.href);
       let response = await fetch(
-        "http://localhost:4001/client/" + currentUrl
+        "https://ecserver.estatebot.in/client/" + currentUrl
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -98,7 +98,7 @@ const AddProduct = () => {
         navigate("error");
       }
 
-      let resultNavItem = await fetch("http://localhost:4001/nav-item");
+      let resultNavItem = await fetch("https://ecserver.estatebot.in/nav-item");
       resultNavItem = await resultNavItem.json();
 
       const filteredResultNavItems = resultNavItem.filter((value) => {

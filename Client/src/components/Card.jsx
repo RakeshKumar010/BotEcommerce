@@ -15,7 +15,7 @@ const Card = ({ value, setDetailsPopup, setAddId }) => {
           {image && (
             <img
               className="rounded-t-lg  w-full"
-              src={`http://localhost:4001/${image[3]}`}
+              src={`https://ecserver.estatebot.in/${image[3]}`}
               alt="product image"
               onMouseEnter={() => {
                 setAddStyle(true);

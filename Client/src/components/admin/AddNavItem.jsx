@@ -17,7 +17,7 @@ const AddNavItem = () => {
 
     if (data.length > 0) {
       let response = await fetch(
-        "http://localhost:4001/update-nav-item/"+data[0]._id,
+        "https://ecserver.estatebot.in/update-nav-item/"+data[0]._id,
         {
           method: "put",
           headers: { "content-type": "application/json" },
@@ -36,7 +36,7 @@ const AddNavItem = () => {
         alert("HTTP-Error: " + response.status);
       }
     } else {
-      let response = await fetch("http://localhost:4001/add-nav-item", {
+      let response = await fetch("https://ecserver.estatebot.in/add-nav-item", {
         method: "post",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ clientId, nav1, nav2, nav3, nav4, nav5 }),
@@ -58,7 +58,7 @@ const AddNavItem = () => {
   };
   useEffect(() => {
     const getData = async () => {
-      let result = await fetch("http://localhost:4001/nav-item");
+      let result = await fetch("https://ecserver.estatebot.in/nav-item");
       result = await result.json();
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);

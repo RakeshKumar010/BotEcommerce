@@ -44,12 +44,12 @@ const NewArrival = ({ title }) => {
       }
       const currentUrl = trimUrl(window.location.href);
       let response = await fetch(
-        "http://localhost:4001/client/" + currentUrl
+        "https://ecserver.estatebot.in/client/" + currentUrl
       );
       const clientData = await response.json();
       // console.log(clientData);
       let result = await fetch(
-        "http://localhost:4001/product/" + clientData.clientId
+        "https://ecserver.estatebot.in/product/" + clientData.clientId
       );
       result = await result.json();
 

@@ -56,7 +56,7 @@ const EditProduct = () => {
     // Append other fields...
 
     let response = await fetch(
-      "http://localhost:4001/product/" + location.pathname.split("/").pop(),
+      "https://ecserver.estatebot.in/product/" + location.pathname.split("/").pop(),
       {
         method: "PUT",
         body: formData,
@@ -81,7 +81,7 @@ const EditProduct = () => {
   useEffect(() => {
     const getFun = async () => {
       let result = await fetch(
-        "http://localhost:4001/" + location.pathname.split("/").pop()
+        "https://ecserver.estatebot.in/" + location.pathname.split("/").pop()
       );
       result = await result.json();
       setData(result);
@@ -107,7 +107,7 @@ const EditProduct = () => {
       }
       const currentUrl = trimUrl(window.location.href);
       let response = await fetch(
-        "http://localhost:4001/client/" + currentUrl
+        "https://ecserver.estatebot.in/client/" + currentUrl
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -121,7 +121,7 @@ const EditProduct = () => {
         navigate("error");
       }
 
-      let resultNavItem = await fetch("http://localhost:4001/nav-item");
+      let resultNavItem = await fetch("https://ecserver.estatebot.in/nav-item");
       resultNavItem = await resultNavItem.json();
 
       const filteredResultNavItems = resultNavItem.filter((value) => {
@@ -169,7 +169,7 @@ const EditProduct = () => {
                   <>
                     <img
                       className="rounded-sm w-20 object-cover "
-                      src={`http://localhost:4001/${value}`}
+                      src={`https://ecserver.estatebot.in/${value}`}
                       alt="product image"
                     />
                   </>

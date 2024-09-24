@@ -9,7 +9,7 @@ const Carousel = () => {
     const getFun = async () => {
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);
-      let result = await fetch("http://localhost:4001/carousel");
+      let result = await fetch("https://ecserver.estatebot.in/carousel");
       result = await result.json();
       let filteredResults = result.filter(
         (value) => value.clientId == user._id
@@ -49,7 +49,7 @@ const Carousel = () => {
                 <td className=" p-2">{index + 1}</td>
                 <td className=" p-2 bg-black ">
                   <img
-                    src={`http://localhost:4001/${carousel}`}
+                    src={`https://ecserver.estatebot.in/${carousel}`}
                     alt="..."
                     className="  h-52 "
                   />
@@ -58,7 +58,7 @@ const Carousel = () => {
                   <CgRemove
                     onClick={async () => {
                       let result = await fetch(
-                        `http://localhost:4001/carousel/${_id}`,
+                        `https://ecserver.estatebot.in/carousel/${_id}`,
                         {
                           method: "delete",
                           headers: { "content-type": "application/json" },

@@ -14,7 +14,7 @@ const EditClient = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let result = await fetch(
-      "http://localhost:4001/edit-client/" +
+      "https://ecserver.estatebot.in/edit-client/" +
         location.pathname.split("/").pop(),
       {
         method: "put",
@@ -49,7 +49,7 @@ const EditClient = () => {
   useEffect(() => {
     const getFun = async () => {
       let result = await fetch(
-        "http://localhost:4001/show-client/" +
+        "https://ecserver.estatebot.in/show-client/" +
           location.pathname.split("/").pop()
       );
       result = await result.json();

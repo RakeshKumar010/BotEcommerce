@@ -14,7 +14,6 @@ const productSchema = require("../schema/productSchema");
 const bannerSchema = require("../schema/bannerSchema");
 const titleSchema = require("../schema/titleSchema");
 const faviconSchema = require("../schema/faviconSchema");
- 
 
 // post
 app.post("/add-products", upload.array("image"), async (req, res) => {
@@ -48,7 +47,7 @@ app.put("/product/:id", upload.array("image"), async (req, res) => {
     res.status(500).send("An error occurred while updating the product.");
   }
 });
- 
+
 app.post("/add-carousel", upload.single("image"), async (req, res) => {
   try {
     let carouselData = req.body;
@@ -118,7 +117,6 @@ app.post("/add-favicon", upload.single("image"), async (req, res) => {
   res.send(result);
 });
 
- 
 app.post("/add-banner", upload.single("image"), async (req, res) => {
   let bannerData = req.body;
   bannerData.banner = req.file.path;
@@ -127,23 +125,20 @@ app.post("/add-banner", upload.single("image"), async (req, res) => {
   res.send(result);
 });
 
-
 app.post("/login", async (req, res) => {
   let result = await clientSchema.findOne({
     email: req.body.email,
     pass: req.body.pass,
   });
- 
-  if (result) {
-   
-    if(result.status=="1"){
 
-      res.send(result)
-    }else{
-      res.status(200).send({"status":"deactivate"})
+  if (result) {
+    if (result.status == "1") {
+      res.send(result);
+    } else {
+      res.status(200).send({ status: "deactivate" });
     }
   } else {
-    res.status(401).send({"status":"Invalid Information"});
+    res.status(401).send({ status: "Invalid Information" });
     console.log("Login failed for:", req.body.email);
   }
 });
@@ -174,9 +169,11 @@ app.get("/favicon", async (req, res) => {
   res.send(result);
 });
 app.get("/product/:clientId", async (req, res) => {
-  let result = await productSchema.find({ clientId: req.params.clientId,recycleId: "0"  });
+  let result = await productSchema.find({
+    clientId: req.params.clientId,
+    recycleId: "0",
+  });
   res.send(result);
-
 });
 app.get("/", (req, res) => {
   res.send({ mess: "Api is ok" });
@@ -197,16 +194,14 @@ app.get("/nav-item", async (req, res) => {
   let result = await navSchema.find();
   res.send(result);
 });
- 
+
 app.get("/client/:domain", async (req, res) => {
   let result = await clientSchema.findOne({ domain: req.params.domain });
   res.send(result);
-
 });
 app.get("/show-client/:id", async (req, res) => {
   let result = await clientSchema.findOne({ _id: req.params.id });
   res.send(result);
-
 });
 
 app.get("/coupon/:code", async (req, res) => {
@@ -230,11 +225,11 @@ app.get("/carousel", async (req, res) => {
   res.send(result);
 });
 app.get("/color", async (req, res) => {
-  let result = await colorSchema.find()
+  let result = await colorSchema.find();
   res.send(result);
 });
 app.get("/social", async (req, res) => {
-  let result = await socialSchema.find()
+  let result = await socialSchema.find();
   res.send(result);
 });
 // app.get("/admins/:id", async (req, res) => {
@@ -242,12 +237,14 @@ app.get("/social", async (req, res) => {
 //   res.send(result);
 // });
 
+// app.get("/:id", async (req, res) => {
+//   if (!res.params.id) {
+//     return res.send({ error: "id is required" });
+//   }
+//   let result = await productSchema.findOne({ _id: req.params.id });
+//   res.send(result);
+// });
 
-app.get("/:id", async (req, res) => {
-  let result = await productSchema.findOne({ _id: req.params.id });
-  res.send(result);
-});
- 
 app.get("/coupon-id/:id", async (req, res) => {
   let result = await couponSchema.findOne({ _id: req.params.id });
   res.send(result);
@@ -290,7 +287,7 @@ app.put("/edit-client/:id", async (req, res) => {
   );
   res.send(result);
 });
- 
+
 app.put("/recycle/:id", async (req, res) => {
   let result = await productSchema.updateOne(
     { _id: req.params.id },
@@ -298,7 +295,6 @@ app.put("/recycle/:id", async (req, res) => {
   );
   res.send(result);
 });
- 
 
 app.put("/coupon/:id", async (req, res) => {
   let result = await couponSchema.updateOne(
@@ -334,7 +330,7 @@ app.put("/update-favicon/:id", upload.single("image"), async (req, res) => {
 
   res.send(result);
 });
- 
+
 app.put("/update-banner/:id", upload.single("image"), async (req, res) => {
   let bannerData = {};
   bannerData.banner = req.file.path; // Add image paths to banner data
@@ -365,16 +361,8 @@ app.put("/update-nav-item/:id", async (req, res) => {
     { _id: req.params.id },
     { $set: req.body }
   );
-   
-  res.send(result);
 
+  res.send(result);
 });
 
-
 module.exports = app;
-
-
-
-
-
-

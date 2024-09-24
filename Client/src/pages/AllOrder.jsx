@@ -9,7 +9,7 @@ const AllOrder = () => {
   useEffect(()=>{
     window.scrollTo({ top: 0, behavior: "smooth" });
     async function getColor(){
-      let result = await fetch('http://localhost:4001/color')
+      let result = await fetch('https://ecserver.estatebot.in/color')
       result = await result.json()
    
       setApiDataColor(result[result.length-1].color)

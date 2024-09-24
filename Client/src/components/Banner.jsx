@@ -10,7 +10,7 @@ const Banner = ({data,dummyData}) => {
             return (
               <img
               key={index}
-                src={`http://localhost:4001/${carousel}`}
+                src={`https://ecserver.estatebot.in/${carousel}`}
                 alt="..."
                 className="w-full h-full  bg-cover "
               />

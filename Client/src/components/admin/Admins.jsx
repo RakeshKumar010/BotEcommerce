@@ -13,7 +13,7 @@ const Admins = () => {
     const getFun = async () => {
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);
-      let result = await fetch("http://localhost:4001/show-client");
+      let result = await fetch("https://ecserver.estatebot.in/show-client");
       result = await result.json();
       let filteredResults = result.filter(
         (value) => value.clientId == user._id
@@ -79,7 +79,7 @@ const Admins = () => {
                       <CgRemove
                         onClick={async () => {
                           let result = await fetch(
-                            `http://localhost:4001/delete-client/${_id}`,
+                            `https://ecserver.estatebot.in/delete-client/${_id}`,
                             {
                               method: "delete",
                               headers: { "content-type": "application/json" },

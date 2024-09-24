@@ -63,11 +63,11 @@ const Layout = () => {
       }
       const currentUrl = trimUrl(window.location.href);
       let response = await fetch(
-        "http://localhost:4001/client/" + currentUrl
+        "https://ecserver.estatebot.in/client/" + currentUrl
       );
       const clientData = await response.json();
 
-      let resultNavItem = await fetch("http://localhost:4001/nav-item");
+      let resultNavItem = await fetch("https://ecserver.estatebot.in/nav-item");
       resultNavItem = await resultNavItem.json();
 
       const filteredResultNavItems = resultNavItem.filter((value) => {
@@ -77,7 +77,7 @@ const Layout = () => {
       setNavItemData(
         filteredResultNavItems.length > 0 ? filteredResultNavItems[0] : false
       );
-      let resultTitle = await fetch("http://localhost:4001/title");
+      let resultTitle = await fetch("https://ecserver.estatebot.in/title");
       resultTitle = await resultTitle.json();
 
       const filteredResultTitles = resultTitle.filter((value) => {
@@ -89,7 +89,7 @@ const Layout = () => {
       document.title = `${titleData?titleData.title:'Title'}`;
       // console.log(titleData);
 
-      let resultFavicon = await fetch("http://localhost:4001/favicon");
+      let resultFavicon = await fetch("https://ecserver.estatebot.in/favicon");
       resultFavicon = await resultFavicon.json();
 
       const filteredResultFavicons = resultFavicon.filter((value) => {
@@ -99,7 +99,7 @@ const Layout = () => {
       const FaviconData =
         filteredResultFavicons.length > 0 ? filteredResultFavicons[0] : false;
         if(FaviconData){
-          const faviconUrl = `http://localhost:4001/${FaviconData.favicon}`;
+          const faviconUrl = `https://ecserver.estatebot.in/${FaviconData.favicon}`;
           const linkTag = document.querySelector('link[rel="icon"]');
           linkTag.href = faviconUrl;
         

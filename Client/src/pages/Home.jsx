@@ -55,11 +55,11 @@ const Home = () => {
       }
       const currentUrl = trimUrl(window.location.href);
       let response = await fetch(
-        "http://localhost:4001/client/" + currentUrl
+        "https://ecserver.estatebot.in/client/" + currentUrl
       );
       const clientData = await response.json();
 
-      let result = await fetch("http://localhost:4001/carousel");
+      let result = await fetch("https://ecserver.estatebot.in/carousel");
       result = await result.json();
 
       const filterResult = result.filter((value) => {
@@ -74,7 +74,7 @@ const Home = () => {
       }
 
       
-      let couponresult = await fetch("http://localhost:4001/coupon");
+      let couponresult = await fetch("https://ecserver.estatebot.in/coupon");
       couponresult = await couponresult.json();
       
       const filterCoupan = couponresult.filter((value) => {
@@ -89,7 +89,7 @@ const Home = () => {
         setCouponData('5%')
       }
 
-      // let bannerResult = await fetch("http://localhost:4001/banner");
+      // let bannerResult = await fetch("https://ecserver.estatebot.in/banner");
       // bannerResult = await bannerResult.json();
       // // console.log(bannerResult);
       // const filterbannerResult = bannerResult.filter((value) => {
@@ -141,7 +141,7 @@ const Home = () => {
           <img
             src={
               data
-                ? `http://localhost:4001/${data[0].carousel}`
+                ? `https://ecserver.estatebot.in/${data[0].carousel}`
                 : "https://vonex.com.au/wp-content/uploads/2021/09/MicrosoftTeams-image-6-768x259.jpg"
             }
             alt="..."

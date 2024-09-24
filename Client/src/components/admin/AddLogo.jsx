@@ -15,7 +15,7 @@ const AddLogo = () => {
     formData.append("clientId", clientId);
     if (data.length > 0) {
       let response = await fetch(
-        "http://localhost:4001/update-logo/" + data[0]._id,
+        "https://ecserver.estatebot.in/update-logo/" + data[0]._id,
         {
           method: "put",
           body: formData,
@@ -36,7 +36,7 @@ const AddLogo = () => {
         alert("HTTP-Error: " + response.status);
       }
     } else {
-      let response = await fetch("http://localhost:4001/add-logo", {
+      let response = await fetch("https://ecserver.estatebot.in/add-logo", {
         method: "post",
         body: formData,
       });
@@ -59,7 +59,7 @@ const AddLogo = () => {
   };
   useEffect(() => {
     const getData = async () => {
-      let result = await fetch("http://localhost:4001/logo");
+      let result = await fetch("https://ecserver.estatebot.in/logo");
       result = await result.json();
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);

@@ -20,7 +20,7 @@ const SignUp = () => {
 
     if (data.length > 0) {
       let result = await fetch(
-        "http://localhost:4001/add-client",
+        "https://ecserver.estatebot.in/add-client",
         {
           method: "post",
           headers: { "content-type": "application/json" },
@@ -53,7 +53,7 @@ const SignUp = () => {
         console.log("error");
       }
     } else {
-      let result = await fetch("http://localhost:4001/edit-client/" + clientId, {
+      let result = await fetch("https://ecserver.estatebot.in/edit-client/" + clientId, {
         method: "put",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
@@ -88,7 +88,7 @@ const SignUp = () => {
 
   useEffect(() => {
     const getFun = async () => {
-      let result = await fetch("http://localhost:4001/show-client");
+      let result = await fetch("https://ecserver.estatebot.in/show-client");
       result = await result.json();
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);

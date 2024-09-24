@@ -16,7 +16,7 @@ const AddColor = () => {
    
 
     if (data.length > 0) {
-    let response = await fetch("http://localhost:4001/update-color/"+ data[0]._id, {
+    let response = await fetch("https://ecserver.estatebot.in/update-color/"+ data[0]._id, {
       method: "put",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ color: currentColor,clientId:user._id }),
@@ -37,7 +37,7 @@ const AddColor = () => {
       alert("HTTP-Error: " + response.status);
     }
   }else{
-    let response = await fetch("http://localhost:4001/add-color", {
+    let response = await fetch("https://ecserver.estatebot.in/add-color", {
       method: "post",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ color: currentColor,clientId:user._id }),
@@ -61,7 +61,7 @@ const AddColor = () => {
   };
   useEffect(() => {
     const getData = async () => {
-      let result = await fetch("http://localhost:4001/color");
+      let result = await fetch("https://ecserver.estatebot.in/color");
       result = await result.json();
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);

@@ -22,11 +22,11 @@ const HeaderTop = () => {
       }
       const currentUrl = trimUrl(window.location.href);
       let response = await fetch(
-        "http://localhost:4001/client/" + currentUrl
+        "https://ecserver.estatebot.in/client/" + currentUrl
       );
       const clientData = await response.json();
       
-      let couponresult = await fetch("http://localhost:4001/coupon");
+      let couponresult = await fetch("https://ecserver.estatebot.in/coupon");
       couponresult = await couponresult.json();
 
       const filterCoupan = couponresult.filter((value) => {

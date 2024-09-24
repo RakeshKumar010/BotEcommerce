@@ -44,7 +44,7 @@ const SuperAdminLogin = ({setIsSuperAdmin}) => {
         return;
       }
   
-      let response = await fetch("http://localhost:4001/super-admin-login", {
+      let response = await fetch("https://ecserver.estatebot.in/super-admin-login", {
         method: "post",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ email, pass }),
