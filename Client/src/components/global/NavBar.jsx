@@ -58,7 +58,7 @@ const [pageLoader,setPageLoader]=useState(false)
       }
       const currentUrl = trimUrl(window.location.href);
       let response = await fetch(
-        "http://localhost:4001/client/" + currentUrl
+        "https://ecserver.estatebot.in/client/" + currentUrl
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -81,7 +81,7 @@ const [pageLoader,setPageLoader]=useState(false)
 
       if (clientData.expiryDate < formattedDate) {
         let result = await fetch(
-          "http://localhost:4001/edit-client/" + clientData._id,
+          "https://ecserver.estatebot.in/edit-client/" + clientData._id,
           {
             method: "put",
             headers: { "content-type": "application/json" },
@@ -96,7 +96,7 @@ const [pageLoader,setPageLoader]=useState(false)
         }
       }
 
-      let result = await fetch("http://localhost:4001/logo");
+      let result = await fetch("https://ecserver.estatebot.in/logo");
       result = await result.json();
       setPageLoader(result)
       const filteredResults = result.filter((value) => {
@@ -108,7 +108,7 @@ const [pageLoader,setPageLoader]=useState(false)
         setLogos(false);
       }
 
-      let resultNavItem = await fetch("http://localhost:4001/nav-item");
+      let resultNavItem = await fetch("https://ecserver.estatebot.in/nav-item");
       resultNavItem = await resultNavItem.json();
 
       const filteredResultNavItems = resultNavItem.filter((value) => {
@@ -126,7 +126,7 @@ const [pageLoader,setPageLoader]=useState(false)
     async function getColor() {
       const currentUrl = trimUrl(window.location.href);
       let response = await fetch(
-        "http://localhost:4001/client/" + currentUrl
+        "https://ecserver.estatebot.in/client/" + currentUrl
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -136,7 +136,7 @@ const [pageLoader,setPageLoader]=useState(false)
       }
       const clientData = await response.json();
 
-      response = await fetch("http://localhost:4001/color");
+      response = await fetch("https://ecserver.estatebot.in/color");
       const colorsData = await response.json();
 
       const filteredResults = colorsData.filter((value) => {
@@ -168,7 +168,7 @@ const [pageLoader,setPageLoader]=useState(false)
         <Link to={"/"}>
           {logos ? (
             <img
-              src={`http://localhost:4001/${logos}`}
+              src={logos}
               alt="..."
               className="h-8 lg:h-12 xl:h-16"
             />
@@ -190,7 +190,7 @@ const [pageLoader,setPageLoader]=useState(false)
             <Link to={"/"}>
           {logos ? (
             <img
-              src={`http://localhost:4001/${logos}`}
+              src={`https://ecserver.estatebot.in/${logos}`}
               alt="..."
               className="h-8 lg:h-12 xl:h-16"
             />

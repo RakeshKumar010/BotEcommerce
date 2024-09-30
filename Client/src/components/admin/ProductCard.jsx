@@ -100,7 +100,7 @@ const ProductCard = ({ value, index, setPageLoad, recycle }) => {
         {image.length > 0 && (
           <img
             className=" w-20  rounded-sm object-cover   "
-            src={`https://ecserver.estatebot.in/${image[image.length - 1]}`}
+            src={image[image.length - 1]}
             alt="product image"
           />
         )}

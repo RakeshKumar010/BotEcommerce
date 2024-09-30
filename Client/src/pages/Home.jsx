@@ -141,7 +141,7 @@ const Home = () => {
           <img
             src={
               data
-                ? `https://ecserver.estatebot.in/${data[0].carousel}`
+                ? `${data[0].carousel}`
                 : "https://vonex.com.au/wp-content/uploads/2021/09/MicrosoftTeams-image-6-768x259.jpg"
             }
             alt="..."

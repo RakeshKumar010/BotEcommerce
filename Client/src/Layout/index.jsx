@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "../pages/Home";
 import AdminLogin from "../pages/AdminLogin";
 import Admin from "../pages/Admin";
@@ -38,7 +38,6 @@ import AllClient from "../components/superadmin/AllClient.jsx";
 import EditClient from "../components/superadmin/EditClient.jsx";
 import SuperAdminLogin from "../pages/SuperAdminLogin.jsx";
 import ErrorPage from "../components/ErrorPage.jsx";
-import AddBanner from "../components/admin/AddBanner.jsx";
 import AddTitle from "../components/admin/AddTitle.jsx";
 import AddFavicon from "../components/admin/AddFavicon.jsx";
 
@@ -102,10 +101,7 @@ const Layout = () => {
           const faviconUrl = `https://ecserver.estatebot.in/${FaviconData.favicon}`;
           const linkTag = document.querySelector('link[rel="icon"]');
           linkTag.href = faviconUrl;
-        
-
         }
-
       // document.Favicon = FaviconData.Favicon;
     };
     getFun();

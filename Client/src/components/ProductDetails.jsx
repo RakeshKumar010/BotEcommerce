@@ -39,6 +39,8 @@ const ProductDetails = () => {
     // Use the extracted ID in your fetch request
     let result = await fetch(`https://ecserver.estatebot.in/${id}`);
     result = await result.json();
+    console.log(result);
+    
     if (result) {
       setData(result);
     }
@@ -67,9 +69,7 @@ const ProductDetails = () => {
                 {data.image && (
                   <img
                     className="w-full h-full object-cover rounded-md object-top"
-                    src={`https://ecserver.estatebot.in/${
-                      imageUrl == null ? data.image[3] : imageUrl
-                    }`}
+                    src={imageUrl == null ? data.image[0] : imageUrl}
                     alt="Product Image"
                   />
                 )}

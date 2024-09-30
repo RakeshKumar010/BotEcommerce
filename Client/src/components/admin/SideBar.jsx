@@ -206,7 +206,7 @@ const SideBar = () => {
               <Link to={"/admin"}>
                 {logos ? (
                   <img
-                    src={`https://ecserver.estatebot.in/${logos}`}
+                    src={logos}
                     alt="..."
                     className="h-14  lg:h-20"
                   />

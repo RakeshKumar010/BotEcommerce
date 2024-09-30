@@ -9,7 +9,7 @@ const FixedBtn = ({data,couponData}) => {
       {offerImg ? (
         <div
           style={{
-            background: `url(${data?`https://ecserver.estatebot.in/${data[3].carousel}`:"https://vonex.com.au/wp-content/uploads/2021/09/MicrosoftTeams-image-6-768x259.jpg"}) no-repeat center center`,
+            background: `url(${data?`${data[2].carousel}`:"https://vonex.com.au/wp-content/uploads/2021/09/MicrosoftTeams-image-6-768x259.jpg"}) no-repeat center center`,
             // background: `url(${data?'OfferImg':OfferImg}) no-repeat center center`,
             backgroundSize: "cover",
           }}

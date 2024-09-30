@@ -1,5 +1,4 @@
 const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
 const express = require("express");
 const app = express.Router();
 const couponSchema = require("../schema/couponSchema");
@@ -7,6 +6,7 @@ const logoSchema = require("../schema/logoSchema");
 const carouselSchema = require("../schema/carouselSchema");
 const colorSchema = require("../schema/colorSchema");
 const navSchema = require("../schema/navSchema");
+const cloudinary = require("../utils/cloudinary");
 const socialSchema = require("../schema/socialSchema");
 const superAdminSchema = require("../schema/superAdminSchema");
 const clientSchema = require("../schema/clientSchema");
@@ -14,39 +14,117 @@ const productSchema = require("../schema/productSchema");
 const bannerSchema = require("../schema/bannerSchema");
 const titleSchema = require("../schema/titleSchema");
 const faviconSchema = require("../schema/faviconSchema");
+const storage = multer.diskStorage({
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+const upload = multer({ storage: storage });
 
 // post
-app.post("/add-products", upload.array("image"), async (req, res) => {
-  try {
-    let productData = req.body;
-    productData.image = req.files.map((file) => file.path); // Add image paths to product data
 
-    let result = new productSchema(productData);
-    result = await result.save();
-    res.send(result);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("An error occurred while saving the product.");
-  }
-});
-app.put("/product/:id", upload.array("image"), async (req, res) => {
-  try {
-    let productData = req.body;
-    if (req.files && req.files.length > 0) {
-      // Only add image paths if images are uploaded
-      productData.image = req.files.map((file) => file.path);
+app.put(
+  "/update-logo/:id",
+  upload.fields([{ name: "image", maxCount: 1 }]),
+  async (req, res) => {
+    try {
+      let logoData = req.body;
+      const uploadToCloudinary = async (filePath) => {
+        return await cloudinary.uploader.upload(filePath);
+      };
+      if (req.files.image) {
+        const result = await uploadToCloudinary(req.files.image[0].path);
+        logoData.logo = result.secure_url; // Add Cloudinary URL to product data
+      }
+      let result = await logoSchema.updateOne(
+        { _id: req.params.id },
+        { $set: logoData }
+      );
+      res.send(result);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("An error occurred while saving the product.");
     }
-
-    let result = await productSchema.updateOne(
-      { _id: req.params.id },
-      { $set: productData }
-    );
-    res.send(result);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send("An error occurred while updating the product.");
   }
-});
+);
+
+app.post(
+  "/add-carousel",
+  upload.fields([{ name: "image", maxCount: 1 }]),
+  async (req, res) => {
+    try {
+      let carouselData = req.body;
+      const uploadToCloudinary = async (filePath) => {
+        return await cloudinary.uploader.upload(filePath);
+      };
+      if (req.files.image) {
+        const result = await uploadToCloudinary(req.files.image[0].path);
+        carouselData.carousel = result.secure_url; // Add Cloudinary URL to product data
+      }
+
+      let result = new carouselSchema(carouselData);
+      result = await result.save();
+      res.send(result);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("An error occurred while saving the product.");
+    }
+  }
+);
+
+app.post(
+  "/add-products",
+  upload.fields([{ name: "image", maxCount: 10 }]),
+  async (req, res) => {
+    try {
+      let productData = req.body;
+      const uploadToCloudinary = async (filePath) => {
+        return await cloudinary.uploader.upload(filePath);
+      };
+      if (req.files.image) {
+        const productResults = await Promise.all(
+          req.files.image.map((file) => uploadToCloudinary(file.path))
+        );
+        productData.image = productResults.map((result) => result.secure_url); // Add Cloudinary URLs to product data
+      }
+
+      let result = new productSchema(productData);
+      result = await result.save();
+      res.send(result);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("An error occurred while saving the product.");
+    }
+  }
+);
+app.put(
+  "/product/:id",
+  upload.fields([{ name: "image", maxCount: 10 }]),
+  async (req, res) => {
+    try {
+      let productData = req.body;
+      const uploadToCloudinary = async (filePath) => {
+        return await cloudinary.uploader.upload(filePath);
+      };
+      if (req.files.image) {
+        const productResults = await Promise.all(
+          req.files.image.map((file) => uploadToCloudinary(file.path))
+        );
+        productData.image = productResults.map((result) => result.secure_url); // Add Cloudinary URLs to product data
+      }
+
+      let result = await productSchema.updateOne(
+        { _id: req.params.id },
+        { $set: productData }
+      );
+
+      res.send(result);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("An error occurred while saving the product.");
+    }
+  }
+);
 
 app.post("/add-carousel", upload.single("image"), async (req, res) => {
   try {
@@ -102,13 +180,30 @@ app.post("/add-nav-item", async (req, res) => {
   result = await result.save();
   res.send(result);
 });
-app.post("/add-logo", upload.single("image"), async (req, res) => {
-  let logoData = req.body;
-  logoData.logo = req.file.path;
-  let result = await new logoSchema(logoData);
-  result = await result.save();
-  res.send(result);
-});
+
+app.post(
+  "/add-logo",
+  upload.fields([{ name: "image", maxCount: 1 }]),
+  async (req, res) => {
+    try {
+      let logoData = req.body;
+      const uploadToCloudinary = async (filePath) => {
+        return await cloudinary.uploader.upload(filePath);
+      };
+      if (req.files.image) {
+        const result = await uploadToCloudinary(req.files.image[0].path);
+        logoData.image = result.secure_url; // Add Cloudinary URL to product data
+      }
+      let result = new logoSchema(logoData);
+      result = await result.save();
+      res.send(result);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("An error occurred while saving the product.");
+    }
+  }
+);
+
 app.post("/add-favicon", upload.single("image"), async (req, res) => {
   let faviconData = req.body;
   faviconData.favicon = req.file.path;
@@ -237,13 +332,12 @@ app.get("/social", async (req, res) => {
 //   res.send(result);
 // });
 
-// app.get("/:id", async (req, res) => {
-//   if (!res.params.id) {
-//     return res.send({ error: "id is required" });
-//   }
-//   let result = await productSchema.findOne({ _id: req.params.id });
-//   res.send(result);
-// });
+app.get("/:id", async (req, res) => {
+  let result = await productSchema.findOne({
+    _id: req.params.id,
+  });
+  res.send(result);
+});
 
 app.get("/coupon-id/:id", async (req, res) => {
   let result = await couponSchema.findOne({ _id: req.params.id });
@@ -310,16 +404,7 @@ app.put("/update-social-link/:id", async (req, res) => {
   );
   res.send(result);
 });
-app.put("/update-logo/:id", upload.single("image"), async (req, res) => {
-  let logoData = {};
-  logoData.logo = req.file.path; // Add image paths to logo data
-  let result = await logoSchema.updateOne(
-    { _id: req.params.id },
-    { $set: logoData }
-  );
 
-  res.send(result);
-});
 app.put("/update-favicon/:id", upload.single("image"), async (req, res) => {
   let faviconData = {};
   faviconData.favicon = req.file.path; // Add image paths to favicon data

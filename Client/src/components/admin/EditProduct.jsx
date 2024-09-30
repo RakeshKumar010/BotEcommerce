@@ -84,9 +84,9 @@ const EditProduct = () => {
         "https://ecserver.estatebot.in/" + location.pathname.split("/").pop()
       );
       result = await result.json();
+      console.log(result);
       setData(result);
       setAvailability(result.availability);
-    
       setTitle(result.title);
       setSection(result.section);
       setImage(result.image);
@@ -169,7 +169,7 @@ const EditProduct = () => {
                   <>
                     <img
                       className="rounded-sm w-20 object-cover "
-                      src={`https://ecserver.estatebot.in/${value}`}
+                      src={value}
                       alt="product image"
                     />
                   </>

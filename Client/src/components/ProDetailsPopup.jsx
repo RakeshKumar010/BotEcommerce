@@ -51,7 +51,7 @@ const ProDetailsPopup = ({ setDetailsPopup, addId }) => {
           <div className="w-full h-full rounded-lg bg-gray-300   ">
             <img
               className="w-full  h-[40vh] md:h-full object-cover rounded-md object-top"
-              src={data ? `https://ecserver.estatebot.in/${data.image[0]}` : null}
+              src={data ? `${data.image[0]}` : null}
               alt="Product Image"
             />
           </div>

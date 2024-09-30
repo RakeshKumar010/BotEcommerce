@@ -49,7 +49,7 @@ const Carousel = () => {
                 <td className=" p-2">{index + 1}</td>
                 <td className=" p-2 bg-black ">
                   <img
-                    src={`https://ecserver.estatebot.in/${carousel}`}
+                    src={carousel}
                     alt="..."
                     className="  h-52 "
                   />

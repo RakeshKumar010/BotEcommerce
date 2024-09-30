@@ -6,11 +6,11 @@ function trimUrl(url) {
 async function getColor() {
  
   const currentUrl = trimUrl(window.location.href);
-  let response = await fetch("https://psyrealestate.in/client/" + currentUrl);
+  let response = await fetch("https://ecserver.estatebot.in/client/" + currentUrl);
   const clientData = await response.json();
   
 
-  response = await fetch("https://psyrealestate.in/color");
+  response = await fetch("https://ecserver.estatebot.in/color");
   const colorsData = await response.json();
   
 

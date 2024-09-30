@@ -6,6 +6,8 @@ import { ApiColor } from "./api/data";
 
 const Card = ({ value, setDetailsPopup, setAddId }) => {
   const { _id, title, image, rating, price } = value;
+  console.log(image);
+  
   const [addStyle, setAddStyle] = useState(false);
  
   return (
@@ -15,7 +17,7 @@ const Card = ({ value, setDetailsPopup, setAddId }) => {
           {image && (
             <img
               className="rounded-t-lg  w-full"
-              src={`https://ecserver.estatebot.in/${image[3]}`}
+              src={image[0]}
               alt="product image"
               onMouseEnter={() => {
                 setAddStyle(true);

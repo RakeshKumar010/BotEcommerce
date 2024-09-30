@@ -31,7 +31,7 @@ const AddCarousel = () => {
       alert("HTTP-Error: " + response.status);
     }
   };
-  useEffect(() => {}, []);
+ 
 
   return (
     <div className="absolute flex justify-center items-center bg-gray-100 right-0 border-dotted border-black border-2 min-h-screen w-full lg:w-[82%]">
