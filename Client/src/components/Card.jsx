@@ -48,7 +48,7 @@ const Card = ({ value, setDetailsPopup, setAddId }) => {
             <IoMdEye className="" />
           </div>
           <Link
-            to={"/" + _id}
+            to={"/product/" + _id}
          style={ApiColor?{ backgroundColor: ApiColor }:{ backgroundColor: 'black' }}
             className={`w-10 text-white flex justify-center rounded-full transition-all items-center h-10 relative   bottom-16`}
           >

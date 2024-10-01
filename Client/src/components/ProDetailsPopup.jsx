@@ -171,7 +171,7 @@ const ProDetailsPopup = ({ setDetailsPopup, addId }) => {
               <div className="w-1/2 px-2">
                 <p
                   onClick={() => {
-                    let id ='/'+data._id+'/buy-now';
+                    let id ='/product/'+data._id+'/buy-now';
                     navigater(id);
                     const obj = {
                       title: data.title,

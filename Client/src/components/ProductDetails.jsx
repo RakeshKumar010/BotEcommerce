@@ -85,7 +85,7 @@ const ProductDetails = () => {
                           setImageUrl(value);
                         }}
                         className="cursor-pointer rounded-md w-16 md:w-36"
-                        src={`https://ecserver.estatebot.in/${value}`}
+                        src={value}
                         alt="Product Image"
                       />
                     );
@@ -188,7 +188,7 @@ const ProductDetails = () => {
                           currentPrice,
                           sizes,
                           number,
-                          imageUrl: data.image[3],
+                          imageUrl: data.image[0],
                         };
                         let existingItems = localStorage.getItem("myCart");
                         existingItems = existingItems

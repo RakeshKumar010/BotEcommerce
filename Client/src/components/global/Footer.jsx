@@ -58,7 +58,7 @@ const Footer = () => {
                 {logos ? (
                    <Link to={"/"}>
                   <img
-                    src={`https://ecserver.estatebot.in/${logos}`}
+                    src={logos}
                     alt="..."
                     className="h-16 mb-5"
                   />

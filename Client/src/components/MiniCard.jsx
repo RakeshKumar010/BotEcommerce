@@ -7,11 +7,11 @@ const MiniCard = ({ value }) => {
   const ratingNumber = parseInt(rating);
   return (
     <div   className=" bg-white border w-full md:w-80 hover:border-gray-900 rounded-lg shadow  ">
-      <Link to={"/" + _id} className="">
+      <Link to={"/product/" + _id} className="">
         {image && (
           <img
             className=" rounded-t-lg w-full"
-            src={`https://ecserver.estatebot.in/${image[3]}`}
+            src={image[0]}
             alt="product image"
           />
         )}

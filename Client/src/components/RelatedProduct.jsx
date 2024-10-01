@@ -23,6 +23,8 @@ const RelatedProduct = () => {
       const clientData = await response.json();
       let result = await fetch("https://ecserver.estatebot.in/product");
       result = await result.json();
+      console.log(result);
+      
       const filterProduct = result.filter((value) => {
         //  console.log(value.clientId == clientData._id);
         return value.clientId == clientData._id;
