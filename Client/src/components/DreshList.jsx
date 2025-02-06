@@ -1,4 +1,4 @@
-// import Banner from "../assets/image/banner1.webp";
+const baseUrl = import.meta.env.VITE_APP_URL;
 
 const DreshList = ({ banner }) => {
  console.log(banner);
@@ -7,7 +7,7 @@ const DreshList = ({ banner }) => {
       {banner ? (
         <div className="bg-white pb-3">
           <img
-            src={`https://ecserver.estatebot.in/${banner}`}
+            src={`${baseUrl}/${banner}`}
             alt="..."
             className="w-full"
           />

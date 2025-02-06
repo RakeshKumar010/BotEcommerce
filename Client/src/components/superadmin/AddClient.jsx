@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
+const baseUrl = import.meta.env.VITE_APP_URL;
 
 const AddClient = () => {
   const [name, setName] = useState("");
@@ -11,7 +12,7 @@ const AddClient = () => {
   const [status, setStatus] = useState("1");
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let result = await fetch("https://ecserver.estatebot.in/add-client", {
+    let result = await fetch(`${baseUrl}/add-client`, {
       method: "post",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({

@@ -290,10 +290,7 @@ app.get("/nav-item", async (req, res) => {
   res.send(result);
 });
 
-app.get("/client/:domain", async (req, res) => {
-  let result = await clientSchema.findOne({ domain: req.params.domain });
-  res.send(result);
-});
+ 
 app.get("/show-client/:id", async (req, res) => {
   let result = await clientSchema.findOne({ _id: req.params.id });
   res.send(result);
@@ -303,14 +300,8 @@ app.get("/coupon/:code", async (req, res) => {
   let result = await couponSchema.findOne({ code: req.params.code });
   res.send(result);
 });
-// app.get("/admins", async (req, res) => {
-//   let result = await userSchema.find();
-//   res.send(result);
-// });
-app.get("/logo", async (req, res) => {
-  let result = await logoSchema.find();
-  res.send(result);
-});
+ 
+ 
 app.get("/banner", async (req, res) => {
   let result = await bannerSchema.find();
   res.send(result);
@@ -367,20 +358,7 @@ app.delete("/:id", async (req, res) => {
 });
 
 // put
-// app.put("/admins/:id", async (req, res) => {
-//   let result = await userSchema.updateOne(
-//     { _id: req.params.id },
-//     { $set: req.body }
-//   );
-//   res.send(result);
-// });
-app.put("/edit-client/:id", async (req, res) => {
-  let result = await clientSchema.updateOne(
-    { _id: req.params.id },
-    { $set: req.body }
-  );
-  res.send(result);
-});
+ 
 
 app.put("/recycle/:id", async (req, res) => {
   let result = await productSchema.updateOne(

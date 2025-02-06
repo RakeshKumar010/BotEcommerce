@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import ScrollUpDown from "./ScrollUpDown";
 import { useEffect, useState } from "react";
 import { ApiColor } from "../api/data";
+const baseUrl = import.meta.env.VITE_APP_URL;
+
 const Footer = () => {
   const [logos, setLogos] = useState(false);
   const [socialLink, setSocialLink] = useState("");
@@ -17,11 +19,11 @@ const Footer = () => {
       }
       const currentUrl = trimUrl(window.location.href);
       let response = await fetch(
-        "https://ecserver.estatebot.in/client/" + currentUrl
+        `${baseUrl}/client/${currentUrl}`
       );
       const clientData = await response.json();
 
-      let result = await fetch("https://ecserver.estatebot.in/logo");
+      let result = await fetch(`${baseUrl}/logo`);
       result = await result.json();
       const filteredLogoResults = result.filter((value) => {
         return value.clientId == clientData._id;
@@ -33,7 +35,7 @@ const Footer = () => {
       }else{
         setLogos(false)
       }
-      let socialResult = await fetch("https://ecserver.estatebot.in/social");
+      let socialResult = await fetch(`${baseUrl}/social`);
       socialResult = await socialResult.json();
       const filteredResults = socialResult.filter((value) => {
         return value.clientId == clientData._id;

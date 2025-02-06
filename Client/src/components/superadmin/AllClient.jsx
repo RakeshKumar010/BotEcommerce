@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { BiEdit } from "react-icons/bi";
 import { CgRemove } from "react-icons/cg";
-import { MdStars } from "react-icons/md";
 import { Link } from "react-router-dom";
+const baseUrl = import.meta.env.VITE_APP_URL;
+
 
 const AllClient = () => {
   const [data, setData] = useState();
@@ -10,7 +11,7 @@ const AllClient = () => {
 
   useEffect(() => {
     const getFun = async () => {
-      let result = await fetch("https://ecserver.estatebot.in/show-client");
+      let result = await fetch(`${baseUrl}/show-client`);
       result = await result.json();
       setData(result);
       setPageLoad(result);
@@ -63,7 +64,7 @@ const AllClient = () => {
                     <CgRemove
                       onClick={async () => {
                         let result = await fetch(
-                          `https://ecserver.estatebot.in/delete-client/${_id}`,
+                          `${baseUrl}/delete-client/${_id}`,
                           {
                             method: "delete",
                             headers: { "content-type": "application/json" },

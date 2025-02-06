@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { ApiColor } from "../api/data";
 const sizes = ["XS", "S", "M", "L", "XL", "XXL", "3XL", "4XL"];
+const baseUrl = import.meta.env.VITE_APP_URL;
 
 const AddProduct = () => {
   const [title, setTitle] = useState("");
@@ -57,7 +58,7 @@ const AddProduct = () => {
     }
     // Append other fields...
 
-    let response = await fetch("https://ecserver.estatebot.in/add-products", {
+    let response = await fetch(`${baseUrl}/add-products`, {
       method: "POST",
       body: formData,
     });
@@ -84,7 +85,7 @@ const AddProduct = () => {
       }
       const currentUrl = trimUrl(window.location.href);
       let response = await fetch(
-        "https://ecserver.estatebot.in/client/" + currentUrl
+        `${baseUrl}/client/` + currentUrl
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -98,7 +99,7 @@ const AddProduct = () => {
         navigate("error");
       }
 
-      let resultNavItem = await fetch("https://ecserver.estatebot.in/nav-item");
+      let resultNavItem = await fetch(`${baseUrl}/nav-item`);
       resultNavItem = await resultNavItem.json();
 
       const filteredResultNavItems = resultNavItem.filter((value) => {

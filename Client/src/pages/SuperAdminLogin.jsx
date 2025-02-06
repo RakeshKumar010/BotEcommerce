@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { ApiColor } from "../components/api/data";
+const baseUrl = import.meta.env.VITE_APP_URL;
 
 const SuperAdminLogin = ({setIsSuperAdmin}) => {
     const navigate = useNavigate();
@@ -44,7 +45,7 @@ const SuperAdminLogin = ({setIsSuperAdmin}) => {
         return;
       }
   
-      let response = await fetch("https://ecserver.estatebot.in/super-admin-login", {
+      let response = await fetch(`${baseUrl}/super-admin-login`, {
         method: "post",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ email, pass }),

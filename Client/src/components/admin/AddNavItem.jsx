@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { ApiColor } from "../api/data";
+const baseUrl = import.meta.env.VITE_APP_URL;
+
 const AddNavItem = () => {
   const [nav1, setNav1] = useState("");
   const [nav2, setNav2] = useState("");
@@ -17,7 +19,7 @@ const AddNavItem = () => {
 
     if (data.length > 0) {
       let response = await fetch(
-        "https://ecserver.estatebot.in/update-nav-item/"+data[0]._id,
+        `${baseUrl}/update-nav-item/${data[0]._id}`,
         {
           method: "put",
           headers: { "content-type": "application/json" },
@@ -36,7 +38,7 @@ const AddNavItem = () => {
         alert("HTTP-Error: " + response.status);
       }
     } else {
-      let response = await fetch("https://ecserver.estatebot.in/add-nav-item", {
+      let response = await fetch(`${baseUrl}/add-nav-item`, {
         method: "post",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ clientId, nav1, nav2, nav3, nav4, nav5 }),
@@ -58,7 +60,7 @@ const AddNavItem = () => {
   };
   useEffect(() => {
     const getData = async () => {
-      let result = await fetch("https://ecserver.estatebot.in/nav-item");
+      let result = await fetch(`${baseUrl}/nav-item`);
       result = await result.json();
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);

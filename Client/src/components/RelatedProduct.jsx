@@ -3,6 +3,7 @@ import MiniCard from "./MiniCard";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+const baseUrl = import.meta.env.VITE_APP_URL;
 
 const RelatedProduct = () => {
   const [data, setData] = useState([]);
@@ -18,10 +19,10 @@ const RelatedProduct = () => {
       }
       const currentUrl = trimUrl(window.location.href);
       let response = await fetch(
-        "https://ecserver.estatebot.in/client/" + currentUrl
+        `${baseUrl}/client/${currentUrl}`
       );
       const clientData = await response.json();
-      let result = await fetch("https://ecserver.estatebot.in/product");
+      let result = await fetch(`${baseUrl}/product`);
       result = await result.json();
       console.log(result);
       

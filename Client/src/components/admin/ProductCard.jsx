@@ -5,6 +5,7 @@ import { MdRestorePage } from "react-icons/md";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { ApiColor } from "../api/data";
+const baseUrl = import.meta.env.VITE_APP_URL;
 
 const ProductCard = ({ value, index, setPageLoad, recycle }) => {
   const [access, setAccess] = useState("");
@@ -27,7 +28,7 @@ const ProductCard = ({ value, index, setPageLoad, recycle }) => {
   } = value;
 
   const deleteFun = async () => {
-    let result = await fetch(`https://ecserver.estatebot.in/${_id}`, {
+    let result = await fetch(`${baseUrl}/${_id}`, {
       method: "delete",
       headers: { "content-type": "application/json" },
     });
@@ -35,7 +36,7 @@ const ProductCard = ({ value, index, setPageLoad, recycle }) => {
   };
   const recycleBinFun = async () => {
     let result = await fetch(
-      `https://ecserver.estatebot.in/recycle/${_id}`,
+      `${baseUrl}/recycle/${_id}`,
       {
         method: "put",
         headers: { "content-type": "application/json" },
@@ -56,7 +57,7 @@ const ProductCard = ({ value, index, setPageLoad, recycle }) => {
   };
   const restoreFun = async () => {
     let result = await fetch(
-      `https://ecserver.estatebot.in/recycle/${_id}`,
+      `${baseUrl}/recycle/${_id}`,
       {
         method: "put",
         headers: { "content-type": "application/json" },
@@ -78,7 +79,7 @@ const ProductCard = ({ value, index, setPageLoad, recycle }) => {
   };
   useEffect(() => {
     const getFun = async () => {
-      let result = await fetch("https://ecserver.estatebot.in/show-client");
+      let result = await fetch(`${baseUrl}/show-client`);
       result = await result.json();
       let userString = localStorage.getItem('user');
       let user = JSON.parse(userString);

@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
 import { ApiColor } from "../api/data";
 const sizes = ["XS", "S", "M", "L", "XL", "XXL", "3XL", "4XL"];
+const baseUrl = import.meta.env.VITE_APP_URL;
  
 
 const EditProduct = () => {
@@ -56,7 +57,7 @@ const EditProduct = () => {
     // Append other fields...
 
     let response = await fetch(
-      "https://ecserver.estatebot.in/product/" + location.pathname.split("/").pop(),
+      `${baseUrl}/product/${location.pathname.split("/").pop()}`,
       {
         method: "PUT",
         body: formData,
@@ -81,7 +82,7 @@ const EditProduct = () => {
   useEffect(() => {
     const getFun = async () => {
       let result = await fetch(
-        "https://ecserver.estatebot.in/" + location.pathname.split("/").pop()
+        `${baseUrl}/${location.pathname.split("/").pop()}`
       );
       result = await result.json();
       console.log(result);
@@ -107,7 +108,7 @@ const EditProduct = () => {
       }
       const currentUrl = trimUrl(window.location.href);
       let response = await fetch(
-        "https://ecserver.estatebot.in/client/" + currentUrl
+        `${baseUrl}/client/${currentUrl}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -121,7 +122,7 @@ const EditProduct = () => {
         navigate("error");
       }
 
-      let resultNavItem = await fetch("https://ecserver.estatebot.in/nav-item");
+      let resultNavItem = await fetch(`${baseUrl}/nav-item`);
       resultNavItem = await resultNavItem.json();
 
       const filteredResultNavItems = resultNavItem.filter((value) => {

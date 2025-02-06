@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { ApiColor } from "../api/data";
+const baseUrl = import.meta.env.VITE_APP_URL;
 
 const AddCarousel = () => {
   const [image, setImage] = useState();
@@ -14,7 +15,7 @@ const AddCarousel = () => {
     const formData = new FormData();
     formData.append("image", image);
     formData.append("clientId", clientId);
-    let response = await fetch("https://ecserver.estatebot.in/add-carousel", {
+    let response = await fetch(`${baseUrl}/add-carousel`, {
       method: "post",
       body: formData,
     });

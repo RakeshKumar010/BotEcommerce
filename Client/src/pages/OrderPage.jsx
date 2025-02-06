@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import HeaderTop from "../components/HeaderTop";
 import NavBar from "../components/global/NavBar";
 import Footer from "../components/global/Footer";
-import { ApiColor } from "../components/api/data";
 import { Link } from "react-router-dom";
+const baseUrl = import.meta.env.VITE_APP_URL;
 
 const OrderPage = () => {
   const [sessionData, setSessionData] = useState();
@@ -27,28 +27,13 @@ const OrderPage = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     const storedObject = JSON.parse(sessionStorage.getItem("myObject"));
     setSessionData(storedObject);
+
     const getFun = async () => {
-      function trimUrl(url) {
-        const parsedUrl = new URL(url);
-        return (
-          parsedUrl.hostname + (parsedUrl.port ? ":" + parsedUrl.port : "")
-        );
-      }
-      const currentUrl = trimUrl(window.location.href);
-      let response = await fetch(
-        "https://ecserver.estatebot.in/client/" + currentUrl
-      );
-      const clientData = await response.json();
-
-      let result = await fetch("https://ecserver.estatebot.in/coupon");
+      let result = await fetch(`${baseUrl}/coupon`);
       result = await result.json();
-      
-      const filterCoupan = result.filter((value) => {
-        return value.clientId == clientData._id;
-      });
-      const reversedCoupons = filterCoupan.reverse();
-      setData(reversedCoupons);
 
+      const reversedCoupons = result.reverse();
+      setData(reversedCoupons);
     };
     getFun();
   }, []);
@@ -68,7 +53,10 @@ const OrderPage = () => {
             placeholder="Email or mobile phone number"
             className="w-full rounded-md"
           />
-          <button style={{backgroundColor:ApiColor}} className=" p-3 text-white uppercase rounded-md">
+          <button
+            style={{ backgroundColor: "black" }}
+            className=" p-3 text-white uppercase rounded-md"
+          >
             Generate otp
           </button>
           <div className="flex items-center gap-1">
@@ -140,9 +128,15 @@ const OrderPage = () => {
                 </div>
               </div>
             </div>
-            
-            <Link to={'/thanku-page'} className="md:static bg-white md:p-0 p-2  fixed bottom-0 right-0 left-0">
-              <p style={{backgroundColor:ApiColor}}  className="text-center p-4 w-full  text-white rounded-md  hover:scale-105 transition-all duration-200  hover:shadow-md hover:shadow-gray-600">
+
+            <Link
+              to={"/thanku-page"}
+              className="md:static bg-white md:p-0 p-2  fixed bottom-0 right-0 left-0"
+            >
+              <p
+                style={{ backgroundColor: "black" }}
+                className="text-center p-4 w-full  text-white rounded-md  hover:scale-105 transition-all duration-200  hover:shadow-md hover:shadow-gray-600"
+              >
                 Pay now
               </p>
             </Link>
@@ -151,13 +145,13 @@ const OrderPage = () => {
         <div className="md:w-1/2 w-full md:p-5 flex flex-col gap-5">
           <div className="flex gap-3 items-start">
             <img
-              src={`https://ecserver.estatebot.in/${
+              src={
                 sessionData
                   ? sessionData.imageUrl
                   : "https://cdn.shopify.com/s/files/1/0839/4647/1697/files/DSC_1321copy_64x64.jpg?v=1711732690"
-              }`}
+              }
               alt="Product Image"
-              className="h-16 rounded-sm shadow-md"
+              className="h-16 rounded-sm  shadow-md"
             />
             <div>
               <p className="text-lg font-bold text-gray-700">
@@ -216,11 +210,17 @@ const OrderPage = () => {
             onSubmit={async (e) => {
               e.preventDefault();
               let result = await fetch(
-                `https://ecserver.estatebot.in/coupon/${discountCode}`
+                `${baseUrl}/coupon/${discountCode}`
               );
               result = await result.json();
-              setCouponData(result);
-              console.log(result.discount);
+              if(result.expiryDate<currentDate){
+                alert('Coupon Expiry')
+              }else{
+
+                setCouponData(result);
+              }
+
+            
             }}
             className="flex w-full gap-3 justify-between items-center bg-white p-3 rounded-md shadow-md"
           >
@@ -235,7 +235,7 @@ const OrderPage = () => {
             />
             <button
               type="submit"
-              style={{backgroundColor:ApiColor}} 
+              style={{ backgroundColor: "black" }}
               className="  text-white p-2 rounded-md hover:scale-105 transition-all duration-200  hover:shadow-md hover:shadow-gray-600 "
             >
               Apply

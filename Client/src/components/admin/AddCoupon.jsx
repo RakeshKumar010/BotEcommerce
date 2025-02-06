@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Swal from 'sweetalert2'
 import { ApiColor } from "../api/data";
+const baseUrl = import.meta.env.VITE_APP_URL;
+
 const AddCoupon = () => {
   const [title, setTitle] = useState("");
   const [discount, setDiscount] = useState("");
@@ -12,7 +14,7 @@ const AddCoupon = () => {
     let user = JSON.parse(userString);
     let clientId=user._id
  
-    let response = await fetch("https://ecserver.estatebot.in/add-coupon", {
+    let response = await fetch(`${baseUrl}/add-coupon`, {
       method: "post",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ clientId,title,discount,code,expiryDate }),

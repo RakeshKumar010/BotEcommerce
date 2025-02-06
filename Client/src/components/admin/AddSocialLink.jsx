@@ -3,7 +3,7 @@ import { FaFacebook } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { RiInstagramFill } from "react-icons/ri";
 import { SiYoutubemusic } from "react-icons/si";
-
+const baseUrl = import.meta.env.VITE_APP_URL;
 import Swal from "sweetalert2";
 import { ApiColor } from "../api/data";
 const AddSocialLink = () => {
@@ -21,7 +21,7 @@ const AddSocialLink = () => {
 
     if (data.length > 0) {
       let response = await fetch(
-        "https://ecserver.estatebot.in/update-social-link/" + data[0]._id,
+        `${baseUrl}/update-social-link/${data[0]._id}`,
         {
           method: "put",
           headers: { "content-type": "application/json" },
@@ -42,7 +42,7 @@ const AddSocialLink = () => {
         alert("HTTP-Error: " + response.status);
       }
     } else {
-      let response = await fetch("https://ecserver.estatebot.in/add-social-link", {
+      let response = await fetch(`${baseUrl}/add-social-link`, {
         method: "post",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ clientId, facebook, insta, youtube, twitter }),
@@ -64,7 +64,7 @@ const AddSocialLink = () => {
   };
   useEffect(() => {
     const getData = async () => {
-      let result = await fetch("https://ecserver.estatebot.in/social");
+      let result = await fetch(`${baseUrl}/social`);
       result = await result.json();
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);

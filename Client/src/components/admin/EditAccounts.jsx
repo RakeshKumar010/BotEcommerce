@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { ApiColor } from "../api/data";
+const baseUrl = import.meta.env.VITE_APP_URL;
+
 const EditAccounts = () => {
     const location =useLocation()
     const navigate =useNavigate()
@@ -18,7 +20,7 @@ const EditAccounts = () => {
   
     const handleSubmit = async (e) => {
       e.preventDefault();
-      let result = await fetch("https://ecserver.estatebot.in/client/"+location.pathname.split("/").pop(), {
+      let result = await fetch(`${baseUrl}/client/${location.pathname.split("/").pop()}`, {
         method: "put",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ name, email, pass,addProduct,editProduct,deleteProduct,addCoupon,editCoupon,deleteCoupon }),
@@ -40,7 +42,7 @@ const EditAccounts = () => {
     };
     useEffect(() => {
         const getFun = async () => {
-          let result = await fetch("https://ecserver.estatebot.in/client/"+location.pathname.split("/").pop());
+          let result = await fetch(`${baseUrl}/client/${location.pathname.split("/").pop()}`);
           result = await result.json();
           setName(result.name)
           setEmail(result.email)

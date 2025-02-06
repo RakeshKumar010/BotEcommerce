@@ -1,6 +1,7 @@
 import { FaUserSlash } from "react-icons/fa";
 import { FaPeopleGroup, FaUserLarge } from "react-icons/fa6";
 import { useEffect, useState } from "react";
+const baseUrl = import.meta.env.VITE_APP_URL;
 
 const Sdashboard = () => {
   const [totalClient, setTotalClient] = useState();
@@ -26,7 +27,7 @@ const Sdashboard = () => {
   ];
   useEffect(() => {
     const getFun = async () => {
-      let total = await fetch("https://ecserver.estatebot.in/show-client");
+      let total = await fetch(`${baseUrl}/show-client`);
       total = await total.json();
       setTotalClient(total.length);
       let deactive = total.filter((user) => user.status === "0");

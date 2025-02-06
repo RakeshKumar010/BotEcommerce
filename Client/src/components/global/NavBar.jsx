@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { IoReorderThreeOutline, IoSearchOutline } from "react-icons/io5";
+import { IoReorderThreeOutline} from "react-icons/io5";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 import { HiShoppingBag } from "react-icons/hi2";
+const baseUrl = import.meta.env.VITE_APP_URL;
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ const NavBar = () => {
   const [showCart, setShowCart] = useState(false);
   const [apiDataColor, setApiDataColor] = useState();
   const [logos, setLogos] = useState(false);
-const [pageLoader,setPageLoader]=useState(false)
+  const [pageLoader, setPageLoader] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
   const [numOfProduct, setNumOfProduct] = useState(0);
   const location = useLocation();
@@ -37,7 +38,6 @@ const [pageLoader,setPageLoader]=useState(false)
       to: "/" + (navItemData ? navItemData.nav5.replace(/\s+/g, "") : "menu5"),
       text: navItemData ? navItemData.nav5 : "menu 5",
     },
- 
   ];
   useEffect(() => {
     const storedObject = JSON.parse(localStorage.getItem("myCart"));
@@ -57,48 +57,43 @@ const [pageLoader,setPageLoader]=useState(false)
         );
       }
       const currentUrl = trimUrl(window.location.href);
-      let response = await fetch(
-        "https://ecserver.estatebot.in/client/" + currentUrl
-      );
+      let response = await fetch(`${baseUrl}/client/${currentUrl}`);
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
       if (response.headers.get("content-length") === "0") {
         throw new Error("Empty response body");
       }
-      const clientData = await response.json();
-
+      const clientData = await response.json(); 
       if (clientData.status == "0") {
         navigate("error");
       }
       let today = new Date();
-      
-      let dd =  String(today.getDate()).padStart(2, '0');
+
+      let dd = String(today.getDate()).padStart(2, "0");
       let mm = String(today.getMonth() + 1).padStart(2, "0"); // January is 0!
       let yyyy = today.getFullYear();
 
       let formattedDate = yyyy + "-" + mm + "-" + dd;
 
       if (clientData.expiryDate < formattedDate) {
-        let result = await fetch(
-          "https://ecserver.estatebot.in/edit-client/" + clientData._id,
-          {
-            method: "put",
-            headers: { "content-type": "application/json" },
-            body: JSON.stringify({
-              status: "0",
-            }),
-          }
-        );
-        if(result.ok){
-
+        let result = await fetch(`${baseUrl}/edit-client/${clientData._id}`, {
+          method: "put",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            status: "0",
+          }),
+        });
+        if (result.ok) {
           navigate("error");
         }
       }
 
-      let result = await fetch("https://ecserver.estatebot.in/logo");
+      let result = await fetch(`${baseUrl}/logo`);
       result = await result.json();
-      setPageLoader(result)
+      setPageLoader(result);
+      console.log(result);
+      
       const filteredResults = result.filter((value) => {
         return value.clientId == clientData._id;
       });
@@ -108,7 +103,7 @@ const [pageLoader,setPageLoader]=useState(false)
         setLogos(false);
       }
 
-      let resultNavItem = await fetch("https://ecserver.estatebot.in/nav-item");
+      let resultNavItem = await fetch(`${baseUrl}/nav-item`);
       resultNavItem = await resultNavItem.json();
 
       const filteredResultNavItems = resultNavItem.filter((value) => {
@@ -125,9 +120,7 @@ const [pageLoader,setPageLoader]=useState(false)
     }
     async function getColor() {
       const currentUrl = trimUrl(window.location.href);
-      let response = await fetch(
-        "https://ecserver.estatebot.in/client/" + currentUrl
-      );
+      let response = await fetch(`${baseUrl}/client/${currentUrl}`);
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -136,7 +129,7 @@ const [pageLoader,setPageLoader]=useState(false)
       }
       const clientData = await response.json();
 
-      response = await fetch("https://ecserver.estatebot.in/color");
+      response = await fetch(`${baseUrl}/color`);
       const colorsData = await response.json();
 
       const filteredResults = colorsData.filter((value) => {
@@ -167,11 +160,7 @@ const [pageLoader,setPageLoader]=useState(false)
         />
         <Link to={"/"}>
           {logos ? (
-            <img
-              src={logos}
-              alt="..."
-              className="h-8 lg:h-12 xl:h-16"
-            />
+            <img src={logos} alt="..." className="h-8 lg:h-12 xl:h-16" />
           ) : (
             <span className="flex-1 ms-3 text-black font-bold text-3xl whitespace-nowrap">
               Logo
@@ -187,19 +176,19 @@ const [pageLoader,setPageLoader]=useState(false)
             className={`flex md:flex-row flex-col md:static h-screen md:bg-transparent bg-white  sm:gap-4 gap-7 md:gap-5 lg:gap-2 xl:gap-4 p-4  md:h-auto  md:w-auto w-[80%] md:items-center text-nowrap `}
           >
             <li className="md:hidden flex justify-between items-center  py-2 px-1 w-full  ">
-            <Link to={"/"}>
-          {logos ? (
-            <img
-              src={`https://ecserver.estatebot.in/${logos}`}
-              alt="..."
-              className="h-8 lg:h-12 xl:h-16"
-            />
-          ) : (
-            <span className="flex-1 ms-3 text-black font-bold text-3xl whitespace-nowrap">
-              Logo
-            </span>
-          )}
-        </Link>
+              <Link to={"/"}>
+                {logos ? (
+                  <img
+                    src={`${baseUrl}/${logos}`}
+                    alt="..."
+                    className="h-8 lg:h-12 xl:h-16"
+                  />
+                ) : (
+                  <span className="flex-1 ms-3 text-black font-bold text-3xl whitespace-nowrap">
+                    Logo
+                  </span>
+                )}
+              </Link>
             </li>
 
             {navItems.map((item, index) => (

@@ -1,21 +1,10 @@
-import React, { useEffect, useState } from "react";
 import Footer from "../components/global/Footer";
 import NavBar from "../components/global/NavBar";
 import HeaderTop from "../components/HeaderTop";
 import OrderImg from "../assets/image/orderImg1.webp";
 import OrderImg2 from "../assets/image/orderImg2.webp";
 const AllOrder = () => {
-  const [apiDataColor,setApiDataColor]=useState('')
-  useEffect(()=>{
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    async function getColor(){
-      let result = await fetch('https://ecserver.estatebot.in/color')
-      result = await result.json()
-   
-      setApiDataColor(result[result.length-1].color)
-    }
-    getColor()
-  })
+  
   return (
     <>
       <div className="sticky top-0 z-10 right-0 left-0 ">
@@ -25,7 +14,7 @@ const AllOrder = () => {
       <section className="md:py-24 py-12 relative bg-gray-100">
         <div className="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto">
           <h2
-            style={{ color: apiDataColor }}
+            style={{ color: 'black' }}
             className="title font-manrope font-bold text-3xl md:text-4xl leading-10 mb-8 text-center  "
           >
             Your Orders

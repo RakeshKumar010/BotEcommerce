@@ -54,55 +54,30 @@ const Layout = () => {
     admin ? setIsAdmin(true) : null;
 
     const getFun = async () => {
-      function trimUrl(url) {
-        const parsedUrl = new URL(url);
-        return (
-          parsedUrl.hostname + (parsedUrl.port ? ":" + parsedUrl.port : "")
-        );
-      }
-      const currentUrl = trimUrl(window.location.href);
-      let response = await fetch(
-        "https://ecserver.estatebot.in/client/" + currentUrl
-      );
-      const clientData = await response.json();
+     
+ 
+    
+     
 
       let resultNavItem = await fetch("https://ecserver.estatebot.in/nav-item");
       resultNavItem = await resultNavItem.json();
 
-      const filteredResultNavItems = resultNavItem.filter((value) => {
-        return value.clientId == clientData._id;
-      });
-
-      setNavItemData(
-        filteredResultNavItems.length > 0 ? filteredResultNavItems[0] : false
-      );
-      let resultTitle = await fetch("https://ecserver.estatebot.in/title");
-      resultTitle = await resultTitle.json();
-
-      const filteredResultTitles = resultTitle.filter((value) => {
-        return value.clientId == clientData._id;
-      });
-
-      const titleData =
-        filteredResultTitles.length > 0 ? filteredResultTitles[0] : false;
-      document.title = `${titleData?titleData.title:'Title'}`;
+      setNavItemData(resultNavItem.length > 0 ? resultNavItem[0] : false);
+       
       // console.log(titleData);
 
       let resultFavicon = await fetch("https://ecserver.estatebot.in/favicon");
       resultFavicon = await resultFavicon.json();
 
-      const filteredResultFavicons = resultFavicon.filter((value) => {
-        return value.clientId == clientData._id;
-      });
+   
 
       const FaviconData =
-        filteredResultFavicons.length > 0 ? filteredResultFavicons[0] : false;
-        if(FaviconData){
-          const faviconUrl = `https://ecserver.estatebot.in/${FaviconData.favicon}`;
-          const linkTag = document.querySelector('link[rel="icon"]');
-          linkTag.href = faviconUrl;
-        }
-      // document.Favicon = FaviconData.Favicon;
+        resultFavicon.length > 0 ? resultFavicon[0] : false;
+      if (FaviconData) {
+        const faviconUrl = `https://ecserver.estatebot.in/${FaviconData.favicon}`;
+        const linkTag = document.querySelector('link[rel="icon"]');
+        linkTag.href = faviconUrl;
+      } 
     };
     getFun();
   }, []);
@@ -114,21 +89,9 @@ const Layout = () => {
         <Route path="/thanku-page" element={<ThankuPage />} />
         <Route path="/add-to-cart" element={<AddToCart />} />
         <Route path="orders" element={<AllOrder />} />
-        <Route path="/add-to-cart/cart-order" element={<CartOrder />} />
         <Route path="/return-policy" element={<ReturnPolicy />} />
         <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
         <Route path="/about" element={<About />} />
-        <Route path="/product/:id" element={<ProductDetails />} />
-        <Route path="/product/:id/buy-now" element={<OrderPage />} />
-        <Route
-          path="admin-login"
-          element={<AdminLogin setIsAdmin={setIsAdmin} />}
-        />
-        <Route
-          path="super-admin-login"
-          element={<SuperAdminLogin setIsSuperAdmin={setIsSuperAdmin} />}
-        />
-
         <Route
           path={navItemData ? navItemData.nav1.replace(/\s+/g, "") : "menu1"}
           element={
@@ -159,6 +122,22 @@ const Layout = () => {
             <NewArrival title={navItemData ? navItemData.nav5 : "section 5"} />
           }
         />
+        <Route path="/add-to-cart/cart-order" element={<CartOrder />} />
+        <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/product/:id/buy-now" element={<OrderPage />} />
+
+
+
+
+        <Route
+          path="admin-login"
+          element={<AdminLogin setIsAdmin={setIsAdmin} />}
+        />
+        <Route
+          path="super-admin-login"
+          element={<SuperAdminLogin setIsSuperAdmin={setIsSuperAdmin} />}
+        />
+
         <Route
           path="/admin"
           element={
@@ -169,7 +148,6 @@ const Layout = () => {
             )
           }
         >
-          
           <Route index element={<DashBoard />} />
           <Route path="product" element={<Product />} />
           <Route path="recycle-bin/:id" element={<EditProduct />} />

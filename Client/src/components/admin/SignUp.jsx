@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { ApiColor } from "../api/data";
+const baseUrl = import.meta.env.VITE_APP_URL;
+
 const SignUp = () => {
   const [name, setName] = useState("");
   const [addProduct, setAddProduct] = useState("");
@@ -20,7 +22,7 @@ const SignUp = () => {
 
     if (data.length > 0) {
       let result = await fetch(
-        "https://ecserver.estatebot.in/add-client",
+        `${baseUrl}/add-client`,
         {
           method: "post",
           headers: { "content-type": "application/json" },
@@ -53,7 +55,7 @@ const SignUp = () => {
         console.log("error");
       }
     } else {
-      let result = await fetch("https://ecserver.estatebot.in/edit-client/" + clientId, {
+      let result = await fetch(`${baseUrl}/edit-client/${clientId}`, {
         method: "put",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
@@ -88,7 +90,7 @@ const SignUp = () => {
 
   useEffect(() => {
     const getFun = async () => {
-      let result = await fetch("https://ecserver.estatebot.in/show-client");
+      let result = await fetch(`${baseUrl}/show-client`);
       result = await result.json();
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);

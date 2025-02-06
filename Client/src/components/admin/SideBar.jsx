@@ -18,6 +18,7 @@ import { RiCoupon2Line, RiImageAddLine } from "react-icons/ri";
 import { BsMenuButtonWide } from "react-icons/bs";
 import { SlSocialDropbox } from "react-icons/sl";
 import { ApiColor } from "../api/data";
+const baseUrl = import.meta.env.VITE_APP_URL;
 
 const SideBar = () => {
   const [navOpen, setNavOpen] = useState(true);
@@ -38,7 +39,7 @@ const SideBar = () => {
 
   useEffect(() => {
     const getFun = async () => {
-      let result = await fetch("https://ecserver.estatebot.in/show-client");
+      let result = await fetch(`${baseUrl}/show-client`);
       result = await result.json();
       setNavColor(localStorage.getItem("color"));
       setNavItem(localStorage.getItem("nav"));
@@ -57,7 +58,7 @@ const SideBar = () => {
           }
         }
       });
-      let resultTitle = await fetch("https://ecserver.estatebot.in/title");
+      let resultTitle = await fetch(`${baseUrl}/title`);
       resultTitle = await resultTitle.json();
       const filteredTitleResults = resultTitle.filter(
         (value) => value.clientId === user._id
@@ -65,7 +66,7 @@ const SideBar = () => {
       filteredTitleResults.length > 0
         ? setTitle(filteredTitleResults[0].title)
         : setTitle(null);
-      let resultFavicon = await fetch("https://ecserver.estatebot.in/favicon");
+      let resultFavicon = await fetch(`${baseUrl}/favicon`);
       resultFavicon = await resultFavicon.json();
       const filteredFaviconResults = resultFavicon.filter(
         (value) => value.clientId === user._id
@@ -74,7 +75,7 @@ const SideBar = () => {
         ? setFavicon(filteredFaviconResults[0].favicon)
         : setFavicon(null);
 
-      let result3 = await fetch("https://ecserver.estatebot.in/logo");
+      let result3 = await fetch(`${baseUrl}/logo`);
       result3 = await result3.json();
       const filteredResults = result3.filter(
         (value) => value.clientId === user._id
@@ -82,7 +83,7 @@ const SideBar = () => {
       filteredResults.length > 0
         ? setLogos(filteredResults[0].logo)
         : setLogos(null);
-      let resultColor = await fetch("https://ecserver.estatebot.in/color");
+      let resultColor = await fetch(`${baseUrl}/color`);
       resultColor = await resultColor.json();
       const filteredResultColor = resultColor.filter(
         (value) => value.clientId === user._id
@@ -90,13 +91,13 @@ const SideBar = () => {
       filteredResultColor.length > 0
         ? setNavColor(filteredResultColor[0].color)
         : setNavColor(null);
-      let resultNavItem = await fetch("https://ecserver.estatebot.in/nav-item");
+      let resultNavItem = await fetch(`${baseUrl}/nav-item`);
       resultNavItem = await resultNavItem.json();
       const filteredResultNavItem = resultNavItem.filter(
         (value) => value.clientId === user._id
       );
       filteredResultNavItem.length > 0 ? setNavItem(true) : setNavItem(false);
-      let resultSocialLink = await fetch("https://ecserver.estatebot.in/social");
+      let resultSocialLink = await fetch(`${baseUrl}/social`);
       resultSocialLink = await resultSocialLink.json();
       const filteredResultSocialLink = resultSocialLink.filter(
         (value) => value.clientId === user._id
@@ -420,7 +421,7 @@ const SideBar = () => {
               <Link to={"/admin"}>
                 {logos ? (
                   <img
-                    src={`https://ecserver.estatebot.in/${logos}`}
+                    src={`${baseUrl}/${logos}`}
                     alt="..."
                     className="h-14  lg:h-20"
                   />

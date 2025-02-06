@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { ApiColor } from "./api/data";
 
 const FilterSide = ({

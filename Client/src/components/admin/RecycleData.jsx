@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import * as XLSX from "xlsx";
 import { ApiColor } from "../api/data";
+const baseUrl = import.meta.env.VITE_APP_URL;
 
 const RecycleData = () => {
   const [data, setData] = useState();
@@ -12,7 +13,7 @@ const RecycleData = () => {
     const getFun = async () => {
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);
-      let result = await fetch("https://ecserver.estatebot.in/deleted-product");
+      let result = await fetch(`${baseUrl}/deleted-product`);
       result = await result.json();
       let filteredResults = result.filter(
         (value) => value.clientId == user._id

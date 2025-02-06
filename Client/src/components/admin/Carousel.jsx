@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { CgRemove } from "react-icons/cg";
 import { ApiColor } from "../api/data";
+const baseUrl = import.meta.env.VITE_APP_URL;
+
 const Carousel = () => {
   const [data, setData] = useState();
   const [pageLoad, setPageLoad] = useState();
@@ -9,7 +11,7 @@ const Carousel = () => {
     const getFun = async () => {
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);
-      let result = await fetch("https://ecserver.estatebot.in/carousel");
+      let result = await fetch(`${baseUrl}/carousel`);
       result = await result.json();
       let filteredResults = result.filter(
         (value) => value.clientId == user._id
@@ -58,7 +60,7 @@ const Carousel = () => {
                   <CgRemove
                     onClick={async () => {
                       let result = await fetch(
-                        `https://ecserver.estatebot.in/carousel/${_id}`,
+                        `${baseUrl}/carousel/${_id}`,
                         {
                           method: "delete",
                           headers: { "content-type": "application/json" },

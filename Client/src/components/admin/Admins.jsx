@@ -4,6 +4,7 @@ import { CgRemove } from "react-icons/cg";
 import { MdStars } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { ApiColor } from "../api/data";
+const baseUrl = import.meta.env.VITE_APP_URL;
 
 const Admins = () => {
   const [data, setData] = useState();
@@ -13,7 +14,7 @@ const Admins = () => {
     const getFun = async () => {
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);
-      let result = await fetch("https://ecserver.estatebot.in/show-client");
+      let result = await fetch(`${baseUrl}/show-client`);
       result = await result.json();
       let filteredResults = result.filter(
         (value) => value.clientId == user._id
@@ -79,7 +80,7 @@ const Admins = () => {
                       <CgRemove
                         onClick={async () => {
                           let result = await fetch(
-                            `https://ecserver.estatebot.in/delete-client/${_id}`,
+                            `${baseUrl}/delete-client/${_id}`,
                             {
                               method: "delete",
                               headers: { "content-type": "application/json" },

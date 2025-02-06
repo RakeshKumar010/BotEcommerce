@@ -1,77 +1,75 @@
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { ApiColor } from "../api/data";
+const baseUrl = import.meta.env.VITE_APP_URL;
 
 const AddFavicon = () => {
-    const [image, setImage] = useState();
-    const [data, setData] = useState();
+  const [image, setImage] = useState();
+  const [data, setData] = useState();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        let userString = localStorage.getItem("user");
-        let user = JSON.parse(userString);
-        const clientId = user._id;
-        const formData = new FormData();
-        formData.append("image", image);
-        formData.append("clientId", clientId);
-        if (data.length > 0) {
-          let response = await fetch(
-            "https://ecserver.estatebot.in/update-favicon/" + data[0]._id,
-            {
-              method: "put",
-              body: formData,
-            }
-          );
-          if (response.ok) {
-            Swal.fire({
-              title: "Success",
-              text: "Favicon added successfully!",
-              icon: "success",
-              confirmButtonColor: `${ApiColor?ApiColor:'black'}`,
-            }).then((result) => {
-              if (result.value) {
-                location.reload();
-              }
-            });
-          } else {
-            alert("HTTP-Error: " + response.status);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let userString = localStorage.getItem("user");
+    let user = JSON.parse(userString);
+    const clientId = user._id;
+    const formData = new FormData();
+    formData.append("image", image);
+    formData.append("clientId", clientId);
+    if (data.length > 0) {
+      let response = await fetch(`${baseUrl}/update-favicon/${data[0]._id}`, {
+        method: "put",
+        body: formData,
+      });
+      if (response.ok) {
+        Swal.fire({
+          title: "Success",
+          text: "Favicon added successfully!",
+          icon: "success",
+          confirmButtonColor: `${ApiColor ? ApiColor : "black"}`,
+        }).then((result) => {
+          if (result.value) {
+            location.reload();
           }
-        } else {
-          let response = await fetch("https://ecserver.estatebot.in/add-favicon", {
-            method: "post",
-            body: formData,
-          });
-          
-          if (response.ok) {
-            Swal.fire({
-              title: "Success",
-              text: "Favicon added successfully!",
-              icon: "success",
-              confirmButtonColor: `${ApiColor?ApiColor:'black'}`,
-            }).then((result) => {
-              if (result.value) {
-                location.reload();
-              }
-            });
-          } else {
-            alert("HTTP-Error: " + response.status);
-          }
-        }
-      };
+        });
+      } else {
+        alert("HTTP-Error: " + response.status);
+      }
+    } else {
+      let response = await fetch(`${baseUrl}/add-favicon`, {
+        method: "post",
+        body: formData,
+      });
 
-    useEffect(() => {
-        const getData = async () => {
-          let result = await fetch("https://ecserver.estatebot.in/favicon");
-          result = await result.json();
-          let userString = localStorage.getItem("user");
-          let user = JSON.parse(userString);
-          const filteredResults = result.filter(
-            (value) => value.clientId === user._id
-          );
-          setData(filteredResults);
-        };
-        getData();
-      }, []);
+      if (response.ok) {
+        Swal.fire({
+          title: "Success",
+          text: "Favicon added successfully!",
+          icon: "success",
+          confirmButtonColor: `${ApiColor ? ApiColor : "black"}`,
+        }).then((result) => {
+          if (result.value) {
+            location.reload();
+          }
+        });
+      } else {
+        alert("HTTP-Error: " + response.status);
+      }
+    }
+  };
+
+  useEffect(() => {
+    const getData = async () => {
+      let result = await fetch(`${baseUrl}/favicon`);
+      result = await result.json();
+      let userString = localStorage.getItem("user");
+      let user = JSON.parse(userString);
+      const filteredResults = result.filter(
+        (value) => value.clientId === user._id
+      );
+      setData(filteredResults);
+    };
+    getData();
+  }, []);
   return (
     <div className="absolute flex justify-center items-center bg-gray-100 right-0 border-dotted border-black border-2 min-h-screen w-full lg:w-[82%]">
       <form
@@ -105,7 +103,7 @@ const AddFavicon = () => {
         </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default AddFavicon
+export default AddFavicon;

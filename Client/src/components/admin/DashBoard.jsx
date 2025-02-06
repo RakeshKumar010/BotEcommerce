@@ -9,6 +9,7 @@ import DashBoardCard from "./DashBoardCard";
 import { TfiLayoutSlider } from "react-icons/tfi";
 import { Link } from "react-router-dom";
 import { ApiColor } from "../api/data";
+const baseUrl = import.meta.env.VITE_APP_URL;
 
 const DashBoard = () => {
   const [product, setProduct] = useState();
@@ -75,7 +76,7 @@ const DashBoard = () => {
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);
 
-      let result1 = await fetch("https://ecserver.estatebot.in/product");
+      let result1 = await fetch(`${baseUrl}/product`);
       result1 = await result1.json();
       let filteredResults1 = result1.filter(
         (value) => value.clientId == user._id
@@ -83,14 +84,14 @@ const DashBoard = () => {
 
       setProduct(filteredResults1.length);
 
-      let result2 = await fetch("https://ecserver.estatebot.in/coupon");
+      let result2 = await fetch(`${baseUrl}/coupon`);
       result2 = await result2.json();
       let filteredResults2 = result2.filter(
         (value) => value.clientId == user._id
       );
       setCoupon(filteredResults2.length);
 
-      let result3 = await fetch("https://ecserver.estatebot.in/show-client");
+      let result3 = await fetch(`${baseUrl}/show-client`);
       result3 = await result3.json();
       let filteredResults3 = result3.filter(
         (value) => value.clientId == user._id
@@ -108,7 +109,7 @@ const DashBoard = () => {
         }
       });
 
-      let result4 = await fetch("https://ecserver.estatebot.in/carousel");
+      let result4 = await fetch(`${baseUrl}/carousel`);
       result4 = await result4.json();
       let filteredResults4 = result4.filter(
         (value) => value.clientId == user._id

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { MdAddShoppingCart } from "react-icons/md";
 import { ApiColor } from "./api/data";
 import DummyCard from "./DummyCard";
+const baseUrl = import.meta.env.VITE_APP_URL;
 
 const ArrivalShow = ({ setDetailsPopup, setAddId }) => {
   const [data, setData] = useState();
@@ -18,12 +19,12 @@ const ArrivalShow = ({ setDetailsPopup, setAddId }) => {
       }
       const currentUrl = trimUrl(window.location.href);
       let response = await fetch(
-        "https://ecserver.estatebot.in/client/" + currentUrl
+        `${baseUrl}/client/${currentUrl}`
       );
       const clientData = await response.json();
     
 
-      let resultNavItem = await fetch("https://ecserver.estatebot.in/nav-item");
+      let resultNavItem = await fetch(`${baseUrl}/nav-item`);
       resultNavItem = await resultNavItem.json();
 
       const filteredResultNavItems = resultNavItem.filter((value) => {
@@ -35,7 +36,7 @@ const ArrivalShow = ({ setDetailsPopup, setAddId }) => {
       );
       const navItemInner =
         filteredResultNavItems.length > 0 ? filteredResultNavItems[0] : false;
-      let result = await fetch("https://ecserver.estatebot.in/product");
+      let result = await fetch(`${baseUrl}/product`);
       result = await result.json();
       let array = [];
       result.map((value) => {

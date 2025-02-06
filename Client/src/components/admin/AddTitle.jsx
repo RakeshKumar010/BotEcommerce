@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ApiColor } from "../api/data";
 import Swal from "sweetalert2";
+const baseUrl = import.meta.env.VITE_APP_URL;
 
 const AddTitle = () => {
   const [title, setTitle] = useState("");
@@ -13,7 +14,7 @@ const AddTitle = () => {
 
     if (data.length > 0) {
       let response = await fetch(
-        "https://ecserver.estatebot.in/update-title/" + data[0]._id,
+        `${baseUrl}/update-title/${data[0]._id}`,
         {
           method: "put",
           headers: { "content-type": "application/json" },
@@ -36,7 +37,7 @@ const AddTitle = () => {
         alert("HTTP-Error: " + response.status);
       }
     } else {
-      let response = await fetch("https://ecserver.estatebot.in/add-title", {
+      let response = await fetch(`${baseUrl}/add-title`, {
         method: "post",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ title, clientId: user._id }),
@@ -61,7 +62,7 @@ const AddTitle = () => {
 
   useEffect(() => {
     const getData = async () => {
-      let result = await fetch("https://ecserver.estatebot.in/title");
+      let result = await fetch(`${baseUrl}/title`);
       result = await result.json();
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);

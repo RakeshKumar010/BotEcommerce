@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { ApiColor } from "../api/data";
+const baseUrl = import.meta.env.VITE_APP_URL;
 
 const EditCoupon = () => {
   const location = useLocation();
@@ -14,8 +15,7 @@ const EditCoupon = () => {
     e.preventDefault();
 
     let response = await fetch(
-      "https://ecserver.estatebot.in/coupon/" +
-        location.pathname.split("/").pop(),
+      `${baseUrl}/coupon/${location.pathname.split("/").pop()}`,
       {
         method: "put",
         headers: { "content-type": "application/json" },
@@ -41,8 +41,7 @@ const EditCoupon = () => {
   useEffect(() => {
     const getFun = async () => {
       let result = await fetch(
-        "https://ecserver.estatebot.in/coupon-id/" +
-          location.pathname.split("/").pop()
+        `${baseUrl}/coupon-id/${location.pathname.split("/").pop()}`
       );
       result = await result.json();
       setTitle(result.title);

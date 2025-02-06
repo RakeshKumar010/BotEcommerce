@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react"; 
 import HeaderTop from "../components/HeaderTop";
 import NavBar from "../components/global/NavBar";
 import Footer from "../components/global/Footer";
 import { ApiColor } from "../components/api/data";
+const baseUrl = import.meta.env.VITE_APP_URL;
 
 const CartOrder = () => {
   const [localData, setLocalData] = useState();
@@ -35,7 +35,7 @@ const CartOrder = () => {
     }
     setLocalData(storedObject);
     const getFun = async () => {
-      let result = await fetch("https://ecserver.estatebot.in/coupon");
+      let result = await fetch(`${baseUrl}/coupon`);
       result = await result.json();
       setData(result);
     };
@@ -145,7 +145,7 @@ const CartOrder = () => {
                 return (
                   <div className="flex gap-3 items-start">
                     <img
-                      src={`https://ecserver.estatebot.in/${imageUrl}`}
+                      src={`${baseUrl}/${imageUrl}`}
                       alt="Product Image"
                       className="h-16 rounded-sm shadow-md"
                     />

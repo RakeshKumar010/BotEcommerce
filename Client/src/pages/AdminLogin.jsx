@@ -1,9 +1,10 @@
 // import { GoogleLogin } from "@react-oauth/google";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
-import { ApiColor } from "../components/api/data";
-// import { jwtDecode } from "jwt-decode";
+import Swal from "sweetalert2";  
+const baseUrl = import.meta.env.VITE_APP_URL;
+
+
 const AdminLogin = ({ setIsAdmin }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -11,75 +12,9 @@ const AdminLogin = ({ setIsAdmin }) => {
   const [countWPass, setCountWPass] = useState(0);
   const [counter, setCounter] = useState(30);
 
-  // Effect to handle the countdown
-  useEffect(() => {
-    let intervalValue;
-    if (countWPass === 3) {
-      intervalValue = setInterval(() => {
-        setCounter((prevCounter) => prevCounter - 1);
-      }, 1000);
-    }
 
-    // Cleanup interval on component unmount
-    return () => clearInterval(intervalValue);
-  }, [countWPass]);
 
-  // Reset countWPass and counter when counter reaches 0
-  useEffect(() => {
-    if (counter === 0) {
-      setCountWPass(0);
-      setCounter(30);
-    }
-
-    const getFun = async () => {
-      function trimUrl(url) {
-        const parsedUrl = new URL(url);
-        return (
-          parsedUrl.hostname + (parsedUrl.port ? ":" + parsedUrl.port : "")
-        );
-      }
-      const currentUrl = trimUrl(window.location.href);
-      let response = await fetch(
-        "https://ecserver.estatebot.in/client/" + currentUrl
-      );
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      if (response.headers.get("content-length") === "0") {
-        throw new Error("Empty response body");
-      }
-      const clientData = await response.json();
-
-      if (clientData.status == "0") {
-        navigate("error");
-      }
-      let today = new Date();
-      
-      let dd = String(today.getDate()).padStart(2, '0');
-      let mm = String(today.getMonth() + 1).padStart(2, "0"); // January is 0!
-      let yyyy = today.getFullYear();
-
-      let formattedDate = yyyy + "-" + mm + "-" + dd;
-
-      if (clientData.expiryDate < formattedDate) {
-        let result = await fetch(
-          "https://ecserver.estatebot.in/edit-client/" + clientData._id,
-          {
-            method: "put",
-            headers: { "content-type": "application/json" },
-            body: JSON.stringify({
-              status: "0",
-            }),
-          }
-        );
-        if(result.ok){
-
-          navigate("error");
-        }
-      }
-    }
-    getFun()
-  }, [counter]);
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -93,7 +28,7 @@ const AdminLogin = ({ setIsAdmin }) => {
       return;
     }
 
-    let response = await fetch("https://ecserver.estatebot.in/login", {
+    let response = await fetch(`${baseUrl}/login`, {
       method: "post",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ email, pass }),
@@ -123,10 +58,23 @@ const AdminLogin = ({ setIsAdmin }) => {
         icon: "error",
         title: "Incorrect Password",
         text: `You have ${3 - countWPass} attempts left.`,
-        confirmButtonColor: `${ApiColor?ApiColor:'black'}`,
+        confirmButtonColor: `${'black'}`,
       });
     }
   };
+
+    // Effect to handle the countdown
+    useEffect(() => {
+      let intervalValue;
+      if (countWPass === 3) {
+        intervalValue = setInterval(() => {
+          setCounter((prevCounter) => prevCounter - 1);
+        }, 1000);
+      }
+  
+      // Cleanup interval on component unmount
+      return () => clearInterval(intervalValue);
+    }, [countWPass]);
   return (
     <div style={{background:'slategrey'}} className="flex min-h-full h-screen flex-col justify-center px-6 py-12 lg:px-8  transition-all duration-500 ease-in-out">
       <div className="animate-bounce">
@@ -155,14 +103,7 @@ const AdminLogin = ({ setIsAdmin }) => {
           <div>
             <div className="flex items-center justify-between">
               <p className="text-lg font-semibold text-gray-700">Password</p>
-              <div className="text-sm">
-                <a
-                  href="#"
-                  className="font-semibold text-gray-600 hover:text-gray-500"
-                >
-                  Forgot password?
-                </a>
-              </div>
+               
             </div>
             <div className="mt-2">
               <input
@@ -182,8 +123,8 @@ const AdminLogin = ({ setIsAdmin }) => {
               type="submit"
                
               disabled={countWPass >= 3} // This will disable the button when countWPass is 3 or more
-              className={`p-3 w-full bg-blue-500 text-white rounded-md shadow-md ${
-                countWPass >= 3 ? "bg-blue-300" : "hover:bg-blue-600"
+              className={`p-3 w-full  text-white rounded-md shadow-md ${
+                countWPass >= 3 ? "bg-blue-300" : " bg-blue-500  hover:bg-blue-600" 
               } transition-colors duration-200`}
             >
               <i className="fas fa-user-shield mr-2"></i> Sign in

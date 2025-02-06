@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+const baseUrl = import.meta.env.VITE_APP_URL;
+
 const EditClient = () => {
   const location = useLocation();
   const navigater = useNavigate();
@@ -14,8 +16,7 @@ const EditClient = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let result = await fetch(
-      "https://ecserver.estatebot.in/edit-client/" +
-        location.pathname.split("/").pop(),
+      `${baseUrl}/edit-client/${location.pathname.split("/").pop()}`,
       {
         method: "put",
         headers: { "content-type": "application/json" },
@@ -49,8 +50,7 @@ const EditClient = () => {
   useEffect(() => {
     const getFun = async () => {
       let result = await fetch(
-        "https://ecserver.estatebot.in/show-client/" +
-          location.pathname.split("/").pop()
+        `${baseUrl}/show-client/${location.pathname.split("/").pop()}`
       );
       result = await result.json();
       console.log(result);

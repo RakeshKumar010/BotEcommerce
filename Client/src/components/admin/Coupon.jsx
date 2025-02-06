@@ -4,6 +4,8 @@ import { CgRemove } from "react-icons/cg";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { ApiColor } from "../api/data";
+const baseUrl = import.meta.env.VITE_APP_URL;
+
 const Coupon = () => {
   const [data, setData] = useState();
   const [access, setAccess] = useState("");
@@ -14,7 +16,7 @@ const Coupon = () => {
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);
 
-      let result = await fetch("https://ecserver.estatebot.in/coupon");
+      let result = await fetch(`${baseUrl}/coupon`);
       result = await result.json();
       let filteredResults = result.filter(
         (value) => value.clientId == user._id
@@ -22,7 +24,7 @@ const Coupon = () => {
 
       setData(filteredResults);
 
-      let result2 = await fetch("https://ecserver.estatebot.in/show-client");
+      let result2 = await fetch(`${baseUrl}/show-client`);
       result2 = await result2.json();
 
       result2.map((value) => {
@@ -77,7 +79,7 @@ const Coupon = () => {
                       <CgRemove
                         onClick={async () => {
                           let result = await fetch(
-                            `https://ecserver.estatebot.in/coupon/${_id}`,
+                            `${baseUrl}/coupon/${_id}`,
                             {
                               method: "delete",
                               headers: { "content-type": "application/json" },

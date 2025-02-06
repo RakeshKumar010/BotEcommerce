@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ApiColor } from "./api/data";
 import RiseLoader from "react-spinners/RiseLoader";
+const baseUrl = import.meta.env.VITE_APP_URL;
 
 const HeaderTop = () => {
   const [loading, SetLoading] = useState(false);
@@ -22,11 +23,11 @@ const HeaderTop = () => {
       }
       const currentUrl = trimUrl(window.location.href);
       let response = await fetch(
-        "https://ecserver.estatebot.in/client/" + currentUrl
+        `${baseUrl}/client/${currentUrl}`
       );
       const clientData = await response.json();
       
-      let couponresult = await fetch("https://ecserver.estatebot.in/coupon");
+      let couponresult = await fetch(`${baseUrl}/coupon`);
       couponresult = await couponresult.json();
 
       const filterCoupan = couponresult.filter((value) => {

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { ApiColor } from "../api/data";
+const baseUrl = import.meta.env.VITE_APP_URL;
 
 const AddLogo = () => {
   const [image, setImage] = useState();
@@ -15,7 +16,7 @@ const AddLogo = () => {
     formData.append("clientId", clientId);
     if (data.length > 0) {
       let response = await fetch(
-        "https://ecserver.estatebot.in/update-logo/" + data[0]._id,
+        `${baseUrl}/update-logo/${data[0]._id}`,
         {
           method: "put",
           body: formData,
@@ -36,7 +37,7 @@ const AddLogo = () => {
         alert("HTTP-Error: " + response.status);
       }
     } else {
-      let response = await fetch("https://ecserver.estatebot.in/add-logo", {
+      let response = await fetch(`${baseUrl}/add-logo`, {
         method: "post",
         body: formData,
       });
@@ -59,7 +60,7 @@ const AddLogo = () => {
   };
   useEffect(() => {
     const getData = async () => {
-      let result = await fetch("https://ecserver.estatebot.in/logo");
+      let result = await fetch(`${baseUrl}/logo`);
       result = await result.json();
       let userString = localStorage.getItem("user");
       let user = JSON.parse(userString);
