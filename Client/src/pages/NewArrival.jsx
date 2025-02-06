@@ -11,7 +11,7 @@ import ProDetailsPopup from "../components/ProDetailsPopup";
 import DummyCard from "../components/DummyCard";
 const baseUrl = import.meta.env.VITE_APP_URL;
 
-NewArrival = ({ title }) => {
+const NewArrival = ({ title }) => {
   const itemsPerPage = 8;
   const [addId, setAddId] = useState(false);
   const [detailsPopup, setDetailsPopup] = useState(false);
