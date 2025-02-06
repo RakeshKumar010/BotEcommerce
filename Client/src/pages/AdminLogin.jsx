@@ -11,11 +11,6 @@ const AdminLogin = ({ setIsAdmin }) => {
   const [pass, setPass] = useState("");
   const [countWPass, setCountWPass] = useState(0);
   const [counter, setCounter] = useState(30);
-
-
-
- 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
