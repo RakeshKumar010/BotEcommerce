@@ -1,7 +1,25 @@
 import { Carousel } from "flowbite-react";
  
-const Banner = ({data,dummyData}) => {
+const Banner = ({data}) => {
+  const dummyData = [
+    {
+      carousel:
+        "https://vonex.com.au/wp-content/uploads/2021/09/MicrosoftTeams-image-6-768x259.jpg",
+    },
+    {
+      carousel:
+        "https://vonex.com.au/wp-content/uploads/2021/09/MicrosoftTeams-image-6-768x259.jpg",
+    },
+    {
+      carousel:
+        "https://vonex.com.au/wp-content/uploads/2021/09/MicrosoftTeams-image-6-768x259.jpg",
+    },
 
+    {
+      carousel:
+        "https://vonex.com.au/wp-content/uploads/2021/09/MicrosoftTeams-image-6-768x259.jpg",
+    },
+  ];
   return (
     <div className="relative h-56 md:h-screen carousel-main">
      {data? <Carousel>

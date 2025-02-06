@@ -18,20 +18,13 @@ const RelatedProduct = () => {
         );
       }
       const currentUrl = trimUrl(window.location.href);
-      let response = await fetch(
-        `${baseUrl}/client/${currentUrl}`
-      );
+      let response = await fetch(`${baseUrl}/client/${currentUrl}`);
       const clientData = await response.json();
       let result = await fetch(`${baseUrl}/product`);
       result = await result.json();
-      console.log(result);
-      
-      const filterProduct = result.filter((value) => {
-        //  console.log(value.clientId == clientData._id);
-        return value.clientId == clientData._id;
-      });
-      if (filterProduct.length > 6) {
-        setData(filterProduct);
+
+      if (result.length > 6) {
+        setData(result);
       }
     };
     getFun();

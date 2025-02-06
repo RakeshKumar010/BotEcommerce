@@ -1,82 +1,30 @@
 import { FaFacebookF, FaYoutube, FaInstagram, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import ScrollUpDown from "./ScrollUpDown";
-import { useEffect, useState } from "react";
-import { ApiColor } from "../api/data";
-const baseUrl = import.meta.env.VITE_APP_URL;
-
+import ScrollUpDown from "./ScrollUpDown"; 
 const Footer = () => {
-  const [logos, setLogos] = useState(false);
-  const [socialLink, setSocialLink] = useState("");
-
-  useEffect(() => {
-    const getFun = async () => {
-      function trimUrl(url) {
-        const parsedUrl = new URL(url);
-        return (
-          parsedUrl.hostname + (parsedUrl.port ? ":" + parsedUrl.port : "")
-        );
-      }
-      const currentUrl = trimUrl(window.location.href);
-      let response = await fetch(
-        `${baseUrl}/client/${currentUrl}`
-      );
-      const clientData = await response.json();
-
-      let result = await fetch(`${baseUrl}/logo`);
-      result = await result.json();
-      const filteredLogoResults = result.filter((value) => {
-        return value.clientId == clientData._id;
-      });
-       
-      if(filteredLogoResults.length>0){
-
-        setLogos(filteredLogoResults[0].logo);
-      }else{
-        setLogos(false)
-      }
-      let socialResult = await fetch(`${baseUrl}/social`);
-      socialResult = await socialResult.json();
-      const filteredResults = socialResult.filter((value) => {
-        return value.clientId == clientData._id;
-      });
-      // console.log(filteredResults);
-      setSocialLink(filteredResults[0]);
-    };
-    getFun();
-  }, []);
-
   return (
     <>
       <div>
         <div
-          style={ApiColor?{ backgroundColor: ApiColor }:{ backgroundColor: 'black' }}
+          style={ { backgroundColor: "black" }
+          }
           className={`flex justify-center md:justify-between flex-wrap   text-white md:p-5 lg:p-16`}
         >
           <div className="flex flex-col text-center md:text-start gap-3 md:gap-7 lg:gap-10 mt-8 w-80">
             <h3 className="text-lg font-semibold">KNOW ABOUT US </h3>
             <div className="flex flex-col items-center md:items-start">
-             
-                {logos ? (
-                   <Link to={"/"}>
-                  <img
-                    src={logos}
-                    alt="..."
-                    className="h-16 mb-5"
-                  />
-                   </Link>
-                ) : (
-         
-                  <Link to={"/"} className="mb-5">
-                      <span className="   text-white font-bold text-3xl whitespace-nowrap">
-                        Logo
-                      </span>
-                 </Link>
-           
-                )}
-             
+              <Link to={"/"}>
+                <img
+                  src={
+                    "https://www.shareicon.net/download/2015/12/11/685818_global.svg"
+                  }
+                  alt="..."
+                  style={{ filter: "invert(1)" }}
+                  className="h-16 mb-5"
+                />
+              </Link>
+
               <p className="text-lg">
-          
                 In 2024, ‘CartCraze’ was launched, With Imaginative fashion as a
                 fashion destination to busy fast paced woman with a strong sense
                 of fashion.
@@ -141,40 +89,27 @@ const Footer = () => {
                 </p>
               </div>
               <div className="flex gap-5 text-xl mb-5 cursor-pointer justify-center">
-                {socialLink && socialLink.facebook == "" ? (
-                  ""
-                ) : (
-                  <Link target="_blank" to={socialLink?.facebook}>
-                    <FaFacebookF />
-                  </Link>
-                )}
-                {socialLink && socialLink.insta == "" ? (
-                  ""
-                ) : (
-                  <Link target="_blank" to={socialLink?.insta}>
-                    <FaInstagram />
-                  </Link>
-                )}
-                {socialLink && socialLink.youtube == "" ? (
-                  ""
-                ) : (
-                  <Link target="_blank" to={socialLink?.youtube}>
-                    <FaYoutube />
-                  </Link>
-                )}
-                {socialLink && socialLink.twitter == "" ? (
-                  ""
-                ) : (
-                  <Link target="_blank" to={socialLink?.twitter}>
-                    <FaTwitter />
-                  </Link>
-                )}
+                <Link target="_blank">
+                  <FaFacebookF />
+                </Link>
+
+                <Link target="_blank">
+                  <FaInstagram />
+                </Link>
+
+                <Link target="_blank">
+                  <FaYoutube />
+                </Link>
+
+                <Link target="_blank">
+                  <FaTwitter />
+                </Link>
               </div>
             </div>
           </div>
         </div>
         <div className="bg-black text-white md:text-base text-[10px] py-4 md:px-16">
-          <p>© 2024 botmediadigital.com | Developed by BotMedia Digital</p>
+          <p>© 2025 | Developed by Rakesh</p>
         </div>
       </div>
       <ScrollUpDown />

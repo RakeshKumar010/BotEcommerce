@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import { Link } from "react-router-dom";
 import { MdAddShoppingCart } from "react-icons/md";
-import { ApiColor } from "./api/data";
 import DummyCard from "./DummyCard";
 const baseUrl = import.meta.env.VITE_APP_URL;
 
@@ -12,46 +11,15 @@ const BestSeller = ({ setDetailsPopup, setAddId }) => {
 
   useEffect(() => {
     const getFun = async () => {
-      function trimUrl(url) {
-        const parsedUrl = new URL(url);
-        return (
-          parsedUrl.hostname + (parsedUrl.port ? ":" + parsedUrl.port : "")
-        );
-      }
-      const currentUrl = trimUrl(window.location.href);
-      let response = await fetch(
-        `${baseUrl}/client/${currentUrl}`
-      );
-      const clientData = await response.json();
- 
-
       let resultNavItem = await fetch(`${baseUrl}/nav-item`);
       resultNavItem = await resultNavItem.json();
-
-      const filteredResultNavItems = resultNavItem.filter((value) => {
-        return value.clientId == clientData._id;
-      });
- 
-      setNavItemData(
-        filteredResultNavItems.length > 0 ? filteredResultNavItems[0] : false
-      );
-      const navItemInner =
-        filteredResultNavItems.length > 0 ? filteredResultNavItems[0] : false;
-
+      setNavItemData(resultNavItem.length > 0 ? resultNavItem[0] : false);
       let result = await fetch(`${baseUrl}/product`);
       result = await result.json();
-      let array = [];
-      result.map((value) => {
-        if (
-          (navItemInner
-            ? navItemInner.nav4.replace(/\s+/g, "")
-            : "menu4"
-          ).toUpperCase() == value.section.toUpperCase()
-        ) {
-          array.push(value);
-        }
-        array.length > 0 ? setData(array) : setData(null);
+      const filterData = result.filter((value) => {
+        return value.section == resultNavItem[0].nav4.replace(/\s+/g, "");
       });
+      setData(filterData);
     };
     getFun();
   }, []);
@@ -63,16 +31,12 @@ const BestSeller = ({ setDetailsPopup, setAddId }) => {
           to={navItemData ? navItemData.nav4.replace(/\s+/g, "") : "menu4"}
           className="font-semibold text-lg md:text-2xl"
         >
-          {navItemData ? navItemData.nav1 : "Section 4"}
+          {navItemData ? navItemData.nav2 : "Section 2"}
         </Link>
         <p className="">Explore suit sets</p>
         <div className="flex items-center my-5 justify-center ">
           <Link
-            style={
-              ApiColor
-                ? { backgroundColor: ApiColor }
-                : { backgroundColor: "black" }
-            }
+            style={{ backgroundColor: "black" }}
             to={navItemData ? navItemData.nav4.replace(/\s+/g, "") : "menu4"}
             className={`flex items-center  text-white p-2 md:w-[40vw] w-[60vw]  justify-center rounded-full hover:scale-105 hover:shadow-sm hover:shadow-gray-600 transition-all duration-200`}
           >
@@ -84,10 +48,10 @@ const BestSeller = ({ setDetailsPopup, setAddId }) => {
       {data ? (
         <div className="flex   justify-center  flex-wrap gap-4 gap-y-7 sm:px-2 xl:px-10">
           {data &&
-            [...data].reverse().map((value,index) => {
+            [...data].slice(0, 8).map((value, index) => {
               return (
                 <Card
-                key={index}
+                  key={index}
                   setDetailsPopup={setDetailsPopup}
                   setAddId={setAddId}
                   value={value}

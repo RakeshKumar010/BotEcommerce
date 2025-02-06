@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { IoMdEye } from "react-icons/io";
-import { HiOutlineShoppingBag } from "react-icons/hi2";
-import { ApiColor } from "./api/data";
+import { HiOutlineShoppingBag } from "react-icons/hi2"; 
 
 const Card = ({ value, setDetailsPopup, setAddId }) => {
-  const { _id, title, image, rating, price } = value;
-  console.log(image);
+  const { _id, title, image, rating, price } = value; 
   
   const [addStyle, setAddStyle] = useState(false);
  
@@ -38,18 +36,17 @@ const Card = ({ value, setDetailsPopup, setAddId }) => {
         >
           <div
             onClick={() => {
-              setAddId(_id);
-              console.log(_id);
+              setAddId(_id); 
               setDetailsPopup(true);
             }}
-         style={ApiColor?{ backgroundColor: ApiColor }:{ backgroundColor: 'black' }}
+         style={{ backgroundColor: 'black' }}
             className={`w-10 cursor-pointer text-white flex justify-center rounded-full transition-all  items-center relative  h-10   bottom-16 `}
           >
             <IoMdEye className="" />
           </div>
           <Link
             to={"/product/" + _id}
-         style={ApiColor?{ backgroundColor: ApiColor }:{ backgroundColor: 'black' }}
+         style={{ backgroundColor: 'black' }}
             className={`w-10 text-white flex justify-center rounded-full transition-all items-center h-10 relative   bottom-16`}
           >
             <HiOutlineShoppingBag />
@@ -57,9 +54,9 @@ const Card = ({ value, setDetailsPopup, setAddId }) => {
         </div>
       </p>
       <div className="px-5  py-2 text-center">
-        <Link to={"/" + _id}>
+        <Link to={"/product/" + _id}>
           <h5 style={{
-            color:ApiColor
+            color:'black'
           }} className={`xl:text-lg md:text-base sm:text-[15px]   tracking-tight  `}>{title}</h5>
         </Link>
         <div className="flex items-center justify-center mt-2.5 mb-5">

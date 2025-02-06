@@ -1,18 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { IoReorderThreeOutline} from "react-icons/io5";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import  { useEffect, useState } from "react";
+import { IoReorderThreeOutline } from "react-icons/io5";
+import { Link, useLocation} from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 import { HiShoppingBag } from "react-icons/hi2";
 const baseUrl = import.meta.env.VITE_APP_URL;
 
-const NavBar = () => {
-  const navigate = useNavigate();
+const NavBar = () => { 
   const [navRes, setNavRes] = useState(false);
   const [navItemData, setNavItemData] = useState(false);
-  const [showCart, setShowCart] = useState(false);
-  const [apiDataColor, setApiDataColor] = useState();
-  const [logos, setLogos] = useState(false);
-  const [pageLoader, setPageLoader] = useState(false);
+  const [showCart, setShowCart] = useState(false); 
   const [totalPrice, setTotalPrice] = useState(0);
   const [numOfProduct, setNumOfProduct] = useState(0);
   const location = useLocation();
@@ -50,101 +46,14 @@ const NavBar = () => {
     }
 
     const getFun = async () => {
-      function trimUrl(url) {
-        const parsedUrl = new URL(url);
-        return (
-          parsedUrl.hostname + (parsedUrl.port ? ":" + parsedUrl.port : "")
-        );
-      }
-      const currentUrl = trimUrl(window.location.href);
-      let response = await fetch(`${baseUrl}/client/${currentUrl}`);
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      if (response.headers.get("content-length") === "0") {
-        throw new Error("Empty response body");
-      }
-      const clientData = await response.json(); 
-      if (clientData.status == "0") {
-        navigate("error");
-      }
-      let today = new Date();
-
-      let dd = String(today.getDate()).padStart(2, "0");
-      let mm = String(today.getMonth() + 1).padStart(2, "0"); // January is 0!
-      let yyyy = today.getFullYear();
-
-      let formattedDate = yyyy + "-" + mm + "-" + dd;
-
-      if (clientData.expiryDate < formattedDate) {
-        let result = await fetch(`${baseUrl}/edit-client/${clientData._id}`, {
-          method: "put",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({
-            status: "0",
-          }),
-        });
-        if (result.ok) {
-          navigate("error");
-        }
-      }
-
-      let result = await fetch(`${baseUrl}/logo`);
-      result = await result.json();
-      setPageLoader(result);
-      console.log(result);
-      
-      const filteredResults = result.filter((value) => {
-        return value.clientId == clientData._id;
-      });
-      if (filteredResults.length > 0) {
-        setLogos(filteredResults[0].logo);
-      } else {
-        setLogos(false);
-      }
-
       let resultNavItem = await fetch(`${baseUrl}/nav-item`);
       resultNavItem = await resultNavItem.json();
 
-      const filteredResultNavItems = resultNavItem.filter((value) => {
-        return value.clientId == clientData._id;
-      });
-      setNavItemData(
-        filteredResultNavItems.length > 0 ? filteredResultNavItems[0] : false
-      );
+      setNavItemData(resultNavItem.length > 0 ? resultNavItem[0] : false);
     };
     getFun();
-    function trimUrl(url) {
-      const parsedUrl = new URL(url);
-      return parsedUrl.hostname + (parsedUrl.port ? ":" + parsedUrl.port : "");
-    }
-    async function getColor() {
-      const currentUrl = trimUrl(window.location.href);
-      let response = await fetch(`${baseUrl}/client/${currentUrl}`);
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      if (response.headers.get("content-length") === "0") {
-        throw new Error("Empty response body");
-      }
-      const clientData = await response.json();
-
-      response = await fetch(`${baseUrl}/color`);
-      const colorsData = await response.json();
-
-      const filteredResults = colorsData.filter((value) => {
-        // console.log(value.clientId);
-        return value.clientId == clientData._id;
-      });
-      if (filteredResults.length > 0) {
-        setApiDataColor(filteredResults[0].color);
-      } else {
-        setApiDataColor(null);
-      }
-    }
-
-    getColor();
-  }, [pageLoader]);
+ 
+  }, []);
 
   return (
     <>
@@ -159,13 +68,13 @@ const NavBar = () => {
           }}
         />
         <Link to={"/"}>
-          {logos ? (
-            <img src={logos} alt="..." className="h-8 lg:h-12 xl:h-16" />
-          ) : (
-            <span className="flex-1 ms-3 text-black font-bold text-3xl whitespace-nowrap">
-              Logo
-            </span>
-          )}
+          <img
+            src={
+              "https://www.shareicon.net/download/2015/12/11/685818_global.svg"
+            }
+            alt="..."
+            className="h-8 lg:h-12 xl:h-10"
+          />
         </Link>
         <div
           className={`md:sticky absolute    md:left-auto left-0 top-0 bottom-0 right-0 z-50   ${
@@ -177,17 +86,13 @@ const NavBar = () => {
           >
             <li className="md:hidden flex justify-between items-center  py-2 px-1 w-full  ">
               <Link to={"/"}>
-                {logos ? (
-                  <img
-                    src={`${baseUrl}/${logos}`}
-                    alt="..."
-                    className="h-8 lg:h-12 xl:h-16"
-                  />
-                ) : (
-                  <span className="flex-1 ms-3 text-black font-bold text-3xl whitespace-nowrap">
-                    Logo
-                  </span>
-                )}
+                <img
+                  src={
+                    "https://www.shareicon.net/download/2015/12/11/685818_global.svg"
+                  }
+                  alt="..."
+                  className="h-8 lg:h-12 xl:h-16"
+                />
               </Link>
             </li>
 
@@ -204,9 +109,7 @@ const NavBar = () => {
                   style={
                     location.pathname == item.to
                       ? {
-                          backgroundColor: ` ${
-                            apiDataColor ? apiDataColor : "black"
-                          }`,
+                          backgroundColor: "black",
                         }
                       : null
                   }
@@ -237,7 +140,7 @@ const NavBar = () => {
             className="text-[10px] uppercase flex flex-col items-center"
           >
             <HiShoppingBag
-              style={{ color: apiDataColor }}
+              style={{ color: "black" }}
               className="text-2xl   cursor-pointer"
             />
             Order
@@ -245,7 +148,7 @@ const NavBar = () => {
           <p className="text-[10px]  uppercase flex flex-col items-center">
             <FaShoppingCart
               className="text-2xl pr-1 cursor-pointer"
-              style={{ color: apiDataColor }}
+              style={{ color: "black" }}
               onClick={() => {
                 setShowCart(!showCart);
               }}
@@ -275,7 +178,7 @@ const NavBar = () => {
                   }}
                 >
                   <p
-                    style={{ backgroundColor: apiDataColor }}
+                    style={{ backgroundColor: "black" }}
                     className={`py-2 w-full text-white text-center  rounded-md hover:shadow-md hover:shadow-gray-400`}
                   >
                     {" "}

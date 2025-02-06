@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import { Link } from "react-router-dom";
-import { MdAddShoppingCart } from "react-icons/md";
-import { ApiColor } from "./api/data";
+import { MdAddShoppingCart } from "react-icons/md"; 
 import DummyCard from "./DummyCard";
 const baseUrl = import.meta.env.VITE_APP_URL;
 
@@ -11,45 +10,24 @@ const ArrivalShow = ({ setDetailsPopup, setAddId }) => {
   const [navItemData, setNavItemData] = useState(false);
   useEffect(() => {
     const getFun = async () => {
-      function trimUrl(url) {
-        const parsedUrl = new URL(url);
-        return (
-          parsedUrl.hostname + (parsedUrl.port ? ":" + parsedUrl.port : "")
-        );
-      }
-      const currentUrl = trimUrl(window.location.href);
-      let response = await fetch(
-        `${baseUrl}/client/${currentUrl}`
-      );
-      const clientData = await response.json();
-    
+     
 
       let resultNavItem = await fetch(`${baseUrl}/nav-item`);
       resultNavItem = await resultNavItem.json();
 
-      const filteredResultNavItems = resultNavItem.filter((value) => {
-        return value.clientId == clientData._id;
-      });
-    
+  
+
       setNavItemData(
-        filteredResultNavItems.length > 0 ? filteredResultNavItems[0] : false
+        resultNavItem.length > 0 ? resultNavItem[0] : false
       );
-      const navItemInner =
-        filteredResultNavItems.length > 0 ? filteredResultNavItems[0] : false;
+
       let result = await fetch(`${baseUrl}/product`);
       result = await result.json();
-      let array = [];
-      result.map((value) => {
-        if (
-          (navItemInner
-            ? navItemInner.nav1.replace(/\s+/g, "")
-            : "menu1"
-          ).toUpperCase() == value.section.toUpperCase()
-        ) {
-          array.push(value);
-        }
-        array.length > 0 ? setData(array) : setData(null);
-      });
+      const filterData=result.filter((value)=>{
+        return value.section==resultNavItem[0].nav1.replace(/\s+/g, "");
+        
+      })
+      setData(filterData);
     };
     getFun();
   }, []);
@@ -69,10 +47,7 @@ const ArrivalShow = ({ setDetailsPopup, setAddId }) => {
         <div className="flex items-center my-5 justify-center ">
           <Link
             to={navItemData ? navItemData.nav1.replace(/\s+/g, "") : "menu1"}
-            style={
-              ApiColor
-                ? { backgroundColor: ApiColor }
-                : { backgroundColor: "black" }
+            style={  { backgroundColor: "black" }
             }
             className={`flex items-center   text-white p-2 md:w-[40vw] w-[60vw]  justify-center rounded-full hover:scale-105 hover:shadow-sm hover:shadow-gray-600 transition-all duration-200`}
           >
@@ -84,7 +59,7 @@ const ArrivalShow = ({ setDetailsPopup, setAddId }) => {
       {data ? (
         <div className="flex   justify-center  flex-wrap gap-4 gap-y-7 sm:px-2 xl:px-10">
           {data &&
-            [...data].reverse().map((value, index) => {
+            [...data].slice(0,8).map((value, index) => {
               return (
                 <Card
                   value={value}

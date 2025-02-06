@@ -17,7 +17,7 @@ const MiniCard = ({ value }) => {
         )}
       </Link>
       <div className="md:py-4 py-1 md:px-6 px-1 text-center">
-        <Link to={"/" + _id}>
+        <Link to={"/product/" + _id}>
           <h5 style={{color:ApiColor}} className="md:text-lg text-sm md:hidden block  font-semibold">  {title.substring(0, 11)}</h5>
           <h5 style={{color:ApiColor}} className="md:text-lg text-sm hidden md:block  font-semibold">  {title}</h5>
           <div className="flex justify-center items-center mt-2 mb-3">

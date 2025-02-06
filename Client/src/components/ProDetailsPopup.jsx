@@ -4,8 +4,8 @@ import {  MdOutlineAddBusiness } from "react-icons/md";
 import { BsCartCheckFill } from "react-icons/bs";
 import { IoMdClose } from "react-icons/io";
  
-import { useNavigate } from "react-router-dom";
-import { ApiColor } from "./api/data";
+import { useNavigate } from "react-router-dom"; 
+const baseUrl = import.meta.env.VITE_APP_URL;
 
 const ProDetailsPopup = ({ setDetailsPopup, addId }) => {
   const navigater = useNavigate();
@@ -24,7 +24,7 @@ const ProDetailsPopup = ({ setDetailsPopup, addId }) => {
   let extraoff = priceNumber * (discount / 100);
   extraoff = extraoff.toFixed();
   async function getFun() {
-    let result = await fetch(`https://ecserver.estatebot.in/${addId}`);
+    let result = await fetch(`${baseUrl}/${addId}`);
     result = await result.json();
     if (result) {
       setData(result);
@@ -32,8 +32,7 @@ const ProDetailsPopup = ({ setDetailsPopup, addId }) => {
   }
   useEffect(() => {
     getFun();
-  }, []);
-  let bg=`bg-[${ApiColor}]/90`
+  }, []); 
   return (
     <div
       className="flex   z-[100] justify-center items-center fixed top-0 bottom-0 right-0 left-0 bg-black/30 p-3 md:p-0 backdrop-blur-sm  w-full   "
@@ -160,9 +159,9 @@ const ProDetailsPopup = ({ setDetailsPopup, addId }) => {
                       JSON.stringify(existingItems)
                     );
                   }}
-                  style={ApiColor?{ backgroundColor: ApiColor }:{ backgroundColor: 'black' }}
+                  style={{ backgroundColor: 'black' }}
                   className={`w-full flex items-center gap-2 justify-center cursor-pointer hover:scale-105 hover:shadow-md 
-                      hover:bg-gray-600 transition-all duration-200  text-center text-nowrap text-white py-2 px-4 rounded-md font-bold hover:${bg} `}
+                      hover:bg-gray-600 transition-all duration-200  text-center text-nowrap text-white py-2 px-4 rounded-md font-bold hover:bg-black/90 `}
                 >
                   <MdOutlineAddBusiness className="w-10  " />
                   Add to Cart
@@ -183,8 +182,8 @@ const ProDetailsPopup = ({ setDetailsPopup, addId }) => {
                     };
                     sessionStorage.setItem("myObject", JSON.stringify(obj));
                   }}
-                  style={ApiColor?{ backgroundColor: ApiColor }:{ backgroundColor: 'black' }}
-                  className={`w-full flex items-center gap-2 justify-center cursor-pointer hover:scale-105 hover:shadow-md hover:bg-gray-600 transition-all duration-200   text-nowrap  text-center text-white   py-2 px-4 rounded-md font-bold hover:${bg} `}
+                  style={{ backgroundColor: 'black' }}
+                  className={`w-full flex items-center gap-2 justify-center cursor-pointer hover:scale-105 hover:shadow-md hover:bg-gray-600 transition-all duration-200   text-nowrap  text-center text-white   py-2 px-4 rounded-md font-bold hover:bg-black/90 `}
                 >
                   <BsCartCheckFill />
                   Buy Now
